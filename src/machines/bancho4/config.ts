@@ -3,9 +3,9 @@ import type { MachineConfig } from '../../types/machine';
 const config: MachineConfig = {
   id: 'bancho4',
   name: '押忍！番長4',
-  version: '1.0.0',
+  version: '1.1.0',
   color: 'bg-gradient-to-r from-amber-600 to-orange-600',
-  settingLabels: ['1', '2', '4', '5', '6'],
+  // 6段階設定（1,2,3,4,5,6）
 
   sections: [
     {
@@ -15,94 +15,108 @@ const config: MachineConfig = {
           columns: 3,
           fields: [
             { key: 'totalG', label: '総ゲーム数', hint: '通常時+AT中合算' },
-            { key: 'atCnt', label: 'AT初当たり回数', hint: '最重要の設定差' },
-            { key: 'bellCnt', label: 'ベル回数', hint: '設定差あり' },
+            { key: 'atCnt', label: '初当たり合算回数' },
+            { key: 'directCnt', label: 'AT直撃回数', hint: '頂RISE/UP・設定差約3倍!' },
+            { key: 'bellCnt', label: '共通ベル回数', hint: '左第1停止ベル揃い' },
           ],
         },
       ],
     },
     {
-      title: '演出系データ', icon: '🎬',
+      title: '青7BB・確定対決', icon: '⚡',
       groups: [
         {
-          label: '対決演出', columns: 3,
+          label: '青7ボーナス（天国以外）', columns: 2,
           fields: [
-            { key: 'd_normal', label: '通常対決', hint: 'デフォルト' },
-            { key: 'd_strong', label: '強対決', hint: '高設定示唆' },
-            { key: 'd_special', label: '特殊対決', hint: '設定4以上濃厚' },
+            { key: 'blue7_hit', label: '青7BB当選回数', hint: '設定1と6で約6.7倍差!' },
+            { key: 'blue7_total', label: 'BB当選総数（天国以外）', hint: '青7の分母' },
           ],
         },
         {
-          label: 'AT終了画面', columns: 3,
+          label: 'RB後確定対決', columns: 2,
           fields: [
-            { key: 'e_normal', label: '通常画面', hint: 'デフォルト' },
-            { key: 'e_bancho', label: '番長画面', hint: '高設定示唆' },
-            { key: 'e_special', label: '特殊画面', hint: '設定6濃厚!' },
+            { key: 'kakutei_hit', label: '確定対決当選回数', hint: '設定1と6で約13倍差!' },
+            { key: 'rb_total', label: 'RB後特訓総数', hint: '確定対決の分母' },
           ],
         },
+      ],
+    },
+    {
+      title: 'AT終了画面', icon: '🖼️',
+      groups: [
         {
-          label: '設定確定演出', columns: 2,
+          label: 'AT・ボーナス終了画面', columns: 4,
           fields: [
-            { key: 'c_456', label: '設定4以上確定演出', hint: '設定4以上確定!' },
-            { key: 'c_6', label: '設定6確定演出', hint: '設定6確定!' },
+            { key: 'e_default', label: '轟（デフォルト）' },
+            { key: 'e_hamburg', label: 'ハンバーグ', hint: '偶数設定示唆' },
+            { key: 'e_safari', label: 'サファリ', hint: '高設定示唆（弱）' },
+            { key: 'e_shopping', label: 'ショッピング', hint: '高設定示唆（強）' },
+            { key: 'e_chatsumi', label: '茶摘み', hint: '設定4以上確定!' },
+            { key: 'e_racequeen', label: 'レースクイーン', hint: '設定5以上確定!' },
+            { key: 'e_onsen', label: '温泉', hint: '設定6確定!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'エンディング中キャラ', icon: '👤',
+      groups: [
+        {
+          label: 'ベルカウンター7到達時キャラ', columns: 3,
+          fields: [
+            { key: 'ch_machiko', label: 'マチ子', hint: '設定4以上確定!' },
+            { key: 'ch_misao', label: '操', hint: '設定5以上確定!' },
+            { key: 'ch_koutetsu', label: '鋼鉄', hint: '設定6確定!!' },
           ],
         },
       ],
     },
   ],
 
-  // 設定1,2,4,5,6の5段階
+  // 6段階設定
   probEntries: [
-    { key: 'atCnt', totalKey: 'totalG', rates: [1/349.2, 1/337.5, 1/295.8, 1/271.3, 1/247.9] },
-    { key: 'bellCnt', totalKey: 'totalG', rates: [1/8.8, 1/8.5, 1/8.0, 1/7.7, 1/7.4] },
+    { key: 'atCnt', totalKey: 'totalG', rates: [1/259.5, 1/256.3, 1/247.6, 1/236.0, 1/225.3, 1/221.1] },
+    { key: 'directCnt', totalKey: 'totalG', rates: [1/6411, 1/5624, 1/4344, 1/3053, 1/2420, 1/2150] },
+    { key: 'bellCnt', totalKey: 'totalG', rates: [1/21.8, 1/21.6, 1/21.4, 1/21.2, 1/21.0, 1/20.6] },
   ],
 
-  binomialEntries: [],
+  binomialEntries: [
+    { hitKey: 'blue7_hit', totalKey: 'blue7_total', rates: [0.0117, 0.0156, 0.0273, 0.0469, 0.0625, 0.0781] },
+    { hitKey: 'kakutei_hit', totalKey: 'rb_total', rates: [0.012, 0.020, 0.040, 0.070, 0.110, 0.156] },
+  ],
 
   categoricalGroups: [
     {
-      keys: ['d_normal', 'd_strong', 'd_special'],
+      keys: ['e_default', 'e_hamburg', 'e_safari', 'e_shopping', 'e_chatsumi', 'e_racequeen', 'e_onsen'],
       rates: {
-        d_normal:  [0.970, 0.955, 0.920, 0.895, 0.865],
-        d_strong:  [0.025, 0.035, 0.060, 0.078, 0.100],
-        d_special: [0.005, 0.010, 0.020, 0.027, 0.035],
-      },
-    },
-    {
-      keys: ['e_normal', 'e_bancho', 'e_special'],
-      rates: {
-        e_normal:  [0.980, 0.965, 0.930, 0.905, 0.870],
-        e_bancho:  [0.020, 0.035, 0.070, 0.093, 0.125],
-        e_special: [0.000, 0.000, 0.000, 0.002, 0.005],
-      },
-    },
-    {
-      keys: ['c_456', 'c_6'],
-      rates: {
-        c_456: [0.000, 0.000, 0.010, 0.015, 0.020],
-        c_6:   [0.000, 0.000, 0.000, 0.000, 0.005],
+        e_default:   [0.70, 0.60, 0.55, 0.48, 0.42, 0.36],
+        e_hamburg:   [0.15, 0.20, 0.15, 0.18, 0.15, 0.18],
+        e_safari:    [0.08, 0.10, 0.13, 0.13, 0.15, 0.15],
+        e_shopping:  [0.04, 0.06, 0.10, 0.10, 0.12, 0.12],
+        e_chatsumi:  [0.00, 0.00, 0.00, 0.04, 0.05, 0.06],
+        e_racequeen: [0.00, 0.00, 0.00, 0.00, 0.04, 0.05],
+        e_onsen:     [0.00, 0.00, 0.00, 0.00, 0.00, 0.01],
       },
     },
   ],
 
   confirmedMin: {
-    d_special: 4,
-    e_special: 6,
-    c_456: 4, c_6: 6,
+    e_chatsumi: 4, e_racequeen: 5, e_onsen: 6,
+    ch_machiko: 4, ch_misao: 5, ch_koutetsu: 6,
   },
 
   getJudgment: (input, result) => {
     const p = result.probabilities;
     const cMin = result.confirmedMin ?? 1;
-    // index: 0=設定1, 1=設定2, 2=設定4, 3=設定5, 4=設定6
 
-    if ((input.c_6 ?? 0) >= 1) return { message: '設定6確定！確定演出を確認済み', level: 'high' };
-    if ((input.e_special ?? 0) >= 1) return { message: '設定6濃厚！特殊終了画面を確認済み', level: 'high' };
-    if (cMin >= 5) return { message: `設定${cMin}以上確定！（設定5: ${(p[3]*100).toFixed(1)}% / 設定6: ${(p[4]*100).toFixed(1)}%）`, level: 'high' };
-    if (cMin >= 4) return { message: `設定4以上確定！（設定4: ${(p[2]*100).toFixed(1)}% / 設定5: ${(p[3]*100).toFixed(1)}% / 設定6: ${(p[4]*100).toFixed(1)}%）`, level: 'high' };
-    const p56 = p[3] + p[4];
+    if ((input.e_onsen ?? 0) >= 1 || (input.ch_koutetsu ?? 0) >= 1) {
+      return { message: '設定6確定！確定演出を確認済み', level: 'high' };
+    }
+    if (cMin >= 5) return { message: `設定5以上確定！（設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
+    if (cMin >= 4) return { message: `設定4以上確定！（設定4: ${(p[3]*100).toFixed(1)}% / 設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
+    const p56 = p[4] + p[5];
     if (p56 > 0.60) return { message: `高設定濃厚！続行推奨（設定5・6合算: ${(p56*100).toFixed(1)}%）`, level: 'high' };
-    const p456 = p[2] + p[3] + p[4];
+    const p456 = p[3] + p[4] + p[5];
     if (p456 > 0.65) return { message: `中〜高設定の可能性あり（設定4以上合算: ${(p456*100).toFixed(1)}%）`, level: 'mid' };
     if (p[0] > 0.40) return { message: `設定1の可能性が高い（${(p[0]*100).toFixed(1)}%）。ヤメ時検討`, level: 'low' };
     return { message: `最有力: 設定${result.mostLikely}（${(p[result.mostLikely-1]*100).toFixed(1)}%）。データを追加して精度を上げましょう`, level: 'low' };
@@ -111,12 +125,10 @@ const config: MachineConfig = {
   getHints: (input) => {
     const hints: string[] = [];
     if (input.totalG == null) hints.push('総ゲーム数を入力すると確率系の判定精度が上がります');
-    if (input.atCnt == null) hints.push('AT初当たり回数は最重要の設定差要素です');
-    if (input.bellCnt == null) hints.push('ベル確率に設定差があります。カウントしましょう');
-    if (!['d_normal', 'd_strong', 'd_special'].some(k => (input[k] ?? 0) > 0))
-      hints.push('対決演出の種類を記録すると精度が上がります');
-    if (!['e_normal', 'e_bancho', 'e_special'].some(k => (input[k] ?? 0) > 0))
-      hints.push('AT終了画面を確認して入力してください');
+    if (input.directCnt == null) hints.push('AT直撃回数は設定差約3倍！必ずカウントしましょう');
+    if (input.blue7_hit == null) hints.push('天国以外での青7BB当選は設定差約6.7倍の重要要素');
+    if (!['e_default', 'e_hamburg', 'e_safari', 'e_shopping', 'e_chatsumi', 'e_racequeen', 'e_onsen'].some(k => (input[k] ?? 0) > 0))
+      hints.push('終了画面を確認してください（茶摘み=設定4以上、温泉=設定6確定）');
     return hints;
   },
 };
