@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useDarkMode } from './hooks/useDarkMode';
+import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import MachinePage from './pages/MachinePage';
 import FeedbackPage from './pages/FeedbackPage';
@@ -42,6 +43,7 @@ function App() {
   return (
     <DarkModeContext.Provider value={darkMode}>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/feedback" element={<FeedbackPage />} />

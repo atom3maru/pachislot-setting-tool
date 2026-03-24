@@ -105,12 +105,12 @@ export default function FeedbackPage() {
     : feedbacks.filter(f => f.category === filter);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors">
       {/* ヘッダー */}
       <header className="bg-gradient-to-r from-emerald-700 to-teal-600 text-white py-5 px-4 shadow-lg">
         <div className="max-w-3xl mx-auto">
           <Link to="/" className="inline-flex items-center gap-1 text-white/80 hover:text-white text-xs mb-2 transition-colors">
-            ← トップへ戻る
+            &larr; トップへ戻る
           </Link>
           <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2">
             📣 みんなの声
@@ -124,9 +124,9 @@ export default function FeedbackPage() {
       <main className="max-w-3xl mx-auto px-4 py-6 flex-1 w-full">
 
         {/* ========== 投稿フォーム ========== */}
-        <section className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
-          <div className="bg-gradient-to-r from-emerald-50 to-teal-50 px-5 py-3 border-b border-gray-100">
-            <h2 className="font-bold text-gray-800 text-sm flex items-center gap-2">
+        <section className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-8">
+          <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30 px-5 py-3 border-b border-gray-100 dark:border-gray-700">
+            <h2 className="font-bold text-gray-800 dark:text-gray-100 text-sm flex items-center gap-2">
               ✏️ 声を投稿する
             </h2>
           </div>
@@ -134,25 +134,25 @@ export default function FeedbackPage() {
           <form onSubmit={handleSubmit} className="p-5 space-y-4">
             {/* ニックネーム */}
             <div>
-              <label className="block text-xs font-bold text-gray-600 mb-1">ニックネーム（任意）</label>
+              <label className="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">ニックネーム（任意）</label>
               <input
                 type="text"
                 value={nickname}
                 onChange={e => setNickname(e.target.value)}
                 placeholder="名無しさん"
                 maxLength={20}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition-all"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition-all"
               />
             </div>
 
             {/* カテゴリ & 関連機種 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-gray-600 mb-1">カテゴリ</label>
+                <label className="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">カテゴリ</label>
                 <select
                   value={category}
                   onChange={e => setCategory(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none bg-white"
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none"
                 >
                   {CATEGORIES.map(c => (
                     <option key={c.value} value={c.value}>{c.label}</option>
@@ -160,11 +160,11 @@ export default function FeedbackPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-600 mb-1">関連機種（任意）</label>
+                <label className="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">関連機種（任意）</label>
                 <select
                   value={machine}
                   onChange={e => setMachine(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none bg-white"
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none"
                 >
                   {MACHINES.map(m => (
                     <option key={m.value} value={m.value}>{m.label}</option>
@@ -175,7 +175,7 @@ export default function FeedbackPage() {
 
             {/* メッセージ */}
             <div>
-              <label className="block text-xs font-bold text-gray-600 mb-1">
+              <label className="block text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">
                 メッセージ <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -185,9 +185,9 @@ export default function FeedbackPage() {
                 rows={4}
                 maxLength={500}
                 required
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition-all resize-none"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition-all resize-none"
               />
-              <p className="text-right text-[10px] text-gray-400 mt-1">{message.length} / 500</p>
+              <p className="text-right text-[10px] text-gray-400 dark:text-gray-500 mt-1">{message.length} / 500</p>
             </div>
 
             {/* 送信ボタン */}
@@ -201,7 +201,7 @@ export default function FeedbackPage() {
 
             {/* 送信完了メッセージ */}
             {submitted && (
-              <div className="bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3 text-sm text-emerald-700 text-center animate-pulse">
+              <div className="bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-700 rounded-lg px-4 py-3 text-sm text-emerald-700 dark:text-emerald-300 text-center animate-pulse">
                 ✅ 投稿ありがとうございます！今後のアプデに活かします！
               </div>
             )}
@@ -211,14 +211,14 @@ export default function FeedbackPage() {
         {/* ========== 投稿一覧 ========== */}
         <section>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-bold text-gray-800 flex items-center gap-2">
-              💬 みんなの声 <span className="text-xs font-normal text-gray-400">({filtered.length}件)</span>
+            <h2 className="font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+              💬 みんなの声 <span className="text-xs font-normal text-gray-400 dark:text-gray-500">({filtered.length}件)</span>
             </h2>
             {/* フィルタ */}
             <select
               value={filter}
               onChange={e => setFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-2 py-1 text-xs bg-white focus:ring-2 focus:ring-emerald-400 outline-none"
+              className="border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1 text-xs bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-emerald-400 outline-none"
             >
               <option value="all">すべて</option>
               {CATEGORIES.map(c => (
@@ -228,39 +228,39 @@ export default function FeedbackPage() {
           </div>
 
           {filtered.length === 0 ? (
-            <div className="bg-white rounded-xl border border-gray-200 py-16 text-center">
+            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 py-16 text-center">
               <p className="text-4xl mb-3">📭</p>
-              <p className="text-gray-400 text-sm">まだ投稿がありません</p>
-              <p className="text-gray-300 text-xs mt-1">最初の声を投稿してみましょう！</p>
+              <p className="text-gray-400 dark:text-gray-500 text-sm">まだ投稿がありません</p>
+              <p className="text-gray-300 dark:text-gray-600 text-xs mt-1">最初の声を投稿してみましょう！</p>
             </div>
           ) : (
             <div className="space-y-3">
               {filtered.map(fb => (
                 <article
                   key={fb.id}
-                  className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                  className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden hover:shadow-md transition-shadow"
                 >
                   {/* メタ情報 */}
                   <div className="flex items-center gap-2 px-4 pt-3 pb-1 flex-wrap">
-                    <span className="bg-gray-100 text-gray-600 text-[10px] font-bold rounded-full px-2 py-0.5">
+                    <span className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-[10px] font-bold rounded-full px-2 py-0.5">
                       {getCategoryLabel(fb.category)}
                     </span>
                     {fb.machine && (
-                      <span className="bg-purple-50 text-purple-600 text-[10px] font-bold rounded-full px-2 py-0.5">
+                      <span className="bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300 text-[10px] font-bold rounded-full px-2 py-0.5">
                         🎰 {getMachineLabel(fb.machine)}
                       </span>
                     )}
-                    <span className="ml-auto text-[10px] text-gray-300">{formatDate(fb.timestamp)}</span>
+                    <span className="ml-auto text-[10px] text-gray-300 dark:text-gray-600">{formatDate(fb.timestamp)}</span>
                   </div>
 
                   {/* 本文 */}
                   <div className="px-4 py-2">
-                    <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">{fb.message}</p>
+                    <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed whitespace-pre-wrap">{fb.message}</p>
                   </div>
 
                   {/* 投稿者 */}
                   <div className="px-4 pb-3">
-                    <p className="text-[11px] text-gray-400">by {fb.nickname}</p>
+                    <p className="text-[11px] text-gray-400 dark:text-gray-500">by {fb.nickname}</p>
                   </div>
                 </article>
               ))}
@@ -269,9 +269,9 @@ export default function FeedbackPage() {
         </section>
 
         {/* ========== 注意書き ========== */}
-        <div className="mt-8 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
-          <p className="text-xs text-amber-700 font-bold mb-1">📌 お知らせ</p>
-          <ul className="text-[11px] text-amber-600 space-y-1 list-disc list-inside">
+        <div className="mt-8 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl px-4 py-3">
+          <p className="text-xs text-amber-700 dark:text-amber-400 font-bold mb-1">📌 お知らせ</p>
+          <ul className="text-[11px] text-amber-600 dark:text-amber-500 space-y-1 list-disc list-inside">
             <li>現在、投稿はお使いのブラウザにのみ保存されます（他のユーザーには表示されません）</li>
             <li>将来的にサーバー接続後、全ユーザーで共有されるようになります</li>
             <li>いただいた声は定期的に確認し、アプリの改善に反映していきます</li>
@@ -281,9 +281,9 @@ export default function FeedbackPage() {
       </main>
 
       {/* フッター */}
-      <footer className="bg-gray-100 border-t border-gray-200 py-4 px-4 mt-8">
+      <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4 mt-8">
         <div className="max-w-3xl mx-auto">
-          <p className="text-[10px] text-gray-400 text-center leading-relaxed">
+          <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center leading-relaxed">
             本ツールは非公式の個人制作であり、各パチスロメーカー・版権元とは一切関係ありません。
           </p>
         </div>

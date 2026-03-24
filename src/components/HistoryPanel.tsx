@@ -48,9 +48,9 @@ export default function HistoryPanel({ history, onLoad, onClear }: Props) {
                   <span className="text-xs font-bold text-gray-700 dark:text-gray-200">
                     設定{best}
                   </span>
-                  <span className="text-[10px] text-gray-400">({bestProb}%)</span>
+                  <span className="text-[10px] text-gray-400 dark:text-gray-500">({bestProb}%)</span>
                   {totalG && (
-                    <span className="text-[10px] text-gray-400">{totalG}G</span>
+                    <span className="text-[10px] text-gray-400 dark:text-gray-500">{totalG}G</span>
                   )}
                 </div>
               </div>

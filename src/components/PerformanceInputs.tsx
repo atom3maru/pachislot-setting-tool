@@ -13,7 +13,7 @@ export default function PerformanceInputs({ data, onChange }: Props) {
       <div className="space-y-4">
         {/* ボイス */}
         <div>
-          <h3 className="text-xs font-semibold text-gray-500 mb-2">逆押しカットインボイス</h3>
+          <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">逆押しカットインボイス</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             <NumberField label="未発生" value={data.v_none} onChange={v => onChange('v_none', v)} hint="設定5以上濃厚!" />
             <NumberField label="男性ボイス" value={data.v_male} onChange={v => onChange('v_male', v)} hint="奇数設定示唆" />
@@ -25,7 +25,7 @@ export default function PerformanceInputs({ data, onChange }: Props) {
 
         {/* キャラ紹介 */}
         <div>
-          <h3 className="text-xs font-semibold text-gray-500 mb-2">キャラ紹介（カバネリボーナス中）</h3>
+          <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">キャラ紹介（カバネリボーナス中）</h3>
           <div className="grid grid-cols-3 gap-3">
             <NumberField label="女性多め" value={data.c_female} onChange={v => onChange('c_female', v)} hint="偶数設定示唆" />
             <NumberField label="男性多め" value={data.c_male} onChange={v => onChange('c_male', v)} hint="奇数設定示唆" />
@@ -35,7 +35,7 @@ export default function PerformanceInputs({ data, onChange }: Props) {
 
         {/* ゾロ目上乗せ */}
         <div>
-          <h3 className="text-xs font-semibold text-gray-500 mb-2">カバネリアタック・ゾロ目上乗せ</h3>
+          <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">カバネリアタック・ゾロ目上乗せ</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <NumberField label="+44枚" value={data.zoro44} onChange={v => onChange('zoro44', v)} hint="設定4以上濃厚" />
             <NumberField label="+55枚" value={data.zoro55} onChange={v => onChange('zoro55', v)} hint="設定5以上濃厚" />
