@@ -4,6 +4,8 @@ import { useDarkMode } from './hooks/useDarkMode';
 import HomePage from './pages/HomePage';
 import MachinePage from './pages/MachinePage';
 import FeedbackPage from './pages/FeedbackPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsPage from './pages/TermsPage';
 
 // 機種設定のインポート
 import kabaneriConfig from './machines/kabaneri/config';
@@ -38,6 +40,8 @@ function App() {
           <Route path="/hokuto" element={<MachinePage config={hokutoConfig} />} />
           <Route path="/ghoul" element={<MachinePage config={ghoulConfig} />} />
           <Route path="/hanahana" element={<MachinePage config={hanahanaConfig} />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
         </Routes>
       </BrowserRouter>
     </DarkModeContext.Provider>

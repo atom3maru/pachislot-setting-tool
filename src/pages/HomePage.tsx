@@ -166,8 +166,23 @@ export default function HomePage() {
         </Link>
       </main>
 
-      <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4 mt-8">
-        <div className="max-w-4xl mx-auto space-y-2">
+      <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-5 px-4 mt-8">
+        <div className="max-w-4xl mx-auto space-y-3">
+          {/* ページリンク */}
+          <div className="flex justify-center gap-4 text-xs">
+            <Link to="/privacy" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline transition-colors">
+              プライバシーポリシー
+            </Link>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <Link to="/terms" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline transition-colors">
+              利用規約・免責事項
+            </Link>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <Link to="/feedback" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline transition-colors">
+              お問い合わせ
+            </Link>
+          </div>
+          {/* 免責文 */}
           <p className="text-[10px] text-gray-400 text-center leading-relaxed">
             本ツールは非公式の個人制作であり、各パチスロメーカー・版権元とは一切関係ありません。
           </p>
@@ -175,7 +190,7 @@ export default function HomePage() {
             掲載されている解析値は暫定値を含みます。実際の数値と異なる場合がありますので、参考値としてご利用ください。
           </p>
           <p className="text-[10px] text-gray-400 text-center leading-relaxed">
-            機種名・キャラクター名等の知的財産権は各権利者に帰属します。
+            機種名・キャラクター名等の知的財産権は各権利者に帰属します。© 2026 パチスロ設定判別ツール
           </p>
         </div>
       </footer>
