@@ -3,8 +3,9 @@ import type { MachineConfig } from '../../types/machine';
 const config: MachineConfig = {
   id: 'tokyorevengers',
   name: 'スマスロ 東京リベンジャーズ',
-  version: '1.0.0',
+  version: '1.1.0',
   color: 'bg-gradient-to-r from-yellow-500 to-red-500',
+  // 6段階設定（1,2,3,4,5,6）
 
   sections: [
     {
@@ -14,29 +15,69 @@ const config: MachineConfig = {
           columns: 3,
           fields: [
             { key: 'totalG', label: '総ゲーム数', hint: '通常時+AT中合算' },
-            { key: 'atCnt', label: 'AT初当たり回数', hint: '最重要の設定差' },
-            { key: 'koyakuCnt', label: '弱チェリー回数', hint: '設定差あり' },
+            { key: 'bonusCnt', label: '初当たり合算回数' },
+            { key: 'atCnt', label: 'AT回数', hint: '東卍RUSH' },
+            { key: 'bellCnt', label: '共通ベル回数', hint: '通常時・左第1停止15枚ベル' },
+            { key: 'chuCherry', label: '中段チェリー回数', hint: '設定差約1.5倍' },
           ],
         },
       ],
     },
     {
-      title: '演出系データ', icon: '🎬',
+      title: 'リベンジフリーズ・CZ昇格', icon: '⚡',
       groups: [
         {
-          label: 'AT終了画面', columns: 3,
+          label: 'リベンジフリーズ（特大設定差）', columns: 2,
           fields: [
-            { key: 'e_normal', label: '通常画面', hint: 'デフォルト' },
-            { key: 'e_mikey', label: 'マイキー画面', hint: '高設定示唆' },
-            { key: 'e_group', label: '全員集合画面', hint: '設定4以上濃厚' },
-            { key: 'e_special', label: '特殊画面', hint: '設定6濃厚!' },
+            { key: 'revenge_hit', label: 'リベンジフリーズ発生回数', hint: '設定1:0.8%→設定6:6.2%' },
+            { key: 'revenge_total', label: '3〜5周期スルー回数', hint: 'フリーズの分母' },
           ],
         },
         {
-          label: '設定示唆セリフ', columns: 2,
+          label: '東卍CHANCE中AT昇格', columns: 2,
           fields: [
-            { key: 's_high', label: '高設定示唆セリフ', hint: '設定4以上濃厚' },
-            { key: 's_confirm6', label: '設定6確定セリフ', hint: '設定6確定!' },
+            { key: 'cz_at_hit', label: 'スイカ/弱チェリー→AT昇格数', hint: '高設定ほど優遇' },
+            { key: 'cz_koyaku_total', label: 'CZ中スイカ/弱チェリー総数' },
+          ],
+        },
+      ],
+    },
+    {
+      title: '終了画面', icon: '🖼️',
+      groups: [
+        {
+          label: '終了画面枠色', columns: 4,
+          fields: [
+            { key: 'e_red1', label: '赤枠（デフォルト）' },
+            { key: 'e_blue_high', label: '青枠（高設定示唆）', hint: '高設定示唆' },
+            { key: 'e_red_high', label: '赤枠（高設定強）', hint: '高設定示唆（強）' },
+            { key: 'e_yellow', label: '黄枠', hint: '設定3以上濃厚' },
+            { key: 'e_red4', label: '赤枠（特殊）', hint: '設定4以上濃厚!' },
+            { key: 'e_purple', label: '紫枠', hint: '設定5以上濃厚!' },
+            { key: 'e_gold', label: '金枠（東卍結成）', hint: '設定6濃厚!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'トロフィー・獲得枚数', icon: '🏆',
+      groups: [
+        {
+          label: 'サミートロフィー', columns: 3,
+          fields: [
+            { key: 't_copper', label: '銅トロフィー', hint: '設定2以上' },
+            { key: 't_silver', label: '銀トロフィー', hint: '設定3以上' },
+            { key: 't_gold', label: '金トロフィー', hint: '設定4以上' },
+            { key: 't_kirin', label: 'キリン柄', hint: '設定5以上!' },
+            { key: 't_rainbow', label: '虹トロフィー', hint: '設定6濃厚!' },
+          ],
+        },
+        {
+          label: '獲得枚数表示', columns: 3,
+          fields: [
+            { key: 'm456', label: '456枚OVER', hint: '設定4以上濃厚' },
+            { key: 'm555', label: '555枚OVER', hint: '設定5以上濃厚' },
+            { key: 'm666', label: '666枚OVER', hint: '設定6濃厚!' },
           ],
         },
       ],
@@ -44,43 +85,64 @@ const config: MachineConfig = {
   ],
 
   probEntries: [
-    { key: 'atCnt', totalKey: 'totalG', rates: [1/345.8, 1/332.5, 1/318.2, 1/287.6, 1/263.8, 1/242.4] },
-    { key: 'koyakuCnt', totalKey: 'totalG', rates: [1/105.3, 1/101.8, 1/97.5, 1/90.2, 1/85.6, 1/81.3] },
+    { key: 'bonusCnt', totalKey: 'totalG', rates: [1/282.4, 1/279.5, 1/272.2, 1/255.8, 1/249.1, 1/240.1] },
+    { key: 'atCnt', totalKey: 'totalG', rates: [1/482.2, 1/474.7, 1/456.9, 1/414.0, 1/393.8, 1/373.1] },
+    { key: 'bellCnt', totalKey: 'totalG', rates: [1/99.3, 1/96.4, 1/89.8, 1/84.0, 1/79.0, 1/77.1] },
+    { key: 'chuCherry', totalKey: 'totalG', rates: [1/16384.0, 1/16384.0, 1/13107.2, 1/13107.2, 1/10922.7, 1/10922.7] },
   ],
 
-  binomialEntries: [],
+  binomialEntries: [
+    { hitKey: 'revenge_hit', totalKey: 'revenge_total', rates: [0.008, 0.012, 0.020, 0.032, 0.048, 0.062] },
+    { hitKey: 'cz_at_hit', totalKey: 'cz_koyaku_total', rates: [0.102, 0.110, 0.125, 0.140, 0.155, 0.164] },
+  ],
 
   categoricalGroups: [
     {
-      keys: ['e_normal', 'e_mikey', 'e_group', 'e_special'],
+      keys: ['e_red1', 'e_blue_high', 'e_red_high', 'e_yellow', 'e_red4', 'e_purple', 'e_gold'],
       rates: {
-        e_normal:  [0.980, 0.968, 0.952, 0.928, 0.900, 0.865],
-        e_mikey:   [0.015, 0.022, 0.033, 0.047, 0.062, 0.082],
-        e_group:   [0.005, 0.010, 0.015, 0.025, 0.035, 0.048],
-        e_special: [0.000, 0.000, 0.000, 0.000, 0.003, 0.005],
+        e_red1:      [0.70, 0.65, 0.58, 0.50, 0.44, 0.38],
+        e_blue_high: [0.12, 0.13, 0.15, 0.16, 0.17, 0.17],
+        e_red_high:  [0.08, 0.10, 0.12, 0.13, 0.14, 0.15],
+        e_yellow:    [0.00, 0.00, 0.05, 0.06, 0.06, 0.07],
+        e_red4:      [0.00, 0.00, 0.00, 0.05, 0.06, 0.07],
+        e_purple:    [0.00, 0.00, 0.00, 0.00, 0.05, 0.06],
+        e_gold:      [0.00, 0.00, 0.00, 0.00, 0.00, 0.01],
       },
     },
     {
-      keys: ['s_high', 's_confirm6'],
+      keys: ['t_copper', 't_silver', 't_gold', 't_kirin', 't_rainbow'],
       rates: {
-        s_high:     [0.000, 0.000, 0.000, 0.020, 0.030, 0.040],
-        s_confirm6: [0.000, 0.000, 0.000, 0.000, 0.000, 0.005],
+        t_copper:  [0.000, 0.020, 0.020, 0.020, 0.020, 0.020],
+        t_silver:  [0.000, 0.000, 0.010, 0.010, 0.010, 0.010],
+        t_gold:    [0.000, 0.000, 0.000, 0.005, 0.005, 0.005],
+        t_kirin:   [0.000, 0.000, 0.000, 0.000, 0.003, 0.005],
+        t_rainbow: [0.000, 0.000, 0.000, 0.000, 0.000, 0.002],
+      },
+    },
+    {
+      keys: ['m456', 'm555', 'm666'],
+      rates: {
+        m456: [0.00, 0.00, 0.00, 0.03, 0.03, 0.05],
+        m555: [0.00, 0.00, 0.00, 0.00, 0.02, 0.03],
+        m666: [0.00, 0.00, 0.00, 0.00, 0.00, 0.02],
       },
     },
   ],
 
   confirmedMin: {
-    e_group: 4, e_special: 6,
-    s_high: 4, s_confirm6: 6,
+    e_yellow: 3, e_red4: 4, e_purple: 5, e_gold: 6,
+    t_copper: 2, t_silver: 3, t_gold: 4, t_kirin: 5, t_rainbow: 6,
+    m456: 4, m555: 5, m666: 6,
   },
 
   getJudgment: (input, result) => {
     const p = result.probabilities;
     const cMin = result.confirmedMin ?? 1;
 
-    if ((input.s_confirm6 ?? 0) >= 1) return { message: '設定6確定！確定セリフを確認済み', level: 'high' };
-    if ((input.e_special ?? 0) >= 1) return { message: '設定6濃厚！特殊終了画面を確認済み', level: 'high' };
-    if (cMin >= 5) return { message: `設定${cMin}以上確定！（設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
+    if ((input.e_gold ?? 0) >= 1 || (input.t_rainbow ?? 0) >= 1 || (input.m666 ?? 0) >= 1) {
+      return { message: '設定6濃厚！確定級演出を確認済み', level: 'high' };
+    }
+    if (cMin >= 5) return { message: `設定5以上確定！（設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
     if (cMin >= 4) return { message: `設定4以上確定！（設定4: ${(p[3]*100).toFixed(1)}% / 設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
     const p56 = p[4] + p[5];
     if (p56 > 0.60) return { message: `高設定濃厚！続行推奨（設定5・6合算: ${(p56*100).toFixed(1)}%）`, level: 'high' };
@@ -93,10 +155,10 @@ const config: MachineConfig = {
   getHints: (input) => {
     const hints: string[] = [];
     if (input.totalG == null) hints.push('総ゲーム数を入力すると確率系の判定精度が上がります');
-    if (input.atCnt == null) hints.push('AT初当たり回数は最重要の設定差要素です');
-    if (input.koyakuCnt == null) hints.push('弱チェリー確率に設定差があります。カウントしましょう');
-    if (!['e_normal', 'e_mikey', 'e_group', 'e_special'].some(k => (input[k] ?? 0) > 0))
-      hints.push('AT終了画面を確認して入力してください（特殊画面=設定6濃厚）');
+    if (input.bellCnt == null) hints.push('共通ベル（通常時・左第1停止）は重要な判別要素。カウントしましょう');
+    if (input.revenge_hit == null) hints.push('リベンジフリーズは特大設定差あり（設定1:0.8%→設定6:6.2%）');
+    if (!['e_red1', 'e_blue_high', 'e_yellow', 'e_red4', 'e_purple', 'e_gold'].some(k => (input[k] ?? 0) > 0))
+      hints.push('終了画面の枠色を確認してください（紫枠=設定5以上、金枠=設定6濃厚）');
     return hints;
   },
 };
