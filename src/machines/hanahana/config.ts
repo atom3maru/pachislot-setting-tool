@@ -148,7 +148,7 @@ const config: MachineConfig = {
   // ========================================
   // 判定コメント生成
   // ========================================
-  getJudgment: (input, result) => {
+  getJudgment: (_input, result) => {
     const labels = ['1', '2', '3', '4', 'V'];
     const mlLabel = labels[result.mostLikely - 1] ?? String(result.mostLikely);
     const topProb = result.probabilities[result.mostLikely - 1];
