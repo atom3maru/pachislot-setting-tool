@@ -3,7 +3,7 @@ import type { MachineConfig } from '../../types/machine';
 const config: MachineConfig = {
   id: 'monkeyturn',
   name: 'スマスロモンキーターンV',
-  version: '1.0.0',
+  version: '1.1.0',
   color: 'bg-gradient-to-r from-cyan-600 to-blue-500',
   settingLabels: ['1', '2', '4', '5', '6'],
 
@@ -15,32 +15,63 @@ const config: MachineConfig = {
           columns: 3,
           fields: [
             { key: 'totalG', label: '総ゲーム数', hint: '通常時+AT中合算' },
-            { key: 'atCnt', label: 'AT初当たり回数', hint: '最重要の設定差' },
-            { key: 'bellCnt', label: 'ベル回数', hint: '設定差あり' },
+            { key: 'atCnt', label: 'AT初当たり回数' },
+            { key: 'gomaiyaku', label: '5枚役回数', hint: '最重要カウント要素!設定差約1.7倍' },
           ],
         },
       ],
     },
     {
-      title: '演出系データ', icon: '🎬',
+      title: 'AT直撃・ライバルモード', icon: '⚡',
       groups: [
         {
-          label: 'AT終了画面', columns: 3,
+          label: '弱レア役AT直撃（設定4以上確定）', columns: 2,
           fields: [
-            { key: 'e_default', label: 'デフォルト', hint: '通常画面' },
-            { key: 'e_group', label: '集合画面', hint: '高設定示唆' },
-            { key: 'e_helmet', label: 'ヘルメット画面', hint: '設定4以上濃厚' },
-            { key: 'e_special', label: '特殊画面', hint: '設定6濃厚!' },
+            { key: 'direct_weak', label: '弱レア役AT直撃回数', hint: '発生=設定4以上確定!' },
+            { key: 'direct_none', label: 'AT直撃なし' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'AT終了画面', icon: '🖼️',
+      groups: [
+        {
+          label: 'SGメダル', columns: 3,
+          fields: [
+            { key: 'medal_normal', label: '通常メダル', hint: 'デフォルト' },
+            { key: 'medal_blue', label: '青メダル', hint: '偶数設定示唆' },
+            { key: 'medal_yellow', label: '黄メダル', hint: '高設定示唆（弱）' },
+            { key: 'medal_black', label: '黒メダル', hint: '高設定示唆（強）' },
           ],
         },
         {
-          label: 'サミートロフィー', columns: 3,
+          label: 'ケロットトロフィー', columns: 4,
           fields: [
-            { key: 't_copper', label: '銅トロフィー', hint: '設定2以上' },
-            { key: 't_silver', label: '銀トロフィー', hint: '設定4以上' },
-            { key: 't_gold', label: '金トロフィー', hint: '設定5以上' },
-            { key: 't_kirin', label: 'キリン柄', hint: '設定5以上!' },
+            { key: 't_copper', label: '銅トロフィー', hint: '設定2以上確定' },
+            { key: 't_gold', label: '金トロフィー', hint: '設定4以上確定!' },
+            { key: 't_kerot', label: 'ケロット柄', hint: '設定5以上確定!' },
             { key: 't_rainbow', label: '虹トロフィー', hint: '設定6確定!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: '獲得枚数・その他', icon: '📋',
+      groups: [
+        {
+          label: '獲得枚数表示', columns: 3,
+          fields: [
+            { key: 'm456', label: '456 OVER', hint: '設定4以上確定' },
+            { key: 'm803', label: '803 OVER', hint: '設定5以上確定' },
+            { key: 'm666', label: '666 OVER', hint: '設定6確定!' },
+          ],
+        },
+        {
+          label: '青島SG ラウンド開始画面', columns: 2,
+          fields: [
+            { key: 'aoshima_hatano', label: '青島&波多野', hint: '設定5以上確定+継続確定!' },
+            { key: 'aoshima_none', label: '上記以外' },
           ],
         },
       ],
@@ -49,47 +80,63 @@ const config: MachineConfig = {
 
   // 設定1,2,4,5,6の5段階
   probEntries: [
-    { key: 'atCnt', totalKey: 'totalG', rates: [1/296.3, 1/288.5, 1/256.1, 1/238.4, 1/218.7] },
-    { key: 'bellCnt', totalKey: 'totalG', rates: [1/8.5, 1/8.3, 1/7.9, 1/7.6, 1/7.3] },
+    { key: 'atCnt', totalKey: 'totalG', rates: [1/299.8, 1/295.5, 1/258.8, 1/235.7, 1/222.9] },
+    { key: 'gomaiyaku', totalKey: 'totalG', rates: [1/38.15, 1/36.86, 1/30.27, 1/24.51, 1/22.53] },
   ],
 
   binomialEntries: [],
 
   categoricalGroups: [
     {
-      keys: ['e_default', 'e_group', 'e_helmet', 'e_special'],
+      keys: ['direct_weak', 'direct_none'],
       rates: {
-        e_default: [0.975, 0.960, 0.930, 0.905, 0.870],
-        e_group:   [0.020, 0.030, 0.050, 0.065, 0.085],
-        e_helmet:  [0.005, 0.010, 0.020, 0.028, 0.040],
-        e_special: [0.000, 0.000, 0.000, 0.002, 0.005],
+        direct_weak: [0.000, 0.000, 0.004, 0.020, 0.031],
+        direct_none: [1.000, 1.000, 0.996, 0.980, 0.969],
       },
     },
     {
-      keys: ['t_copper', 't_silver', 't_gold', 't_kirin', 't_rainbow'],
+      keys: ['medal_normal', 'medal_blue', 'medal_yellow', 'medal_black'],
+      rates: {
+        medal_normal: [0.80, 0.72, 0.65, 0.60, 0.55],
+        medal_blue:   [0.10, 0.15, 0.12, 0.13, 0.15],
+        medal_yellow: [0.06, 0.08, 0.13, 0.15, 0.16],
+        medal_black:  [0.01, 0.02, 0.04, 0.045, 0.045],
+      },
+    },
+    {
+      keys: ['t_copper', 't_gold', 't_kerot', 't_rainbow'],
       rates: {
         t_copper:  [0.000, 0.020, 0.020, 0.020, 0.020],
-        t_silver:  [0.000, 0.000, 0.010, 0.010, 0.010],
-        t_gold:    [0.000, 0.000, 0.000, 0.005, 0.005],
-        t_kirin:   [0.000, 0.000, 0.000, 0.003, 0.005],
+        t_gold:    [0.000, 0.000, 0.005, 0.005, 0.005],
+        t_kerot:   [0.000, 0.000, 0.000, 0.003, 0.005],
         t_rainbow: [0.000, 0.000, 0.000, 0.000, 0.002],
+      },
+    },
+    {
+      keys: ['m456', 'm803', 'm666'],
+      rates: {
+        m456: [0.00, 0.00, 0.03, 0.03, 0.05],
+        m803: [0.00, 0.00, 0.00, 0.02, 0.03],
+        m666: [0.00, 0.00, 0.00, 0.00, 0.02],
       },
     },
   ],
 
   confirmedMin: {
-    t_copper: 2, t_silver: 4, t_gold: 5, t_kirin: 5, t_rainbow: 6,
-    e_helmet: 4, e_special: 6,
+    direct_weak: 4,
+    t_copper: 2, t_gold: 4, t_kerot: 5, t_rainbow: 6,
+    m456: 4, m803: 5, m666: 6,
+    aoshima_hatano: 5,
   },
 
   getJudgment: (input, result) => {
     const p = result.probabilities;
     const cMin = result.confirmedMin ?? 1;
-    // index: 0=設定1, 1=設定2, 2=設定4, 3=設定5, 4=設定6
 
-    if ((input.t_rainbow ?? 0) >= 1) return { message: '設定6確定！虹トロフィーを確認済み', level: 'high' };
-    if ((input.e_special ?? 0) >= 1) return { message: '設定6濃厚！特殊終了画面を確認済み', level: 'high' };
-    if (cMin >= 5) return { message: `設定${cMin}以上確定！（設定5: ${(p[3]*100).toFixed(1)}% / 設定6: ${(p[4]*100).toFixed(1)}%）`, level: 'high' };
+    if ((input.t_rainbow ?? 0) >= 1 || (input.m666 ?? 0) >= 1) {
+      return { message: '設定6確定！確定演出を確認済み', level: 'high' };
+    }
+    if (cMin >= 5) return { message: `設定5以上確定！（設定5: ${(p[3]*100).toFixed(1)}% / 設定6: ${(p[4]*100).toFixed(1)}%）`, level: 'high' };
     if (cMin >= 4) return { message: `設定4以上確定！（設定4: ${(p[2]*100).toFixed(1)}% / 設定5: ${(p[3]*100).toFixed(1)}% / 設定6: ${(p[4]*100).toFixed(1)}%）`, level: 'high' };
     const p56 = p[3] + p[4];
     if (p56 > 0.60) return { message: `高設定濃厚！続行推奨（設定5・6合算: ${(p56*100).toFixed(1)}%）`, level: 'high' };
@@ -102,12 +149,12 @@ const config: MachineConfig = {
   getHints: (input) => {
     const hints: string[] = [];
     if (input.totalG == null) hints.push('総ゲーム数を入力すると確率系の判定精度が上がります');
-    if (input.atCnt == null) hints.push('AT初当たり回数は最重要の設定差要素です');
-    if (input.bellCnt == null) hints.push('ベル確率に設定差があります。カウントしましょう');
-    if (!['e_default', 'e_group', 'e_helmet', 'e_special'].some(k => (input[k] ?? 0) > 0))
-      hints.push('AT終了画面を確認して入力してください');
-    if (!['t_copper', 't_silver', 't_gold', 't_kirin', 't_rainbow'].some(k => (input[k] ?? 0) > 0))
-      hints.push('サミートロフィーの色を確認してください（虹=設定6確定）');
+    if (input.gomaiyaku == null) hints.push('5枚役は最重要カウント要素！セグに「5」表示で判別可能');
+    if (input.direct_weak == null) hints.push('弱レア役からのAT直撃は設定4以上確定！見逃さないように');
+    if (!['medal_normal', 'medal_blue', 'medal_yellow', 'medal_black'].some(k => (input[k] ?? 0) > 0))
+      hints.push('AT終了時のSGメダル色を確認してください');
+    if (!['t_copper', 't_gold', 't_kerot', 't_rainbow'].some(k => (input[k] ?? 0) > 0))
+      hints.push('ケロットトロフィーを確認してください（虹=設定6確定）');
     return hints;
   },
 };
