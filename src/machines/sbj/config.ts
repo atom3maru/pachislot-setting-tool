@@ -3,8 +3,9 @@ import type { MachineConfig } from '../../types/machine';
 const config: MachineConfig = {
   id: 'sbj',
   name: 'スマスロスーパーブラックジャック',
-  version: '1.0.0',
+  version: '1.1.0',
   color: 'bg-gradient-to-r from-green-800 to-emerald-600',
+  // 6段階設定（1,2,3,4,5,6）
 
   sections: [
     {
@@ -14,75 +15,115 @@ const config: MachineConfig = {
           columns: 3,
           fields: [
             { key: 'totalG', label: '総ゲーム数', hint: '通常時+AT中合算' },
-            { key: 'atCnt', label: 'AT初当たり回数', hint: '最重要の設定差' },
-            { key: 'koyakuCnt', label: '弱チェリー回数', hint: '設定差あり' },
+            { key: 'bonusCnt', label: '初当たり回数', hint: '設定4以上で大幅UP' },
+            { key: 'suikaCnt', label: '斜めスイカ回数', hint: '最重要カウント対象!' },
           ],
         },
       ],
     },
     {
-      title: '演出系データ', icon: '🎬',
+      title: 'ST直撃・チャンス目', icon: '⚡',
       groups: [
         {
-          label: 'ディーラー演出', columns: 3,
+          label: '斜めスイカ→ST直撃', columns: 2,
           fields: [
-            { key: 'dl_normal', label: '通常ディーラー', hint: 'デフォルト' },
-            { key: 'dl_silver', label: 'シルバーディーラー', hint: '高設定示唆' },
-            { key: 'dl_gold', label: 'ゴールドディーラー', hint: '設定4以上濃厚' },
-            { key: 'dl_rainbow', label: 'レインボーディーラー', hint: '設定6確定!' },
+            { key: 'st_hit', label: 'スイカST直撃回数', hint: '設定5・6で大幅優遇' },
+            { key: 'st_suika_total', label: 'スイカ成立総数', hint: 'ST直撃の分母' },
           ],
         },
         {
-          label: 'AT終了画面', columns: 3,
+          label: 'チャンス目→高確移行', columns: 2,
           fields: [
-            { key: 'e_normal', label: '通常画面', hint: 'デフォルト' },
-            { key: 'e_high', label: '高設定示唆画面', hint: '高設定示唆' },
-            { key: 'e_special', label: '特殊画面', hint: '設定6濃厚!' },
+            { key: 'chance_koukaku', label: 'チャンス目→高確移行回数', hint: '設定1:40%→設定6:60%' },
+            { key: 'chance_total', label: 'チャンス目成立総数' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'ケロットトロフィー・終了画面', icon: '🏆',
+      groups: [
+        {
+          label: 'ケロットトロフィー（ボーナス終了時）', columns: 3,
+          fields: [
+            { key: 't_copper', label: '銅トロフィー', hint: '設定2以上' },
+            { key: 't_silver', label: '銀トロフィー', hint: '設定3以上' },
+            { key: 't_gold', label: '金トロフィー', hint: '設定4以上' },
+            { key: 't_kerot', label: 'ケロット柄', hint: '設定5以上!' },
+            { key: 't_rainbow', label: '虹トロフィー', hint: '設定6濃厚!' },
+          ],
+        },
+        {
+          label: 'REG終了時キャラカード', columns: 3,
+          fields: [
+            { key: 'card_rina', label: 'リナ', hint: '高設定期待度UP（強）' },
+            { key: 'card_joker', label: 'リオ&リナ（ジョーカー）', hint: '設定5以上濃厚!' },
+            { key: 'card_3nin', label: 'リオ&リナ&ミント', hint: '設定6濃厚!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'ダイスチェック', icon: '🎲',
+      groups: [
+        {
+          label: 'ダイスゾロ目（150G/450G/750G時）', columns: 3,
+          fields: [
+            { key: 'dice4', label: '4ゾロ目', hint: '設定4以上濃厚' },
+            { key: 'dice5', label: '5ゾロ目', hint: '設定5以上濃厚' },
+            { key: 'dice6', label: '6ゾロ目', hint: '設定6濃厚!' },
           ],
         },
       ],
     },
   ],
 
+  // 6段階設定
   probEntries: [
-    { key: 'atCnt', totalKey: 'totalG', rates: [1/312.5, 1/298.7, 1/285.3, 1/262.8, 1/245.6, 1/228.1] },
-    { key: 'koyakuCnt', totalKey: 'totalG', rates: [1/95.2, 1/92.1, 1/88.5, 1/83.4, 1/79.8, 1/76.3] },
+    { key: 'bonusCnt', totalKey: 'totalG', rates: [1/241.7, 1/238.8, 1/235.9, 1/201.8, 1/194.9, 1/181.3] },
+    { key: 'suikaCnt', totalKey: 'totalG', rates: [1/99.9, 1/91.1, 1/87.7, 1/86.7, 1/85.0, 1/83.9] },
   ],
 
-  binomialEntries: [],
+  binomialEntries: [
+    { hitKey: 'st_hit', totalKey: 'st_suika_total', rates: [0.004, 0.004, 0.005, 0.007, 0.014, 0.016] },
+    { hitKey: 'chance_koukaku', totalKey: 'chance_total', rates: [0.401, 0.430, 0.465, 0.510, 0.555, 0.595] },
+  ],
 
   categoricalGroups: [
     {
-      keys: ['dl_normal', 'dl_silver', 'dl_gold', 'dl_rainbow'],
+      keys: ['t_copper', 't_silver', 't_gold', 't_kerot', 't_rainbow'],
       rates: {
-        dl_normal:  [0.975, 0.960, 0.940, 0.915, 0.888, 0.855],
-        dl_silver:  [0.020, 0.030, 0.042, 0.058, 0.075, 0.095],
-        dl_gold:    [0.005, 0.010, 0.018, 0.027, 0.035, 0.045],
-        dl_rainbow: [0.000, 0.000, 0.000, 0.000, 0.002, 0.005],
+        t_copper:  [0.000, 0.020, 0.020, 0.020, 0.020, 0.020],
+        t_silver:  [0.000, 0.000, 0.010, 0.010, 0.010, 0.010],
+        t_gold:    [0.000, 0.000, 0.000, 0.005, 0.005, 0.005],
+        t_kerot:   [0.000, 0.000, 0.000, 0.000, 0.003, 0.005],
+        t_rainbow: [0.000, 0.000, 0.000, 0.000, 0.000, 0.002],
       },
     },
     {
-      keys: ['e_normal', 'e_high', 'e_special'],
+      keys: ['card_rina', 'card_joker', 'card_3nin'],
       rates: {
-        e_normal:  [0.985, 0.975, 0.960, 0.938, 0.912, 0.880],
-        e_high:    [0.015, 0.025, 0.040, 0.062, 0.085, 0.115],
-        e_special: [0.000, 0.000, 0.000, 0.000, 0.003, 0.005],
+        card_rina:   [0.02, 0.03, 0.04, 0.05, 0.06, 0.08],
+        card_joker:  [0.00, 0.00, 0.00, 0.00, 0.02, 0.03],
+        card_3nin:   [0.00, 0.00, 0.00, 0.00, 0.00, 0.01],
       },
     },
   ],
 
   confirmedMin: {
-    dl_gold: 4, dl_rainbow: 6,
-    e_special: 6,
+    t_copper: 2, t_silver: 3, t_gold: 4, t_kerot: 5, t_rainbow: 6,
+    card_joker: 5, card_3nin: 6,
+    dice4: 4, dice5: 5, dice6: 6,
   },
 
   getJudgment: (input, result) => {
     const p = result.probabilities;
     const cMin = result.confirmedMin ?? 1;
 
-    if ((input.dl_rainbow ?? 0) >= 1) return { message: '設定6確定！レインボーディーラーを確認済み', level: 'high' };
-    if ((input.e_special ?? 0) >= 1) return { message: '設定6濃厚！特殊終了画面を確認済み', level: 'high' };
-    if (cMin >= 5) return { message: `設定${cMin}以上確定！（設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
+    if ((input.t_rainbow ?? 0) >= 1 || (input.card_3nin ?? 0) >= 1 || (input.dice6 ?? 0) >= 1) {
+      return { message: '設定6濃厚！確定級演出を確認済み', level: 'high' };
+    }
+    if (cMin >= 5) return { message: `設定5以上確定！（設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
     if (cMin >= 4) return { message: `設定4以上確定！（設定4: ${(p[3]*100).toFixed(1)}% / 設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
     const p56 = p[4] + p[5];
     if (p56 > 0.60) return { message: `高設定濃厚！続行推奨（設定5・6合算: ${(p56*100).toFixed(1)}%）`, level: 'high' };
@@ -95,12 +136,11 @@ const config: MachineConfig = {
   getHints: (input) => {
     const hints: string[] = [];
     if (input.totalG == null) hints.push('総ゲーム数を入力すると確率系の判定精度が上がります');
-    if (input.atCnt == null) hints.push('AT初当たり回数は最重要の設定差要素です');
-    if (input.koyakuCnt == null) hints.push('弱チェリー確率に設定差があります。カウントしましょう');
-    if (!['dl_normal', 'dl_silver', 'dl_gold', 'dl_rainbow'].some(k => (input[k] ?? 0) > 0))
-      hints.push('ディーラー演出を確認してください（レインボー=設定6確定）');
-    if (!['e_normal', 'e_high', 'e_special'].some(k => (input[k] ?? 0) > 0))
-      hints.push('AT終了画面を確認して入力してください');
+    if (input.suikaCnt == null) hints.push('斜めスイカ確率は最重要カウント対象！必ずカウントしましょう');
+    if (input.st_hit == null) hints.push('スイカからのST直撃は設定5・6で大幅優遇');
+    if (input.chance_koukaku == null) hints.push('チャンス目からの高確移行率にも大きな設定差あり');
+    if (!['t_copper', 't_silver', 't_gold', 't_kerot', 't_rainbow'].some(k => (input[k] ?? 0) > 0))
+      hints.push('ケロットトロフィーを確認してください（虹=設定6濃厚）');
     return hints;
   },
 };
