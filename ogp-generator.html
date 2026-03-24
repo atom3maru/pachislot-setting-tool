@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: #111827; font-family: 'Segoe UI', 'Hiragino Sans', 'Yu Gothic', sans-serif; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1200" height="630"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+// 背景グラデーション
+const bg = ctx.createLinearGradient(0, 0, 1200, 630);
+bg.addColorStop(0, '#0f172a');
+bg.addColorStop(0.5, '#1e1b4b');
+bg.addColorStop(1, '#0f172a');
+ctx.fillStyle = bg;
+ctx.fillRect(0, 0, 1200, 630);
+
+// 装飾：光の粒
+const dots = [
+  {x:100,y:80,r:2,a:0.4},{x:300,y:50,r:1.5,a:0.3},{x:500,y:100,r:2.5,a:0.5},
+  {x:700,y:60,r:1.5,a:0.3},{x:900,y:90,r:2,a:0.4},{x:1100,y:70,r:1.5,a:0.3},
+  {x:150,y:550,r:2,a:0.3},{x:400,y:580,r:1.5,a:0.4},{x:600,y:560,r:2,a:0.3},
+  {x:800,y:570,r:1.5,a:0.4},{x:1050,y:550,r:2,a:0.3},
+];
+dots.forEach(d => {
+  ctx.beginPath();
+  ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(167,139,250,${d.a})`;
+  ctx.fill();
+});
+
+// 上部ライン
+const lineGrad = ctx.createLinearGradient(0, 0, 1200, 0);
+lineGrad.addColorStop(0, 'rgba(139,92,246,0)');
+lineGrad.addColorStop(0.5, 'rgba(139,92,246,0.8)');
+lineGrad.addColorStop(1, 'rgba(139,92,246,0)');
+ctx.fillStyle = lineGrad;
+ctx.fillRect(0, 0, 1200, 3);
+
+// 下部ライン
+ctx.fillRect(0, 627, 1200, 3);
+
+// スロットマシンアイコン（左上装飾）
+ctx.font = '80px serif';
+ctx.fillText('🎰', 60, 170);
+
+// メインタイトル
+ctx.textAlign = 'left';
+ctx.fillStyle = '#ffffff';
+ctx.font = 'bold 64px sans-serif';
+ctx.fillText('パチスロ', 160, 130);
+ctx.fillText('設定判別ツール', 160, 210);
+
+// サブタイトル
+const subGrad = ctx.createLinearGradient(160, 0, 900, 0);
+subGrad.addColorStop(0, '#a78bfa');
+subGrad.addColorStop(1, '#60a5fa');
+ctx.fillStyle = subGrad;
+ctx.font = 'bold 32px sans-serif';
+ctx.fillText('スマスロ・Lスロ 設定差データで高精度判別', 160, 270);
+
+// 区切り線
+ctx.strokeStyle = 'rgba(139,92,246,0.4)';
+ctx.lineWidth = 1;
+ctx.beginPath();
+ctx.moveTo(60, 305);
+ctx.lineTo(1140, 305);
+ctx.stroke();
+
+// 対応機種タグ
+const tags = [
+  { label: '🚂 カバネリ', color: '#7c3aed' },
+  { label: '🔥 炎炎ノ消防隊2', color: '#b91c1c' },
+  { label: '🦋 うみねこ2', color: '#0369a1' },
+  { label: '🤖 攻殻機動隊', color: '#065f46' },
+  { label: '⭐ 北斗転生2', color: '#1d4ed8' },
+  { label: '👁️ 東京喰種', color: '#4b1c1c' },
+  { label: '🌺 ハナハナV', color: '#9d174d' },
+];
+
+let tagX = 60;
+let tagY = 350;
+ctx.font = 'bold 22px sans-serif';
+tags.forEach((tag, i) => {
+  if (i === 4) { tagX = 60; tagY = 420; }
+  const w = ctx.measureText(tag.label).width + 30;
+
+  // タグ背景
+  ctx.fillStyle = tag.color;
+  ctx.globalAlpha = 0.85;
+  roundRect(ctx, tagX, tagY, w, 44, 8);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // タグ枠
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, tagX, tagY, w, 44, 8);
+  ctx.stroke();
+
+  // テキスト
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText(tag.label, tagX + 15, tagY + 30);
+  tagX += w + 12;
+});
+
+// 特徴テキスト
+ctx.font = '24px sans-serif';
+ctx.fillStyle = 'rgba(203,213,225,0.9)';
+ctx.fillText('✦ ベイズ推定で設定確率を算出', 60, 500);
+ctx.fillText('✦ 演出・確定演出・小役確率を総合判定', 60, 535);
+ctx.fillText('✦ スマホでもホールで使いやすいUI', 60, 570);
+
+// 右側：URLとQR風装飾
+const rightGrad = ctx.createLinearGradient(850, 320, 1160, 600);
+rightGrad.addColorStop(0, 'rgba(139,92,246,0.15)');
+rightGrad.addColorStop(1, 'rgba(96,165,250,0.15)');
+ctx.fillStyle = rightGrad;
+roundRect(ctx, 850, 320, 300, 280, 16);
+ctx.fill();
+
+ctx.strokeStyle = 'rgba(139,92,246,0.4)';
+ctx.lineWidth = 1.5;
+roundRect(ctx, 850, 320, 300, 280, 16);
+ctx.stroke();
+
+ctx.textAlign = 'center';
+ctx.font = 'bold 20px sans-serif';
+ctx.fillStyle = '#a78bfa';
+ctx.fillText('無料でご利用いただけます', 1000, 365);
+
+ctx.font = '18px sans-serif';
+ctx.fillStyle = 'rgba(203,213,225,0.7)';
+ctx.fillText('pachislot-setting-tool', 1000, 400);
+ctx.fillText('.vercel.app', 1000, 425);
+
+// スコアバーイメージ
+const barLabels = ['設定1', '設定2', '設定3', '設定4', '設定5', '設定6'];
+const barValues = [0.05, 0.08, 0.12, 0.20, 0.22, 0.33];
+const barColors = ['#60a5fa','#3b82f6','#2563eb','#f59e0b','#f97316','#ef4444'];
+
+barLabels.forEach((label, i) => {
+  const bY = 450 + i * 24;
+  const bW = barValues[i] * 230;
+
+  ctx.textAlign = 'right';
+  ctx.font = '13px sans-serif';
+  ctx.fillStyle = 'rgba(203,213,225,0.7)';
+  ctx.fillText(label, 910, bY + 13);
+
+  ctx.fillStyle = barColors[i];
+  ctx.globalAlpha = 0.85;
+  roundRect(ctx, 915, bY, bW, 18, 4);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  ctx.textAlign = 'left';
+  ctx.font = 'bold 12px sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText(`${Math.round(barValues[i]*100)}%`, 915 + bW + 4, bY + 13);
+});
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// PNG出力リンク
+const link = document.createElement('a');
+link.download = 'ogp.png';
+link.href = canvas.toDataURL('image/png');
+link.id = 'dl';
+link.textContent = 'ダウンロード';
+document.body.appendChild(link);
+</script>
+</body>
+</html>
