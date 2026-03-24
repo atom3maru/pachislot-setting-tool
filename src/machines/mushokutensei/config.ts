@@ -2,9 +2,10 @@ import type { MachineConfig } from '../../types/machine';
 
 const config: MachineConfig = {
   id: 'mushokutensei',
-  name: 'L無職転生',
-  version: '1.0.0',
+  name: 'L無職転生～異世界行ったら本気だす～',
+  version: '1.1.0',
   color: 'bg-gradient-to-r from-teal-600 to-cyan-500',
+  // 6段階設定（1,2,3,4,5,6）・小役確率に設定差なし
 
   sections: [
     {
@@ -14,73 +15,139 @@ const config: MachineConfig = {
           columns: 3,
           fields: [
             { key: 'totalG', label: '総ゲーム数', hint: '通常時+AT中合算' },
-            { key: 'atCnt', label: 'AT初当たり回数', hint: '最重要の設定差' },
-            { key: 'koyakuCnt', label: '弱チェリー回数', hint: '設定差あり' },
+            { key: 'atCnt', label: 'AT初当たり回数', hint: '最大の設定差要素!' },
+            { key: 'bonusCnt', label: 'ボーナス初当たり回数' },
+            { key: 'tp2Cnt', label: 'TP2突入回数', hint: 'ターニングポイント2・約1.7倍差' },
           ],
         },
       ],
     },
     {
-      title: '演出系データ', icon: '🎬',
+      title: 'CZ中確定演出', icon: '⚡',
       groups: [
         {
-          label: 'AT終了画面', columns: 3,
+          label: 'CZ中パーセント表示（押し順ナビ煽り）', columns: 3,
           fields: [
-            { key: 'e_normal', label: '通常画面', hint: 'デフォルト' },
-            { key: 'e_roxy', label: 'ロキシー画面', hint: '高設定示唆' },
-            { key: 'e_eris', label: 'エリス画面', hint: '設定4以上濃厚' },
-            { key: 'e_special', label: '特殊画面', hint: '設定6濃厚!' },
+            { key: 'pct44', label: '44%表示', hint: '設定4以上確定!' },
+            { key: 'pct55', label: '55%表示', hint: '設定5以上確定!' },
+            { key: 'pct66', label: '66%表示', hint: '設定6確定!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'ATセット開始画面（赤背景）', icon: '🖼️',
+      groups: [
+        {
+          label: '赤背景時キャラクター', columns: 4,
+          fields: [
+            { key: 'at_heroine', label: 'ヒロイン3人', hint: '偶数設定示唆' },
+            { key: 'at_hitogami', label: 'ヒトガミ', hint: '設定4以上濃厚!' },
+            { key: 'at_zense', label: '前世の男', hint: '設定5以上濃厚!' },
+            { key: 'at_orsted', label: 'オルステッド', hint: '設定6濃厚!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: '終了画面・獲得枚数', icon: '🏆',
+      groups: [
+        {
+          label: '終了画面枠色', columns: 3,
+          fields: [
+            { key: 'e_default', label: 'デフォルト' },
+            { key: 'e_copper', label: '銅枠（デッドエンド）', hint: '設定2以上濃厚' },
+            { key: 'e_silver', label: '銀枠（絆）', hint: '設定4以上濃厚!' },
+            { key: 'e_gold', label: '金枠（オルステッド）', hint: '設定6濃厚!!' },
           ],
         },
         {
-          label: '設定示唆演出', columns: 2,
+          label: '獲得枚数表示', columns: 3,
           fields: [
-            { key: 'c_high', label: '高設定示唆演出', hint: '設定4以上濃厚' },
-            { key: 'c_confirm6', label: '設定6確定演出', hint: '設定6確定!' },
+            { key: 'm444', label: '444枚/456枚', hint: '設定4以上確定!' },
+            { key: 'm555', label: '555枚', hint: '設定5以上確定!' },
+            { key: 'm666', label: '666枚', hint: '設定6確定!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'ボーナス中・ED中示唆', icon: '📋',
+      groups: [
+        {
+          label: '魔術ボーナス中ストーリー', columns: 2,
+          fields: [
+            { key: 'story8', label: '第8話（銀枠）', hint: '設定4以上濃厚' },
+            { key: 'story21', label: '第21話（金枠）', hint: '設定6濃厚!' },
+          ],
+        },
+        {
+          label: 'ED中ミニキャラ（ヒロイン役成立時）', columns: 3,
+          fields: [
+            { key: 'ed_hitogami', label: 'ヒトガミ', hint: '設定4以上濃厚' },
+            { key: 'ed_zense', label: '前世の男', hint: '設定5以上濃厚' },
+            { key: 'ed_orsted', label: 'オルステッド', hint: '設定6濃厚!' },
           ],
         },
       ],
     },
   ],
 
+  // 6段階設定
   probEntries: [
-    { key: 'atCnt', totalKey: 'totalG', rates: [1/356.4, 1/342.1, 1/325.6, 1/295.8, 1/272.3, 1/251.7] },
-    { key: 'koyakuCnt', totalKey: 'totalG', rates: [1/106.8, 1/103.2, 1/98.5, 1/91.7, 1/87.3, 1/83.1] },
+    { key: 'atCnt', totalKey: 'totalG', rates: [1/416, 1/406, 1/394, 1/361, 1/327, 1/292] },
+    { key: 'bonusCnt', totalKey: 'totalG', rates: [1/170, 1/168, 1/166, 1/161, 1/156, 1/147] },
+    { key: 'tp2Cnt', totalKey: 'totalG', rates: [1/2281, 1/2100, 1/1900, 1/1700, 1/1500, 1/1324] },
   ],
 
   binomialEntries: [],
 
   categoricalGroups: [
     {
-      keys: ['e_normal', 'e_roxy', 'e_eris', 'e_special'],
+      keys: ['at_heroine', 'at_hitogami', 'at_zense', 'at_orsted'],
       rates: {
-        e_normal:  [0.982, 0.970, 0.955, 0.930, 0.903, 0.868],
-        e_roxy:    [0.013, 0.020, 0.030, 0.045, 0.060, 0.082],
-        e_eris:    [0.005, 0.010, 0.015, 0.025, 0.035, 0.045],
-        e_special: [0.000, 0.000, 0.000, 0.000, 0.002, 0.005],
+        at_heroine:  [0.10, 0.15, 0.10, 0.12, 0.10, 0.12],
+        at_hitogami: [0.00, 0.00, 0.00, 0.03, 0.04, 0.05],
+        at_zense:    [0.00, 0.00, 0.00, 0.00, 0.03, 0.04],
+        at_orsted:   [0.00, 0.00, 0.00, 0.00, 0.00, 0.01],
       },
     },
     {
-      keys: ['c_high', 'c_confirm6'],
+      keys: ['e_default', 'e_copper', 'e_silver', 'e_gold'],
       rates: {
-        c_high:     [0.000, 0.000, 0.000, 0.020, 0.030, 0.040],
-        c_confirm6: [0.000, 0.000, 0.000, 0.000, 0.000, 0.005],
+        e_default: [0.90, 0.85, 0.82, 0.76, 0.70, 0.63],
+        e_copper:  [0.00, 0.05, 0.05, 0.06, 0.07, 0.08],
+        e_silver:  [0.00, 0.00, 0.00, 0.05, 0.06, 0.07],
+        e_gold:    [0.00, 0.00, 0.00, 0.00, 0.00, 0.01],
+      },
+    },
+    {
+      keys: ['m444', 'm555', 'm666'],
+      rates: {
+        m444: [0.00, 0.00, 0.00, 0.03, 0.03, 0.05],
+        m555: [0.00, 0.00, 0.00, 0.00, 0.02, 0.03],
+        m666: [0.00, 0.00, 0.00, 0.00, 0.00, 0.02],
       },
     },
   ],
 
   confirmedMin: {
-    e_eris: 4, e_special: 6,
-    c_high: 4, c_confirm6: 6,
+    pct44: 4, pct55: 5, pct66: 6,
+    at_hitogami: 4, at_zense: 5, at_orsted: 6,
+    e_copper: 2, e_silver: 4, e_gold: 6,
+    m444: 4, m555: 5, m666: 6,
+    story8: 4, story21: 6,
+    ed_hitogami: 4, ed_zense: 5, ed_orsted: 6,
   },
 
   getJudgment: (input, result) => {
     const p = result.probabilities;
     const cMin = result.confirmedMin ?? 1;
 
-    if ((input.c_confirm6 ?? 0) >= 1) return { message: '設定6確定！確定演出を確認済み', level: 'high' };
-    if ((input.e_special ?? 0) >= 1) return { message: '設定6濃厚！特殊終了画面を確認済み', level: 'high' };
-    if (cMin >= 5) return { message: `設定${cMin}以上確定！（設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
+    if ((input.pct66 ?? 0) >= 1 || (input.m666 ?? 0) >= 1 || (input.e_gold ?? 0) >= 1 || (input.at_orsted ?? 0) >= 1) {
+      return { message: '設定6確定！確定演出を確認済み', level: 'high' };
+    }
+    if (cMin >= 5) return { message: `設定5以上確定！（設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
     if (cMin >= 4) return { message: `設定4以上確定！（設定4: ${(p[3]*100).toFixed(1)}% / 設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
     const p56 = p[4] + p[5];
     if (p56 > 0.60) return { message: `高設定濃厚！続行推奨（設定5・6合算: ${(p56*100).toFixed(1)}%）`, level: 'high' };
@@ -93,10 +160,10 @@ const config: MachineConfig = {
   getHints: (input) => {
     const hints: string[] = [];
     if (input.totalG == null) hints.push('総ゲーム数を入力すると確率系の判定精度が上がります');
-    if (input.atCnt == null) hints.push('AT初当たり回数は最重要の設定差要素です');
-    if (input.koyakuCnt == null) hints.push('弱チェリー確率に設定差があります。カウントしましょう');
-    if (!['e_normal', 'e_roxy', 'e_eris', 'e_special'].some(k => (input[k] ?? 0) > 0))
-      hints.push('AT終了画面を確認して入力してください（特殊画面=設定6濃厚）');
+    if (input.atCnt == null) hints.push('AT初当たり確率は最大の設定差要素（約1.4倍差）');
+    hints.push('本機は小役確率に設定差なし。小役カウントは不要です');
+    if (!['e_default', 'e_copper', 'e_silver', 'e_gold'].some(k => (input[k] ?? 0) > 0))
+      hints.push('終了画面の枠色を確認してください（金枠=設定6濃厚）');
     return hints;
   },
 };
