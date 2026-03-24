@@ -84,11 +84,16 @@ const config: MachineConfig = {
   binomialEntries: [
     // REG中の青7揃い
     { hitKey: 'blue7_hit', totalKey: 'blue7_total', rates: [1/117.0, 1/113.0, 1/111.1, 1/99.3, 1/95.5, 1/94.2] },
-    // ロゴ発光・大（偶数設定が多い）
-    { hitKey: 'logo_big', totalKey: 'logo_small', rates: [0.708, 0.750, 0.688, 0.750, 0.667, 0.750] },
   ],
 
   categoricalGroups: [
+    {
+      keys: ['logo_small', 'logo_big'],
+      rates: {
+        logo_small: [0.292, 0.250, 0.312, 0.250, 0.333, 0.250],
+        logo_big:   [0.708, 0.750, 0.688, 0.750, 0.667, 0.750],
+      },
+    },
     {
       keys: ['end_normal', 'end_sennin', 'end_even', 'end_4plus', 'end_5plus', 'end_6', 'end_halloween'],
       rates: {

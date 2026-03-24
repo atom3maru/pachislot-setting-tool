@@ -90,9 +90,14 @@ export function calculate(
   let probabilities = softmax(scores);
 
   // Step 6: 確定演出フィルタ適用
+  // settingLabelsを参照し、confirmedMin未満の設定を0%にする
   if (confirmedMin > 1) {
-    for (let s = 0; s < confirmedMin - 1; s++) {
-      probabilities[s] = 0;
+    const labels = config.settingLabels ?? ['1', '2', '3', '4', '5', '6'];
+    for (let s = 0; s < numSettings; s++) {
+      const settingNum = parseInt(labels[s], 10);
+      if (settingNum < confirmedMin) {
+        probabilities[s] = 0;
+      }
     }
     const sum = probabilities.reduce((a, b) => a + b, 0);
     if (sum > 0) {
