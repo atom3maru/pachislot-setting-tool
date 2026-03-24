@@ -119,6 +119,8 @@ const config: MachineConfig = {
     { hitKey: 'tachikoma_hit', totalKey: 'tachikoma_total', rates: [0.300, 0.330, 0.360, 0.400, 0.440, 0.483] },
     // 引き戻しストック当選率
     { hitKey: 'pullback_hit', totalKey: 'pullback_total', rates: [0.033, 0.045, 0.055, 0.065, 0.080, 0.096] },
+    // 殲滅ゾーン中ポイント契機比率
+    { hitKey: 'senmetsu_pt', totalKey: 'senmetsu_cnt', rates: [0.20, 0.23, 0.27, 0.32, 0.38, 0.45] },
   ],
 
   categoricalGroups: [

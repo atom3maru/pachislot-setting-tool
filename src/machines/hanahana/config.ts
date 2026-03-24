@@ -81,6 +81,14 @@ const config: MachineConfig = {
             { key: 'hl_rainbow', label: '虹', hint: '設定V濃厚!' },
           ],
         },
+        {
+          label: 'パネルフラッシュ（REG/BIG終了後）', columns: 3,
+          fields: [
+            { key: 'pf_top', label: '上のみ点滅', hint: '奇数設定示唆' },
+            { key: 'pf_bottom', label: '下のみ点滅', hint: '偶数設定示唆' },
+            { key: 'pf_both', label: '上下同時点滅', hint: '高設定示唆!' },
+          ],
+        },
       ],
     },
   ],
@@ -133,6 +141,15 @@ const config: MachineConfig = {
         hl_green:   [0.07, 0.08, 0.10, 0.12, 0.15],
         hl_purple:  [0.03, 0.04, 0.05, 0.07, 0.12],
         hl_rainbow: [0.00, 0.01, 0.02, 0.03, 0.05],
+      },
+    },
+    // パネルフラッシュ（REG/BIG終了後）
+    {
+      keys: ['pf_top', 'pf_bottom', 'pf_both'],
+      rates: {
+        pf_top:    [0.15, 0.08, 0.15, 0.08, 0.10],
+        pf_bottom: [0.08, 0.15, 0.08, 0.15, 0.10],
+        pf_both:   [0.02, 0.03, 0.04, 0.06, 0.10],
       },
     },
   ],

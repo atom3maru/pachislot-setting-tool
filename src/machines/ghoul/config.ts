@@ -128,6 +128,7 @@ const config: MachineConfig = {
     { key: 'czCnt', totalKey: 'totalG', rates: [1/262.6, 1/255.6, 1/246.5, 1/233.1, 1/216.4, 1/203.7] },
     { key: 'atCnt', totalKey: 'totalG', rates: [1/394.4, 1/380.5, 1/357.0, 1/325.9, 1/291.2, 1/261.3] },
     { key: 'ep_cnt', totalKey: 'totalG', rates: [1/6620.2, 1/5500, 1/4500, 1/3800, 1/3200, 1/2639.5] },
+    { key: 'rize_cnt', totalKey: 'totalG', rates: [1/2079.1, 1/1800, 1/1500, 1/1300, 1/1150, 1/1074.9] },
   ],
 
   binomialEntries: [
