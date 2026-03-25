@@ -1,0 +1,156 @@
+import type { MachineConfig } from '../../types/machine';
+
+const config: MachineConfig = {
+  id: 'bakemonogatari',
+  name: 'スマスロ化物語',
+  version: '1.0.0',
+  color: 'bg-gradient-to-r from-purple-600 to-pink-500',
+
+  sections: [
+    {
+      title: '確率系データ', icon: '🎰',
+      groups: [
+        {
+          columns: 3,
+          fields: [
+            { key: 'totalG', label: '総ゲーム数', hint: '通常時+AT中合算' },
+            { key: 'atCnt', label: 'AT初当たり回数' },
+            { key: 'suikaCnt', label: 'スイカ回数', hint: '設定差あり！1/87→1/70' },
+          ],
+        },
+      ],
+    },
+    {
+      title: '弱チェリーAT直撃', icon: '⚡',
+      groups: [
+        {
+          label: '弱チェリーからのAT直撃（設定差約9.5倍）', columns: 2,
+          fields: [
+            { key: 'cherry_direct_hit', label: '直撃当選回数', hint: '1回でも確認できれば高設定期待大' },
+            { key: 'cherry_direct_total', label: '弱チェリー出現総数', hint: '直撃の分母' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'AT終了画面', icon: '🖼️',
+      groups: [
+        {
+          label: 'AT終了画面', columns: 3,
+          fields: [
+            { key: 'e_koyomi', label: '阿良々木暦（デフォルト）' },
+            { key: 'e_hitagi', label: '戦場ヶ原ひたぎ', hint: '高設定示唆（強）' },
+            { key: 'e_mayoi', label: '八九寺真宵', hint: '偶数設定示唆' },
+            { key: 'e_suruga', label: '神原駿河', hint: '奇数＋高設定示唆' },
+            { key: 'e_nadeko', label: '千石撫子', hint: '高設定示唆（弱）' },
+            { key: 'e_hanekawa', label: '羽川翼', hint: '偶数設定示唆（強）' },
+            { key: 'e_shinobu', label: '忍', hint: '偶数設定濃厚' },
+            { key: 'e_meme', label: '忍野メメ', hint: '設定3/5/6濃厚' },
+            { key: 'e_gold', label: '初代パネル金枠', hint: '設定4以上濃厚!' },
+            { key: 'e_iloveu', label: 'I LOVE YOU', hint: '設定6濃厚!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'サミートロフィー・獲得枚数', icon: '🏆',
+      groups: [
+        {
+          label: 'サミートロフィー', columns: 3,
+          fields: [
+            { key: 't_copper', label: '銅', hint: '設定2以上' },
+            { key: 't_silver', label: '銀', hint: '設定3以上' },
+            { key: 't_gold', label: '金', hint: '設定4以上!' },
+            { key: 't_kirin', label: 'キリン柄', hint: '設定5以上!' },
+            { key: 't_rainbow', label: '虹', hint: '設定6確定!!' },
+          ],
+        },
+        {
+          label: '特殊獲得枚数表示', columns: 3,
+          fields: [
+            { key: 'num_174', label: '174枚突破', hint: '設定2以上' },
+            { key: 'num_543', label: '543枚突破', hint: '設定3以上' },
+            { key: 'num_331', label: '331枚突破', hint: '設定6濃厚!!' },
+          ],
+        },
+      ],
+    },
+  ],
+
+  probEntries: [
+    { key: 'atCnt', totalKey: 'totalG', rates: [1/265.1, 1/260.7, 1/252.1, 1/238.8, 1/230.8, 1/219.6] },
+    { key: 'suikaCnt', totalKey: 'totalG', rates: [1/87.4, 1/85.8, 1/84.9, 1/79.7, 1/74.8, 1/69.9] },
+  ],
+
+  binomialEntries: [
+    { hitKey: 'cherry_direct_hit', totalKey: 'cherry_direct_total', rates: [0.004, 0.008, 0.013, 0.021, 0.029, 0.038] },
+  ],
+
+  categoricalGroups: [
+    {
+      keys: ['e_koyomi', 'e_hitagi', 'e_mayoi', 'e_suruga', 'e_nadeko', 'e_hanekawa', 'e_shinobu', 'e_meme', 'e_gold', 'e_iloveu'],
+      rates: {
+        e_koyomi:   [0.50, 0.42, 0.38, 0.30, 0.25, 0.20],
+        e_hitagi:   [0.05, 0.06, 0.08, 0.10, 0.12, 0.14],
+        e_mayoi:    [0.10, 0.12, 0.10, 0.12, 0.10, 0.12],
+        e_suruga:   [0.10, 0.08, 0.12, 0.08, 0.12, 0.08],
+        e_nadeko:   [0.08, 0.08, 0.10, 0.10, 0.10, 0.10],
+        e_hanekawa: [0.05, 0.10, 0.06, 0.10, 0.06, 0.10],
+        e_shinobu:  [0.05, 0.07, 0.05, 0.07, 0.05, 0.07],
+        e_meme:     [0.04, 0.03, 0.06, 0.04, 0.08, 0.06],
+        e_gold:     [0.00, 0.00, 0.00, 0.05, 0.06, 0.07],
+        e_iloveu:   [0.00, 0.00, 0.00, 0.00, 0.00, 0.02],
+      },
+    },
+    {
+      keys: ['t_copper', 't_silver', 't_gold', 't_kirin', 't_rainbow'],
+      rates: {
+        t_copper:  [0.000, 0.020, 0.020, 0.020, 0.020, 0.020],
+        t_silver:  [0.000, 0.000, 0.010, 0.010, 0.010, 0.010],
+        t_gold:    [0.000, 0.000, 0.000, 0.005, 0.005, 0.005],
+        t_kirin:   [0.000, 0.000, 0.000, 0.000, 0.003, 0.005],
+        t_rainbow: [0.000, 0.000, 0.000, 0.000, 0.000, 0.002],
+      },
+    },
+    {
+      keys: ['num_174', 'num_543', 'num_331'],
+      rates: {
+        num_174: [0.000, 0.005, 0.005, 0.005, 0.005, 0.005],
+        num_543: [0.000, 0.000, 0.005, 0.005, 0.005, 0.005],
+        num_331: [0.000, 0.000, 0.000, 0.000, 0.000, 0.005],
+      },
+    },
+  ],
+
+  confirmedMin: {
+    e_gold: 4, e_iloveu: 6,
+    t_copper: 2, t_silver: 3, t_gold: 4, t_kirin: 5, t_rainbow: 6,
+    num_174: 2, num_543: 3, num_331: 6,
+  },
+
+  getJudgment: (input, result) => {
+    const p = result.probabilities;
+    const cMin = result.confirmedMin ?? 1;
+    if ((input.t_rainbow ?? 0) >= 1 || (input.e_iloveu ?? 0) >= 1 || (input.num_331 ?? 0) >= 1) return { message: '設定6確定！確定演出を確認済み', level: 'high' };
+    if (cMin >= 5) return { message: `設定5以上確定！（設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
+    if (cMin >= 4) return { message: `設定4以上確定！（設定4: ${(p[3]*100).toFixed(1)}% / 設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
+    const p56 = p[4] + p[5];
+    if (p56 > 0.60) return { message: `高設定濃厚！続行推奨（設定5・6合算: ${(p56*100).toFixed(1)}%）`, level: 'high' };
+    const p456 = p[3] + p[4] + p[5];
+    if (p456 > 0.65) return { message: `中〜高設定の可能性あり（設定4以上合算: ${(p456*100).toFixed(1)}%）`, level: 'mid' };
+    if (p[0] > 0.40) return { message: `設定1の可能性が高い（${(p[0]*100).toFixed(1)}%）。ヤメ時検討`, level: 'low' };
+    return { message: `最有力: 設定${result.mostLikely}（${(p[result.mostLikely-1]*100).toFixed(1)}%）。データを追加して精度を上げましょう`, level: 'low' };
+  },
+
+  getHints: (input) => {
+    const hints: string[] = [];
+    if (input.totalG == null) hints.push('総ゲーム数を入力すると確率系の判定精度が上がります');
+    if (input.suikaCnt == null) hints.push('スイカ確率は設定差あり（1/87→1/70）。必ずカウントしましょう');
+    if (input.cherry_direct_hit == null) hints.push('弱チェリーAT直撃は設定差約9.5倍！確認必須');
+    if (!['t_copper','t_silver','t_gold','t_kirin','t_rainbow'].some(k => (input[k] ?? 0) > 0))
+      hints.push('サミートロフィーを確認してください（虹=設定6確定）');
+    return hints;
+  },
+};
+
+export default config;

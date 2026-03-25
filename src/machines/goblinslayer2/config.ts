@@ -1,0 +1,135 @@
+import type { MachineConfig } from '../../types/machine';
+
+const config: MachineConfig = {
+  id: 'goblinslayer2',
+  name: 'スマスロ ゴブリンスレイヤーII',
+  version: '1.0.0',
+  color: 'bg-gradient-to-r from-stone-700 to-red-800',
+
+  sections: [
+    {
+      title: '確率系データ', icon: '🎰',
+      groups: [
+        {
+          columns: 3,
+          fields: [
+            { key: 'totalG', label: '総ゲーム数', hint: '通常時+AT中合算' },
+            { key: 'atCnt', label: 'AT初当たり回数' },
+            { key: 'czCnt', label: 'CZ回数', hint: '高設定ほど頻繁に当選' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'AT終了画面', icon: '🖼️',
+      groups: [
+        {
+          label: 'AT終了画面', columns: 3,
+          fields: [
+            { key: 'e_default', label: 'ゴブスレ&女神官（デフォルト）' },
+            { key: 'e_priestess', label: '女神官（1枚絵）', hint: '高設定示唆' },
+            { key: 'e_cowgirl', label: '牛飼い娘', hint: '設定2以上濃厚' },
+            { key: 'e_elf', label: '妖精弓手', hint: '偶数設定濃厚' },
+            { key: 'e_priest_elf', label: '女神官&エルフ', hint: '設定4以上濃厚!' },
+            { key: 'e_bath', label: 'お風呂', hint: '設定4以上濃厚!' },
+            { key: 'e_all_sword', label: '全員集合+剣の乙女', hint: '設定6濃厚!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: '藤丸コイン・獲得枚数', icon: '🏆',
+      groups: [
+        {
+          label: '藤丸コイン', columns: 3,
+          fields: [
+            { key: 'c_copper', label: '銅', hint: '設定2以上' },
+            { key: 'c_silver', label: '銀', hint: '設定3以上' },
+            { key: 'c_gold', label: '金', hint: '設定4以上!' },
+            { key: 'c_danger', label: 'DANGER柄', hint: '設定5以上!' },
+            { key: 'c_rainbow', label: '虹', hint: '設定6濃厚!!' },
+          ],
+        },
+        {
+          label: '特殊獲得枚数表示', columns: 3,
+          fields: [
+            { key: 'num_246', label: '246枚OVER', hint: '偶数設定濃厚' },
+            { key: 'num_52', label: '52枚OVER', hint: '設定5以上!' },
+            { key: 'num_666', label: '666枚OVER', hint: '設定6濃厚!!' },
+          ],
+        },
+      ],
+    },
+  ],
+
+  probEntries: [
+    { key: 'atCnt', totalKey: 'totalG', rates: [1/541.6, 1/526.4, 1/506.4, 1/453.2, 1/417.8, 1/402.4] },
+    { key: 'czCnt', totalKey: 'totalG', rates: [1/239.3, 1/232.3, 1/222.9, 1/200.4, 1/187.3, 1/181.9] },
+  ],
+
+  binomialEntries: [],
+
+  categoricalGroups: [
+    {
+      keys: ['e_default', 'e_priestess', 'e_cowgirl', 'e_elf', 'e_priest_elf', 'e_bath', 'e_all_sword'],
+      rates: {
+        e_default:    [0.60, 0.48, 0.42, 0.32, 0.28, 0.22],
+        e_priestess:  [0.15, 0.14, 0.14, 0.14, 0.14, 0.14],
+        e_cowgirl:    [0.00, 0.10, 0.10, 0.10, 0.10, 0.10],
+        e_elf:        [0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+        e_priest_elf: [0.00, 0.00, 0.00, 0.10, 0.10, 0.12],
+        e_bath:       [0.00, 0.00, 0.00, 0.08, 0.10, 0.12],
+        e_all_sword:  [0.00, 0.00, 0.00, 0.00, 0.00, 0.02],
+      },
+    },
+    {
+      keys: ['c_copper', 'c_silver', 'c_gold', 'c_danger', 'c_rainbow'],
+      rates: {
+        c_copper:  [0.000, 0.020, 0.020, 0.020, 0.020, 0.020],
+        c_silver:  [0.000, 0.000, 0.010, 0.010, 0.010, 0.010],
+        c_gold:    [0.000, 0.000, 0.000, 0.005, 0.005, 0.005],
+        c_danger:  [0.000, 0.000, 0.000, 0.000, 0.003, 0.005],
+        c_rainbow: [0.000, 0.000, 0.000, 0.000, 0.000, 0.002],
+      },
+    },
+    {
+      keys: ['num_246', 'num_52', 'num_666'],
+      rates: {
+        num_246: [0.000, 0.005, 0.000, 0.005, 0.000, 0.005],
+        num_52:  [0.000, 0.000, 0.000, 0.000, 0.005, 0.005],
+        num_666: [0.000, 0.000, 0.000, 0.000, 0.000, 0.005],
+      },
+    },
+  ],
+
+  confirmedMin: {
+    e_cowgirl: 2, e_priest_elf: 4, e_bath: 4, e_all_sword: 6,
+    c_copper: 2, c_silver: 3, c_gold: 4, c_danger: 5, c_rainbow: 6,
+    num_52: 5, num_666: 6,
+  },
+
+  getJudgment: (input, result) => {
+    const p = result.probabilities;
+    const cMin = result.confirmedMin ?? 1;
+    if ((input.c_rainbow ?? 0) >= 1 || (input.e_all_sword ?? 0) >= 1 || (input.num_666 ?? 0) >= 1) return { message: '設定6確定！確定演出を確認済み', level: 'high' };
+    if (cMin >= 5) return { message: `設定5以上確定！（設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
+    if (cMin >= 4) return { message: `設定4以上確定！（設定4: ${(p[3]*100).toFixed(1)}% / 設定5: ${(p[4]*100).toFixed(1)}% / 設定6: ${(p[5]*100).toFixed(1)}%）`, level: 'high' };
+    const p56 = p[4] + p[5];
+    if (p56 > 0.60) return { message: `高設定濃厚！続行推奨（設定5・6合算: ${(p56*100).toFixed(1)}%）`, level: 'high' };
+    const p456 = p[3] + p[4] + p[5];
+    if (p456 > 0.65) return { message: `中〜高設定の可能性あり（設定4以上合算: ${(p456*100).toFixed(1)}%）`, level: 'mid' };
+    if (p[0] > 0.40) return { message: `設定1の可能性が高い（${(p[0]*100).toFixed(1)}%）。ヤメ時検討`, level: 'low' };
+    return { message: `最有力: 設定${result.mostLikely}（${(p[result.mostLikely-1]*100).toFixed(1)}%）。データを追加して精度を上げましょう`, level: 'low' };
+  },
+
+  getHints: (input) => {
+    const hints: string[] = [];
+    if (input.totalG == null) hints.push('総ゲーム数を入力するとAT・CZ確率の判定精度が上がります');
+    if (input.czCnt == null) hints.push('CZ回数をカウントしましょう（設定差あり）');
+    if (!['e_default','e_priestess','e_cowgirl','e_elf','e_priest_elf','e_bath','e_all_sword'].some(k => (input[k] ?? 0) > 0))
+      hints.push('AT終了画面を確認してください（お風呂=設定4以上、全員集合+剣の乙女=設定6）');
+    return hints;
+  },
+};
+
+export default config;

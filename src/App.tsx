@@ -30,6 +30,12 @@ import monhunriseConfig from './machines/monhunrise/config';
 import godeaterConfig from './machines/godeater/config';
 import sbjConfig from './machines/sbj/config';
 import mushokutenseiConfig from './machines/mushokutensei/config';
+import bakemonogatariConfig from './machines/bakemonogatari/config';
+import goblinslayer2Config from './machines/goblinslayer2/config';
+import karakuriConfig from './machines/karakuri/config';
+import gojievaConfig from './machines/gojieva/config';
+import railgunConfig from './machines/railgun/config';
+import rezero2Config from './machines/rezero2/config';
 
 // ダークモードコンテキスト
 export const DarkModeContext = createContext<{ isDark: boolean; toggle: () => void }>({
@@ -70,6 +76,12 @@ function App() {
           <Route path="/godeater" element={<MachinePage config={godeaterConfig} />} />
           <Route path="/sbj" element={<MachinePage config={sbjConfig} />} />
           <Route path="/mushokutensei" element={<MachinePage config={mushokutenseiConfig} />} />
+          <Route path="/bakemonogatari" element={<MachinePage config={bakemonogatariConfig} />} />
+          <Route path="/goblinslayer2" element={<MachinePage config={goblinslayer2Config} />} />
+          <Route path="/karakuri" element={<MachinePage config={karakuriConfig} />} />
+          <Route path="/gojieva" element={<MachinePage config={gojievaConfig} />} />
+          <Route path="/railgun" element={<MachinePage config={railgunConfig} />} />
+          <Route path="/rezero2" element={<MachinePage config={rezero2Config} />} />
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
           <Route path="/terms" element={<TermsPage />} />
         </Routes>

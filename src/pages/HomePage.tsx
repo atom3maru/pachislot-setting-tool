@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import type { MachineListItem } from '../types/machine';
 import { DarkModeContext } from '../App';
@@ -183,10 +183,70 @@ const MACHINES: MachineListItem[] = [
     description: 'AT初当たり・小役確率・終了画面・転生演出',
     icon: '📖',
   },
+  {
+    id: 'bakemonogatari',
+    name: 'スマスロ化物語',
+    shortName: '化物語',
+    color: 'bg-gradient-to-r from-purple-600 to-pink-500',
+    description: 'AT初当たり・スイカ確率・弱チェリー直撃・サミートロフィー',
+    icon: '🦀',
+  },
+  {
+    id: 'goblinslayer2',
+    name: 'スマスロ ゴブリンスレイヤーII',
+    shortName: 'ゴブスレII',
+    color: 'bg-gradient-to-r from-stone-700 to-red-800',
+    description: 'AT初当たり・CZ確率・藤丸コイン・AT終了画面',
+    icon: '🗡️',
+  },
+  {
+    id: 'karakuri',
+    name: 'スマスロ からくりサーカス',
+    shortName: 'からくりサーカス',
+    color: 'bg-gradient-to-r from-yellow-600 to-red-600',
+    description: 'AT/CZ確率・AT終了画面・エンディングランプ・踊れオリンピア',
+    icon: '🎪',
+  },
+  {
+    id: 'gojieva',
+    name: 'L ゴジラ対エヴァンゲリオン',
+    shortName: 'ゴジラvsエヴァ',
+    color: 'bg-gradient-to-r from-green-800 to-purple-800',
+    description: 'AT/ボーナス確率・スイカCZ・殲滅作戦勝利率・終了画面',
+    icon: '🦖',
+  },
+  {
+    id: 'railgun',
+    name: 'スマスロ とある科学の超電磁砲',
+    shortName: '超電磁砲',
+    color: 'bg-gradient-to-r from-sky-500 to-indigo-600',
+    description: 'AT/CZ確率・藤丸コイン・AT終了画面・獲得枚数表示',
+    icon: '⚡',
+  },
+  {
+    id: 'rezero2',
+    name: 'スマスロ Re:ゼロ Season2',
+    shortName: 'リゼロ2',
+    color: 'bg-gradient-to-r from-blue-700 to-cyan-500',
+    description: 'AT初当たり・引き戻し率・AT終了画面・菜月家時計',
+    icon: '🔄',
+  },
 ];
 
 export default function HomePage() {
   const { isDark, toggle } = useContext(DarkModeContext);
+  const [search, setSearch] = useState('');
+
+  const filtered = useMemo(() => {
+    if (!search.trim()) return MACHINES;
+    const q = search.trim().toLowerCase();
+    return MACHINES.filter(m =>
+      m.name.toLowerCase().includes(q) ||
+      m.shortName.toLowerCase().includes(q) ||
+      m.description.toLowerCase().includes(q) ||
+      m.id.toLowerCase().includes(q)
+    );
+  }, [search]);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors">
@@ -197,12 +257,46 @@ export default function HomePage() {
           </div>
           <h1 className="text-2xl md:text-3xl font-bold">🎰 パチスロ設定判別ツール</h1>
           <p className="text-gray-300 text-sm mt-2">機種を選択して設定判別を開始</p>
+          {/* 検索窓 */}
+          <div className="mt-4 max-w-md mx-auto relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+            <input
+              type="text"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="機種名で検索（例：カバネリ、北斗、沖ドキ）"
+              className="w-full pl-10 pr-10 py-2.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white placeholder-gray-400 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none transition-all"
+            />
+            {search && (
+              <button
+                onClick={() => setSearch('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors text-lg"
+                aria-label="検索をクリア"
+              >
+                ✕
+              </button>
+            )}
+          </div>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-6 flex-1">
+        {/* 検索結果カウント */}
+        {search.trim() && (
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+            「{search.trim()}」の検索結果: {filtered.length}件
+          </p>
+        )}
+
+        {filtered.length === 0 ? (
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 py-16 text-center">
+            <p className="text-4xl mb-3">🔍</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">「{search.trim()}」に一致する機種が見つかりません</p>
+            <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">機種名の一部で検索してみてください</p>
+          </div>
+        ) : (
         <div className="grid gap-4 md:grid-cols-2">
-          {MACHINES.map(machine =>
+          {filtered.map(machine =>
             machine.disabled ? (
               <div
                 key={machine.id}
@@ -259,6 +353,7 @@ export default function HomePage() {
             )
           )}
         </div>
+        )}
 
         {/* みんなの声バナー */}
         <Link

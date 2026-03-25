@@ -1,0 +1,136 @@
+import type { MachineConfig } from '../../types/machine';
+
+const config: MachineConfig = {
+  id: 'karakuri',
+  name: 'スマスロ からくりサーカス',
+  version: '1.0.0',
+  color: 'bg-gradient-to-r from-yellow-600 to-red-600',
+  settingLabels: ['1', '2', '4', '5', '6'],
+
+  sections: [
+    {
+      title: '確率系データ', icon: '🎰',
+      groups: [
+        {
+          columns: 3,
+          fields: [
+            { key: 'totalG', label: '総ゲーム数', hint: '通常時+AT中合算' },
+            { key: 'atCnt', label: 'AT初当たり回数' },
+            { key: 'czCnt', label: 'CZ合算回数' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'AT終了画面', icon: '🖼️',
+      groups: [
+        {
+          label: 'AT終了画面', columns: 3,
+          fields: [
+            { key: 'e_default', label: '勝&鳴海（デフォルト）' },
+            { key: 'e_enemy', label: '敵幹部5人', hint: '奇数＋高設定示唆' },
+            { key: 'e_heroine', label: 'ヒロイン5人', hint: '偶数＋高設定示唆' },
+            { key: 'e_ashihana', label: '阿紫花&ギイ', hint: '設定2以上確定!' },
+            { key: 'e_shirogane', label: 'しろがね&勝&鳴海', hint: '設定4以上確定!' },
+            { key: 'e_francine', label: 'フランシーヌ', hint: '設定6濃厚!!' },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'エンディングランプ・踊れオリンピア', icon: '💡',
+      groups: [
+        {
+          label: 'エンディング中ランプ色（レア役成立時）', columns: 3,
+          fields: [
+            { key: 'lamp_blue', label: '青', hint: '奇数設定示唆' },
+            { key: 'lamp_yellow', label: '黄', hint: '偶数設定示唆' },
+            { key: 'lamp_green', label: '緑', hint: '高設定示唆' },
+            { key: 'lamp_purple', label: '紫', hint: '設定4以上確定!' },
+            { key: 'lamp_rainbow', label: '虹', hint: '設定6確定!!' },
+          ],
+        },
+        {
+          label: '踊れ！オリンピア上乗せ', columns: 3,
+          fields: [
+            { key: 'ol_20', label: '+20', hint: '設定2以上示唆' },
+            { key: 'ol_4', label: '+4', hint: '設定4以上濃厚!' },
+            { key: 'ol_6', label: '+6', hint: '設定6濃厚!!' },
+          ],
+        },
+      ],
+    },
+  ],
+
+  // 5段階設定(1,2,4,5,6)
+  probEntries: [
+    { key: 'atCnt', totalKey: 'totalG', rates: [1/564, 1/543, 1/469, 1/451, 1/447] },
+    { key: 'czCnt', totalKey: 'totalG', rates: [1/333, 1/320, 1/292, 1/277, 1/275] },
+  ],
+
+  binomialEntries: [],
+
+  categoricalGroups: [
+    {
+      keys: ['e_default', 'e_enemy', 'e_heroine', 'e_ashihana', 'e_shirogane', 'e_francine'],
+      rates: {
+        e_default:   [0.60, 0.48, 0.35, 0.30, 0.25],
+        e_enemy:     [0.18, 0.10, 0.15, 0.12, 0.12],
+        e_heroine:   [0.10, 0.18, 0.12, 0.12, 0.12],
+        e_ashihana:  [0.00, 0.10, 0.10, 0.10, 0.12],
+        e_shirogane: [0.00, 0.00, 0.15, 0.18, 0.18],
+        e_francine:  [0.00, 0.00, 0.00, 0.00, 0.03],
+      },
+    },
+    {
+      keys: ['lamp_blue', 'lamp_yellow', 'lamp_green', 'lamp_purple', 'lamp_rainbow'],
+      rates: {
+        lamp_blue:    [0.30, 0.15, 0.25, 0.18, 0.15],
+        lamp_yellow:  [0.15, 0.30, 0.18, 0.15, 0.15],
+        lamp_green:   [0.05, 0.05, 0.10, 0.15, 0.15],
+        lamp_purple:  [0.00, 0.00, 0.03, 0.05, 0.07],
+        lamp_rainbow: [0.00, 0.00, 0.00, 0.00, 0.02],
+      },
+    },
+    {
+      keys: ['ol_20', 'ol_4', 'ol_6'],
+      rates: {
+        ol_20: [0.000, 0.005, 0.005, 0.005, 0.005],
+        ol_4:  [0.000, 0.000, 0.005, 0.005, 0.005],
+        ol_6:  [0.000, 0.000, 0.000, 0.000, 0.005],
+      },
+    },
+  ],
+
+  confirmedMin: {
+    e_ashihana: 2, e_shirogane: 4, e_francine: 6,
+    lamp_purple: 4, lamp_rainbow: 6,
+    ol_20: 2, ol_4: 4, ol_6: 6,
+  },
+
+  getJudgment: (input, result) => {
+    const p = result.probabilities;
+    const labels = ['1','2','4','5','6'];
+    const cMin = result.confirmedMin ?? 1;
+    if ((input.e_francine ?? 0) >= 1 || (input.lamp_rainbow ?? 0) >= 1 || (input.ol_6 ?? 0) >= 1) return { message: '設定6確定！確定演出を確認済み', level: 'high' };
+    if (cMin >= 5) return { message: `設定5以上確定！（設定5: ${(p[3]*100).toFixed(1)}% / 設定6: ${(p[4]*100).toFixed(1)}%）`, level: 'high' };
+    if (cMin >= 4) return { message: `設定4以上確定！（設定4: ${(p[2]*100).toFixed(1)}% / 設定5: ${(p[3]*100).toFixed(1)}% / 設定6: ${(p[4]*100).toFixed(1)}%）`, level: 'high' };
+    const p56 = p[3] + p[4];
+    if (p56 > 0.60) return { message: `高設定濃厚！続行推奨（設定5・6合算: ${(p56*100).toFixed(1)}%）`, level: 'high' };
+    const p456 = p[2] + p[3] + p[4];
+    if (p456 > 0.65) return { message: `中〜高設定の可能性あり（設定4以上合算: ${(p456*100).toFixed(1)}%）`, level: 'mid' };
+    if (p[0] > 0.40) return { message: `設定1の可能性が高い（${(p[0]*100).toFixed(1)}%）。ヤメ時検討`, level: 'low' };
+    const mlLabel = labels[result.mostLikely - 1] ?? String(result.mostLikely);
+    return { message: `最有力: 設定${mlLabel}（${(p[result.mostLikely-1]*100).toFixed(1)}%）。データを追加して精度を上げましょう`, level: 'low' };
+  },
+
+  getHints: (input) => {
+    const hints: string[] = [];
+    if (input.totalG == null) hints.push('総ゲーム数を入力するとAT・CZ確率の判定精度が上がります');
+    if (!['e_default','e_enemy','e_heroine','e_ashihana','e_shirogane','e_francine'].some(k => (input[k] ?? 0) > 0))
+      hints.push('AT終了画面を確認（しろがね&勝&鳴海=設定4以上、フランシーヌ=設定6）');
+    return hints;
+  },
+};
+
+export default config;
