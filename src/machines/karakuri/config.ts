@@ -22,6 +22,18 @@ const config: MachineConfig = {
       ],
     },
     {
+      title: '幕間チャンス（最重要）', icon: '⚡',
+      groups: [
+        {
+          label: '幕間チャンス当選率（設定差約3倍!）', columns: 2,
+          fields: [
+            { key: 'makuma_hit', label: '幕間チャンス当選回数', hint: '設定1:1/3000→設定6:1/1000' },
+            { key: 'makuma_total', label: 'からくりレア役出現数', hint: '幕間チャンスの分母' },
+          ],
+        },
+      ],
+    },
+    {
       title: 'AT終了画面', icon: '🖼️',
       groups: [
         {
@@ -68,7 +80,9 @@ const config: MachineConfig = {
     { key: 'czCnt', totalKey: 'totalG', rates: [1/333, 1/320, 1/292, 1/277, 1/275] },
   ],
 
-  binomialEntries: [],
+  binomialEntries: [
+    { hitKey: 'makuma_hit', totalKey: 'makuma_total', rates: [0.033, 0.040, 0.060, 0.080, 0.100] },
+  ],
 
   categoricalGroups: [
     {

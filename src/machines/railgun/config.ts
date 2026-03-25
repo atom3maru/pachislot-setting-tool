@@ -21,6 +21,18 @@ const config: MachineConfig = {
       ],
     },
     {
+      title: '上位CZ（重要）', icon: '⚡',
+      groups: [
+        {
+          label: '上位CZ出現率（設定差約3倍!）', columns: 2,
+          fields: [
+            { key: 'upper_cz_hit', label: '上位CZ当選回数', hint: '設定1:1/7456→設定6:1/2587' },
+            { key: 'upper_cz_total', label: 'CZ突入総数', hint: '上位CZの分母' },
+          ],
+        },
+      ],
+    },
+    {
       title: 'AT終了画面', icon: '🖼️',
       groups: [
         {
@@ -68,7 +80,9 @@ const config: MachineConfig = {
     { key: 'czCnt', totalKey: 'totalG', rates: [1/175.75, 1/170, 1/165, 1/155, 1/145, 1/137.52] },
   ],
 
-  binomialEntries: [],
+  binomialEntries: [
+    { hitKey: 'upper_cz_hit', totalKey: 'upper_cz_total', rates: [0.023, 0.030, 0.045, 0.070, 0.100, 0.130] },
+  ],
 
   categoricalGroups: [
     {
