@@ -263,6 +263,68 @@ const config: MachineConfig = {
       hints.push('サミートロフィーの色を確認してください（虹=設定6確定）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.0, 98.5, 100.2, 104.2, 108.0, 112.0],
+  baseCoins: 30,
+
+  checklist: [
+    { id: 'ck_bell', label: '下段ベルをカウントしているか', category: '通常時' },
+    { id: 'ck_cutin', label: '逆押しカットインボイスを確認', category: '通常時' },
+    { id: 'ck_3cycle', label: '3周期目の当選をメモ', category: '通常時' },
+    { id: 'ck_chara', label: 'キャラ紹介（ボーナス中）を確認', category: 'ボーナス中' },
+    { id: 'ck_trophy', label: 'サミートロフィーを確認', category: 'AT終了時' },
+    { id: 'ck_endscreen', label: 'ST終了画面を確認', category: 'ST終了時' },
+    { id: 'ck_456over', label: '特定枚数表示（456/666枚）を確認', category: 'AT中' },
+    { id: 'ck_omikuji', label: 'サブ液晶おみくじを確認', category: '随時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      '下段ベル確率に設定差大（設定1: 1/121.1 vs 設定6: 1/99.1）',
+      '3周期目のボーナス当選率が最大の設定差要素',
+      'サミートロフィーの色で設定4以上を確認可能',
+      'ST終了画面「水着」出現で設定6濃厚',
+    ],
+    morningCheck: [
+      'データカウンターでボーナス初当たり確率を確認',
+      '下段ベルのカウントを開始（メモ必須）',
+      '前日の最終G数を確認（据え置き判別の参考）',
+    ],
+    quitTiming: [
+      '2000G消化して設定1確率が50%以上ならやめ検討',
+      '確定演出なし＋ボーナス初当たりが1/300以上ならやめ',
+      'ST終了画面が全て通常パターンなら低設定の可能性大',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 800,
+    ceilingBenefit: '800G+α到達で天破の刻（AT）確定',
+    zones: [
+      { start: 200, end: 300, label: '3周期目CZ', strength: 'warm' },
+      { start: 500, end: 600, label: '5周期目CZ', strength: 'warm' },
+      { start: 700, end: 800, label: '天井間近', strength: 'hot' },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -500, note: '0Gから打つと微マイナス' },
+      { fromGame: 100, expectedYen: -200 },
+      { fromGame: 200, expectedYen: 300, note: '3周期目CZ狙い目' },
+      { fromGame: 300, expectedYen: 800 },
+      { fromGame: 400, expectedYen: 1500 },
+      { fromGame: 500, expectedYen: 3000, note: '5周期目CZ狙い' },
+      { fromGame: 600, expectedYen: 5000 },
+      { fromGame: 700, expectedYen: 8000, note: '天井間近・超期待値' },
+    ],
+    resetInfo: 'リセット時は内部的に0Gから再スタート',
+    notes: [
+      '天井は通常時のゲーム数（AT中は含まない）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

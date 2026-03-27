@@ -1,18 +1,24 @@
-import { useState, useCallback, useContext } from 'react';
+import { useState, useCallback, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import type { MachineConfig, CalcResult } from '../types/machine';
+import type { MachineConfig, CalcResult, EnhancedJudgment } from '../types/machine';
 import { calculate } from '../logic/engine';
+import { enhanceJudgment } from '../logic/judgmentHelper';
 import { DarkModeContext } from '../App';
 import { useAutoSave, saveHistory, loadHistory, clearHistory } from '../hooks/useAutoSave';
 import type { HistoryEntry } from '../hooks/useAutoSave';
 import SectionCard from '../components/SectionCard';
 import NumberField from '../components/NumberField';
 import ResultBar from '../components/ResultBar';
+import PieChart from '../components/PieChart';
 import JudgmentComment from '../components/JudgmentComment';
 import InputHints from '../components/InputHints';
 import ShareButton from '../components/ShareButton';
 import DarkModeToggle from '../components/DarkModeToggle';
 import HistoryPanel from '../components/HistoryPanel';
+import MachineGuide from '../components/MachineGuide';
+import Checklist from '../components/Checklist';
+import IncomeSimulator from '../components/IncomeSimulator';
+import HyenaInfo from '../components/HyenaInfo';
 
 interface Props {
   config: MachineConfig;
@@ -22,7 +28,7 @@ export default function MachinePage({ config }: Props) {
   const { isDark, toggle } = useContext(DarkModeContext);
   const [input, setInput] = useState<Record<string, number | null>>({});
   const [result, setResult] = useState<CalcResult | null>(null);
-  const [judgment, setJudgment] = useState<{ message: string; level: 'high' | 'mid' | 'low' } | null>(null);
+  const [judgment, setJudgment] = useState<EnhancedJudgment | null>(null);
   const [hints, setHints] = useState<string[]>([]);
   const [history, setHistory] = useState<HistoryEntry[]>(() => loadHistory(config.id));
   const [showAutoSaveNote, setShowAutoSaveNote] = useState(false);
@@ -38,15 +44,31 @@ export default function MachinePage({ config }: Props) {
     setInput(prev => ({ ...prev, [key]: value }));
   }, []);
 
+  // 入力項目数（null/0でないフィールド数）
+  const inputFieldCount = useMemo(() =>
+    Object.values(input).filter(v => v != null && v !== 0).length
+  , [input]);
+
   const handleCalculate = useCallback(() => {
     const res = calculate(input, config);
     setResult(res);
-    setJudgment(config.getJudgment(input, res));
+    const baseJudgment = config.getJudgment(input, res);
+    const labels = config.settingLabels || ['1','2','3','4','5','6'];
+    const enhanced = enhanceJudgment({
+      probabilities: res.probabilities,
+      settingLabels: labels,
+      payoutRates: config.payoutRates,
+      baseCoins: config.baseCoins,
+      totalGames: (input.totalG as number) ?? undefined,
+      inputFieldCount,
+      baseJudgment,
+    });
+    setJudgment(enhanced);
     setHints(config.getHints(input));
     // 履歴に保存
     saveHistory(config.id, input, res);
     setHistory(loadHistory(config.id));
-  }, [input, config]);
+  }, [input, config, inputFieldCount]);
 
   const handleReset = useCallback(() => {
     setInput({});
@@ -60,7 +82,19 @@ export default function MachinePage({ config }: Props) {
     setInput(entry.input);
     if (entry.result) {
       setResult(entry.result);
-      setJudgment(config.getJudgment(entry.input, entry.result));
+      const base = config.getJudgment(entry.input, entry.result);
+      const labels = config.settingLabels || ['1','2','3','4','5','6'];
+      const histFieldCount = Object.values(entry.input).filter(v => v != null && v !== 0).length;
+      const enhanced = enhanceJudgment({
+        probabilities: entry.result.probabilities,
+        settingLabels: labels,
+        payoutRates: config.payoutRates,
+        baseCoins: config.baseCoins,
+        totalGames: (entry.input.totalG as number) ?? undefined,
+        inputFieldCount: histFieldCount,
+        baseJudgment: base,
+      });
+      setJudgment(enhanced);
       setHints(config.getHints(entry.input));
     }
   }, [config]);
@@ -102,6 +136,17 @@ export default function MachinePage({ config }: Props) {
       )}
 
       <main className="max-w-4xl mx-auto px-3 py-4 space-y-4">
+        {/* 攻め方ガイド */}
+        {config.guide && <MachineGuide guide={config.guide} />}
+
+        {/* チェックリスト */}
+        {config.checklist && config.checklist.length > 0 && (
+          <Checklist items={config.checklist} machineId={config.id} />
+        )}
+
+        {/* ハイエナ情報 */}
+        {config.hyena && <HyenaInfo hyena={config.hyena} />}
+
         {/* 入力セクション */}
         {config.sections.map((section, si) => (
           <SectionCard key={si} title={section.title} icon={section.icon}>
@@ -160,8 +205,65 @@ export default function MachinePage({ config }: Props) {
               </h2>
             </div>
             <div className="p-4 space-y-4">
+              {/* 円グラフ */}
+              <PieChart
+                probabilities={resultCompat.probabilities}
+                settingLabels={config.settingLabels}
+                mostLikely={resultCompat.mostLikely}
+              />
+
+              {/* 棒グラフ */}
               <ResultBar result={resultCompat} settingLabels={config.settingLabels} />
-              {judgment && <JudgmentComment message={judgment.message} level={judgment.level} />}
+
+              {/* 判定コメント（強化版） */}
+              {judgment && (
+                <div className="space-y-3">
+                  <JudgmentComment message={judgment.message} level={judgment.level} />
+
+                  {/* 信頼度バッジ */}
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="text-gray-500 dark:text-gray-400">判定精度:</span>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
+                      judgment.confidence === 'high' ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400' :
+                      judgment.confidence === 'mid' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-400' :
+                      'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400'
+                    }`}>
+                      {judgment.confidence === 'high' ? '高' : judgment.confidence === 'mid' ? '中' : '低'}
+                    </span>
+                    {judgment.confidence === 'low' && (
+                      <span className="text-xs text-gray-400 dark:text-gray-500">データを追加すると精度が上がります</span>
+                    )}
+                  </div>
+
+                  {/* 期待収支（payoutRatesがある場合） */}
+                  {judgment.expectedIncome != null && (
+                    <div className={`p-3 rounded-lg text-center ${
+                      judgment.expectedIncome >= 0
+                        ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
+                        : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
+                    }`}>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">あと1000G打った場合の期待枚数</div>
+                      <div className={`text-xl font-bold ${
+                        judgment.expectedIncome >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                      }`}>
+                        {judgment.expectedIncome >= 0 ? '+' : ''}{judgment.expectedIncome}枚
+                      </div>
+                    </div>
+                  )}
+
+                  {/* やめ時警告 */}
+                  {judgment.shouldStop && (
+                    <div className="p-3 rounded-lg bg-red-100 dark:bg-red-900/40 border border-red-300 dark:border-red-700 flex items-center gap-2">
+                      <span className="text-xl">🚨</span>
+                      <div>
+                        <div className="font-bold text-red-700 dark:text-red-400 text-sm">やめ時の可能性あり</div>
+                        <div className="text-xs text-red-600 dark:text-red-400/80">{judgment.stopReason}</div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
               <InputHints hints={hints} />
 
               {/* 共有ボタン */}
@@ -176,6 +278,9 @@ export default function MachinePage({ config }: Props) {
             </div>
           </section>
         )}
+
+        {/* 期待収支シミュレーター */}
+        {resultCompat && <IncomeSimulator result={resultCompat} config={config} />}
 
         {/* 判別履歴 */}
         <HistoryPanel

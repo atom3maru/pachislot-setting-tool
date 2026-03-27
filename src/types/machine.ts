@@ -61,6 +61,59 @@ export interface CalcResult {
   confirmedMin?: number;
 }
 
+// ========================================
+// 機能追加用の型定義
+// ========================================
+
+/** チェックリスト項目（機能4） */
+export interface ChecklistItem {
+  id: string;
+  label: string;
+  category?: string;  // '通常時' | 'ボーナス中' | 'AT中' | 'AT終了時' | '随時' 等
+}
+
+/** 攻め方ガイド（機能6） */
+export interface MachineGuide {
+  settingHunt: string[];    // 設定狙いのポイント
+  morningCheck: string[];   // 朝一に確認すべきこと
+  quitTiming: string[];     // やめ時の目安
+}
+
+/** ゾーン情報（機能7） */
+export interface ZoneInfo {
+  start: number;    // 開始G数
+  end: number;      // 終了G数
+  label: string;    // 表示ラベル
+  strength: 'hot' | 'warm' | 'cold';
+}
+
+/** 期待値テーブルエントリ（機能7） */
+export interface HyenaExpectedValue {
+  fromGame: number;     // 開始ゲーム数
+  expectedYen: number;  // 期待値（円）
+  note?: string;
+}
+
+/** ハイエナ情報（機能7） */
+export interface HyenaInfo {
+  ceilingGame: number;                    // 天井ゲーム数
+  ceilingBenefit: string;                 // 天井恩恵テキスト
+  zones: ZoneInfo[];                      // ゾーン情報
+  expectedValues: HyenaExpectedValue[];   // 期待値テーブル
+  resetInfo?: string;                     // リセット時の挙動
+  notes?: string[];                       // 注意事項
+}
+
+/** 強化版判定結果（機能2） */
+export interface EnhancedJudgment {
+  message: string;
+  level: 'high' | 'mid' | 'low';
+  expectedIncome?: number;      // あと1000G打った場合の期待枚数差
+  confidence: 'high' | 'mid' | 'low';
+  shouldStop?: boolean;
+  stopReason?: string;
+}
+
 /** 機種定義（1機種分のすべての情報） */
 export interface MachineConfig {
   id: string;
@@ -75,6 +128,13 @@ export interface MachineConfig {
   confirmedMin: ConfirmedMinMap;
   getJudgment: JudgmentFn;
   getHints: HintsFn;
+
+  // 拡張機能（全てOptional - 既存configは無修正で動作）
+  payoutRates?: number[];         // 設定別機械割(%) 例: [97.0, 98.5, 100.2, 104.0, 107.5, 112.0]
+  baseCoins?: number;             // 50枚あたり回転数（デフォルト: 30）
+  checklist?: ChecklistItem[];    // 打ちながらチェックリスト
+  guide?: MachineGuide;           // 攻め方ガイド
+  hyena?: HyenaInfo;              // ハイエナ情報（天井・ゾーン・期待値）
 }
 
 /** 機種一覧表示用 */
