@@ -422,7 +422,7 @@ export default function HomePage() {
 
         {/* 開発を応援するバナー */}
         <a
-          href="https://ofuse.me/#"
+          href="https://ofuse.me/62c7e0c2"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-3 block bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl shadow-md overflow-hidden hover:shadow-lg hover:from-amber-600 hover:to-orange-600 transition-all active:scale-[0.98] min-h-[44px]"

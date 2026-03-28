@@ -305,7 +305,7 @@ export default function MachinePage({ config }: Props) {
         {/* 応援リンク（控えめ） */}
         <div className="text-center py-3">
           <a
-            href="https://ofuse.me/#"
+            href="https://ofuse.me/62c7e0c2"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
