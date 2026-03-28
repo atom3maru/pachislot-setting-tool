@@ -135,6 +135,63 @@ const config: MachineConfig = {
       hints.push('サミートロフィーの色を確認してください（虹=設定6確定）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [98.0, 98.9, 105.7, 110.0, 113.0],
+  baseCoins: 35,
+
+  checklist: [
+    { id: 'ck_bb_hit', label: 'BB初当たり回数を記録', category: '通常時' },
+    { id: 'ck_mode', label: 'モード移行パターンを把握', category: '通常時' },
+    { id: 'ck_endscreen', label: '終了画面セリフ・トロフィーを確認', category: 'BB終了時' },
+    { id: 'ck_ceiling', label: '天井ゲーム数を確認', category: '通常時' },
+    { id: 'ck_samai', label: '有利区間差枚を確認', category: '随時' },
+    { id: 'ck_nazo', label: '謎当たりを記録', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'BB終了後ボイス確認（サブ液晶タッチ）',
+      'サミートロフィーの色で設定示唆',
+      '初当たり確率に設定差あり',
+      'モード移行率で設定推測',
+    ],
+    morningCheck: [
+      'リセット時は天井800Gに短縮',
+      '天国移行率が優遇される',
+      '300Gまでの短縮抽選あり',
+    ],
+    quitTiming: [
+      'AT後モード示唆30G確認',
+      '差枚750以上で1G確認',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1268,
+    ceilingBenefit: 'AT当選+継続率優遇（リセット時は800G天井）',
+    zones: [
+      { start: 280, end: 320, label: '300G短縮抽選', strength: 'warm' as const },
+      { start: 760, end: 800, label: '777G/800G短縮抽選', strength: 'warm' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -2000 },
+      { fromGame: 200, expectedYen: -1000 },
+      { fromGame: 400, expectedYen: 200 },
+      { fromGame: 600, expectedYen: 1500 },
+      { fromGame: 700, expectedYen: 2500 },
+      { fromGame: 800, expectedYen: 4000, note: 'リセット天井到達' },
+      { fromGame: 1000, expectedYen: 8000 },
+    ],
+    resetInfo: 'リセット時は天井800Gに短縮',
+    notes: [
+      '天井は通常時1268G（リセット800G）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

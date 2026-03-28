@@ -168,6 +168,61 @@ const config: MachineConfig = {
     if (input.suika_cz_hit == null) hints.push('スイカからCZ当選率（設定1:20%→設定6:30%）をカウント');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.7, 99.2, 104.6, 110.7, 114.9],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_bonus_count', label: 'ボーナス初当たり', category: '通常時' },
+    { id: 'ck_through', label: 'スルー回数把握', category: '通常時' },
+    { id: 'ck_at_endscreen', label: 'AT終了画面', category: 'AT終了時' },
+    { id: 'ck_ed_voice', label: 'エンディングボイス', category: 'AT中' },
+    { id: 'ck_pullback', label: '引き戻し70G赤発光', category: 'AT終了時' },
+    { id: 'ck_senmetsu', label: '殲滅作戦AT突入率', category: 'ボーナス中' },
+  ],
+
+  guide: {
+    settingHunt: [
+      '殲滅作戦突入率に設定差',
+      'AT突入率に注目',
+      'エンディングボイスで設定示唆',
+      'AT終了画面で設定示唆',
+    ],
+    morningCheck: [
+      '天井700G+スルー天井5回に短縮',
+      '0スルー350Gから狙い可能',
+    ],
+    quitTiming: [
+      'AT終了後70G引き戻し確認（赤発光中は続行）',
+      'スルー回数を考慮してやめ時判断',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1000,
+    ceilingBenefit: '天井1000G（リセット700G）/スルー天井9回（リセット5回）',
+    zones: [
+      { start: 450, end: 550, label: '天井狙い開始', strength: 'warm' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1500 },
+      { fromGame: 300, expectedYen: -500 },
+      { fromGame: 500, expectedYen: 500, note: '天井狙い開始' },
+      { fromGame: 600, expectedYen: 1500 },
+      { fromGame: 700, expectedYen: 3000 },
+      { fromGame: 800, expectedYen: 5000 },
+      { fromGame: 900, expectedYen: 7000, note: '天井間近' },
+    ],
+    resetInfo: 'リセット時は天井700G+スルー天井5回に短縮',
+    notes: [
+      '天井は通常時のゲーム数（AT中は含まない）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

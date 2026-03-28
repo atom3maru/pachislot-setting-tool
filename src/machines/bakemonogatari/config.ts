@@ -151,6 +151,68 @@ const config: MachineConfig = {
       hints.push('サミートロフィーを確認してください（虹=設定6確定）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.9, 98.9, 100.9, 105.0, 107.8, 112.1],
+  baseCoins: 31,
+
+  checklist: [
+    { id: 'ck_suika', label: 'スイカ確率をカウントしているか（1/87→1/70）', category: '通常時' },
+    { id: 'ck_cherry', label: '弱チェリーAT直撃を確認（9.5倍差）', category: '通常時' },
+    { id: 'ck_trophy', label: 'サミートロフィーを確認（虹=設定6確定）', category: 'AT終了時' },
+    { id: 'ck_ceiling', label: '通常時G数をメモ（天井1000G）', category: '通常時' },
+    { id: 'ck_reset', label: 'リセット判別（天井600Gに短縮）を確認', category: '朝一' },
+    { id: 'ck_baibai', label: '天井恩恵（AT+倍倍チャンス）を把握', category: '天井到達時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'スイカ確率は設定差あり（1/87→1/70）。必ずカウント',
+      '弱チェリーAT直撃は設定差約9.5倍！確認必須',
+      'サミートロフィー虹で設定6確定',
+      '天井恩恵はAT+倍倍チャンスと強力',
+    ],
+    morningCheck: [
+      'リセット時は天井が600Gに短縮',
+      'データカウンターでボーナス初当たり確率を確認',
+      '前日の最終G数を確認（据え置き判別の参考）',
+    ],
+    quitTiming: [
+      '2000G消化してスイカ確率が設定1以下ならやめ検討',
+      '確定演出なし＋AT直撃なしが続くなら低設定を疑う',
+      'トロフィーが銅以下のみなら低設定の可能性大',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1000,
+    ceilingBenefit: '1000G到達で天井（恩恵: AT+倍倍チャンス）',
+    zones: [
+      { start: 0, end: 50, label: '引き戻し', strength: 'hot' as const },
+      { start: 100, end: 100, label: 'CZ抽選', strength: 'warm' as const },
+      { start: 200, end: 200, label: 'CZ抽選', strength: 'warm' as const },
+      { start: 300, end: 300, label: 'CZ抽選', strength: 'warm' as const },
+      { start: 550, end: 600, label: 'リセット天井', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -800, note: '0Gから打つとマイナス' },
+      { fromGame: 300, expectedYen: 200 },
+      { fromGame: 400, expectedYen: 800 },
+      { fromGame: 600, expectedYen: 1500, note: 'リセット天井付近' },
+      { fromGame: 650, expectedYen: 2000 },
+      { fromGame: 700, expectedYen: 2500 },
+      { fromGame: 800, expectedYen: 4000, note: '天井間近・高期待値' },
+    ],
+    resetInfo: 'リセット時は天井が600Gに短縮',
+    notes: [
+      '通常天井1000Gとリセット天井600Gに注意',
+      '天井恩恵はAT+倍倍チャンスと強力',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

@@ -143,6 +143,66 @@ const config: MachineConfig = {
       hints.push('ケロットトロフィーを確認してください（虹=設定6濃厚）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.8, 98.8, 100.0, 103.5, 107.7, 112.7],
+  baseCoins: 31,
+
+  checklist: [
+    { id: 'ck_suika', label: '斜めスイカ確率をカウントしているか', category: '通常時' },
+    { id: 'ck_st', label: 'スイカからのST直撃を確認（設定5・6優遇）', category: '通常時' },
+    { id: 'ck_chance', label: 'チャンス目からの高確移行率を確認', category: '通常時' },
+    { id: 'ck_trophy', label: 'ケロットトロフィーを確認（虹=設定6濃厚）', category: 'AT終了時' },
+    { id: 'ck_reg', label: 'REGスルー回数をカウント（4連続で天井）', category: '通常時' },
+    { id: 'ck_reset', label: 'リセット判別（天井666Gに短縮）を確認', category: '朝一' },
+  ],
+
+  guide: {
+    settingHunt: [
+      '斜めスイカ確率は最重要カウント対象！必ずカウント',
+      'スイカからのST直撃は設定5・6で大幅優遇',
+      'チャンス目からの高確移行率にも大きな設定差あり',
+      'ケロットトロフィー虹で設定6濃厚',
+    ],
+    morningCheck: [
+      'リセット時は天井が666Gに短縮',
+      'データカウンターでボーナス初当たり確率を確認',
+      '前日の最終G数を確認（据え置き判別の参考）',
+    ],
+    quitTiming: [
+      '2000G消化してスイカ確率が設定1以下ならやめ検討',
+      '確定演出なし＋ST直撃なしが続くなら低設定を疑う',
+      'REGスルーが続く場合は4スルー天井を狙うか判断',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 999,
+    ceilingBenefit: '999G/REGスルー4連続/スイカ100回で天井',
+    zones: [
+      { start: 0, end: 100, label: 'リオチャンス高確', strength: 'warm' as const },
+      { start: 250, end: 300, label: 'ゾーン', strength: 'warm' as const },
+      { start: 550, end: 666, label: 'リセット天井', strength: 'hot' as const },
+      { start: 900, end: 999, label: '通常天井', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000, note: '0Gから打つとマイナス' },
+      { fromGame: 250, expectedYen: 200 },
+      { fromGame: 350, expectedYen: 800 },
+      { fromGame: 450, expectedYen: 1500 },
+      { fromGame: 560, expectedYen: 2500, note: 'リセット天井狙い目' },
+      { fromGame: 700, expectedYen: 4000, note: '通常天井狙い' },
+    ],
+    resetInfo: 'リセット時は天井が666Gに短縮',
+    notes: [
+      'G数天井999G・REGスルー4連続・スイカ100回の3種天井',
+      'リセット時は天井666Gに短縮',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

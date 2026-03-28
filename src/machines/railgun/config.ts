@@ -146,6 +146,66 @@ const config: MachineConfig = {
       hints.push('藤丸コインを確認してください（虹=設定6確定）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.7, 98.9, 100.3, 105.4, 110.0, 112.9],
+  baseCoins: 32,
+
+  checklist: [
+    { id: 'ck_at_count', label: 'AT初当たり', category: '通常時' },
+    { id: 'ck_cz_count', label: 'CZ確率', category: '通常時' },
+    { id: 'ck_upper_cz', label: '上位CZ婚后光子', category: '通常時' },
+    { id: 'ck_card', label: '獲得枚数カード', category: 'AT中' },
+    { id: 'ck_over_color', label: '枚数OVER文字色', category: 'AT中' },
+    { id: 'ck_coin_direct', label: 'コイン直撃', category: '通常時' },
+    { id: 'ck_500zone', label: '500Gゾーン', category: 'AT終了時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      '超電磁砲コイン直撃確率に設定差',
+      '上位CZ婚后光子出現率に注目',
+      '獲得枚数カードで設定示唆',
+      '枚数OVER文字色赤で高設定示唆',
+    ],
+    morningCheck: [
+      '天井699Gに短縮',
+      '600Gゾーン期待度50%',
+      'ゲーム数発光でリセット判別',
+    ],
+    quitTiming: [
+      'AT後500Gゾーンフォロー（期待度40%）',
+      '500Gゾーン非当選で即やめ',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 999,
+    ceilingBenefit: '天井999G（リセット699G）',
+    zones: [
+      { start: 50, end: 150, label: 'ゾーン', strength: 'warm' as const },
+      { start: 150, end: 250, label: 'ゾーン', strength: 'warm' as const },
+      { start: 450, end: 550, label: 'AT後ゾーン期待度40%', strength: 'hot' as const },
+      { start: 550, end: 650, label: 'リセット後ゾーン期待度50%', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000 },
+      { fromGame: 250, expectedYen: 200 },
+      { fromGame: 350, expectedYen: 800 },
+      { fromGame: 450, expectedYen: 1500 },
+      { fromGame: 550, expectedYen: 2500 },
+      { fromGame: 650, expectedYen: 4000 },
+      { fromGame: 800, expectedYen: 6000, note: '天井間近' },
+    ],
+    resetInfo: 'リセット時は天井699Gに短縮',
+    notes: [
+      '天井は通常時のゲーム数（AT中は含まない）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

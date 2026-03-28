@@ -130,6 +130,63 @@ const config: MachineConfig = {
       hints.push('AT終了画面を確認してください（お風呂=設定4以上、全員集合+剣の乙女=設定6）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.6, 98.7, 100.4, 104.9, 109.7, 113.2],
+  baseCoins: 31,
+
+  checklist: [
+    { id: 'ck_at_count', label: 'AT初当たりカウント', category: '通常時' },
+    { id: 'ck_cz_count', label: 'CZ確率カウント', category: '通常時' },
+    { id: 'ck_ceiling', label: '天井到達G数確認', category: '通常時' },
+    { id: 'ck_coin', label: '藤丸コイン確認', category: 'AT終了時' },
+    { id: 'ck_枚数', label: '獲得枚数表示', category: 'AT中' },
+    { id: 'ck_bell', label: '共通ベルカウント', category: '通常時' },
+    { id: 'ck_suika_cz', label: 'スイカ2周期CZ当選', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT間天井600G到達は高設定期待大',
+      'スイカ2周期目以降CZ当選率に設定差',
+      'AT終了画面の藤丸コインに注目',
+      '共通ベル確率に設定差あり',
+    ],
+    morningCheck: [
+      'リセット時は天井1000Gに短縮',
+      '1G目レア役に注目',
+    ],
+    quitTiming: [
+      'AT終了後引き戻し45Gフォロー',
+      '高設定示唆なしなら即やめ',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1500,
+    ceilingBenefit: '天井振り分け600/1000/1500G。リセット時は1000Gに短縮',
+    zones: [
+      { start: 250, end: 350, label: 'スイカ2周期CZ', strength: 'warm' as const },
+      { start: 450, end: 550, label: 'スイカ2周期CZ', strength: 'warm' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1500 },
+      { fromGame: 200, expectedYen: -800 },
+      { fromGame: 400, expectedYen: -200 },
+      { fromGame: 600, expectedYen: 1000, note: '天井振り分け600G' },
+      { fromGame: 800, expectedYen: 3000 },
+      { fromGame: 1000, expectedYen: 6000, note: '天井振り分け1000G' },
+      { fromGame: 1200, expectedYen: 10000, note: '天井間近' },
+    ],
+    resetInfo: 'リセット時は天井1000Gに短縮',
+    notes: [
+      '天井は通常時のゲーム数（AT中は含まない）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

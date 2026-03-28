@@ -108,6 +108,67 @@ const config: MachineConfig = {
     hints.push('※ 新台のため解析データは限定的です。データが公開され次第更新します');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.5, 99.3, 102.8, 107.1, 110.5, 115.2],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_gg_freq', label: 'GG初当たり頻度確認', category: '通常時' },
+    { id: 'ck_mode', label: '前兆モード移行率', category: '通常時' },
+    { id: 'ck_god_hit', label: 'GOD揃い発生有無', category: 'AT中' },
+    { id: 'ck_end_screen', label: 'AT終了画面種類', category: 'AT終了時' },
+    { id: 'ck_voice', label: 'AT終了時ボイス', category: 'AT終了時' },
+    { id: 'ck_sets', label: 'GGセット数ストック', category: 'AT中' },
+  ],
+
+  guide: {
+    settingHunt: [
+      '偶数設定のほうが機械割が高い特徴的スペック',
+      'GG初当たり確率に大きな設定差あり',
+      'AT終了画面・ボイスで設定示唆パターンを確認',
+      '特殊画面出現で高設定確定パターンあり',
+      'GOD揃い確率は設定不問（1/16384推定）',
+    ],
+    morningCheck: [
+      'GG初当たり確率を重視（最重要指標）',
+      'AT終了画面の高設定確定パターン出現を注視',
+      '300G以内の初当たりが多いほど高設定期待度UP',
+    ],
+    quitTiming: [
+      '500G以上ハマりが連続する場合は低設定を疑う',
+      'GG初当たり確率が1/500を超えたら要注意',
+      '設定示唆演出で低設定確定パターンが出たら即ヤメ推奨',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1500,
+    ceilingBenefit: '1500G+α到達でGG（ゴッドゲーム）確定',
+    zones: [
+      { start: 450, end: 550, label: '前兆発生ゾーン（モードB以上）', strength: 'warm' },
+      { start: 750, end: 850, label: '天国準備ゾーン', strength: 'warm' },
+      { start: 1150, end: 1250, label: '天井CZ前兆ゾーン', strength: 'hot' },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1800, note: '等価' },
+      { fromGame: 200, expectedYen: -1200 },
+      { fromGame: 500, expectedYen: -300 },
+      { fromGame: 700, expectedYen: 400, note: 'ボーダー付近' },
+      { fromGame: 900, expectedYen: 1500, note: '狙い目' },
+      { fromGame: 1100, expectedYen: 3200, note: '積極的に狙う' },
+      { fromGame: 1300, expectedYen: 5500, note: '天井狙い' },
+    ],
+    resetInfo: '有利区間リセットで天井短縮なし（推定）',
+    notes: [
+      '天井は通常時のゲーム数（AT中は含まない）',
+      '期待値は設定1・等価換金で計算',
+      '新台のため解析値は推定を含む',
+    ],
+  },
 };
 
 export default config;

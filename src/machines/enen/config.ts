@@ -156,6 +156,65 @@ const config: MachineConfig = {
       hints.push('エンディング中のミニキャラを確認してください');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.7, 98.8, 101.2, 105.6, 110.2, 114.9],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_loop', label: '炎炎ループ初当たりカウント', category: '通常時' },
+    { id: 'ck_trap', label: '伝導者の罠成功失敗', category: 'ボーナス中' },
+    { id: 'ck_endscreen', label: '終了画面パターン', category: 'ボーナス終了時' },
+    { id: 'ck_reg_chara', label: 'RB中キャラ紹介', category: 'ボーナス中' },
+    { id: 'ck_medal', label: '獲得枚数表示', category: 'AT中' },
+    { id: 'ck_ed_mini', label: 'エンディングミニキャラ', category: 'エンディング中' },
+    { id: 'ck_eyecatch', label: 'アイキャッチパターン', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      '炎炎ループ初当たり確率が最重要',
+      '伝導者の罠成功期待度',
+      'ボーナス終了画面',
+    ],
+    morningCheck: [
+      'アイキャッチでモード示唆',
+      '45-88Gゾーン確認',
+    ],
+    quitTiming: [
+      'RB後伝導者の罠終了後',
+      '炎炎激闘後潜伏28G確認',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 850,
+    ceilingBenefit: '850G到達でボーナス当選（リセット時650G）',
+    zones: [
+      { start: 45, end: 88, label: 'リセット後ゾーン', strength: 'hot' },
+      { start: 155, end: 250, label: 'リセット後ゾーン', strength: 'warm' },
+      { start: 750, end: 850, label: '天井間近', strength: 'hot' },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -868 },
+      { fromGame: 100, expectedYen: -682 },
+      { fromGame: 200, expectedYen: -418 },
+      { fromGame: 300, expectedYen: -44 },
+      { fromGame: 400, expectedYen: 487 },
+      { fromGame: 500, expectedYen: 1239 },
+      { fromGame: 600, expectedYen: 2306 },
+      { fromGame: 700, expectedYen: 3818 },
+      { fromGame: 800, expectedYen: 5963 },
+    ],
+    resetInfo: 'リセット時は天井650Gに短縮',
+    notes: [
+      '天井は通常時のゲーム数（AT中は含まない）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

@@ -166,6 +166,59 @@ const config: MachineConfig = {
       hints.push('終了画面の枠色を確認してください（金枠=設定6濃厚）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.7, 99.1, 100.9, 105.4, 109.5, 113.7],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_at', label: 'AT初当たり確率をカウントしているか', category: '通常時' },
+    { id: 'ck_endscreen', label: '終了画面の枠色を確認（金枠=設定6濃厚）', category: 'AT終了時' },
+    { id: 'ck_stechen', label: 'ステチェン回数をカウント（ボーナス間19回/AT間40回で天井）', category: '通常時' },
+    { id: 'ck_reset', label: 'リセット判別（ボーナス間13回/AT間17回に短縮）を確認', category: '朝一' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT初当たり確率は最大の設定差要素（約1.4倍差）',
+      '本機は小役確率に設定差なし。小役カウントは不要',
+      '終了画面の枠色「金枠」で設定6濃厚',
+      'ステチェン回数で天井管理が重要',
+    ],
+    morningCheck: [
+      'リセット時はボーナス間天井13回/AT間天井17回に短縮',
+      'リセット後はAT間天井が大幅短縮で狙い目',
+      'データカウンターでAT初当たり確率を確認',
+    ],
+    quitTiming: [
+      '2000G消化してAT初当たりが設定1以下ならやめ検討',
+      '確定演出なし＋枠色が通常のみなら低設定を疑う',
+      'AT初当たりが重い場合は早めのやめ検討を',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 999,
+    ceilingBenefit: 'ボーナス間ステチェン19回/AT間ステチェン40回で天井',
+    zones: [
+      { start: 0, end: 100, label: 'リセット後（AT間天井17回短縮）', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -500, note: '0Gから打つと微マイナス' },
+      { fromGame: 300, expectedYen: 200 },
+      { fromGame: 600, expectedYen: 1500 },
+      { fromGame: 750, expectedYen: 2500, note: '天井狙い目（概算）' },
+    ],
+    resetInfo: 'リセット時はボーナス間天井13回/AT間天井17回に短縮',
+    notes: [
+      '天井はG数ではなくステチェン回数で管理',
+      'リセット後はAT間天井が17回に短縮され狙い目',
+      '期待値は設定1・等価換金で概算',
+    ],
+  },
 };
 
 export default config;

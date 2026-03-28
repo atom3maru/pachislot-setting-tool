@@ -149,6 +149,56 @@ const config: MachineConfig = {
       hints.push('終了画面の枠色を確認してください（銀枠=設定4以上、金枠=設定6濃厚）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.7, 99.3, 104.7, 110.8, 114.9],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_harakiri', label: 'ハラキリドライブ発生回数を記録', category: 'AT中' },
+    { id: 'ck_cz_end', label: 'CZ終了画面の枠色を確認', category: 'CZ終了時' },
+    { id: 'ck_at_end', label: 'AT終了画面ディスプレイを確認', category: 'AT終了時' },
+    { id: 'ck_medal', label: '獲得枚数表示を確認', category: 'AT終了時' },
+    { id: 'ck_ceiling', label: '天井カウント（周期/CZ間/AT間）', category: '通常時' },
+    { id: 'ck_hikimodo', label: '引き戻し66Gを確認', category: 'AT終了後' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'ハラキリドライブ発生率に大きな設定差',
+      'CZ終了画面の枠色で設定示唆',
+      'AT終了画面で設定示唆',
+      '獲得枚数表示で設定示唆',
+    ],
+    morningCheck: [
+      'リセット時は周期天井3周期に短縮',
+      'AT間天井が1000Gに短縮',
+    ],
+    quitTiming: [
+      'AT終了後66G引き戻し確認',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1500,
+    ceilingBenefit: '周期6周期/CZ間999G/AT間1500G到達でAT確定（リセット: 周期3周期/AT間1000G）',
+    zones: [],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000 },
+      { fromGame: 300, expectedYen: 200 },
+      { fromGame: 550, expectedYen: 1000 },
+      { fromGame: 750, expectedYen: 2500 },
+      { fromGame: 950, expectedYen: 5000 },
+    ],
+    resetInfo: 'リセット時は周期3周期/AT間1000Gに短縮',
+    notes: [
+      '天井は周期ベース（周期6周期/CZ間999G/AT間1500G）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

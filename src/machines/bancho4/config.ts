@@ -131,6 +131,64 @@ const config: MachineConfig = {
       hints.push('終了画面を確認してください（茶摘み=設定4以上、温泉=設定6確定）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.8, 98.9, 101.5, 106.0, 110.0, 113.1],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_direct', label: 'AT直撃回数をカウントしているか', category: '通常時' },
+    { id: 'ck_blue7', label: '天国以外での青7BB当選を確認', category: 'ボーナス中' },
+    { id: 'ck_endscreen', label: '終了画面を確認（茶摘み=設定4↑、温泉=設定6）', category: 'AT終了時' },
+    { id: 'ck_ceiling', label: '特訓間・ボーナス間G数をメモ', category: '通常時' },
+    { id: 'ck_through', label: 'スルー回数をカウント', category: '通常時' },
+    { id: 'ck_reset', label: 'リセット判別（押忍モード149G以内）を確認', category: '朝一' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT直撃回数は設定差約3倍！最重要カウント対象',
+      '天国以外での青7BB当選は設定差約6.7倍',
+      '終了画面「茶摘み」で設定4以上、「温泉」で設定6確定',
+      'スルー天井は10スルー（リセット時6スルー）',
+    ],
+    morningCheck: [
+      'リセット時は押忍モード確定（149G以内に特訓突入）',
+      'スルー天井がリセットで6スルーに短縮',
+      'データカウンターでボーナス初当たり確率を確認',
+    ],
+    quitTiming: [
+      '特訓間249G天井を意識したヤメ時判断',
+      '確定演出なし＋AT直撃なしが続くなら低設定を疑う',
+      '10スルー天井到達前にAT非当選が続くならヤメ検討',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 699,
+    ceilingBenefit: '特訓間249G/ボーナス間699G到達で天井、スルー天井10スルー',
+    zones: [
+      { start: 0, end: 149, label: '押忍モード/リセット', strength: 'hot' as const },
+      { start: 50, end: 100, label: '天国', strength: 'warm' as const },
+      { start: 190, end: 249, label: '特訓間天井', strength: 'warm' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -800, note: '0Gから打つとマイナス' },
+      { fromGame: 200, expectedYen: 200, note: '特訓間天井付近' },
+      { fromGame: 250, expectedYen: 500 },
+      { fromGame: 400, expectedYen: 1500 },
+      { fromGame: 550, expectedYen: 2500, note: 'ボーナス間天井狙い目' },
+    ],
+    resetInfo: 'リセット時は押忍モード確定（149G以内）、スルー天井6スルーに短縮',
+    notes: [
+      '特訓間天井249Gとボーナス間天井699Gの二段構え',
+      'スルー天井は10スルー（リセット時6スルー）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

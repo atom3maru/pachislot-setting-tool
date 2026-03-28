@@ -221,6 +221,62 @@ const config: MachineConfig = {
       hints.push('エンディング中のパネル色を確認してください（虹=設定6濃厚）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.9, 98.7, 100.8, 104.9, 109.3, 112.2],
+  baseCoins: 32,
+
+  checklist: [
+    { id: 'ck_trophy', label: 'トロフィー色', category: 'AT終了時' },
+    { id: 'ck_push', label: '隠しPUSH画面', category: 'AT終了時' },
+    { id: 'ck_ed_lamp', label: 'エンディングランプ色', category: 'エンディング中' },
+    { id: 'ck_cz_flag', label: 'CZ視覚フラグ', category: '通常時' },
+    { id: 'ck_tachikoma', label: '200G400Gタチコマ家出', category: '通常時' },
+    { id: 'ck_episode', label: 'エピソード重複確認', category: 'AT中' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'サミートロフィー色',
+      'AT終了時隠しPUSH画面',
+      'エンディングランプ色',
+    ],
+    morningCheck: [
+      '77G以上で隠しPUSH確認',
+      'リセット恩恵50Gで殲滅ゾーン50%',
+      'CZ天井350G',
+    ],
+    quitTiming: [
+      'CZ終了後',
+      'AT終了後',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 999,
+    ceilingBenefit: '999G到達でAT確定（CZ天井550G、リセット時CZ350G/AT699G）',
+    zones: [
+      { start: 200, end: 200, label: 'タチコマ家出CZ', strength: 'warm' },
+      { start: 400, end: 400, label: 'タチコマ家出CZ', strength: 'warm' },
+      { start: 900, end: 999, label: '天井間近', strength: 'hot' },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000 },
+      { fromGame: 200, expectedYen: -200 },
+      { fromGame: 350, expectedYen: 500, note: 'CZ天井狙い目' },
+      { fromGame: 550, expectedYen: 1000 },
+      { fromGame: 700, expectedYen: 2500 },
+      { fromGame: 900, expectedYen: 5000, note: '天井間近・高期待値' },
+    ],
+    resetInfo: 'リセット時はCZ天井350G・AT天井699Gに短縮',
+    notes: [
+      'AT天井999G・CZ天井550Gの二重天井',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

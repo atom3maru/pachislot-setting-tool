@@ -131,6 +131,64 @@ const config: MachineConfig = {
       hints.push('ケロットトロフィーを確認してください（虹=設定6確定）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.9, 98.9, 100.5, 105.2, 110.3, 114.9],
+  baseCoins: 31,
+
+  checklist: [
+    { id: 'ck_direct', label: 'AT直撃回数をカウントしているか', category: '通常時' },
+    { id: 'ck_epi', label: 'エピソードBIG昇格率を確認', category: 'ボーナス中' },
+    { id: 'ck_trophy', label: 'ケロットトロフィーを確認（虹=設定6確定）', category: 'AT終了時' },
+    { id: 'ck_pt', label: 'pt数（ゲーム数管理）をメモ', category: '通常時' },
+    { id: 'ck_reset', label: 'リセット判別（500pt天井）を確認', category: '朝一' },
+    { id: 'ck_through', label: 'スルー回数をカウント（2スルーで天井）', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT直撃は設定差約3.5倍！最重要カウント対象',
+      'エピソードBIG昇格率に大きな設定差（設定1:2%→設定6:13%）',
+      'ケロットトロフィー虹で設定6確定',
+      'pt管理のため正確なG数把握が重要',
+    ],
+    morningCheck: [
+      'リセット時は天井が500ptに短縮',
+      'スルー天井が2スルーにリセット',
+      'データカウンターでボーナス初当たり確率を確認',
+    ],
+    quitTiming: [
+      '2000G消化して設定1確率が50%以上ならやめ検討',
+      '確定演出なし＋AT直撃なしが続くなら低設定を疑う',
+      'エピソードBIG昇格が一度もなければ低設定の可能性大',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 747,
+    ceilingBenefit: '900pt（約747G）到達で天井、スルー天井2スルー',
+    zones: [
+      { start: 0, end: 100, label: '引き戻し', strength: 'warm' as const },
+      { start: 370, end: 415, label: 'リセット天井（500pt）', strength: 'warm' as const },
+      { start: 660, end: 747, label: '天井直前', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000, note: '0Gから打つとマイナス' },
+      { fromGame: 250, expectedYen: 200 },
+      { fromGame: 400, expectedYen: 1000 },
+      { fromGame: 500, expectedYen: 2000, note: 'リセット天井付近' },
+      { fromGame: 650, expectedYen: 4000, note: '天井直前・高期待値' },
+    ],
+    resetInfo: 'リセット時は天井500ptに短縮、スルー天井2スルー',
+    notes: [
+      '天井は900pt（約747G相当）',
+      'ptとG数は完全に一致しないため注意',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

@@ -139,6 +139,67 @@ const config: MachineConfig = {
       hints.push('エンタトロフィーを確認してください（紅葉=設定5以上、虹=設定6）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.9, 98.8, 100.3, 105.4, 110.1, 114.3],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_direct', label: 'AT直撃回数をカウントしているか', category: '通常時' },
+    { id: 'ck_endscreen', label: 'ボーナス終了画面を確認（全員集合=設定5↑、エンタライオン=設定6）', category: 'ボーナス終了時' },
+    { id: 'ck_trophy', label: 'エンタトロフィーを確認（紅葉=設定5↑、虹=設定6）', category: 'AT終了時' },
+    { id: 'ck_quest', label: 'クエストスルー回数をカウント（7回で天井）', category: '通常時' },
+    { id: 'ck_reset', label: 'リセット判別（天国準備75%）を確認', category: '朝一' },
+    { id: 'ck_zone', label: 'カムラポイントゾーン到達を確認', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT直撃は1回でも高設定期待大！見逃さないように',
+      '本機は小役確率に設定差なし。小役カウントは不要',
+      'ボーナス終了画面「全員集合」で設定5以上、「エンタライオン」で設定6',
+      'エンタトロフィー「紅葉」で設定5以上、「虹」で設定6確定',
+    ],
+    morningCheck: [
+      'リセット時は天国準備移行率75%と優遇',
+      'データカウンターでボーナス初当たり確率を確認',
+      '前日の最終G数を確認（据え置き判別の参考）',
+    ],
+    quitTiming: [
+      '確定演出なし＋AT直撃なしが続くなら低設定を疑う',
+      'ボーナス終了画面が全て通常パターンなら低設定の可能性大',
+      'トロフィーが銅以下のみなら2000G消化後にやめ検討',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 999,
+    ceilingBenefit: '999G到達で天井、クエストスルー7回で天井',
+    zones: [
+      { start: 0, end: 100, label: '引き戻し', strength: 'warm' as const },
+      { start: 280, end: 300, label: 'カムラポイント', strength: 'warm' as const },
+      { start: 380, end: 450, label: 'ゾーン', strength: 'warm' as const },
+      { start: 700, end: 999, label: '天井狙い', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000, note: '0Gから打つとマイナス' },
+      { fromGame: 300, expectedYen: 200 },
+      { fromGame: 400, expectedYen: 700 },
+      { fromGame: 500, expectedYen: 1500 },
+      { fromGame: 600, expectedYen: 2500 },
+      { fromGame: 700, expectedYen: 4000, note: '天井狙い目' },
+      { fromGame: 800, expectedYen: 6000, note: '天井間近・高期待値' },
+    ],
+    resetInfo: 'リセット時は天国準備移行率75%と優遇',
+    notes: [
+      'G数天井999Gとクエストスルー天井7回の二段構え',
+      'リセット時は天国準備に高確率で移行',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

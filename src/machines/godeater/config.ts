@@ -158,6 +158,66 @@ const config: MachineConfig = {
       hints.push('AT終了画面を確認（キャラ集合=設定5以上、ミニキャラ=設定6濃厚）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.9, 98.9, 101.1, 105.6, 110.0, 114.9],
+  baseCoins: 31,
+
+  checklist: [
+    { id: 'ck_cz', label: 'CZ合算回数をカウントしているか', category: '通常時' },
+    { id: 'ck_weakrare', label: '弱レア役→CZ当選をカウント（6倍差）', category: '通常時' },
+    { id: 'ck_direct', label: '強チェリーAT直撃を確認（15倍差）', category: '通常時' },
+    { id: 'ck_endscreen', label: 'AT終了画面を確認（キャラ集合=設定5↑、ミニキャラ=設定6）', category: 'AT終了時' },
+    { id: 'ck_hannibal', label: '逆鱗ハンニバル敗北後のG数をメモ', category: '通常時' },
+    { id: 'ck_reset', label: 'リセット判別（天井600Gに短縮）を確認', category: '朝一' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'CZ合算回数は最優先カウント対象！',
+      '通常時の弱レア役→CZ当選は6倍差！要カウント',
+      '強チェリーAT直撃は15倍差！見逃さないように',
+      'AT終了画面「キャラ集合」で設定5以上、「ミニキャラ」で設定6濃厚',
+    ],
+    morningCheck: [
+      'リセット時は天井が600Gに短縮',
+      'データカウンターでボーナス初当たり確率を確認',
+      '前日の最終G数を確認（据え置き判別の参考）',
+    ],
+    quitTiming: [
+      '2000G消化してCZ合算が設定1以下ならやめ検討',
+      '確定演出なし＋AT直撃なしが続くなら低設定を疑う',
+      'AT終了画面が全て通常パターンなら低設定の可能性大',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1000,
+    ceilingBenefit: '1000G到達で天井、逆鱗ハンニバル敗北後100Gも狙い目',
+    zones: [
+      { start: 0, end: 100, label: 'AT後/逆鱗敗北後', strength: 'hot' as const },
+      { start: 200, end: 300, label: '規定G数', strength: 'warm' as const },
+      { start: 400, end: 450, label: '規定G数', strength: 'warm' as const },
+      { start: 550, end: 600, label: 'リセット天井', strength: 'warm' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000, note: '0Gから打つとマイナス' },
+      { fromGame: 300, expectedYen: 200 },
+      { fromGame: 480, expectedYen: 1000 },
+      { fromGame: 600, expectedYen: 2000, note: 'リセット天井付近' },
+      { fromGame: 700, expectedYen: 3500 },
+      { fromGame: 800, expectedYen: 5500, note: '天井間近・高期待値' },
+    ],
+    resetInfo: 'リセット時は天井が600Gに短縮',
+    notes: [
+      '通常天井1000Gとリセット天井600Gに注意',
+      '逆鱗ハンニバル敗北後100Gは高期待値ゾーン',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

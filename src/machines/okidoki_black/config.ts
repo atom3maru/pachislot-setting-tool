@@ -104,6 +104,65 @@ const config: MachineConfig = {
     if (input.hit32 == null) hints.push('32G以内の当選回数をカウントすると天国移行率の判別に役立ちます');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.2, 98.7, 101.9, 104.8, 108.6],
+  baseCoins: 32,
+
+  checklist: [
+    { id: 'ck_cherry_ab', label: 'チェリーA/B区別カウント', category: '通常時' },
+    { id: 'ck_kakutei_b', label: '確定役B出現', category: '通常時' },
+    { id: 'ck_mode', label: 'モード推測（32G以内=天国）', category: '通常時' },
+    { id: 'ck_through', label: 'スルー回数管理', category: '通常時' },
+    { id: 'ck_yuri_g', label: '有利区間G数管理', category: '通常時' },
+    { id: 'ck_reset', label: 'リセット判別', category: '朝一' },
+    { id: 'ck_renchain', label: '連チャンパターン', category: 'ボーナス後' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'チェリーB出現率',
+      '確定役B出現率',
+      '通常モードボーナス確率',
+      '天国移行率',
+    ],
+    morningCheck: [
+      'リセット40%チャンスモード確認',
+      '32G以内当選でチャンスモード濃厚',
+      '200G以内当選チェック',
+    ],
+    quitTiming: [
+      'ボーナス後32G消化',
+      '天国ループ終了後32G',
+      '6スルー以上は天井まで',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 999,
+    ceilingBenefit: '999G到達でボーナス確定（引き戻し/チャンス時200G、リセット時40%チャンスモード）',
+    zones: [
+      { start: 0, end: 32, label: '天国', strength: 'hot' },
+      { start: 301, end: 400, label: '仮天井', strength: 'hot' },
+      { start: 900, end: 999, label: '天井間近', strength: 'hot' },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1500 },
+      { fromGame: 200, expectedYen: -500 },
+      { fromGame: 400, expectedYen: 500 },
+      { fromGame: 600, expectedYen: 1500 },
+      { fromGame: 800, expectedYen: 4000 },
+      { fromGame: 900, expectedYen: 7000, note: '天井間近・超期待値' },
+    ],
+    resetInfo: 'リセット時は40%でチャンスモードスタート',
+    notes: [
+      '天井は通常時のゲーム数',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

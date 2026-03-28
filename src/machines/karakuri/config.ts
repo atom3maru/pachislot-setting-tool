@@ -145,6 +145,63 @@ const config: MachineConfig = {
       hints.push('AT終了画面を確認（しろがね&勝&鳴海=設定4以上、フランシーヌ=設定6）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.5, 98.7, 103.0, 108.1, 114.9],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_at_count', label: 'AT初当たりカウント', category: '通常時' },
+    { id: 'ck_cz_count', label: 'CZカウント', category: '通常時' },
+    { id: 'ck_endscreen', label: 'AT終了画面PUSH確認', category: 'AT終了時' },
+    { id: 'ck_stage', label: 'AT中ステージ確認', category: 'AT中' },
+    { id: 'ck_heaven', label: '天国移行頻度', category: 'AT終了時' },
+    { id: 'ck_ed', label: 'ED到達', category: 'AT中' },
+    { id: 'ck_cz_through', label: 'CZスルー回数', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT終了画面で設定示唆を確認',
+      'AT中ステージに設定示唆あり',
+      'エンディング到達率に注目',
+      '初当たり確率に設定差',
+    ],
+    morningCheck: [
+      '1G目レア役注目',
+      '初回は通常Cに移行しやすい',
+      'リセット確定店なら浅め狙い',
+    ],
+    quitTiming: [
+      'AT終了後天国100Gフォロー',
+      'コロンビーヌ出現なら100Gまで',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1200,
+    ceilingBenefit: 'CZ間1200G天井/CZスルー4回で5回目AT確定/AT間2500G/前回1100G以上ハマリで次回CZ天井300G',
+    zones: [
+      { start: 0, end: 100, label: '天国25%', strength: 'warm' as const },
+      { start: 200, end: 300, label: '通常Cゾーン', strength: 'warm' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -800 },
+      { fromGame: 300, expectedYen: 500 },
+      { fromGame: 350, expectedYen: 1000 },
+      { fromGame: 500, expectedYen: 2000 },
+      { fromGame: 700, expectedYen: 4000 },
+      { fromGame: 900, expectedYen: 7000, note: '天井間近' },
+    ],
+    resetInfo: 'リセット確定店なら浅めから狙い可能',
+    notes: [
+      '天井は通常時のゲーム数（AT中は含まない）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

@@ -136,6 +136,64 @@ const config: MachineConfig = {
     if (input.heaven32 == null) hints.push('32G以内の当選回数をカウントすると天国移行率の判別に役立ちます');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.2, 98.6, 102.4, 106.8, 110.0],
+  baseCoins: 25,
+
+  checklist: [
+    { id: 'ck_mode32', label: 'モード推測（32G以内の挙動）', category: '通常時' },
+    { id: 'ck_through', label: 'スルー回数をカウント', category: '通常時' },
+    { id: 'ck_music', label: '楽曲変化（私バージョンアップ!）を確認', category: 'ボーナス中' },
+    { id: 'ck_karitenjou', label: '仮天井ゾーン（301-400G）を意識', category: '通常時' },
+    { id: 'ck_heaven', label: '天国移行率を確認', category: 'ボーナス後' },
+    { id: 'ck_reset', label: 'リセット確認（32G以内の当選）', category: '朝一' },
+  ],
+
+  guide: {
+    settingHunt: [
+      '楽曲変化「私バージョンアップ!」で高設定示唆',
+      '初当たり確率に設定差あり',
+      '天国移行率で設定推測',
+      'スルー天井回数に注意',
+    ],
+    morningCheck: [
+      'リセット時40%でチャンスモード（天井200G）',
+      '32G以内で当選するか確認',
+    ],
+    quitTiming: [
+      'ボーナス後32Gやめが基本',
+      'モードB以上示唆時は天国まで',
+      '6スルー以上は天井まで続行',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 800,
+    ceilingBenefit: '800G天井でボーナス確定（仮天井301-400G、スルー天井最大10回）',
+    zones: [
+      { start: 301, end: 400, label: '仮天井ゾーン', strength: 'hot' as const },
+      { start: 701, end: 800, label: '天井', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1500 },
+      { fromGame: 200, expectedYen: -500 },
+      { fromGame: 300, expectedYen: 500, note: '仮天井ゾーン突入' },
+      { fromGame: 450, expectedYen: 1000 },
+      { fromGame: 550, expectedYen: 2000 },
+      { fromGame: 700, expectedYen: 5500 },
+      { fromGame: 750, expectedYen: 10000, note: '天井間近' },
+    ],
+    resetInfo: 'リセット時40%でチャンスモード移行（天井200G）',
+    notes: [
+      '仮天井は301-400Gでボーナス当選率UP',
+      'スルー天井は最大10回（10回目のボーナスでAT確定）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

@@ -173,6 +173,64 @@ const config: MachineConfig = {
       hints.push('AT終了画面を確認してください（幻魔集合=設定4以上、覚醒鬼武者=設定5以上）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.5, 98.3, 100.2, 105.2, 109.2, 113.0],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_cycle', label: '周期数を管理', category: '通常時' },
+    { id: 'ck_at_end', label: 'AT終了画面を確認', category: 'AT終了時' },
+    { id: 'ck_oni_chara', label: '鬼ボーナスキャラを確認', category: 'ボーナス中' },
+    { id: 'ck_kakusei', label: '覚醒チャレンジ回数を記録', category: 'AT中' },
+    { id: 'ck_card', label: 'カードを確認', category: '通常時' },
+    { id: 'ck_hit', label: '初当たりを記録', category: '通常時' },
+    { id: 'ck_mode', label: 'モード示唆を確認', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT終了画面（幻魔集合/覚醒鬼武者/デフォルメ集合）で設定示唆',
+      '鬼ボーナスキャラ紹介で設定示唆',
+      '覚醒チャレンジ突破率に設定差あり',
+      '初当たり確率で設定推測',
+    ],
+    morningCheck: [
+      'リセット時は周期天井4周期に短縮',
+      '1周期目222ptで鬼モード突入',
+      'カード確認で状態推測',
+    ],
+    quitTiming: [
+      'AT終了後示唆確認',
+      '1周期目フォロー',
+      'カード高期待度なら続行',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1000,
+    ceilingBenefit: '1000G/周期6周期到達でAT確定（リセット周期4周期、1周期目222ptで鬼モード）',
+    zones: [
+      { start: 0, end: 170, label: '1周期目（リセット時222pt鬼モード）', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000 },
+      { fromGame: 300, expectedYen: 200 },
+      { fromGame: 400, expectedYen: 800 },
+      { fromGame: 500, expectedYen: 1500 },
+      { fromGame: 700, expectedYen: 3500 },
+      { fromGame: 900, expectedYen: 6000 },
+    ],
+    resetInfo: 'リセット時は周期4周期に短縮、1周期目222ptで鬼モード',
+    notes: [
+      '天井は1000G/周期6周期',
+      'リセット時は1周期目の鬼モードが狙い目',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

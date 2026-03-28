@@ -149,6 +149,65 @@ const config: MachineConfig = {
       hints.push('AT終了画面を確認してください（まどか&いろは=設定6濃厚）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.6, 98.9, 102.0, 106.0, 110.4, 114.9],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_point', label: 'ポイント数を把握', category: '通常時' },
+    { id: 'ck_evenzone', label: '偶数百ptゾーンを意識', category: '通常時' },
+    { id: 'ck_weakcherry', label: '弱チェリー回数をカウント', category: '通常時' },
+    { id: 'ck_suikacz', label: 'スイカCZ当選を確認', category: '通常時' },
+    { id: 'ck_endscreen', label: 'AT終了画面を確認', category: 'AT終了時' },
+    { id: 'ck_ending', label: 'エンディング演出を確認', category: 'AT中' },
+    { id: 'ck_highmode', label: '高確頻度を確認', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      '弱チェリー確率に設定差あり',
+      'スイカ成立時のCZ当選率で設定推測',
+      'AT終了画面で設定示唆',
+      'エンディング中サブ液晶で設定示唆',
+    ],
+    morningCheck: [
+      'リセット時は天井600-699ptに短縮',
+      '高確移行が優遇される',
+      '0Gから期待値プラス',
+    ],
+    quitTiming: [
+      'AT後1G消化で即やめ',
+      '偶数百ptゾーン直前なら回す',
+      '高確中はCZ当選まで続行',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 633,
+    ceilingBenefit: '950pt（約633G）到達でAT確定（リセット600-699pt=約400-466G）',
+    zones: [
+      { start: 133, end: 200, label: '200-299pt偶数ゾーン', strength: 'warm' as const },
+      { start: 267, end: 333, label: '400-499pt偶数ゾーン', strength: 'hot' as const },
+      { start: 400, end: 466, label: '600-699pt偶数/リセット天井', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -800 },
+      { fromGame: 150, expectedYen: 200 },
+      { fromGame: 250, expectedYen: 1000 },
+      { fromGame: 350, expectedYen: 2000 },
+      { fromGame: 450, expectedYen: 3500 },
+    ],
+    resetInfo: 'リセット時は天井600-699pt（約400-466G）に短縮',
+    notes: [
+      '天井はポイント制（950pt=約633G）',
+      '偶数百ptゾーンでCZ当選率UP',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

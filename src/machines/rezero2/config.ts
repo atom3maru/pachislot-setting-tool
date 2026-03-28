@@ -123,6 +123,66 @@ const config: MachineConfig = {
       hints.push('朝一の菜月家時計を確認してください（6:06=設定6濃厚）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.6, 98.8, 100.7, 105.2, 110.5, 114.9],
+  baseCoins: 33,
+
+  checklist: [
+    { id: 'ck_at_count', label: 'AT初当たりカウント', category: '通常時' },
+    { id: 'ck_200pt', label: '200ptゾーン当選率', category: '通常時' },
+    { id: 'ck_clock', label: '菜月家時計', category: '朝一' },
+    { id: 'ck_endscreen', label: 'AT終了画面', category: 'AT終了時' },
+    { id: 'ck_lamp', label: '引き戻しランプ確認', category: 'AT終了時' },
+    { id: 'ck_rush', label: '超強欲RUSH突入率', category: 'AT中' },
+    { id: 'ck_100pt', label: '100ptゾーン当選', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT初当たり確率に設定差大',
+      '菜月家時計6:06=設定6濃厚',
+      '100ptゾーンAT当選率に設定差',
+      'AT終了画面で設定示唆',
+    ],
+    morningCheck: [
+      'リセット台は100Gから期待値+2000円',
+      '菜月家時計を必ずチェック',
+      '2回目以降の初当たりからカウント推奨',
+    ],
+    quitTiming: [
+      'AT終了後32G引き戻し確認（上部ランプ明滅中は続行）',
+      'ランプ消灯後やめ',
+      '即やめ厳禁（引き戻し確認必須）',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 930,
+    ceilingBenefit: '天井1400pt（約930G）/リセット1000pt（200/400/600/800/1000pt振り分け）/G数天井1300GでロングフリーズED',
+    zones: [
+      { start: 100, end: 200, label: 'AT25%（200pt）', strength: 'warm' as const },
+      { start: 200, end: 300, label: 'AT25%+リセット優遇（400pt）', strength: 'hot' as const },
+      { start: 350, end: 450, label: 'AT25%（600pt）', strength: 'hot' as const },
+      { start: 500, end: 600, label: 'AT25%（800pt）', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000 },
+      { fromGame: 200, expectedYen: 200 },
+      { fromGame: 280, expectedYen: 500 },
+      { fromGame: 400, expectedYen: 1500 },
+      { fromGame: 600, expectedYen: 3000 },
+      { fromGame: 800, expectedYen: 6000, note: '天井間近' },
+    ],
+    resetInfo: 'リセット台は100Gから期待値+2000円（1000pt天井短縮）',
+    notes: [
+      '天井はpt管理（約1.5G=1pt）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

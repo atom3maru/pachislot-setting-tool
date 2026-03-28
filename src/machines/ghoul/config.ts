@@ -251,6 +251,65 @@ const config: MachineConfig = {
       hints.push('エンディングカードを確認してください（虹=設定6濃厚）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.5, 99.0, 101.6, 105.6, 110.3, 114.9],
+  baseCoins: 31,
+
+  checklist: [
+    { id: 'ck_at_end', label: 'AT終了画面', category: 'AT終了時' },
+    { id: 'ck_superhigh', label: '超高確保証G数', category: 'AT中' },
+    { id: 'ck_cherry_cz', label: '弱チェリーCZ当選', category: '通常時' },
+    { id: 'ck_pullback', label: '引き戻し回数', category: 'AT終了後' },
+    { id: 'ck_invite', label: '招待状テキスト', category: '通常時' },
+    { id: 'ck_cz_rate', label: 'CZ成功率', category: 'CZ中' },
+    { id: 'ck_medal', label: '獲得枚数表示', category: 'AT中' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT終了画面（全員集合=設定6）',
+      '超高確保証G数',
+      '弱チェリーCZ当選率',
+      '引き戻し率',
+    ],
+    morningCheck: [
+      'リセットCZ天井200G活用',
+      '150G以内当選率66%',
+      'モード有利移行',
+    ],
+    quitTiming: [
+      'AT終了後3-5G引き戻し確認',
+      'CZ失敗後次周期検討',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1200,
+    ceilingBenefit: '1200G到達でAT確定（CZ天井600G、リセット時CZ200G）',
+    zones: [
+      { start: 0, end: 200, label: 'リセット後CZ天井', strength: 'hot' },
+      { start: 550, end: 600, label: 'CZ天井間近', strength: 'warm' },
+      { start: 1100, end: 1200, label: 'AT天井間近', strength: 'hot' },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -500 },
+      { fromGame: 150, expectedYen: 200, note: 'リセット後CZ天井狙い' },
+      { fromGame: 250, expectedYen: 1000 },
+      { fromGame: 400, expectedYen: 2000 },
+      { fromGame: 600, expectedYen: 3500 },
+      { fromGame: 800, expectedYen: 5000 },
+      { fromGame: 1000, expectedYen: 8000, note: '天井間近・超期待値' },
+    ],
+    resetInfo: 'リセット時はCZ天井200Gに短縮',
+    notes: [
+      'AT間天井1200G・CZ天井600Gの二重天井',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

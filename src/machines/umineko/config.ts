@@ -161,6 +161,55 @@ const config: MachineConfig = {
       hints.push('ボーナス終了画面を確認してください（ハロウィン=設定4以上確定）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [98.4, 99.6, 101.2, 103.4, 104.7, 105.5],
+  baseCoins: 34,
+
+  checklist: [
+    { id: 'ck_reg_bg', label: 'REGキャラ背景色', category: 'ボーナス中' },
+    { id: 'ck_bb_end', label: 'BB終了画面', category: 'ボーナス終了時' },
+    { id: 'ck_logo', label: 'ロゴ発光', category: '通常時' },
+    { id: 'ck_vita', label: 'ビタ押し成功率管理', category: 'ボーナス中' },
+    { id: 'ck_blue7', label: '青7斜め揃い', category: 'ボーナス中' },
+    { id: 'ck_superpar', label: '超パー演出', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'REG中キャラ背景色が最重要（銀=設定2以上、金=設定4以上）',
+      'ステージチェンジロゴ発光',
+      'RB中青7斜め揃い',
+    ],
+    morningCheck: [
+      '時計0時0分確認',
+      'ステージチェンジ発光パターン確認',
+    ],
+    quitTiming: [
+      'CZ終了後',
+      '魔女ポイントMAX後のART終了後',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 200,
+    ceilingBenefit: '200G（CZ間固定周期）到達で運命分岐モード突入',
+    zones: [],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -200 },
+      { fromGame: 100, expectedYen: 200 },
+      { fromGame: 150, expectedYen: 500, note: '天井間近' },
+    ],
+    resetInfo: '朝一状態（時計0時0分表示）',
+    notes: [
+      '固定200G周期のためゾーンはなし',
+      '天井が浅いため期待値はシンプル',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

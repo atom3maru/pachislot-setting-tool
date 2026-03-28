@@ -157,6 +157,62 @@ const config: MachineConfig = {
       hints.push('ケロットトロフィーを確認してください（虹=設定6確定）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.9, 98.9, 104.5, 110.2, 114.9],
+  baseCoins: 32,
+
+  checklist: [
+    { id: 'ck_helmet', label: 'ヘルメット種類を確認', category: 'AT終了時' },
+    { id: 'ck_side', label: 'サイド液晶表示を確認', category: 'AT終了時' },
+    { id: 'ck_cycle', label: '周期数・スルー回数を記録', category: '通常時' },
+    { id: 'ck_charge', label: 'チャージ間G数を記録', category: '通常時' },
+    { id: 'ck_hit', label: '初当たりを記録', category: '通常時' },
+    { id: 'ck_vstock', label: 'Vストックを確認', category: 'AT中' },
+    { id: 'ck_gakkun', label: 'リセットガックン判別', category: '朝一' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT終了画面ヘルメットで設定示唆',
+      'サイド液晶表示で設定示唆',
+      'AT初当たり確率に設定差あり',
+      '周期当選率で設定推測',
+    ],
+    morningCheck: [
+      'リセットで天井495Gに短縮',
+      'ガックン判別でリセット確認',
+    ],
+    quitTiming: [
+      'AT終了後ヘルメット確認',
+      'サイド液晶確認',
+      'Vストック保持なら続行',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 795,
+    ceilingBenefit: '795G天井でAT確定（リセット495G）、5スルー6回目AT確定',
+    zones: [
+      { start: 60, end: 81, label: 'チャージ間81G天井', strength: 'warm' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1000 },
+      { fromGame: 250, expectedYen: 500 },
+      { fromGame: 350, expectedYen: 1000 },
+      { fromGame: 500, expectedYen: 2500 },
+      { fromGame: 600, expectedYen: 4000 },
+    ],
+    resetInfo: 'リセット時は天井495Gに短縮',
+    notes: [
+      '天井は通常時795G（リセット495G）',
+      '周期5スルー6回目はAT確定',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

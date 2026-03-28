@@ -248,6 +248,40 @@ const config: MachineConfig = {
 
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.0, 99.0, 101.0, 104.0, 108.0],
+  baseCoins: 37,
+
+  checklist: [
+    { id: 'ck_big', label: 'BIG確率カウント', category: '通常時' },
+    { id: 'ck_reg', label: 'REG確率カウント', category: '通常時' },
+    { id: 'ck_side_lamp', label: 'サイドランプ色', category: 'ボーナス後' },
+    { id: 'ck_top_lamp', label: 'トップランプ色', category: 'ボーナス後' },
+    { id: 'ck_bell', label: 'ベル出現率', category: '通常時' },
+    { id: 'ck_suika', label: 'スイカ確率', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'BIG・REG合算確率管理（1/172以上で設定3以上目安）',
+      'サイドランプ色',
+      'トップランプ色',
+      'ベル確率',
+    ],
+    morningCheck: [
+      '序盤ボーナス確率とREG比率チェック',
+      'サイドランプ色傾向確認',
+    ],
+    quitTiming: [
+      'ボーナス不成立時いつでもOK',
+      '投資上限決めて立ち回り',
+      'ランプ示唆悪ければ早め見切り',
+    ],
+  },
 };
 
 export default config;

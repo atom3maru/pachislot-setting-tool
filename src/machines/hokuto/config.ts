@@ -148,6 +148,66 @@ const config: MachineConfig = {
     if (input.tengeki_hit == null) hints.push('天撃の成功率もチェックしましょう（設定6=60.8%）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.6, 98.4, 106.2, 111.1, 114.9],
+  settingLabels: ['設定1', '設定2', '設定4', '設定5', '設定6'],
+  baseCoins: 32,
+
+  checklist: [
+    { id: 'ck_abeshi', label: 'あべし数管理', category: '通常時' },
+    { id: 'ck_lamp100', label: '100Gランプ色', category: '通常時' },
+    { id: 'ck_trophy', label: 'トロフィー', category: 'AT終了時' },
+    { id: 'ck_tengeki', label: '天撃CZ成功失敗', category: 'CZ中' },
+    { id: 'ck_ui_red', label: 'UI赤表示', category: '通常時' },
+    { id: 'ck_mode', label: 'モード推測', category: '通常時' },
+    { id: 'ck_denshou', label: '伝承ショート', category: 'AT中' },
+  ],
+
+  guide: {
+    settingHunt: [
+      '100Gランプ色',
+      'サミートロフィー',
+      '天撃CZ成功率',
+      'モード移行率',
+    ],
+    morningCheck: [
+      'リセットで天井1280短縮',
+      '高確50%スタート',
+      '193-256ゾーン確認',
+    ],
+    quitTiming: [
+      'AT後モード示唆30G確認',
+      '差枚750以上で1G確認',
+      '地獄モード示唆時',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1536,
+    ceilingBenefit: '1536あべし到達でAT闘神演舞（リセット時1280あべし）',
+    zones: [
+      { start: 193, end: 256, label: '全モード共通高期待度', strength: 'hot' },
+      { start: 300, end: 300, label: '短縮抽選', strength: 'warm' },
+      { start: 777, end: 777, label: '短縮抽選', strength: 'warm' },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1500 },
+      { fromGame: 200, expectedYen: -800 },
+      { fromGame: 400, expectedYen: 200 },
+      { fromGame: 600, expectedYen: 1500 },
+      { fromGame: 700, expectedYen: 2500 },
+      { fromGame: 800, expectedYen: 4000 },
+    ],
+    resetInfo: 'リセット時は天井1280あべしに短縮',
+    notes: [
+      '天井はあべし数で管理（通常時のゲーム数）',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;

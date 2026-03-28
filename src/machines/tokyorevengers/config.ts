@@ -161,6 +161,64 @@ const config: MachineConfig = {
       hints.push('終了画面の枠色を確認してください（紫枠=設定5以上、金枠=設定6濃厚）');
     return hints;
   },
+
+  // ========================================
+  // 拡張機能データ
+  // ========================================
+
+  payoutRates: [97.8, 98.8, 101.4, 106.3, 111.2, 114.9],
+  baseCoins: 32,
+
+  checklist: [
+    { id: 'ck_sublcd', label: 'サブ液晶セリフを確認', category: 'AT終了後' },
+    { id: 'ck_noise', label: '液晶ノイズを確認', category: '通常時' },
+    { id: 'ck_at_start', label: 'AT開始画面を確認', category: 'AT開始時' },
+    { id: 'ck_lamp', label: 'トップランプ色を確認', category: 'エンディング中' },
+    { id: 'ck_cycle', label: '周期数を記録', category: '通常時' },
+    { id: 'ck_through', label: 'スルー回数を記録', category: '通常時' },
+    { id: 'ck_mode', label: 'モード示唆を確認', category: '通常時' },
+  ],
+
+  guide: {
+    settingHunt: [
+      'AT開始画面で設定示唆',
+      'エンディング中トップランプ色で設定示唆',
+      '決戦前夜リベンジ発生率に設定差あり',
+      '東卍チャンススルー時リベンジで設定示唆',
+    ],
+    morningCheck: [
+      'リセット時1周期目200pt短縮',
+      'サブ液晶タッチセリフ確認',
+      'モード移行優遇',
+    ],
+    quitTiming: [
+      'AT後サブ液晶確認即やめ',
+      '液晶ノイズ時は消滅まで続行',
+      'モードB以上はAT当選まで続行',
+    ],
+  },
+
+  hyena: {
+    ceilingGame: 1190,
+    ceilingBenefit: '1190G到達でAT確定（リセット1周期目200pt短縮/モード移行優遇）',
+    zones: [
+      { start: 0, end: 130, label: '1周期目（リセット時200pt短縮）', strength: 'hot' as const },
+    ],
+    expectedValues: [
+      { fromGame: 0, expectedYen: -1500 },
+      { fromGame: 250, expectedYen: -300 },
+      { fromGame: 450, expectedYen: 1000 },
+      { fromGame: 600, expectedYen: 2000 },
+      { fromGame: 800, expectedYen: 4000 },
+      { fromGame: 1000, expectedYen: 7000 },
+    ],
+    resetInfo: 'リセット時は1周期目200pt短縮、モード移行優遇',
+    notes: [
+      '天井は通常時1190G',
+      'リセット時は1周期目短縮が狙い目',
+      '期待値は設定1・等価換金で計算',
+    ],
+  },
 };
 
 export default config;
