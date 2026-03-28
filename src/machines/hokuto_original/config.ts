@@ -198,6 +198,25 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'サミートロフィー 虹', timing: 'BB終了時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー キリン柄', timing: 'BB終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 金', timing: 'BB終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'バトル', name: 'シンバトル', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'バトル', name: 'サウザーバトル', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'バトル', name: 'ジャギバトル', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'ボイス', name: 'BB終了時ボイス ユリア', timing: 'BB終了時', settingHint: '設定5以上期待大', importance: 'strong' },
+    { keyword: 'ボイス', name: 'BB終了時ボイス ケンシロウ', timing: 'BB終了時', settingHint: '設定4以上期待大', importance: 'strong' },
+    { keyword: 'ボイス', name: 'BB終了時ボイス アミバ', timing: 'BB終了時', settingHint: '高設定示唆（強）', importance: 'weak' },
+    { keyword: 'ボイス', name: 'BB終了時ボイス ジャギ', timing: 'BB終了時', settingHint: '高設定示唆（中）', importance: 'weak' },
+    { keyword: 'ボイス', name: 'BB終了時ボイス サウザー', timing: 'BB終了時', settingHint: '高設定示唆（弱）', importance: 'weak' },
+    { keyword: 'ボイス', name: 'BB終了時ボイス シン', timing: 'BB終了時', settingHint: '高設定示唆（弱）', importance: 'weak' },
+    { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/383.4 → 設定6: 1/235.1（約1.63倍差）', importance: 'weak' },
+    { keyword: 'リーチ目', name: 'リーチ目確率', timing: '通常時', settingHint: '設定1: 1/16384 → 設定6: 1/8192（2倍差）', importance: 'weak' },
+    { keyword: 'スイカ', name: '弱スイカ確率', timing: '通常時', settingHint: '設定1: 1/109.0 → 設定6: 1/98.3', importance: 'weak' },
+    { keyword: '初代画面', name: '初代画面出現', timing: 'BB中/復活演出', settingHint: '設定5以上確定', importance: 'confirmed' },
+  ],
 };
 
 export default config;

@@ -331,6 +331,25 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'サミートロフィー 虹', timing: 'AT終了時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー キリン柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銅', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'ST終了画面 水着', timing: 'ST終了時', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'ST終了画面 全員集合', timing: 'ST終了時', settingHint: '高設定示唆', importance: 'strong' },
+    { keyword: '終了画面', name: 'ST終了画面 デフォルト', timing: 'ST終了時', settingHint: '設定示唆なし', importance: 'weak' },
+    { keyword: 'ボイス', name: '逆押しカットインボイス 景之', timing: 'AT中', settingHint: '高設定示唆', importance: 'strong' },
+    { keyword: 'ボイス', name: '逆押しカットインボイス 未発生', timing: 'AT中', settingHint: '設定5以上示唆', importance: 'strong' },
+    { keyword: 'おみくじ', name: 'サブ液晶おみくじ 大大吉', timing: '随時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'おみくじ', name: 'サブ液晶おみくじ 大吉', timing: '随時', settingHint: '高設定示唆', importance: 'strong' },
+    { keyword: 'ベル', name: '下段ベル確率', timing: '通常時', settingHint: '設定1: 1/121.1 → 設定6: 1/99.1', importance: 'weak' },
+    { keyword: '周期', name: '3周期目ボーナス当選', timing: '通常時', settingHint: '設定1: 12.5% → 設定6: 25.0%', importance: 'weak' },
+    { keyword: '枚数', name: '特定枚数表示 456枚', timing: 'AT中', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '枚数', name: '特定枚数表示 666枚', timing: 'AT中', settingHint: '設定6確定', importance: 'confirmed' },
+  ],
 };
 
 export default config;

@@ -223,6 +223,27 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で概算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'パーセント', name: 'CZ中66%表示', timing: 'CZ中', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'パーセント', name: 'CZ中55%表示', timing: 'CZ中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'パーセント', name: 'CZ中44%表示', timing: 'CZ中', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数666枚表示', timing: 'AT中', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数555枚表示', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数444枚/456枚表示', timing: 'AT中', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: '終了画面 金枠（オルステッド）', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: '終了画面 銀枠（絆）', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: '終了画面 銅枠（デッドエンド）', timing: 'AT終了時', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: '開始画面', name: 'ATセット開始画面 オルステッド', timing: 'ATセット開始時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '開始画面', name: 'ATセット開始画面 前世の男', timing: 'ATセット開始時', settingHint: '設定5以上濃厚', importance: 'strong' },
+    { keyword: '開始画面', name: 'ATセット開始画面 ヒトガミ', timing: 'ATセット開始時', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: 'ストーリー', name: '魔術ボーナス中第21話（金枠）', timing: 'ボーナス中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'ストーリー', name: '魔術ボーナス中第8話（銀枠）', timing: 'ボーナス中', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: 'ミニキャラ', name: 'ED中ミニキャラ オルステッド', timing: 'ED中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'ミニキャラ', name: 'ED中ミニキャラ 前世の男', timing: 'ED中', settingHint: '設定5以上濃厚', importance: 'strong' },
+    { keyword: 'AT', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/416 → 設定6: 1/292（約1.42倍差）', importance: 'weak' },
+    { keyword: 'TP2', name: 'TP2突入率', timing: '通常時', settingHint: '設定1: 1/2281 → 設定6: 1/1324（約1.72倍差）', importance: 'weak' },
+  ],
 };
 
 export default config;

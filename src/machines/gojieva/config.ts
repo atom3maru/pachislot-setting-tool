@@ -227,6 +227,25 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'AT初当たり', name: 'AT初当たり確率', timing: '終日カウント', settingHint: '設定1: 1/581.8 → 設定6: 1/407.3（約1.43倍差）', importance: 'strong' },
+    { keyword: 'ボーナス合算', name: 'ボーナス合算確率', timing: '終日カウント', settingHint: '設定1: 1/299.9 → 設定6: 1/244.8', importance: 'strong' },
+    { keyword: '殲滅作戦', name: '殲滅作戦勝利率', timing: '殲滅作戦突入時', settingHint: '設定1: 49.3% → 設定6: 65.3%。設定6のみ突出。最重要', importance: 'strong' },
+    { keyword: 'スイカCZ', name: 'スイカからCZ当選率', timing: 'スイカ出現時', settingHint: '設定1: 20.3% → 設定6: 30.5%（約1.5倍差）', importance: 'strong' },
+    { keyword: 'モスラ', name: 'AT終了画面（モスラ）', timing: 'AT終了時PUSH', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: 'エヴァ&ゴジラAT', name: 'AT終了画面（エヴァ&ゴジラ）', timing: 'AT終了時PUSH', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: 'カヲルAT', name: 'AT終了画面（カヲル）', timing: 'AT終了時PUSH', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'レイ月背景', name: 'ボーナス終了画面（レイ月背景）', timing: 'ボーナス終了時', settingHint: '設定2以上濃厚', importance: 'confirmed' },
+    { keyword: 'エヴァ&ゴジラBN', name: 'ボーナス終了画面（エヴァ&ゴジラ）', timing: 'ボーナス終了時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: 'レイ', name: 'ボーナス終了画面（レイ）', timing: 'ボーナス終了時', settingHint: '偶数設定示唆', importance: 'weak' },
+    { keyword: 'アスカ', name: 'ボーナス終了画面（アスカ）', timing: 'ボーナス終了時', settingHint: '高設定示唆（強）', importance: 'strong' },
+    { keyword: '222枚', name: '特殊獲得枚数（222枚超）', timing: 'AT中', settingHint: '設定2以上', importance: 'confirmed' },
+    { keyword: '456枚', name: '特殊獲得枚数（456枚超）', timing: 'AT中', settingHint: '設定4以上', importance: 'confirmed' },
+    { keyword: '666枚', name: '特殊獲得枚数（666枚超）', timing: 'AT中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '加持ボイス', name: 'ED中ボイス（加持）', timing: 'エンディング中', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: 'カヲルボイス', name: 'ED中ボイス（カヲル）', timing: 'エンディング中', settingHint: '設定6濃厚', importance: 'confirmed' },
+  ],
 };
 
 export default config;

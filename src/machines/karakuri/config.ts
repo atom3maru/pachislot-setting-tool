@@ -206,6 +206,25 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'AT初当たり', name: 'AT初当たり確率', timing: '終日カウント', settingHint: '設定1: 1/564 → 設定6: 1/447（約1.26倍差）', importance: 'strong' },
+    { keyword: 'CZ合算', name: 'CZ合算確率', timing: '終日カウント', settingHint: '設定1: 1/333 → 設定6: 1/275', importance: 'strong' },
+    { keyword: '幕間チャンス', name: '幕間チャンス当選率', timing: 'からくりレア役出現時', settingHint: '設定1: 3.3% → 設定6: 10.0%（約3倍差）。最重要要素', importance: 'strong' },
+    { keyword: '阿紫花&ギイ', name: 'AT終了画面（阿紫花&ギイ）', timing: 'AT終了時PUSH', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: 'しろがね', name: 'AT終了画面（しろがね&勝&鳴海）', timing: 'AT終了時PUSH', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'フランシーヌ', name: 'AT終了画面（フランシーヌ）', timing: 'AT終了時PUSH', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '敵幹部', name: 'AT終了画面（敵幹部5人）', timing: 'AT終了時PUSH', settingHint: '奇数＋高設定示唆', importance: 'weak' },
+    { keyword: 'ヒロイン', name: 'AT終了画面（ヒロイン5人）', timing: 'AT終了時PUSH', settingHint: '偶数＋高設定示唆', importance: 'weak' },
+    { keyword: 'ランプ紫', name: 'エンディング中ランプ（紫）', timing: 'ED中レア役成立時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'ランプ虹', name: 'エンディング中ランプ（虹）', timing: 'ED中レア役成立時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'ランプ青', name: 'エンディング中ランプ（青）', timing: 'ED中レア役成立時', settingHint: '奇数設定示唆', importance: 'weak' },
+    { keyword: 'ランプ黄', name: 'エンディング中ランプ（黄）', timing: 'ED中レア役成立時', settingHint: '偶数設定示唆', importance: 'weak' },
+    { keyword: 'ランプ緑', name: 'エンディング中ランプ（緑）', timing: 'ED中レア役成立時', settingHint: '高設定示唆', importance: 'strong' },
+    { keyword: '踊れオリンピア+4', name: '踊れ！オリンピア上乗せ+4', timing: '踊れオリンピア中', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '踊れオリンピア+6', name: '踊れ！オリンピア上乗せ+6', timing: '踊れオリンピア中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '踊れオリンピア+20', name: '踊れ！オリンピア上乗せ+20', timing: '踊れオリンピア中', settingHint: '設定2以上示唆', importance: 'strong' },
+  ],
 };
 
 export default config;

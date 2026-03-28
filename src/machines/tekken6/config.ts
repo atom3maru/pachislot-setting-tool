@@ -194,6 +194,21 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 虹', timing: 'BIG/CZ/ED終了時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー ケロット柄', timing: 'BIG/CZ/ED終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 金', timing: 'BIG/CZ/ED終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 銀', timing: 'BIG/CZ/ED終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 銅', timing: 'BIG/CZ/ED終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'BIG終了画面 赤背景（一八/平八/一美）', timing: '鉄拳チャンス経由BIG終了時', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: '直撃', name: 'AT直撃確率', timing: '通常時', settingHint: '設定1: 1/12580 → 設定6: 1/3565（約3.5倍差）', importance: 'weak' },
+    { keyword: 'エピソード', name: 'エピソードBIG昇格率', timing: '赤7BIG開始時', settingHint: '設定1: 2% → 設定6: 13%（6.5倍差）', importance: 'weak' },
+    { keyword: '引き戻し', name: 'AT引き戻し率', timing: 'AT終了時', settingHint: '設定1: 10.2% → 設定6: 17.2%', importance: 'weak' },
+    { keyword: 'AT', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/497.0 → 設定6: 1/358.5（約1.39倍差）', importance: 'weak' },
+    { keyword: 'ボーナス', name: 'ボーナス初当たり確率', timing: '通常時', settingHint: '設定1: 1/264.7 → 設定6: 1/218.5', importance: 'weak' },
+    { keyword: 'スルー', name: 'スルー天井', timing: '通常時', settingHint: '2スルーで天井（リセット時も2スルー）', importance: 'weak' },
+  ],
 };
 
 export default config;

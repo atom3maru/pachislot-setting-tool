@@ -114,6 +114,15 @@ export interface EnhancedJudgment {
   stopReason?: string;
 }
 
+/** 演出辞典エントリ */
+export interface DictionaryEntry {
+  keyword: string;          // 検索用キーワード（「トロフィー」「終了画面」等）
+  name: string;             // 演出名（「サミートロフィー 虹」）
+  timing: string;           // 発生タイミング（「AT終了時」「ボーナス中」等）
+  settingHint: string;      // 示唆内容（「設定6確定」）
+  importance: 'confirmed' | 'strong' | 'weak';  // 重要度
+}
+
 /** 機種定義（1機種分のすべての情報） */
 export interface MachineConfig {
   id: string;
@@ -135,6 +144,7 @@ export interface MachineConfig {
   checklist?: ChecklistItem[];    // 打ちながらチェックリスト
   guide?: MachineGuide;           // 攻め方ガイド
   hyena?: HyenaInfo;              // ハイエナ情報（天井・ゾーン・期待値）
+  dictionary?: DictionaryEntry[];  // 演出辞典（設定示唆演出一覧）
 }
 
 /** 機種一覧表示用 */

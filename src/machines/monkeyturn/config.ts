@@ -218,6 +218,23 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 虹', timing: 'AT終了時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー ケロット柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 銅', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 666 OVER', timing: 'AT中', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 803 OVER', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 456 OVER', timing: 'AT中', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '直撃', name: '弱レア役AT直撃', timing: '通常時', settingHint: '設定4以上確定（設定4: 0.4%、設定6: 3.1%）', importance: 'confirmed' },
+    { keyword: '青島', name: '青島SG 青島&波多野', timing: 'ラウンド開始時', settingHint: '設定5以上確定+継続確定', importance: 'confirmed' },
+    { keyword: 'メダル', name: 'SGメダル 黒', timing: 'AT終了時', settingHint: '高設定示唆（強）', importance: 'strong' },
+    { keyword: 'メダル', name: 'SGメダル 黄', timing: 'AT終了時', settingHint: '高設定示唆（弱）', importance: 'weak' },
+    { keyword: 'メダル', name: 'SGメダル 青', timing: 'AT終了時', settingHint: '偶数設定示唆', importance: 'weak' },
+    { keyword: '5枚役', name: '5枚役確率', timing: '通常時', settingHint: '設定1: 1/38.15 → 設定6: 1/22.53（約1.69倍差）', importance: 'strong' },
+    { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/299.8 → 設定6: 1/222.9（約1.35倍差）', importance: 'weak' },
+  ],
 };
 
 export default config;

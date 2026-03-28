@@ -208,6 +208,24 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 虹', timing: 'ボーナス終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー ケロット柄', timing: 'ボーナス終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 金', timing: 'ボーナス終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 銀', timing: 'ボーナス終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 銅', timing: 'ボーナス終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: 'カード', name: 'REGキャラカード リオ&リナ&ミント', timing: 'REG終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'カード', name: 'REGキャラカード リオ&リナ（ジョーカー）', timing: 'REG終了時', settingHint: '設定5以上濃厚', importance: 'strong' },
+    { keyword: 'カード', name: 'REGキャラカード リナ', timing: 'REG終了時', settingHint: '高設定期待度UP（強）', importance: 'weak' },
+    { keyword: 'ダイス', name: 'ダイス6ゾロ目', timing: '150G/450G/750G時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'ダイス', name: 'ダイス5ゾロ目', timing: '150G/450G/750G時', settingHint: '設定5以上濃厚', importance: 'strong' },
+    { keyword: 'ダイス', name: 'ダイス4ゾロ目', timing: '150G/450G/750G時', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: 'スイカ', name: '斜めスイカ確率', timing: '通常時', settingHint: '設定1: 1/99.9 → 設定6: 1/83.9（約1.19倍差）', importance: 'weak' },
+    { keyword: '直撃', name: 'スイカST直撃率', timing: '通常時', settingHint: '設定1: 0.4% → 設定6: 1.6%（4倍差）', importance: 'weak' },
+    { keyword: 'チャンス目', name: 'チャンス目→高確移行率', timing: '通常時', settingHint: '設定1: 40.1% → 設定6: 59.5%', importance: 'weak' },
+    { keyword: '初当たり', name: '初当たり確率', timing: '通常時', settingHint: '設定1: 1/241.7 → 設定6: 1/181.3', importance: 'weak' },
+  ],
 };
 
 export default config;

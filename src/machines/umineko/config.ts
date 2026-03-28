@@ -216,6 +216,27 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: '終了画面', name: 'ボーナス終了画面 ベアト&GM戦人(2)', timing: 'ボーナス終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'ボーナス終了画面 ベアト&GM戦人(1)', timing: 'ボーナス終了時', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'ボーナス終了画面 ハロウィン', timing: 'ボーナス終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'ボーナス終了画面 ベアト&戦人(2)', timing: 'ボーナス終了時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'ボーナス終了画面 戦人一家', timing: 'ボーナス終了時', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'ボーナス終了画面 ベアト&戦人(1)', timing: 'ボーナス終了時', settingHint: '偶数設定示唆', importance: 'weak' },
+    { keyword: '超パー', name: '超パー演出 66%表示', timing: '通常時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '超パー', name: '超パー演出 55%表示', timing: '通常時', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: '超パー', name: '超パー演出 44%表示', timing: '通常時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '超パー', name: '超パー演出 33%表示', timing: '通常時', settingHint: '設定3以上濃厚', importance: 'confirmed' },
+    { keyword: '超パー', name: '超パー演出 88%表示', timing: '通常時', settingHint: '設定2以上+BB濃厚', importance: 'strong' },
+    { keyword: '超パー', name: '超パー演出 22%表示', timing: '通常時', settingHint: '設定2以上示唆', importance: 'weak' },
+    { keyword: '背景', name: 'RB中キャラ紹介 全金背景', timing: 'RB中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '背景', name: 'RB中キャラ紹介 全銀背景', timing: 'RB中', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: 'ロゴ', name: 'ロゴ発光・大', timing: 'ステージチェンジ時', settingHint: '偶数設定で出現率UP', importance: 'weak' },
+    { keyword: 'ロゴ', name: 'ロゴ発光・小', timing: 'ステージチェンジ時', settingHint: '奇数設定で出現率UP', importance: 'weak' },
+    { keyword: 'ボーナス', name: 'ボーナス合算確率', timing: '通常時', settingHint: '設定1: 1/189.4 → 設定6: 1/167.6（約1.13倍差）', importance: 'weak' },
+    { keyword: '青7', name: 'REG中 青7揃い確率', timing: 'REG中', settingHint: '設定1: 1/117.0 → 設定6: 1/94.2', importance: 'weak' },
+  ],
 };
 
 export default config;

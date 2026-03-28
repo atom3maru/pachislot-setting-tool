@@ -194,6 +194,23 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: '終了画面', name: 'AT終了画面 温泉', timing: 'AT終了時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 レースクイーン', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 茶摘み', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 ショッピング', timing: 'AT終了時', settingHint: '高設定示唆（強）', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 サファリ', timing: 'AT終了時', settingHint: '高設定示唆（弱）', importance: 'weak' },
+    { keyword: '終了画面', name: 'AT終了画面 ハンバーグ', timing: 'AT終了時', settingHint: '偶数設定示唆', importance: 'weak' },
+    { keyword: 'キャラ', name: 'EDベルカウンター7 鋼鉄', timing: 'エンディング中', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'キャラ', name: 'EDベルカウンター7 操', timing: 'エンディング中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'キャラ', name: 'EDベルカウンター7 マチ子', timing: 'エンディング中', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '直撃', name: 'AT直撃確率', timing: '通常時', settingHint: '設定1: 1/6411 → 設定6: 1/2150（約2.98倍差）', importance: 'weak' },
+    { keyword: '青7', name: '青7BB当選率（天国以外）', timing: 'ボーナス当選時', settingHint: '設定1: 1.17% → 設定6: 7.81%（約6.7倍差）', importance: 'weak' },
+    { keyword: '確定対決', name: 'RB後確定対決当選率', timing: 'RB後特訓', settingHint: '設定1: 1.2% → 設定6: 15.6%（約13倍差）', importance: 'weak' },
+    { keyword: 'ベル', name: '共通ベル確率', timing: '通常時', settingHint: '設定1: 1/21.8 → 設定6: 1/20.6', importance: 'weak' },
+    { keyword: '初当たり', name: '初当たり合算確率', timing: '通常時', settingHint: '設定1: 1/259.5 → 設定6: 1/221.1', importance: 'weak' },
+  ],
 };
 
 export default config;

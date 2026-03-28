@@ -235,6 +235,29 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'エンタトロフィー 虹', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'エンタトロフィー 紅葉柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'エンタトロフィー 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'エンタトロフィー 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'エンタトロフィー 銅', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 デフォルメ集合', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 覚醒鬼武者', timing: 'AT終了時', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 幻魔集合', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 鬼武者WoS', timing: 'AT終了時', settingHint: '設定3以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 蒼鬼&茜', timing: 'AT終了時', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: '上乗せ', name: '特殊上乗せ +6G', timing: 'AT中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '上乗せ', name: '特殊上乗せ +5G', timing: 'AT中', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: '上乗せ', name: '特殊上乗せ +4G', timing: 'AT中', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 666枚OVER', timing: 'AT中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 555枚OVER', timing: 'AT中', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 456枚OVER', timing: 'AT中', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: 'ベル', name: '共通3枚ベル確率', timing: '通常時', settingHint: '設定1: 1/35.1 → 設定6: 1/26.7（約1.31倍差）', importance: 'strong' },
+    { keyword: '周期', name: '1周期目AT当選率', timing: '通常時', settingHint: '設定1: 25% → 設定6: 75%（3倍差）', importance: 'strong' },
+    { keyword: '鬼斬', name: '弱レア役→鬼斬チャージ当選率', timing: '通常時', settingHint: '設定1: 25% → 設定6: 44%', importance: 'weak' },
+    { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/379.7 → 設定6: 1/293.1（約1.30倍差）', importance: 'weak' },
+  ],
 };
 
 export default config;

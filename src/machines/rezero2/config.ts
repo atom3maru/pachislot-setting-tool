@@ -186,6 +186,22 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'AT初当たり', name: 'AT初当たり確率', timing: '終日カウント', settingHint: '設定1: 1/417.2 → 設定6: 1/305.4（約1.37倍差）', importance: 'strong' },
+    { keyword: '引き戻し', name: 'AT引き戻し率', timing: 'AT終了後32G間', settingHint: '設定1: 10.2% → 設定6: 20.0%（約2倍差）。最重要', importance: 'strong' },
+    { keyword: '露天風呂', name: 'AT終了画面（露天風呂）', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'お茶の時間', name: 'AT終了画面（お茶の時間）', timing: 'AT終了時', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: 'ラム&レム', name: 'AT終了画面（ラム&レム）', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: 'お風呂女性', name: 'AT終了画面（お風呂・女性）', timing: 'AT終了時', settingHint: '設定2以上濃厚', importance: 'confirmed' },
+    { keyword: 'お風呂男性', name: 'AT終了画面（お風呂・男性）', timing: 'AT終了時', settingHint: '高設定示唆', importance: 'weak' },
+    { keyword: '6時6分', name: '菜月家時計（6:06）', timing: '朝一・設定変更後', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '5時6分', name: '菜月家時計（5:06）', timing: '朝一・設定変更後', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: '4時56分', name: '菜月家時計（4:56）', timing: '朝一・設定変更後', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '3時過ぎ', name: '菜月家時計（3時過ぎ）', timing: '朝一・設定変更後', settingHint: '設定3以上濃厚', importance: 'confirmed' },
+    { keyword: '死に戻り', name: '死に戻り抽選', timing: 'AT終了後32G間', settingHint: 'ランプ明滅中は絶対にやめない。引き戻し率に設定差大', importance: 'strong' },
+    { keyword: '100ptゾーン', name: '100ptゾーンAT当選率', timing: '100pt到達時', settingHint: '設定1と6で約2.6倍差。高設定ほどゾーン当選率UP', importance: 'strong' },
+  ],
 };
 
 export default config;

@@ -224,6 +224,27 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: '終了画面', name: 'ボーナス終了画面 シンラ(死ノ圧)', timing: 'ボーナス終了時', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'ボーナス終了画面 ジョーカー', timing: 'ボーナス終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'ボーナス終了画面 黒野', timing: 'ボーナス終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'ボーナス終了画面 特殊キャラ', timing: 'ボーナス終了時', settingHint: '高設定示唆', importance: 'weak' },
+    { keyword: 'キャラ紹介', name: 'REG中キャラ紹介 シンラ(死ノ圧)', timing: 'REG中', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: 'キャラ紹介', name: 'REG中キャラ紹介 ジョーカー', timing: 'REG中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'キャラ紹介', name: 'REG中キャラ紹介 黒野', timing: 'REG中', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'ミニキャラ', name: 'エンディングミニキャラ ショウ', timing: 'エンディング中', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: 'ミニキャラ', name: 'エンディングミニキャラ 紅丸&ジョーカー', timing: 'エンディング中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'ミニキャラ', name: 'エンディングミニキャラ アイリス', timing: 'エンディング中', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'ミニキャラ', name: 'エンディングミニキャラ 119', timing: 'エンディング中', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: '枚数', name: '獲得枚数表示 666枚OVER', timing: 'AT中', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: '枚数', name: '獲得枚数表示 456枚OVER', timing: 'AT中', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: '枚数', name: '獲得枚数表示 246枚OVER', timing: 'AT中', settingHint: '偶数設定濃厚', importance: 'strong' },
+    { keyword: '枚数', name: '獲得枚数表示 119枚OVER', timing: 'AT中', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: '十字目', name: '十字目変換発生率', timing: 'ボーナス中', settingHint: '設定1: 42% → 設定6: 50%', importance: 'weak' },
+    { keyword: '初当たり', name: '炎炎ループ初当たり確率', timing: '通常時', settingHint: '設定1: 1/684 → 設定6: 1/486（約1.41倍差）', importance: 'weak' },
+    { keyword: '初当たり', name: 'ボーナス初当たり確率', timing: '通常時', settingHint: '設定1: 1/272 → 設定6: 1/227（約1.20倍差）', importance: 'weak' },
+  ],
 };
 
 export default config;

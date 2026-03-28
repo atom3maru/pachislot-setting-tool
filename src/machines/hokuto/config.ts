@@ -213,6 +213,26 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'サミートロフィー 虹', timing: 'AT終了時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー キリン柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銅', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: 'ランプ', name: '枠ランプ 金点灯', timing: '100G毎', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: 'ランプ', name: '枠ランプ 黄緑点滅', timing: '100G毎', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: 'ランプ', name: '枠ランプ 黄緑点灯', timing: '100G毎', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: 'ランプ', name: '枠ランプ 水色点滅', timing: '100G毎', settingHint: '高設定示唆（強）', importance: 'weak' },
+    { keyword: 'ランプ', name: '枠ランプ 水色点灯', timing: '100G毎', settingHint: '高設定示唆（弱）', importance: 'weak' },
+    { keyword: 'ランプ', name: '枠ランプ 白点灯', timing: '100G毎', settingHint: '設定2・4示唆', importance: 'weak' },
+    { keyword: 'ランプ', name: '枠ランプ 白点滅', timing: '100G毎', settingHint: '設定3・5示唆', importance: 'weak' },
+    { keyword: '天撃', name: '天撃CZ成功率', timing: 'CZ中', settingHint: '設定1: 50.0% → 設定6: 60.8%', importance: 'weak' },
+    { keyword: '天国', name: '天国モード移行率', timing: 'AT終了後', settingHint: '設定1: 6.8% → 設定6: 15.0%', importance: 'weak' },
+    { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/366 → 設定6: 1/273.1', importance: 'weak' },
+    { keyword: '天破', name: '天破の刻出現率', timing: '通常時', settingHint: '設定1: 1/100.2 → 設定6: 1/81.3', importance: 'weak' },
+    { keyword: 'リセット', name: '朝一256以内AT当選率', timing: '朝一', settingHint: '設定1: 25% → 設定6: 52%', importance: 'weak' },
+  ],
 };
 
 export default config;

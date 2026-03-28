@@ -192,6 +192,24 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'コイン', name: '藤丸コイン 虹', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'コイン', name: '藤丸コイン DANGER柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'コイン', name: '藤丸コイン 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'コイン', name: '藤丸コイン 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'コイン', name: '藤丸コイン 銅', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 全員集合+剣の乙女', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 お風呂', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 女神官&エルフ', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 牛飼い娘', timing: 'AT終了時', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 妖精弓手', timing: 'AT終了時', settingHint: '偶数設定濃厚', importance: 'weak' },
+    { keyword: '枚数', name: '獲得枚数 666枚OVER', timing: 'AT中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 52枚OVER', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 246枚OVER', timing: 'AT中', settingHint: '偶数設定濃厚', importance: 'strong' },
+    { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/541.6 → 設定6: 1/402.4（約1.35倍差）', importance: 'strong' },
+    { keyword: 'CZ', name: 'CZ確率', timing: '通常時', settingHint: '設定1: 1/239.3 → 設定6: 1/181.9（約1.32倍差）', importance: 'weak' },
+  ],
 };
 
 export default config;

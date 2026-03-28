@@ -207,6 +207,25 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: '終了画面', name: 'AT終了画面 金枠', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 銀枠', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 紫枠', timing: 'AT終了時', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 赤枠', timing: 'AT終了時', settingHint: '高設定示唆', importance: 'weak' },
+    { keyword: '終了画面', name: 'AT終了画面 青枠', timing: 'AT終了時', settingHint: '奇偶示唆', importance: 'weak' },
+    { keyword: '枚数', name: '獲得枚数表示 666枚OVER', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: '枚数', name: '獲得枚数表示 555枚OVER', timing: 'AT終了時', settingHint: '設定5以上濃厚', importance: 'strong' },
+    { keyword: '枚数', name: '獲得枚数表示 456枚OVER', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: 'ゾロ目', name: 'ゾロ目G数上乗せ +66G', timing: 'AT中', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: 'ゾロ目', name: 'ゾロ目G数上乗せ +44G', timing: 'AT中', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: 'ゾロ目', name: 'ゾロ目G数上乗せ +22G', timing: 'AT中', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: 'ハラキリ', name: 'ハラキリドライブ発生率', timing: 'AT中', settingHint: '設定1: 6% → 設定5/6: 28%（約4.7倍差）', importance: 'weak' },
+    { keyword: '直撃', name: 'BAR揃いAT直撃', timing: '通常時', settingHint: '設定1: 3% → 設定6: 7%', importance: 'weak' },
+    { keyword: 'マギウス', name: 'マギウスマーク 4個以上', timing: '通常時', settingHint: '天国滞在濃厚・高設定示唆', importance: 'weak' },
+    { keyword: 'サブモニター', name: 'サブモニター機体（有人タイプ）', timing: '通常時', settingHint: '偶数設定示唆', importance: 'weak' },
+    { keyword: 'サブモニター', name: 'サブモニター機体（無人タイプ）', timing: '通常時', settingHint: '奇数設定示唆', importance: 'weak' },
+  ],
 };
 
 export default config;

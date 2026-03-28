@@ -210,6 +210,25 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'AT初当たり', name: 'AT初当たり確率', timing: '終日カウント', settingHint: '設定1: 1/317.8 → 設定6: 1/235.3（約1.35倍差）', importance: 'strong' },
+    { keyword: 'CZ確率', name: 'CZ（GIRLS JUDGE）確率', timing: '終日カウント', settingHint: '設定1: 1/175.8 → 設定6: 1/137.5', importance: 'strong' },
+    { keyword: '上位CZ', name: '上位CZ（婚后光子）出現率', timing: 'CZ突入時', settingHint: '設定1: 2.3% → 設定6: 13.0%（約5.6倍差）。最重要', importance: 'strong' },
+    { keyword: '紫枠', name: 'AT終了画面（紫枠・寝起き美琴）', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '金枠', name: 'AT終了画面（金枠・美琴&操祈）', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: '虹枠', name: 'AT終了画面（虹枠・ウエディング）', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '赤枠D', name: 'AT終了画面（赤枠・大切な友達）', timing: 'AT終了時', settingHint: '設定2以上', importance: 'confirmed' },
+    { keyword: '赤枠婚后', name: 'AT終了画面（赤枠・婚后一派）', timing: 'AT終了時', settingHint: '設定3以上', importance: 'confirmed' },
+    { keyword: '藤丸コイン金', name: '藤丸コイン（金）', timing: 'AT中', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'DANGER柄', name: '藤丸コイン（DANGER柄）', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: '藤丸コイン虹', name: '藤丸コイン（虹）', timing: 'AT中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '藤丸コイン銅', name: '藤丸コイン（銅）', timing: 'AT中', settingHint: '設定2以上', importance: 'weak' },
+    { keyword: '087枚', name: '特殊獲得枚数（087枚OVER）', timing: 'AT中', settingHint: '設定2以上', importance: 'weak' },
+    { keyword: '965枚', name: '特殊獲得枚数（965枚OVER）', timing: 'AT中', settingHint: '設定4以上', importance: 'confirmed' },
+    { keyword: '555枚', name: '特殊獲得枚数（555枚OVER）', timing: 'AT中', settingHint: '設定5以上', importance: 'confirmed' },
+    { keyword: '666枚', name: '特殊獲得枚数（666枚OVER）', timing: 'AT中', settingHint: '設定6濃厚', importance: 'confirmed' },
+  ],
 };
 
 export default config;

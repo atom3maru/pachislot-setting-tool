@@ -218,6 +218,27 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'サミートロフィー 虹', timing: 'AT終了時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー キリン柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銅', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 I LOVE YOU', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 初代パネル金枠', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 忍野メメ', timing: 'AT終了時', settingHint: '設定3/5/6濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 忍', timing: 'AT終了時', settingHint: '偶数設定濃厚', importance: 'weak' },
+    { keyword: '終了画面', name: 'AT終了画面 羽川翼', timing: 'AT終了時', settingHint: '偶数設定示唆（強）', importance: 'weak' },
+    { keyword: '終了画面', name: 'AT終了画面 戦場ヶ原ひたぎ', timing: 'AT終了時', settingHint: '高設定示唆（強）', importance: 'weak' },
+    { keyword: '終了画面', name: 'AT終了画面 神原駿河', timing: 'AT終了時', settingHint: '奇数＋高設定示唆', importance: 'weak' },
+    { keyword: '枚数', name: '獲得枚数表示 331枚突破', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: '枚数', name: '獲得枚数表示 543枚突破', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数表示 174枚突破', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: 'スイカ', name: 'スイカ確率', timing: '通常時', settingHint: '設定1: 1/87.4 → 設定6: 1/69.9', importance: 'weak' },
+    { keyword: '直撃', name: '弱チェリーAT直撃', timing: '通常時', settingHint: '設定1: 0.4% → 設定6: 3.8%（約9.5倍差）', importance: 'weak' },
+    { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/265.1 → 設定6: 1/219.6', importance: 'weak' },
+  ],
 };
 
 export default config;

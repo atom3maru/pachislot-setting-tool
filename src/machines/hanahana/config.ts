@@ -286,6 +286,24 @@ const config: MachineConfig = {
       'REG中スイカ確率も確認（設定1: 1/80 → 設定V: 1/52.9）。低設定寄りなら早めに撤退',
     ],
   },
+
+  dictionary: [
+    { keyword: 'BIG確率', name: 'BIG確率', timing: '終日カウント', settingHint: '設定1: 1/299 → 設定V: 1/253', importance: 'strong' },
+    { keyword: 'REG確率', name: 'REG確率', timing: '終日カウント', settingHint: '設定1: 1/496 → 設定V: 1/372。REG確率差が大きい', importance: 'strong' },
+    { keyword: 'ベル確率', name: 'ベル確率（通常時）', timing: '通常時カウント（2000G以上推奨）', settingHint: '設定1: 1/7.60 → 設定V: 1/7.25', importance: 'strong' },
+    { keyword: 'BIG中スイカ', name: 'BIG中スイカ確率（前半14G）', timing: 'BIG前半14G', settingHint: '設定1: 1/30 → 設定V: 1/19.3（約1.55倍差）', importance: 'strong' },
+    { keyword: 'REG中スイカ', name: 'REG中スイカ確率', timing: 'REG中', settingHint: '設定1: 1/80 → 設定V: 1/52.9', importance: 'strong' },
+    { keyword: 'サイドランプ青', name: 'BIG後半サイドランプ（青）', timing: 'BIG後半スイカ揃い時', settingHint: '奇数設定示唆（弱）', importance: 'weak' },
+    { keyword: 'サイドランプ黄', name: 'BIG後半サイドランプ（黄）', timing: 'BIG後半スイカ揃い時', settingHint: '偶数設定示唆（弱）', importance: 'weak' },
+    { keyword: 'サイドランプ緑', name: 'BIG後半サイドランプ（緑）', timing: 'BIG後半スイカ揃い時', settingHint: '奇数設定示唆（強）', importance: 'strong' },
+    { keyword: 'サイドランプ赤', name: 'BIG後半サイドランプ（赤）', timing: 'BIG後半スイカ揃い時', settingHint: '偶数設定示唆（強）', importance: 'strong' },
+    { keyword: 'サイドランプ虹', name: 'BIG後半サイドランプ（虹）', timing: 'BIG後半スイカ揃い時', settingHint: '高設定濃厚（設定4以上）', importance: 'confirmed' },
+    { keyword: 'ハイビスカス紫', name: 'ハイビスカスランプ（紫）', timing: 'ボーナス後', settingHint: '高設定示唆。設定3以上で出現率UP', importance: 'strong' },
+    { keyword: 'ハイビスカス虹', name: 'ハイビスカスランプ（虹）', timing: 'ボーナス後', settingHint: '設定V濃厚（設定4以上）', importance: 'confirmed' },
+    { keyword: 'パネル上下同時', name: 'パネルフラッシュ（上下同時点滅）', timing: 'REG/BIG終了後', settingHint: '高設定示唆（設定3以上）', importance: 'strong' },
+    { keyword: 'パネル上のみ', name: 'パネルフラッシュ（上のみ点滅）', timing: 'REG/BIG終了後', settingHint: '奇数設定示唆', importance: 'weak' },
+    { keyword: 'パネル下のみ', name: 'パネルフラッシュ（下のみ点滅）', timing: 'REG/BIG終了後', settingHint: '偶数設定示唆', importance: 'weak' },
+  ],
 };
 
 export default config;

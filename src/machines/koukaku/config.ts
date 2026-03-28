@@ -284,6 +284,29 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'サミートロフィー 虹', timing: 'AT終了時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー キリン柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銅', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT/CZ終了画面 特殊画面', timing: 'AT/CZ終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT/CZ終了画面 全員集合', timing: 'AT/CZ終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT/CZ終了画面 バトー', timing: 'AT/CZ終了時', settingHint: '偶数設定示唆', importance: 'weak' },
+    { keyword: '終了画面', name: 'AT/CZ終了画面 トグサ', timing: 'AT/CZ終了時', settingHint: '奇数設定示唆', importance: 'weak' },
+    { keyword: 'CZ終了画面', name: 'CZ終了画面 全員集合', timing: 'CZ終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'CZ終了画面', name: 'CZ終了画面 バカンス', timing: 'CZ終了時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: 'CZ終了画面', name: 'CZ終了画面 公安9課', timing: 'CZ終了時', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: 'パネル', name: 'エンディング中 虹パネル', timing: 'エンディング中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'パネル', name: 'エンディング中 紫パネル', timing: 'エンディング中', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: 'ランプ', name: 'エンディング中 虹ランプ', timing: 'エンディング中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'ランプ', name: 'エンディング中 紫ランプ', timing: 'エンディング中', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: 'タチコマ', name: 'タチコマの家出CZ当選率', timing: 'AT後200G・400G', settingHint: '設定1: 30% → 設定6: 48.3%', importance: 'weak' },
+    { keyword: '殲滅', name: '殲滅ゾーン ポイント契機比率', timing: '殲滅ゾーン中', settingHint: '設定1: 20% → 設定6: 45%', importance: 'weak' },
+    { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/336.3 → 設定6: 1/278.0（約1.21倍差）', importance: 'weak' },
+    { keyword: 'エピソード', name: 'S.A.M.エピソード同一連続', timing: 'AT中', settingHint: '設定2以上濃厚', importance: 'strong' },
+  ],
 };
 
 export default config;

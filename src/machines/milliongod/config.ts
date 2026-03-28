@@ -171,6 +171,21 @@ const config: MachineConfig = {
       '新台のため解析値は推定を含む',
     ],
   },
+
+  dictionary: [
+    { keyword: 'GG初当たり', name: 'GG（ゴッドゲーム）初当たり確率', timing: '終日カウント', settingHint: '設定1: 1/533 → 設定6: 1/295（約1.81倍差）。偶数設定が優遇', importance: 'strong' },
+    { keyword: '偶数設定', name: '偶数設定優遇スペック', timing: '終日', settingHint: '設定2: 1/420、設定4: 1/338、設定6: 1/295。偶数設定の方が機械割が高い', importance: 'strong' },
+    { keyword: '全員集合', name: 'AT終了画面（全員集合）', timing: 'AT終了時PUSH', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '特殊画面', name: 'AT終了画面（特殊画面）', timing: 'AT終了時PUSH', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'ポセイドン画面', name: 'AT終了画面（ポセイドン）', timing: 'AT終了時PUSH', settingHint: '奇数設定示唆', importance: 'weak' },
+    { keyword: 'ゼウス画面', name: 'AT終了画面（ゼウス）', timing: 'AT終了時PUSH', settingHint: '偶数設定示唆', importance: 'weak' },
+    { keyword: 'ハデス画面', name: 'AT終了画面（ハデス）', timing: 'AT終了時PUSH', settingHint: '高設定示唆', importance: 'strong' },
+    { keyword: 'ポセイドンステージ', name: 'ポセイドンステージ出現率', timing: '通常時', settingHint: '設定1: 5% → 設定6: 10%。高設定ほど出現率UP', importance: 'weak' },
+    { keyword: 'ゼウスステージ', name: 'ゼウスステージ出現率', timing: '通常時', settingHint: '設定1: 2% → 設定6: 6%（約3倍差）。高設定示唆（強）', importance: 'strong' },
+    { keyword: 'GOD揃い', name: 'GOD揃い', timing: 'AT中', settingHint: '全設定共通 1/16384（推定）。設定差なし', importance: 'weak' },
+    { keyword: 'GGセット数', name: 'GGセット数ストック', timing: 'AT中', settingHint: '高設定ほど連チャン性能が優遇される傾向', importance: 'weak' },
+    { keyword: 'モードB', name: '前兆発生ゾーン（モードB以上）', timing: '450-550G付近', settingHint: '高設定ほどモードB以上滞在率UP', importance: 'strong' },
+  ],
 };
 
 export default config;

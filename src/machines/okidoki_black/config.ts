@@ -167,6 +167,21 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'チェリー', name: 'チェリーB確率', timing: '通常時', settingHint: '設定1: 1/168.0 → 設定6: 1/128.5（約1.31倍差）', importance: 'weak' },
+    { keyword: '確定役', name: '確定役B（スイカ小V型）', timing: '通常時', settingHint: '設定1: 1/16384 → 設定6: 1/6554（約2.5倍差）', importance: 'weak' },
+    { keyword: '初当たり', name: 'ボーナス合算確率', timing: '通常時', settingHint: '設定1: 1/288.7 → 設定6: 1/243.1', importance: 'weak' },
+    { keyword: '天国', name: '32G以内天国移行率', timing: 'ボーナス後', settingHint: '設定1: 15% → 設定6: 26%', importance: 'weak' },
+    { keyword: '黒ドキ', name: '黒ドキモード突入', timing: '通常時', settingHint: '設定1: 0.5% → 設定6: 2.0%・次回天国以上確定', importance: 'strong' },
+    { keyword: '無音', name: '無音演出発生', timing: 'ボーナス確定時', settingHint: '設定1: 1% → 設定6: 7%・高設定示唆', importance: 'weak' },
+    { keyword: '遅れ', name: '遅れ発生', timing: 'ボーナス確定時', settingHint: 'ボーナス確定演出', importance: 'weak' },
+    { keyword: 'フラッシュ', name: 'LEDフラッシュ', timing: 'ボーナス確定時', settingHint: 'ボーナス確定演出', importance: 'weak' },
+    { keyword: '先チカ', name: '先チカ発生', timing: 'ボーナス確定時', settingHint: 'ボーナス確定演出', importance: 'weak' },
+    { keyword: 'モード', name: 'チャンスモード（天井200G）', timing: 'リセット後', settingHint: 'リセット時40%移行', importance: 'weak' },
+    { keyword: '仮天井', name: '仮天井ゾーン301-400G', timing: '通常時', settingHint: '仮天井でボーナス当選率UP', importance: 'weak' },
+    { keyword: 'スルー', name: 'スルー天井', timing: '通常時', settingHint: '6スルーで天井・前日回数引き継ぎ', importance: 'weak' },
+  ],
 };
 
 export default config;

@@ -224,6 +224,27 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'サミートロフィー 虹', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー キリン柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'サミートロフィー 銅', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: '終了画面 金枠（東卍結成）', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: '終了画面 紫枠', timing: 'AT終了時', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: '終了画面 赤枠（特殊）', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: '終了画面 黄枠', timing: 'AT終了時', settingHint: '設定3以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: '終了画面 赤枠（高設定強）', timing: 'AT終了時', settingHint: '高設定示唆（強）', importance: 'strong' },
+    { keyword: '終了画面', name: '終了画面 青枠', timing: 'AT終了時', settingHint: '高設定示唆', importance: 'weak' },
+    { keyword: '枚数', name: '獲得枚数 666枚OVER', timing: 'AT中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 555枚OVER', timing: 'AT中', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: '枚数', name: '獲得枚数 456枚OVER', timing: 'AT中', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: 'フリーズ', name: 'リベンジフリーズ', timing: '3〜5周期スルー時', settingHint: '設定1: 0.8% → 設定6: 6.2%（約7.75倍差）', importance: 'strong' },
+    { keyword: 'ベル', name: '共通ベル確率', timing: '通常時', settingHint: '設定1: 1/99.3 → 設定6: 1/77.1（約1.29倍差）', importance: 'strong' },
+    { keyword: 'CZ', name: 'CZ中スイカ/弱チェリーAT昇格率', timing: 'CZ中', settingHint: '設定1: 10.2% → 設定6: 16.4%', importance: 'weak' },
+    { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/482.2 → 設定6: 1/373.1（約1.29倍差）', importance: 'weak' },
+  ],
 };
 
 export default config;

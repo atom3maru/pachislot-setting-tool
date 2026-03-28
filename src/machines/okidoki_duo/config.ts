@@ -199,6 +199,23 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'ボイス', name: 'テンパイボイス「3人で楽しもー！」', timing: 'ボーナステンパイ時', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: 'ボイス', name: 'テンパイボイス カナちゃん', timing: 'ボーナステンパイ時', settingHint: '設定5以上濃厚', importance: 'strong' },
+    { keyword: 'ボイス', name: 'テンパイボイス ぴこーん', timing: 'ボーナステンパイ時', settingHint: '設定3以上濃厚', importance: 'strong' },
+    { keyword: 'ボイス', name: 'テンパイボイス きらりーん', timing: 'ボーナステンパイ時', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: 'ボイス', name: 'テンパイボイス てぃろりろ', timing: 'ボーナステンパイ時', settingHint: '設定2・6示唆', importance: 'weak' },
+    { keyword: '終了画面', name: '終了画面 ハナ&カナ', timing: 'ボーナス終了時', settingHint: 'DUOモード濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: '終了画面 夜', timing: 'ボーナス終了時', settingHint: 'ドキドキ以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: '終了画面 夕方', timing: 'ボーナス終了時', settingHint: '天国以上濃厚・32G超えても続行', importance: 'strong' },
+    { keyword: '終了画面', name: '終了画面 ハイビスカス', timing: 'ボーナス終了時', settingHint: '通常B以上期待', importance: 'weak' },
+    { keyword: '楽曲', name: '楽曲「私バージョンアップ！」', timing: 'ボーナス中', settingHint: '設定2以上示唆', importance: 'strong' },
+    { keyword: 'チェリー', name: 'チェリー確率', timing: '通常時', settingHint: '設定1: 1/46.8 → 設定6: 1/40.3', importance: 'weak' },
+    { keyword: '初当たり', name: '初当たり合算確率', timing: '通常時', settingHint: '設定1: 1/240.0 → 設定6: 1/181.0（約1.33倍差）', importance: 'weak' },
+    { keyword: '天国', name: '32G以内天国移行率', timing: 'ボーナス後', settingHint: '設定1: 22% → 設定6: 31%', importance: 'weak' },
+    { keyword: '仮天井', name: '仮天井ゾーン301-400G', timing: '通常時', settingHint: 'ボーナス当選率UP', importance: 'weak' },
+  ],
 };
 
 export default config;

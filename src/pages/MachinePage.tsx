@@ -19,6 +19,8 @@ import MachineGuide from '../components/MachineGuide';
 import Checklist from '../components/Checklist';
 import IncomeSimulator from '../components/IncomeSimulator';
 import HyenaInfo from '../components/HyenaInfo';
+import MachineSelector from '../components/MachineSelector';
+import DictionarySearch from '../components/DictionarySearch';
 
 interface Props {
   config: MachineConfig;
@@ -136,8 +138,16 @@ export default function MachinePage({ config }: Props) {
       )}
 
       <main className="max-w-4xl mx-auto px-3 py-4 space-y-5">
+        {/* 台選びアシスタント */}
+        {config.hyena && <MachineSelector config={config} />}
+
         {/* 攻め方ガイド */}
         {config.guide && <MachineGuide guide={config.guide} />}
+
+        {/* 演出辞典 */}
+        {config.dictionary && config.dictionary.length > 0 && (
+          <DictionarySearch dictionary={config.dictionary} />
+        )}
 
         {/* チェックリスト */}
         {config.checklist && config.checklist.length > 0 && (

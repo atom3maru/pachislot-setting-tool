@@ -223,6 +223,28 @@ const config: MachineConfig = {
       '期待値は設定1・等価換金で計算',
     ],
   },
+
+  dictionary: [
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 虹', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー ケロット柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'AT終了画面 ミニキャラ', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 キャラ集合', timing: 'AT終了時', settingHint: '設定5以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 シオ', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 リンドウ', timing: 'AT終了時', settingHint: '設定3以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'AT終了画面 ソーマ', timing: 'AT終了時', settingHint: '高設定示唆（強）', importance: 'weak' },
+    { keyword: '終了画面', name: 'AT終了画面 コウタ', timing: 'AT終了時', settingHint: '高設定示唆（弱）', importance: 'weak' },
+    { keyword: 'ボイス', name: 'ストーリー終了時ボイス シオ「いただきま〜す」', timing: 'ストーリー終了時', settingHint: '設定5以上濃厚', importance: 'strong' },
+    { keyword: 'ボイス', name: 'ストーリー終了時ボイス レン', timing: 'ストーリー終了時', settingHint: '高設定示唆（強）', importance: 'weak' },
+    { keyword: 'ボイス', name: 'ストーリー終了時ボイス リンドウ', timing: 'ストーリー終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: 'ゾロ目', name: '上乗せゾロ目 +66', timing: 'AT中', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'ゾロ目', name: '上乗せゾロ目 +55', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'ゾロ目', name: '上乗せゾロ目 +44', timing: 'AT中', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '直撃', name: '強チェリーAT直撃', timing: '通常時', settingHint: '設定1: 0.4% → 設定6: 5.9%（約15倍差）', importance: 'weak' },
+    { keyword: 'CZ', name: '弱レア役→CZ当選率', timing: '通常時', settingHint: '設定1: 0.2% → 設定6: 1.2%（約6倍差）', importance: 'weak' },
+    { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/351.9 → 設定6: 1/290.3', importance: 'weak' },
+  ],
 };
 
 export default config;
