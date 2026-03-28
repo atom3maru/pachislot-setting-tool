@@ -20,7 +20,7 @@ export default function Checklist({ items, machineId }: Props) {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
       <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 flex items-center justify-between">
         <h3 className="text-white font-bold text-lg flex items-center gap-2">
           📋 確認チェックリスト
@@ -39,9 +39,9 @@ export default function Checklist({ items, machineId }: Props) {
           <span>{checkedCount}/{totalCount} 確認済み</span>
           <span>{Math.round(progress)}%</span>
         </div>
-        <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+        <div className="w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transition-all duration-300"
+            className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-violet-500 rounded-full transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -60,14 +60,14 @@ export default function Checklist({ items, machineId }: Props) {
                 return (
                   <label
                     key={item.id}
-                    className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors
-                      ${checked ? 'bg-green-50 dark:bg-green-900/20' : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'}`}
+                    className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-colors
+                      ${checked ? 'bg-indigo-50/50 dark:bg-indigo-900/10' : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'}`}
                   >
                     <input
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggle(item.id)}
-                      className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 flex-shrink-0"
+                      className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 accent-indigo-600 text-indigo-600 focus:ring-indigo-500 flex-shrink-0"
                     />
                     <span className={`text-sm transition-all ${checked ? 'line-through text-gray-400 dark:text-gray-500' : 'text-gray-700 dark:text-gray-300'}`}>
                       {item.label}

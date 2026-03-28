@@ -19,8 +19,13 @@ export default function HyenaInfo({ hyena }: Props) {
     ? interpolateExpectedValue(inputGame, hyena.expectedValues)
     : null;
 
+  // 期待値横棒グラフ用: 最大絶対値を計算
+  const maxAbsYen = hyena.expectedValues.length > 0
+    ? Math.max(...hyena.expectedValues.map(ev => Math.abs(ev.expectedYen)), 1)
+    : 1;
+
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden animate-slide-up">
       <div className="bg-gradient-to-r from-rose-600 to-orange-600 px-4 py-3">
         <h3 className="text-white font-bold text-lg flex items-center gap-2">
           🎰 ハイエナ情報
@@ -28,27 +33,24 @@ export default function HyenaInfo({ hyena }: Props) {
       </div>
       <div className="p-4 space-y-5">
 
-        {/* 天井情報 */}
-        <div className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50">
-          <span className="text-2xl">🏔️</span>
-          <div>
-            <div className="font-semibold text-gray-800 dark:text-gray-200">
-              天井: <span className="text-rose-600 dark:text-rose-400">{hyena.ceilingGame}G</span>
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">{hyena.ceilingBenefit}</div>
-            {hyena.resetInfo && (
-              <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                📌 {hyena.resetInfo}
-              </div>
-            )}
+        {/* 天井ヒーローカード */}
+        <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/60 dark:to-gray-700/30 shadow-sm">
+          <div className="text-5xl font-extrabold text-rose-500 leading-tight">
+            {hyena.ceilingGame}G
           </div>
+          <div className="text-base text-gray-700 dark:text-gray-300 mt-2">{hyena.ceilingBenefit}</div>
+          {hyena.resetInfo && (
+            <span className="inline-block mt-3 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold rounded-full px-3 py-1">
+              📌 {hyena.resetInfo}
+            </span>
+          )}
         </div>
 
         {/* ゾーンバー */}
         {hyena.zones.length > 0 && (
           <div>
             <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">ゾーン</div>
-            <div className="relative h-8 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="relative h-12 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               {hyena.zones.map((zone, i) => {
                 const leftPct = (zone.start / hyena.ceilingGame) * 100;
                 const widthPct = ((zone.end - zone.start) / hyena.ceilingGame) * 100;
@@ -61,11 +63,11 @@ export default function HyenaInfo({ hyena }: Props) {
                   />
                 );
               })}
-              {/* 目盛り */}
-              <div className="absolute inset-0 flex items-center justify-between px-2 text-[10px] font-mono text-gray-600 dark:text-gray-400">
-                <span>0G</span>
-                <span>{hyena.ceilingGame}G</span>
-              </div>
+            </div>
+            {/* 目盛り（バーのすぐ下） */}
+            <div className="flex items-center justify-between px-2 mt-1 text-xs font-mono text-gray-500 dark:text-gray-400">
+              <span>0G</span>
+              <span>{hyena.ceilingGame}G</span>
             </div>
             {/* ゾーン凡例 */}
             <div className="flex flex-wrap gap-2 mt-2">
@@ -98,7 +100,7 @@ export default function HyenaInfo({ hyena }: Props) {
             <span className="text-sm text-gray-500 dark:text-gray-400">G</span>
           </div>
           {expectedYen != null && (
-            <div className={`text-center p-3 rounded-lg ${expectedYen >= 0 ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20'}`}>
+            <div className={`text-center p-3 rounded-2xl ${expectedYen >= 0 ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20'}`}>
               <div className="text-sm text-gray-500 dark:text-gray-400">ここから打つと</div>
               <div className={`text-2xl font-bold ${expectedYen >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                 期待値 {expectedYen >= 0 ? '+' : ''}¥{expectedYen.toLocaleString()}
@@ -110,20 +112,37 @@ export default function HyenaInfo({ hyena }: Props) {
           )}
         </div>
 
-        {/* 期待値テーブル */}
+        {/* 期待値テーブル → 横棒グラフ形式 */}
         {hyena.expectedValues.length > 0 && (
           <div>
-            <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">期待値テーブル</div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {hyena.expectedValues.map((ev, i) => (
-                <div key={i} className={`text-center p-2 rounded-lg text-sm ${ev.expectedYen >= 0 ? 'bg-green-50 dark:bg-green-900/20' : 'bg-gray-50 dark:bg-gray-700/50'}`}>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">{ev.fromGame}G〜</div>
-                  <div className={`font-bold ${ev.expectedYen >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-                    {ev.expectedYen >= 0 ? '+' : ''}¥{ev.expectedYen.toLocaleString()}
+            <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">期待値テーブル</div>
+            <div className="space-y-2">
+              {hyena.expectedValues.map((ev, i) => {
+                const barWidth = Math.abs(ev.expectedYen) / maxAbsYen * 100;
+                const isPositive = ev.expectedYen >= 0;
+                return (
+                  <div key={i} className="flex items-center gap-2">
+                    <div className="w-14 text-xs text-gray-500 dark:text-gray-400 text-right shrink-0 font-mono">
+                      {ev.fromGame}G〜
+                    </div>
+                    <div className="flex-1 h-6 bg-gray-100 dark:bg-gray-700/50 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-300 ${
+                          isPositive
+                            ? 'bg-gradient-to-r from-emerald-400 to-green-500'
+                            : 'bg-gradient-to-r from-red-400 to-rose-500'
+                        }`}
+                        style={{ width: `${Math.max(barWidth, 2)}%` }}
+                      />
+                    </div>
+                    <div className={`w-20 text-xs font-bold text-right shrink-0 ${
+                      isPositive ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                    }`}>
+                      {isPositive ? '+' : ''}¥{ev.expectedYen.toLocaleString()}
+                    </div>
                   </div>
-                  {ev.note && <div className="text-[10px] text-gray-400">{ev.note}</div>}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

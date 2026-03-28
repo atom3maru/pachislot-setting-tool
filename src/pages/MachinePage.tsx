@@ -113,7 +113,7 @@ export default function MachinePage({ config }: Props) {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       {/* ヘッダー */}
-      <header className={`${config.color} text-white py-4 px-4 shadow-lg sticky top-0 z-30`}>
+      <header className={`${config.color} text-white py-5 px-4 shadow-lg sticky top-0 z-30`}>
         <div className="max-w-4xl mx-auto flex items-center gap-3">
           <Link to="/" className="text-white/80 hover:text-white transition-colors text-lg p-1 -ml-1 min-w-[44px] min-h-[44px] flex items-center justify-center">
             ←
@@ -135,7 +135,7 @@ export default function MachinePage({ config }: Props) {
         </div>
       )}
 
-      <main className="max-w-4xl mx-auto px-3 py-4 space-y-4">
+      <main className="max-w-4xl mx-auto px-3 py-4 space-y-5">
         {/* 攻め方ガイド */}
         {config.guide && <MachineGuide guide={config.guide} />}
 
@@ -183,13 +183,13 @@ export default function MachinePage({ config }: Props) {
         <div className="flex gap-3 sticky bottom-3 z-20">
           <button
             onClick={handleCalculate}
-            className={`flex-1 ${config.color} text-white font-bold py-4 rounded-xl shadow-lg active:scale-[0.97] transition-all text-base min-h-[52px]`}
+            className={`flex-1 ${config.color} text-white font-bold py-4 rounded-2xl shadow-xl active:scale-[0.97] transition-all text-base min-h-[52px]`}
           >
             🔍 判別する
           </button>
           <button
             onClick={handleReset}
-            className="px-6 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-bold py-4 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600 active:scale-[0.97] transition-all text-sm min-h-[52px] shadow-lg"
+            className="px-6 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-bold py-4 rounded-2xl hover:bg-gray-300 dark:hover:bg-gray-600 active:scale-[0.97] transition-all text-sm min-h-[52px] shadow-xl"
           >
             リセット
           </button>
@@ -197,7 +197,7 @@ export default function MachinePage({ config }: Props) {
 
         {/* 結果表示 */}
         {resultCompat && (
-          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden animate-fade-in">
             <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/30 dark:to-indigo-900/30 px-4 py-2.5 border-b border-gray-100 dark:border-gray-700">
               <h2 className="text-sm font-bold text-purple-800 dark:text-purple-300 flex items-center gap-2">
                 <span>📊</span>

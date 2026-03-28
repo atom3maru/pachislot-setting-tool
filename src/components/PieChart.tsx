@@ -13,6 +13,15 @@ const COLORS = [
   '#EF4444', // 設定6 - red
 ];
 
+const LEGEND_BG = [
+  'bg-blue-50 dark:bg-blue-900/30',
+  'bg-cyan-50 dark:bg-cyan-900/30',
+  'bg-emerald-50 dark:bg-emerald-900/30',
+  'bg-amber-50 dark:bg-amber-900/30',
+  'bg-orange-50 dark:bg-orange-900/30',
+  'bg-red-50 dark:bg-red-900/30',
+];
+
 export default function PieChart({ probabilities, settingLabels, mostLikely }: Props) {
   const labels = settingLabels || ['1', '2', '3', '4', '5', '6'];
   const radius = 70;
@@ -39,15 +48,15 @@ export default function PieChart({ probabilities, settingLabels, mostLikely }: P
   const mlProb = probabilities[mostLikely - 1] ?? 0;
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="relative w-48 h-48 sm:w-56 sm:h-56">
+    <div className="flex flex-col items-center animate-scale-up">
+      <div className="relative w-52 h-52 sm:w-60 sm:h-60">
         <svg viewBox="0 0 200 200" className="w-full h-full -rotate-90">
           {/* 背景円 */}
           <circle
             cx={cx} cy={cy} r={radius}
             fill="none"
             stroke="currentColor"
-            strokeWidth="28"
+            strokeWidth="32"
             className="text-gray-200 dark:text-gray-700"
           />
           {/* データセグメント */}
@@ -57,7 +66,7 @@ export default function PieChart({ probabilities, settingLabels, mostLikely }: P
               cx={cx} cy={cy} r={radius}
               fill="none"
               stroke={seg.color}
-              strokeWidth="28"
+              strokeWidth="32"
               strokeDasharray={seg.dashArray}
               strokeDashoffset={seg.dashOffset}
               strokeLinecap="butt"
@@ -68,7 +77,7 @@ export default function PieChart({ probabilities, settingLabels, mostLikely }: P
         {/* 中央テキスト */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-xs text-gray-500 dark:text-gray-400">最有力</span>
-          <span className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+          <span className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">
             設定{mlLabel}
           </span>
           <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">
@@ -77,11 +86,11 @@ export default function PieChart({ probabilities, settingLabels, mostLikely }: P
         </div>
       </div>
       {/* 凡例 */}
-      <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 mt-3">
+      <div className="flex flex-wrap justify-center gap-2 mt-4">
         {probabilities.map((prob, i) => {
           if (prob < 0.001) return null;
           return (
-            <div key={i} className="flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400">
+            <div key={i} className={`flex items-center gap-1.5 text-xs font-medium text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full ${LEGEND_BG[i % LEGEND_BG.length]}`}>
               <span
                 className="w-3 h-3 rounded-full inline-block flex-shrink-0"
                 style={{ backgroundColor: COLORS[i % COLORS.length] }}

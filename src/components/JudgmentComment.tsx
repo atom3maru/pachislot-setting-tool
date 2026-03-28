@@ -17,8 +17,8 @@ const ICONS = {
 
 export default function JudgmentComment({ message, level }: Props) {
   return (
-    <div className={`border-l-4 rounded-r-lg px-4 py-3 ${STYLES[level]}`}>
-      <p className="text-sm font-bold flex items-center gap-2">
+    <div className={`border-l-[5px] rounded-xl p-4 shadow-sm animate-scale-up ${STYLES[level]}`}>
+      <p className="text-base font-bold flex items-center gap-2">
         <span>{ICONS[level]}</span>
         {message}
       </p>

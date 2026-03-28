@@ -7,13 +7,13 @@ interface Props {
   settingLabels?: string[];
 }
 
-const BAR_COLORS = [
-  'bg-blue-400',    // 設定1
-  'bg-blue-500',    // 設定2
-  'bg-blue-600',    // 設定3
-  'bg-amber-500',   // 設定4
-  'bg-orange-500',  // 設定5
-  'bg-red-500',     // 設定6
+const BAR_GRADIENTS = [
+  'bg-gradient-to-r from-blue-400 to-blue-500',      // 設定1
+  'bg-gradient-to-r from-blue-500 to-blue-600',      // 設定2
+  'bg-gradient-to-r from-blue-600 to-blue-700',      // 設定3
+  'bg-gradient-to-r from-amber-400 to-amber-500',    // 設定4
+  'bg-gradient-to-r from-orange-400 to-orange-500',  // 設定5
+  'bg-gradient-to-r from-red-400 to-red-500',        // 設定6
 ];
 
 const TEXT_COLORS = [
@@ -39,13 +39,17 @@ export default function ResultBar({ result, settingLabels }: Props) {
         const barWidth = maxProb > 0 ? (prob / maxProb) * 100 : 0;
         const isMostLikely = i + 1 === mostLikely;
         return (
-          <div key={i} className={`flex items-center gap-2 ${isMostLikely ? 'scale-[1.02]' : 'opacity-80'} transition-all`}>
+          <div
+            key={i}
+            className={`flex items-center gap-2 ${isMostLikely ? 'scale-[1.02] ring-2 ring-indigo-400 ring-offset-1 rounded-xl' : 'opacity-80'} transition-all`}
+            style={{ animationDelay: `${i * 80}ms` }}
+          >
             <span className={`w-12 text-right text-sm font-bold ${TEXT_COLORS[i % TEXT_COLORS.length]}`}>
               設定{labels[i]}
             </span>
-            <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-8 overflow-hidden">
+            <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-xl h-10 overflow-hidden">
               <div
-                className={`h-full rounded-full ${BAR_COLORS[i % BAR_COLORS.length]} transition-all duration-500 flex items-center justify-end pr-2`}
+                className={`h-full rounded-xl ${BAR_GRADIENTS[i % BAR_GRADIENTS.length]} transition-all duration-500 flex items-center justify-end pr-2`}
                 style={{ width: `${Math.max(barWidth, 2)}%` }}
               >
                 {barWidth > 15 && (

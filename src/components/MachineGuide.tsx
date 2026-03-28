@@ -1,64 +1,170 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { MachineGuide as GuideType } from '../types/machine';
 
 interface Props {
   guide: GuideType;
 }
 
-const sections = [
-  { key: 'settingHunt' as const, icon: '🎯', title: '設定狙いのポイント' },
-  { key: 'morningCheck' as const, icon: '🌅', title: '朝一に確認すべきこと' },
-  { key: 'quitTiming' as const, icon: '🚪', title: 'やめ時の目安' },
+const tabs = [
+  { key: 'settingHunt' as const, icon: '🎯', label: '設定狙い' },
+  { key: 'morningCheck' as const, icon: '🌅', label: '朝一確認' },
+  { key: 'quitTiming' as const, icon: '🚪', label: 'やめ時' },
 ];
 
-export default function MachineGuide({ guide }: Props) {
-  const [openSections, setOpenSections] = useState<Set<string>>(new Set());
+type TabKey = typeof tabs[number]['key'];
 
-  const toggle = (key: string) => {
-    setOpenSections(prev => {
+/** テキスト内容からカラーバーの重要度を判定 */
+function getImportance(text: string): 'critical' | 'important' | 'info' {
+  if (/確定|最重要|必ず/.test(text)) return 'critical';
+  if (/設定差|注目|推奨|倍差/.test(text)) return 'important';
+  return 'info';
+}
+
+const borderColorMap = {
+  critical: 'border-red-500',
+  important: 'border-amber-500',
+  info: 'border-indigo-400',
+} as const;
+
+/** テキスト内容からアイコンを自動割当 */
+function getIcon(text: string): string {
+  if (/確定|トロフィー|画面/.test(text)) return '🏆';
+  if (/確率|%|1\//.test(text)) return '📊';
+  if (/朝一|リセット|前日|短縮/.test(text)) return '⏰';
+  if (/やめ|終了|即/.test(text)) return '🚫';
+  if (/確認|チェック|液晶/.test(text)) return '👁️';
+  return '💡';
+}
+
+/** バッジパターンの定義 */
+const badgePattern = /設定[1-6V](確定|以上|濃厚)/g;
+
+const badgeStyleMap: Record<string, string> = {
+  確定: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+  以上: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+  濃厚: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
+};
+
+/** テキスト内のバッジパターンをReact要素に変換 */
+function renderTextWithBadges(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  const regex = new RegExp(badgePattern.source, 'g');
+
+  while ((match = regex.exec(text)) !== null) {
+    // マッチ前のテキスト
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    // バッジ
+    const suffix = match[1]; // 確定 | 以上 | 濃厚
+    const style = badgeStyleMap[suffix] || '';
+    parts.push(
+      <span
+        key={match.index}
+        className={`inline-flex px-2 py-0.5 rounded-full text-xs font-bold ${style}`}
+      >
+        {match[0]}
+      </span>
+    );
+    lastIndex = regex.lastIndex;
+  }
+
+  // 残りのテキスト
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+}
+
+export default function MachineGuide({ guide }: Props) {
+  const [activeTab, setActiveTab] = useState<TabKey>('settingHunt');
+  const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
+
+  // タブ切替時に展開状態をリセット
+  const handleTabChange = (key: TabKey) => {
+    setActiveTab(key);
+    setExpandedCards(new Set());
+  };
+
+  const toggleCard = (index: number) => {
+    setExpandedCards(prev => {
       const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
       return next;
     });
   };
 
+  const items = useMemo(() => guide[activeTab] || [], [guide, activeTab]);
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+      {/* ヘッダー */}
       <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-3">
         <h3 className="text-white font-bold text-lg flex items-center gap-2">
           📖 攻め方ガイド
         </h3>
       </div>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        {sections.map(sec => {
-          const items = guide[sec.key];
-          if (!items || items.length === 0) return null;
-          const isOpen = openSections.has(sec.key);
+
+      {/* タブバー */}
+      <div className="flex gap-2 p-3">
+        {tabs.map(tab => {
+          const isActive = activeTab === tab.key;
           return (
-            <div key={sec.key}>
-              <button
-                onClick={() => toggle(sec.key)}
-                className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-              >
-                <span className="flex items-center gap-2 font-semibold text-gray-800 dark:text-gray-200">
-                  <span className="text-xl">{sec.icon}</span>
-                  {sec.title}
-                </span>
-                <span className={`text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
-                  ▼
-                </span>
-              </button>
-              {isOpen && (
-                <ul className="px-4 pb-4 space-y-2">
-                  {items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
-                      <span className="text-emerald-500 mt-0.5 flex-shrink-0">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
+            <button
+              key={tab.key}
+              onClick={() => handleTabChange(tab.key)}
+              className={`flex-1 flex items-center justify-center gap-1 px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-200 ${
+                isActive
+                  ? 'bg-indigo-600 text-white shadow-md'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600'
+              }`}
+            >
+              <span>{tab.icon}</span>
+              <span>{tab.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* カードリスト */}
+      <div key={activeTab} className="px-3 pb-4 space-y-2 animate-fade-in">
+        {items.length === 0 && (
+          <p className="text-center text-gray-400 dark:text-gray-500 text-sm py-4">
+            データがありません
+          </p>
+        )}
+        {items.map((item, i) => {
+          const importance = getImportance(item);
+          const icon = getIcon(item);
+          const isExpanded = expandedCards.has(i);
+
+          return (
+            <div
+              key={`${activeTab}-${i}`}
+              onClick={() => toggleCard(i)}
+              className={`rounded-xl p-4 bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 border-l-[4px] ${borderColorMap[importance]} cursor-pointer transition-all duration-200 hover:shadow-md animate-slide-up`}
+              style={{ animationDelay: `${i * 50}ms`, animationFillMode: 'both' }}
+            >
+              <div className="flex items-start gap-3">
+                <span className="text-lg flex-shrink-0 mt-0.5">{icon}</span>
+                <div className="flex-1 min-w-0">
+                  <div
+                    className={`text-sm text-gray-700 dark:text-gray-300 leading-relaxed transition-all duration-300 ${
+                      isExpanded ? '' : 'line-clamp-2'
+                    }`}
+                  >
+                    {renderTextWithBadges(item)}
+                  </div>
+                  {/* 展開インジケーター（テキストが長い場合のみ表示想定） */}
+                  <span className="text-xs text-gray-400 dark:text-gray-500 mt-1 inline-block">
+                    {isExpanded ? '▲ 折りたたむ' : '▼ 全文表示'}
+                  </span>
+                </div>
+              </div>
             </div>
           );
         })}

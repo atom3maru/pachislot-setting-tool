@@ -250,13 +250,13 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors">
-      <header className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-6 px-4 shadow-lg">
+      <header className="bg-gradient-to-r from-indigo-700 to-violet-700 dark:from-indigo-900 dark:to-violet-900 text-white py-8 px-4 shadow-lg">
         <div className="max-w-4xl mx-auto text-center relative">
           <div className="absolute right-0 top-0">
             <DarkModeToggle isDark={isDark} toggle={toggle} />
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold">🎰 パチスロ設定判別ツール</h1>
-          <p className="text-gray-300 text-sm mt-2">機種を選択して設定判別を開始</p>
+          <h1 className="text-3xl md:text-4xl font-extrabold">🎰 パチスロ設定判別ツール</h1>
+          <p className="text-indigo-200 text-sm mt-2">機種を選択して設定判別を開始</p>
           {/* 検索窓 */}
           <div className="mt-4 max-w-md mx-auto relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
@@ -265,7 +265,7 @@ export default function HomePage() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="機種名で検索（例：カバネリ、北斗、沖ドキ）"
-              className="w-full pl-10 pr-10 py-2.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-white placeholder-gray-400 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none transition-all"
+              className="w-full pl-10 pr-10 py-2.5 rounded-2xl bg-white/15 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 text-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none transition-all"
             />
             {search && (
               <button
@@ -296,11 +296,12 @@ export default function HomePage() {
           </div>
         ) : (
         <div className="grid gap-4 md:grid-cols-2">
-          {filtered.map(machine =>
+          {filtered.map((machine, idx) =>
             machine.disabled ? (
               <div
                 key={machine.id}
-                className="relative block bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden opacity-60 cursor-not-allowed select-none"
+                style={{ animationDelay: `${idx * 50}ms` }}
+                className="relative block bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden opacity-60 cursor-not-allowed select-none animate-slide-up"
               >
                 {/* 斜線オーバーレイ */}
                 <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
@@ -310,7 +311,7 @@ export default function HomePage() {
                   </svg>
                 </div>
                 <div className={`${machine.color} px-4 py-3 flex items-center gap-3 grayscale`}>
-                  <span className="text-2xl">{machine.icon}</span>
+                  <span className="text-3xl">{machine.icon}</span>
                   <div>
                     <h2 className="text-white font-bold text-sm leading-tight">{machine.shortName}</h2>
                     <p className="text-white/70 text-[10px] leading-tight mt-0.5">{machine.name}</p>
@@ -332,10 +333,11 @@ export default function HomePage() {
               <Link
                 key={machine.id}
                 to={`/${machine.id}`}
-                className="group block bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md hover:border-gray-200 dark:hover:border-gray-600 transition-all active:scale-[0.98] min-h-[44px]"
+                style={{ animationDelay: `${idx * 50}ms` }}
+                className="group block bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:scale-[1.02] hover:border-gray-200 dark:hover:border-gray-600 transition-all duration-200 active:scale-[0.98] min-h-[44px] animate-slide-up"
               >
                 <div className={`${machine.color} px-4 py-3 flex items-center gap-3`}>
-                  <span className="text-2xl">{machine.icon}</span>
+                  <span className="text-3xl">{machine.icon}</span>
                   <div>
                     <h2 className="text-white font-bold text-sm leading-tight">{machine.shortName}</h2>
                     <p className="text-white/70 text-[10px] leading-tight mt-0.5">{machine.name}</p>
@@ -344,7 +346,7 @@ export default function HomePage() {
                 <div className="px-4 py-3">
                   <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{machine.description}</p>
                   <div className="mt-2 flex items-center justify-end">
-                    <span className="text-xs text-purple-600 dark:text-purple-400 font-bold group-hover:text-purple-800 dark:group-hover:text-purple-300 transition-colors">
+                    <span className="text-xs text-indigo-600 dark:text-indigo-400 font-bold group-hover:text-indigo-800 dark:group-hover:text-indigo-300 transition-colors">
                       判別を開始 →
                     </span>
                   </div>
