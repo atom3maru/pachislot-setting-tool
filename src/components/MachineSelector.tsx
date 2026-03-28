@@ -33,7 +33,7 @@ function NumInput({
           onChange(isNaN(v) ? null : v);
         }}
         placeholder="0"
-        className="w-full px-3 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-center text-lg font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+        className="w-full px-3 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-center text-lg font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all min-h-[44px]"
       />
       {hint && (
         <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">{hint}</p>
@@ -134,12 +134,12 @@ export default function MachineSelector({ config }: Props) {
 
       <div className="p-4 space-y-5">
         {/* 入力エリア */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           <NumInput label="当日G数" value={todayG} onChange={setTodayG} />
           <NumInput label="BIG回数" value={bigCount} onChange={setBigCount} />
           <NumInput label="REG回数" value={regCount} onChange={setRegCount} />
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <NumInput
             label="前日最終G数"
             hint="据え置き判定に使用（任意）"
@@ -166,11 +166,11 @@ export default function MachineSelector({ config }: Props) {
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">
                   📊 ボーナス合算
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
                     1/{Math.round(combined)}
                   </div>
-                  <span className={`${settingBand.color} text-white text-xs font-bold px-3 py-1 rounded-full`}>
+                  <span className={`${settingBand.color} text-white text-xs font-bold px-3 py-1 rounded-full flex-shrink-0`}>
                     {settingBand.label}
                   </span>
                 </div>
@@ -222,8 +222,8 @@ export default function MachineSelector({ config }: Props) {
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">
                   🎰 ハイエナ判定（現在 {currentG}G）
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className={`text-3xl font-extrabold ${hyenaExpectedYen >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                <div className="flex items-center justify-between gap-2">
+                  <div className={`text-2xl sm:text-3xl font-extrabold ${hyenaExpectedYen >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                     {hyenaExpectedYen >= 0 ? '+' : ''}¥{hyenaExpectedYen.toLocaleString()}
                   </div>
                   <span className={`text-2xl`}>

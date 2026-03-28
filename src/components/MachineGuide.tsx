@@ -110,14 +110,14 @@ export default function MachineGuide({ guide }: Props) {
       </div>
 
       {/* タブバー */}
-      <div className="flex gap-2 p-3">
+      <div className="flex gap-2 p-3 overflow-x-auto">
         {tabs.map(tab => {
           const isActive = activeTab === tab.key;
           return (
             <button
               key={tab.key}
               onClick={() => handleTabChange(tab.key)}
-              className={`flex-1 flex items-center justify-center gap-1 px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-200 ${
+              className={`flex-1 flex items-center justify-center gap-1 px-2 sm:px-3 py-2.5 text-xs sm:text-sm font-semibold rounded-xl transition-all duration-200 min-h-[44px] whitespace-nowrap ${
                 isActive
                   ? 'bg-indigo-600 text-white shadow-md'
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -153,7 +153,7 @@ export default function MachineGuide({ guide }: Props) {
                 <span className="text-lg flex-shrink-0 mt-0.5">{icon}</span>
                 <div className="flex-1 min-w-0">
                   <div
-                    className={`text-sm text-gray-700 dark:text-gray-300 leading-relaxed transition-all duration-300 ${
+                    className={`text-sm text-gray-700 dark:text-gray-300 leading-relaxed transition-all duration-300 break-words ${
                       isExpanded ? '' : 'line-clamp-2'
                     }`}
                   >

@@ -167,10 +167,13 @@ export default function MachinePage({ config }: Props) {
                     <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">{group.label}</h3>
                   )}
                   <div
-                    className="grid gap-3"
-                    style={{
-                      gridTemplateColumns: `repeat(${group.columns ?? 2}, minmax(0, 1fr))`,
-                    }}
+                    className={`grid gap-3 ${
+                      (group.columns ?? 2) >= 3
+                        ? 'grid-cols-2 sm:grid-cols-3'
+                        : (group.columns ?? 2) === 2
+                          ? 'grid-cols-1 sm:grid-cols-2'
+                          : 'grid-cols-1'
+                    }`}
                   >
                     {group.fields.map(field => (
                       <NumberField

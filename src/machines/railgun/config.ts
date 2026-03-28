@@ -77,7 +77,7 @@ const config: MachineConfig = {
 
   probEntries: [
     { key: 'atCnt', totalKey: 'totalG', rates: [1/317.8, 1/311.8, 1/304.4, 1/272.4, 1/248.1, 1/235.3] },
-    { key: 'czCnt', totalKey: 'totalG', rates: [1/175.75, 1/170, 1/165, 1/155, 1/145, 1/137.52] },
+    { key: 'czCnt', totalKey: 'totalG', rates: [1/175.7, 1/172.6, 1/168.5, 1/156.6, 1/145.7, 1/137.5] },
   ],
 
   binomialEntries: [
@@ -168,7 +168,7 @@ const config: MachineConfig = {
     settingHunt: [
       'AT初当たり確率に設定差（設定1: 1/317.8 → 設定6: 1/235.3、約1.35倍差）',
       '上位CZ（婚后光子）出現率に約5.6倍の設定差（設定1: 2.3% → 設定6: 13.0%）',
-      'CZ確率も高設定ほど優遇（設定1: 1/175.8 → 設定6: 1/137.5）',
+      'CZ確率も高設定ほど優遇（設定1: 1/175.7 → 設定6: 1/137.5）',
       '藤丸コイン：銅=設定2以上、金=設定4以上、DANGER=設定5以上、虹=設定6濃厚',
       'AT終了画面：紫枠=設定4以上、金枠=設定5以上、虹枠（ウエディング）=設定6濃厚',
       '特殊獲得枚数：087=設定2以上、965=設定4以上、555=設定5以上、666=設定6',
@@ -213,7 +213,7 @@ const config: MachineConfig = {
 
   dictionary: [
     { keyword: 'AT初当たり', name: 'AT初当たり確率', timing: '終日カウント', settingHint: '設定1: 1/317.8 → 設定6: 1/235.3（約1.35倍差）', importance: 'strong' },
-    { keyword: 'CZ確率', name: 'CZ（GIRLS JUDGE）確率', timing: '終日カウント', settingHint: '設定1: 1/175.8 → 設定6: 1/137.5', importance: 'strong' },
+    { keyword: 'CZ確率', name: 'CZ（GIRLS JUDGE）確率', timing: '終日カウント', settingHint: '設定1: 1/175.7 → 設定6: 1/137.5', importance: 'strong' },
     { keyword: '上位CZ', name: '上位CZ（婚后光子）出現率', timing: 'CZ突入時', settingHint: '設定1: 2.3% → 設定6: 13.0%（約5.6倍差）。最重要', importance: 'strong' },
     { keyword: '紫枠', name: 'AT終了画面（紫枠・寝起き美琴）', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
     { keyword: '金枠', name: 'AT終了画面（金枠・美琴&操祈）', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },

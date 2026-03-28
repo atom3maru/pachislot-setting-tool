@@ -86,16 +86,16 @@ export default function PieChart({ probabilities, settingLabels, mostLikely }: P
         </div>
       </div>
       {/* 凡例 */}
-      <div className="flex flex-wrap justify-center gap-2 mt-4">
+      <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-1.5 sm:gap-2 mt-4 w-full">
         {probabilities.map((prob, i) => {
           if (prob < 0.001) return null;
           return (
-            <div key={i} className={`flex items-center gap-1.5 text-xs font-medium text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full ${LEGEND_BG[i % LEGEND_BG.length]}`}>
+            <div key={i} className={`flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-medium text-gray-700 dark:text-gray-300 px-2 sm:px-3 py-1 rounded-full ${LEGEND_BG[i % LEGEND_BG.length]}`}>
               <span
-                className="w-3 h-3 rounded-full inline-block flex-shrink-0"
+                className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full inline-block flex-shrink-0"
                 style={{ backgroundColor: COLORS[i % COLORS.length] }}
               />
-              <span>設定{labels[i]}: {(prob * 100).toFixed(1)}%</span>
+              <span className="whitespace-nowrap">設定{labels[i]}: {(prob * 100).toFixed(1)}%</span>
             </div>
           );
         })}

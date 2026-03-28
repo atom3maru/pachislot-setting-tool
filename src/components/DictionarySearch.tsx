@@ -77,7 +77,7 @@ export default function DictionarySearch({ dictionary }: Props) {
   return (
     <>
       {/* ヘッダー */}
-      <div className="bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-3 -mx-4 -mt-4 rounded-t-xl sm:-mx-5 sm:-mt-5 mb-4">
+      <div className="bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-3 -mx-3 -mt-3 rounded-t-xl sm:-mx-5 sm:-mt-5 mb-4">
         <h3 className="text-white font-bold text-lg flex items-center gap-2">
           📖 演出辞典
         </h3>
@@ -110,7 +110,7 @@ export default function DictionarySearch({ dictionary }: Props) {
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
-            className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+            className="absolute inset-y-0 right-1 flex items-center justify-center w-10 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -132,7 +132,7 @@ export default function DictionarySearch({ dictionary }: Props) {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`flex-shrink-0 px-3 py-1.5 text-sm font-semibold rounded-xl transition-all duration-200 whitespace-nowrap ${
+              className={`flex-shrink-0 px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-200 whitespace-nowrap min-h-[44px] flex items-center ${
                 isActive
                   ? 'bg-indigo-600 text-white shadow-md'
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -180,7 +180,7 @@ export default function DictionarySearch({ dictionary }: Props) {
               </div>
 
               {/* 下段: 示唆内容 */}
-              <p className={`text-sm font-medium ${importanceTextMap[entry.importance]}`}>
+              <p className={`text-sm font-medium break-words ${importanceTextMap[entry.importance]}`}>
                 {entry.settingHint}
               </p>
             </div>

@@ -41,24 +41,24 @@ export default function ResultBar({ result, settingLabels }: Props) {
         return (
           <div
             key={i}
-            className={`flex items-center gap-2 ${isMostLikely ? 'scale-[1.02] ring-2 ring-indigo-400 ring-offset-1 rounded-xl' : 'opacity-80'} transition-all`}
+            className={`flex items-center gap-1.5 sm:gap-2 ${isMostLikely ? 'scale-[1.02] ring-2 ring-indigo-400 ring-offset-1 rounded-xl' : 'opacity-80'} transition-all`}
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <span className={`w-12 text-right text-sm font-bold ${TEXT_COLORS[i % TEXT_COLORS.length]}`}>
+            <span className={`w-10 sm:w-12 text-right text-xs sm:text-sm font-bold flex-shrink-0 ${TEXT_COLORS[i % TEXT_COLORS.length]}`}>
               設定{labels[i]}
             </span>
-            <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-xl h-10 overflow-hidden">
+            <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-xl h-9 sm:h-10 overflow-hidden min-w-0">
               <div
                 className={`h-full rounded-xl ${BAR_GRADIENTS[i % BAR_GRADIENTS.length]} transition-all duration-500 flex items-center justify-end pr-2`}
                 style={{ width: `${Math.max(barWidth, 2)}%` }}
               >
-                {barWidth > 15 && (
-                  <span className="text-white text-xs font-bold">{pct}%</span>
+                {barWidth > 20 && (
+                  <span className="text-white text-[10px] sm:text-xs font-bold">{pct}%</span>
                 )}
               </div>
             </div>
-            {barWidth <= 15 && (
-              <span className={`text-xs font-bold ${TEXT_COLORS[i % TEXT_COLORS.length]} w-12`}>{pct}%</span>
+            {barWidth <= 20 && (
+              <span className={`text-[10px] sm:text-xs font-bold ${TEXT_COLORS[i % TEXT_COLORS.length]} w-10 sm:w-12 flex-shrink-0`}>{pct}%</span>
             )}
           </div>
         );

@@ -35,10 +35,10 @@ export default function HyenaInfo({ hyena }: Props) {
 
         {/* 天井ヒーローカード */}
         <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/60 dark:to-gray-700/30 shadow-sm">
-          <div className="text-5xl font-extrabold text-rose-500 leading-tight">
+          <div className="text-4xl sm:text-5xl font-extrabold text-rose-500 leading-tight">
             {hyena.ceilingGame}G
           </div>
-          <div className="text-base text-gray-700 dark:text-gray-300 mt-2">{hyena.ceilingBenefit}</div>
+          <div className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mt-2 break-words">{hyena.ceilingBenefit}</div>
           {hyena.resetInfo && (
             <span className="inline-block mt-3 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold rounded-full px-3 py-1">
               📌 {hyena.resetInfo}
@@ -95,7 +95,7 @@ export default function HyenaInfo({ hyena }: Props) {
                 setInputGame(isNaN(v) ? null : v);
               }}
               placeholder="現在のゲーム数を入力"
-              className="flex-1 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+              className="flex-1 px-3 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 min-h-[44px]"
             />
             <span className="text-sm text-gray-500 dark:text-gray-400">G</span>
           </div>
@@ -121,8 +121,8 @@ export default function HyenaInfo({ hyena }: Props) {
                 const barWidth = Math.abs(ev.expectedYen) / maxAbsYen * 100;
                 const isPositive = ev.expectedYen >= 0;
                 return (
-                  <div key={i} className="flex items-center gap-2">
-                    <div className="w-14 text-xs text-gray-500 dark:text-gray-400 text-right shrink-0 font-mono">
+                  <div key={i} className="flex items-center gap-1.5 sm:gap-2">
+                    <div className="w-12 sm:w-14 text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 text-right shrink-0 font-mono">
                       {ev.fromGame}G〜
                     </div>
                     <div className="flex-1 h-6 bg-gray-100 dark:bg-gray-700/50 rounded-full overflow-hidden">
@@ -135,7 +135,7 @@ export default function HyenaInfo({ hyena }: Props) {
                         style={{ width: `${Math.max(barWidth, 2)}%` }}
                       />
                     </div>
-                    <div className={`w-20 text-xs font-bold text-right shrink-0 ${
+                    <div className={`w-16 sm:w-20 text-[10px] sm:text-xs font-bold text-right shrink-0 ${
                       isPositive ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                     }`}>
                       {isPositive ? '+' : ''}¥{ev.expectedYen.toLocaleString()}

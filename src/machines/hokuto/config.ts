@@ -83,7 +83,7 @@ const config: MachineConfig = {
 
   binomialEntries: [
     // 天破の刻出現率
-    { hitKey: 'tenpa_cnt', totalKey: 'tenpa_total', rates: [1/100.2, 1/96.0, 1/92.0, 1/88.0, 1/84.0, 1/81.3] },
+    { hitKey: 'tenpa_cnt', totalKey: 'tenpa_total', rates: [1/100.2, 1/99.4, 1/97.1, 1/91.4, 1/85.8, 1/81.3] },
     // 天撃成功率
     { hitKey: 'tengeki_hit', totalKey: 'tengeki_total', rates: [0.50, 0.50, 0.50, 0.515, 0.549, 0.608] },
     // 天国モード移行率

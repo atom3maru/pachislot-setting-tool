@@ -88,11 +88,11 @@ export default function ShareButton({ machineName, result, input, settingLabels 
   return (
     <div className="space-y-2">
       <p className="text-xs font-bold text-gray-500 dark:text-gray-400">📤 結果を共有</p>
-      <div className="flex flex-wrap gap-2">
+      <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
         {/* テキストコピー */}
         <button
           onClick={handleCopyText}
-          className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all active:scale-95 ${
+          className={`flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-bold transition-all active:scale-95 min-h-[44px] ${
             copied
               ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
@@ -104,7 +104,7 @@ export default function ShareButton({ machineName, result, input, settingLabels 
         {/* X (Twitter) */}
         <button
           onClick={handleShareX}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold bg-black text-white hover:bg-gray-800 transition-all active:scale-95"
+          className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-bold bg-black text-white hover:bg-gray-800 transition-all active:scale-95 min-h-[44px]"
         >
           𝕏 ポスト
         </button>
@@ -112,7 +112,7 @@ export default function ShareButton({ machineName, result, input, settingLabels 
         {/* LINE */}
         <button
           onClick={handleShareLine}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold bg-green-500 text-white hover:bg-green-600 transition-all active:scale-95"
+          className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-bold bg-green-500 text-white hover:bg-green-600 transition-all active:scale-95 min-h-[44px]"
         >
           💬 LINE
         </button>
@@ -121,7 +121,7 @@ export default function ShareButton({ machineName, result, input, settingLabels 
         {typeof navigator !== 'undefined' && 'share' in navigator && (
           <button
             onClick={handleNativeShare}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold bg-blue-500 text-white hover:bg-blue-600 transition-all active:scale-95"
+            className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs font-bold bg-blue-500 text-white hover:bg-blue-600 transition-all active:scale-95 min-h-[44px]"
           >
             📤 その他
           </button>

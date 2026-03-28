@@ -27,7 +27,7 @@ export default function Checklist({ items, machineId }: Props) {
         </h3>
         <button
           onClick={resetAll}
-          className="text-xs text-white/80 hover:text-white bg-white/20 hover:bg-white/30 px-2 py-1 rounded transition-colors"
+          className="text-xs text-white/80 hover:text-white bg-white/20 hover:bg-white/30 px-3 py-2 rounded min-h-[36px] transition-colors"
         >
           全リセット
         </button>
@@ -60,7 +60,7 @@ export default function Checklist({ items, machineId }: Props) {
                 return (
                   <label
                     key={item.id}
-                    className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-colors
+                    className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-colors min-h-[44px]
                       ${checked ? 'bg-indigo-50/50 dark:bg-indigo-900/10' : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'}`}
                   >
                     <input
@@ -69,7 +69,7 @@ export default function Checklist({ items, machineId }: Props) {
                       onChange={() => toggle(item.id)}
                       className="w-5 h-5 rounded border-gray-300 dark:border-gray-600 accent-indigo-600 text-indigo-600 focus:ring-indigo-500 flex-shrink-0"
                     />
-                    <span className={`text-sm transition-all ${checked ? 'line-through text-gray-400 dark:text-gray-500' : 'text-gray-700 dark:text-gray-300'}`}>
+                    <span className={`text-sm transition-all break-words ${checked ? 'line-through text-gray-400 dark:text-gray-500' : 'text-gray-700 dark:text-gray-300'}`}>
                       {item.label}
                     </span>
                   </label>

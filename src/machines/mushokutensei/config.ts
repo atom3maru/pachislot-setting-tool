@@ -97,7 +97,7 @@ const config: MachineConfig = {
   probEntries: [
     { key: 'atCnt', totalKey: 'totalG', rates: [1/416, 1/406, 1/394, 1/361, 1/327, 1/292] },
     { key: 'bonusCnt', totalKey: 'totalG', rates: [1/170, 1/168, 1/166, 1/161, 1/156, 1/147] },
-    { key: 'tp2Cnt', totalKey: 'totalG', rates: [1/2281, 1/2100, 1/1900, 1/1700, 1/1500, 1/1324] },
+    { key: 'tp2Cnt', totalKey: 'totalG', rates: [1/2281, 1/2137, 1/1968, 1/1655, 1/1459, 1/1324] },
   ],
 
   binomialEntries: [],

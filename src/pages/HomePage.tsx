@@ -255,7 +255,7 @@ export default function HomePage() {
           <div className="absolute right-0 top-0">
             <DarkModeToggle isDark={isDark} toggle={toggle} />
           </div>
-          <h1 className="text-3xl md:text-4xl font-extrabold">🎰 パチスロ設定判別ツール</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">🎰 パチスロ設定判別ツール</h1>
           <p className="text-indigo-200 text-sm mt-2">機種を選択して設定判別を開始</p>
           {/* 検索窓 */}
           <div className="mt-4 max-w-md mx-auto relative">
@@ -270,7 +270,7 @@ export default function HomePage() {
             {search && (
               <button
                 onClick={() => setSearch('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors text-lg"
+                className="absolute right-1 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors text-lg w-10 h-10 flex items-center justify-center"
                 aria-label="検索をクリア"
               >
                 ✕
@@ -295,7 +295,7 @@ export default function HomePage() {
             <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">機種名の一部で検索してみてください</p>
           </div>
         ) : (
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
           {filtered.map((machine, idx) =>
             machine.disabled ? (
               <div
@@ -319,11 +319,11 @@ export default function HomePage() {
                 </div>
                 <div className="px-4 py-3 relative">
                   <p className="text-xs text-gray-400 leading-relaxed">{machine.description}</p>
-                  <div className="mt-2 flex items-center justify-between">
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-orange-500 bg-orange-50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-700 rounded-full px-2 py-0.5">
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-orange-500 bg-orange-50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-700 rounded-full px-2 py-0.5 flex-shrink-0">
                       🚧 工事中
                     </span>
-                    <span className="text-[10px] text-gray-400">
+                    <span className="text-[10px] text-gray-400 break-words">
                       {machine.disabledReason}
                     </span>
                   </div>
@@ -378,7 +378,7 @@ export default function HomePage() {
       <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-5 px-4 mt-8">
         <div className="max-w-4xl mx-auto space-y-3">
           {/* ページリンク */}
-          <div className="flex justify-center gap-4 text-xs">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs">
             <Link to="/privacy" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline transition-colors">
               プライバシーポリシー
             </Link>
