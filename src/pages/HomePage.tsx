@@ -281,6 +281,52 @@ export default function HomePage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-6 flex-1">
+        {/* このサイトでできること */}
+        {!search.trim() && (
+          <div className="mb-6 animate-fade-in">
+            <h2 className="text-base sm:text-lg font-bold text-gray-800 dark:text-gray-200 mb-3 text-center">
+              このツールでできること
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+              {[
+                { icon: '📊', title: '設定判別', desc: 'ベイズ推定で設定確率を算出' },
+                { icon: '🔍', title: '台選び', desc: 'データカウンターから即座に判定' },
+                { icon: '📖', title: '演出辞典', desc: '設定示唆演出をすぐ検索' },
+                { icon: '🎯', title: '攻め方ガイド', desc: '設定狙い・朝一・やめ時' },
+              ].map((f, i) => (
+                <div
+                  key={i}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-100 dark:border-gray-700 text-center shadow-sm"
+                >
+                  <div className="text-2xl sm:text-3xl mb-1">{f.icon}</div>
+                  <div className="text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200">{f.title}</div>
+                  <div className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5 leading-tight">{f.desc}</div>
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-2 sm:mt-3">
+              {[
+                { icon: '🏔️', title: '天井・ゾーン', desc: '期待値テーブル完備' },
+                { icon: '✅', title: 'チェックリスト', desc: '打ちながら確認漏れ防止' },
+                { icon: '💰', title: '収支シミュレーター', desc: '期待収支をリアルタイム計算' },
+                { icon: '📱', title: 'PWA対応', desc: 'ホーム画面に追加して即起動' },
+              ].map((f, i) => (
+                <div
+                  key={i}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-100 dark:border-gray-700 text-center shadow-sm"
+                >
+                  <div className="text-2xl sm:text-3xl mb-1">{f.icon}</div>
+                  <div className="text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200">{f.title}</div>
+                  <div className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5 leading-tight">{f.desc}</div>
+                </div>
+              ))}
+            </div>
+            <p className="text-center text-[10px] sm:text-xs text-gray-400 dark:text-gray-500 mt-3">
+              全{MACHINES.length}機種対応 / オフライン利用可 / 完全無料
+            </p>
+          </div>
+        )}
+
         {/* 検索結果カウント */}
         {search.trim() && (
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
