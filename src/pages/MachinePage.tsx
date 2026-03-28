@@ -301,6 +301,19 @@ export default function MachinePage({ config }: Props) {
           onLoad={handleLoadHistory}
           onClear={handleClearHistory}
         />
+
+        {/* 応援リンク（控えめ） */}
+        <div className="text-center py-3">
+          <a
+            href="https://ofuse.me/#"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
+          >
+            <span>☕</span>
+            <span>このツールが役に立ったら応援する</span>
+          </a>
+        </div>
       </main>
 
       <footer className="text-center text-xs text-gray-400 dark:text-gray-500 py-4">

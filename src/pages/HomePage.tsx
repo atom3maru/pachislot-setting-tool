@@ -419,6 +419,25 @@ export default function HomePage() {
             <span className="text-white/70 text-lg">→</span>
           </div>
         </Link>
+
+        {/* 開発を応援するバナー */}
+        <a
+          href="https://ofuse.me/#"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 block bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl shadow-md overflow-hidden hover:shadow-lg hover:from-amber-600 hover:to-orange-600 transition-all active:scale-[0.98] min-h-[44px]"
+        >
+          <div className="px-5 py-4 flex items-center gap-4">
+            <span className="text-3xl">☕</span>
+            <div className="flex-1">
+              <h2 className="text-white font-bold text-sm">開発を応援する</h2>
+              <p className="text-amber-100 text-xs mt-0.5">
+                このツールが役に立ったら、OFUSEで応援いただけると励みになります！
+              </p>
+            </div>
+            <span className="text-white/70 text-lg">→</span>
+          </div>
+        </a>
       </main>
 
       <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-5 px-4 mt-8">
