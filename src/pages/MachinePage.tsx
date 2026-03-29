@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext, useMemo } from 'react';
+import { useState, useCallback, useContext, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import type { MachineConfig, CalcResult, EnhancedJudgment } from '../types/machine';
 import { calculate } from '../logic/engine';
@@ -34,6 +34,21 @@ export default function MachinePage({ config }: Props) {
   const [hints, setHints] = useState<string[]>([]);
   const [history, setHistory] = useState<HistoryEntry[]>(() => loadHistory(config.id));
   const [showAutoSaveNote, setShowAutoSaveNote] = useState(false);
+
+  // SEO: 動的タイトル・メタ設定
+  useEffect(() => {
+    const ceiling = config.hyena?.ceilingGame ? `天井${config.hyena.ceilingGame}G` : '';
+    document.title = `${config.name} 設定判別ツール｜${ceiling} 期待値 やめどき 終了画面`;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      meta.setAttribute('content',
+        `${config.name}の設定判別・天井期待値・やめどき・設定示唆演出を完全網羅。ボーナス確率や小役をカウントしてベイズ推定で設定を判別。${ceiling}・ゾーン・リセット情報も掲載。`
+      );
+    }
+    return () => {
+      document.title = 'パチスロ設定判別ツール | スマスロ・Lスロ対応';
+    };
+  }, [config]);
 
   // 自動保存フック
   const { clearSave } = useAutoSave(config.id, input, (restored) => {
