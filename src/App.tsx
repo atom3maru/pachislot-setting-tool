@@ -36,6 +36,12 @@ import karakuriConfig from './machines/karakuri/config';
 import gojievaConfig from './machines/gojieva/config';
 import railgunConfig from './machines/railgun/config';
 import rezero2Config from './machines/rezero2/config';
+// 新台（工事中）のconfigは導入後に有効化
+// import jormungandConfig from './machines/jormungand/config';
+// import kyokousuiriConfig from './machines/kyokousuiri/config';
+// import isekaiQuartetConfig from './machines/isekai_quartet/config';
+// import yoshimuneConfig from './machines/yoshimune/config';
+// import gundamUcConfig from './machines/gundam_uc/config';
 
 // ダークモードコンテキスト
 export const DarkModeContext = createContext<{ isDark: boolean; toggle: () => void }>({
@@ -82,6 +88,12 @@ function App() {
           <Route path="/gojieva" element={<MachinePage config={gojievaConfig} />} />
           <Route path="/railgun" element={<MachinePage config={railgunConfig} />} />
           <Route path="/rezero2" element={<MachinePage config={rezero2Config} />} />
+          {/* 新台5機種は未導入のため無効化 */}
+          <Route path="/jormungand" element={<Navigate to="/" replace />} />
+          <Route path="/kyokousuiri" element={<Navigate to="/" replace />} />
+          <Route path="/isekai_quartet" element={<Navigate to="/" replace />} />
+          <Route path="/yoshimune" element={<Navigate to="/" replace />} />
+          <Route path="/gundam_uc" element={<Navigate to="/" replace />} />
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
           <Route path="/terms" element={<TermsPage />} />
         </Routes>
