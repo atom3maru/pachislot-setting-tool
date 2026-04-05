@@ -182,12 +182,24 @@ export interface StageInfo {
   tips?: string;
 }
 
+/** リール1列の図柄（上段・中段・下段） */
+export type ReelSymbol = '7赤' | '7青' | '7白' | 'BAR' | 'チェ' | 'スイカ' | 'ベル' | 'リプ' | '空' | '☆' | '鍵' | 'GOD' | string;
+
+/** リール停止形（3リール×3段 = 9マス） */
+export interface ReelPattern {
+  left: [ReelSymbol, ReelSymbol, ReelSymbol];   // 上段・中段・下段
+  center: [ReelSymbol, ReelSymbol, ReelSymbol];
+  right: [ReelSymbol, ReelSymbol, ReelSymbol];
+  highlightLine?: 'top' | 'center' | 'bottom' | 'diagonal-down' | 'diagonal-up'; // 有効ライン
+}
+
 /** 打ち方の停止形 */
 export interface ReelStop {
   name: string;
   how: string;
   stopForm: string;
   settingDiff?: string;
+  reelPattern?: ReelPattern; // リールイラスト（省略可）
 }
 
 /** 打ち方ガイド */
