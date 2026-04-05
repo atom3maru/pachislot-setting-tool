@@ -223,6 +223,57 @@ const config: MachineConfig = {
     { keyword: 'AT', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/309.5 → 設定6: 1/230.8', importance: 'weak' },
     { keyword: '直撃', name: 'AT直撃確率', timing: '通常時', settingHint: '設定1: 1/20000 → 設定6: 1/4000（5倍差）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'カムラポイント蓄積。規定pt到達でクエスト（CZ）へ', color: 'blue' },
+      { id: 'cz_daruma', label: 'アイルーだるま落とし', description: '5G継続のSTタイプCZ。全だるま落としで成功', color: 'amber' },
+      { id: 'cz_hyakuryu', label: '百竜夜行', description: '12G継続の上位CZ。成功で大連続ボーナス濃厚', color: 'red' },
+      { id: 'bonus', label: '狩猟ボーナス', description: '紫7/赤7/BAR揃い。3種類で純増・保障G数が異なる', color: 'purple' },
+      { id: 'at', label: 'AT（大連続狩猟）', description: 'ボーナスループ型AT。継続率管理でボーナスを連打', color: 'green' },
+      { id: 'rise', label: 'ライズゾーン', description: 'ポイント特化ゾーン。大量pt獲得のチャンス', color: 'red' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz_daruma', label: '規定pt到達' },
+      { from: 'normal', to: 'cz_hyakuryu', label: '上位CZ当選' },
+      { from: 'normal', to: 'rise', label: 'ライズゾーン突入' },
+      { from: 'rise', to: 'normal', label: 'pt獲得後通常へ' },
+      { from: 'cz_daruma', to: 'normal', label: '失敗' },
+      { from: 'cz_daruma', to: 'bonus', label: '成功' },
+      { from: 'cz_hyakuryu', to: 'normal', label: '失敗' },
+      { from: 'cz_hyakuryu', to: 'at', label: '成功（大連続濃厚）' },
+      { from: 'bonus', to: 'normal', label: 'AT非突入' },
+      { from: 'bonus', to: 'at', label: 'AT突入' },
+      { from: 'at', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      'G数天井999Gとクエストスルー天井7回の二段構え',
+      'リセット時は天国準備移行率75%と大幅優遇',
+    ],
+  },
+
+  stages: [
+    { name: 'カムラの里（昼）', color: 'blue', meaning: '基本ステージ。通常状態滞在を示唆', tips: '特に示唆なし。レア役でポイント獲得を狙う' },
+    { name: 'カムラの里（夜）', color: 'purple', meaning: '上位CZ「百竜夜行」の前兆ステージ', tips: '百竜夜行のチャンス！即ヤメ厳禁' },
+    { name: '溶岩洞', color: 'red', meaning: '超高確滞在濃厚（10G以上の超高確保障）', settingHint: '高確移行頻度に設定差の可能性', tips: 'レア役を引けばCZ・ボーナス期待度大幅UP' },
+    { name: '寒冷群島', color: 'cyan', meaning: '前兆ステージ。本前兆と偽前兆でステージ選択率が異なる', tips: 'テーブル判別の材料。本前兆なら継続' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBAR狙い。スイカテンパイ時のみ中リールBAR目安にスイカ狙い。右リールはフリー打ち',
+    reelStops: [
+      { name: 'スイカ', how: '左BAR狙い→スイカテンパイ時は中リールBAR目安にスイカ狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイ/ベルテンパイハズレ' },
+      { name: '弱レア役', how: '左BAR狙い', stopForm: '各種テンパイからの小役成立' },
+      { name: '強レア役', how: '左BAR狙い', stopForm: '強チェリー・強スイカなど' },
+    ],
+    notes: [
+      '通常時は毎G左リールBAR狙いが必須',
+      'AT中・ボーナス中はナビに従う',
+      '本機は小役確率に設定差なし。小役カウントは不要',
+    ],
+  },
 };
 
 export default config;

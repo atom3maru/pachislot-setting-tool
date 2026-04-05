@@ -235,6 +235,59 @@ const config: MachineConfig = {
     { keyword: '5枚役', name: '5枚役確率', timing: '通常時', settingHint: '設定1: 1/38.15 → 設定6: 1/22.53（約1.69倍差）', importance: 'strong' },
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/299.8 → 設定6: 1/222.9（約1.35倍差）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '激走ポイント蓄積。規定pt到達で周期抽選', color: 'blue' },
+      { id: 'charge', label: '激走チャージ', description: 'ポイント獲得特化ゾーン。AT直撃抽選あり', color: 'amber' },
+      { id: 'cz', label: '超抜チャレンジ', description: 'CZ。成功でAT突入', color: 'purple' },
+      { id: 'yuushutsu', label: '優出モード', description: '前兆ステージ。AT当否告知', color: 'green' },
+      { id: 'at', label: 'SGラッシュ', description: '純増約2.5枚。1セット40G+α。継続率約83%', color: 'red' },
+      { id: 'aoshima', label: '青島SG（上位AT）', description: '純増約4.0枚。1セット31G+α', color: 'cyan' },
+    ],
+    edges: [
+      { from: 'normal', to: 'charge', label: 'レア役・規定pt' },
+      { from: 'normal', to: 'cz', label: 'レア役（高確時優遇）' },
+      { from: 'normal', to: 'yuushutsu', label: '周期到達' },
+      { from: 'charge', to: 'normal', label: 'チャージ終了' },
+      { from: 'charge', to: 'at', label: 'AT直撃' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'cz', to: 'at', label: '当選' },
+      { from: 'yuushutsu', to: 'normal', label: '非当選' },
+      { from: 'yuushutsu', to: 'at', label: '当選' },
+      { from: 'at', to: 'normal', label: 'AT終了' },
+      { from: 'at', to: 'aoshima', label: '青島SG昇格' },
+      { from: 'aoshima', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      '通常時は激走ポイントが毎G1pt以上加算。規定pt到達で周期抽選',
+      '天井は通常795G（リセット495G）。5スルー6回目はAT確定',
+      '弱レア役からのAT直撃は設定4以上確定',
+    ],
+  },
+
+  stages: [
+    { name: '多摩川（昼）', color: 'blue', meaning: '基本ステージ。通常状態滞在濃厚', tips: '特に示唆なし' },
+    { name: '多摩川（夕）', color: 'amber', meaning: '高確示唆。CZ・激走チャージ当選率UP', settingHint: '高確移行頻度が高いほど高設定の可能性', tips: 'レア役を引いたらCZ・チャージに期待' },
+    { name: '足合わせステージ', color: 'purple', meaning: '激走チャージor超抜チャレンジ濃厚', tips: '前兆中のため即ヤメ厳禁' },
+    { name: '終電ステージ', color: 'red', meaning: '本前兆に期待。AT当選の可能性大', tips: '本前兆濃厚。絶対に続行' },
+    { name: '初代ステージ', color: 'green', meaning: '当該周期でのAT当選濃厚', settingHint: '出現自体がレア', tips: '青島verなら上位AT青島SGのチャンス' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜中段にBARを狙う（左第1停止推奨）。中・右リールはフリー打ちでOK',
+    reelStops: [
+      { name: '5枚役', how: '左BAR狙い', stopForm: '中段に5枚役が揃う。セグに「5」表示', settingDiff: '設定1: 1/38.15 → 設定6: 1/22.53' },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: 'スイカ', how: '左BAR狙い→中右にスイカ狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: 'ボート（チャンス目）', how: '左BAR狙い→中にボート狙い', stopForm: 'ボートが停止' },
+    ],
+    notes: [
+      '通常時は毎G左リール第1停止が必須（ペナルティ回避）',
+      'AT中はナビに従う。押し順ナビ発生時は指示通りに消化',
+      '5枚役はセグ「5」表示で判別可能。最重要カウント要素',
+    ],
+  },
 };
 
 export default config;

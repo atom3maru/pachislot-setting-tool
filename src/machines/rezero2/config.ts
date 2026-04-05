@@ -203,6 +203,54 @@ const config: MachineConfig = {
     { keyword: '死に戻り', name: '死に戻り抽選', timing: 'AT終了後32G間', settingHint: 'ランプ明滅中は絶対にやめない。引き戻し率に設定差大', importance: 'strong' },
     { keyword: '100ptゾーン', name: '100ptゾーンAT当選率', timing: '100pt到達時', settingHint: '設定1と6で約2.6倍差。高設定ほどゾーン当選率UP', importance: 'strong' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'ポイント管理（最大1400pt）。200pt毎にAT抽選ゾーン', color: 'blue' },
+      { id: 'zone', label: 'ゾーン抽選', description: '200pt到達毎のAT抽選。約25%でAT当選', color: 'amber' },
+      { id: 'at', label: 'AT（殲滅ラッシュ）', description: '初当たりは全て直撃AT。純増約9.0枚/G', color: 'red' },
+      { id: 'pullback', label: '死に戻り（引き戻し）', description: 'AT終了後32G間。ランプ明滅中は継続抽選中', color: 'purple' },
+      { id: 'super_rush', label: '超強欲RUSH', description: '上位AT。高い継続率で大量出玉のチャンス', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'zone', label: '200pt到達' },
+      { from: 'zone', to: 'normal', label: '非当選' },
+      { from: 'zone', to: 'at', label: 'AT当選' },
+      { from: 'normal', to: 'at', label: '直撃当選' },
+      { from: 'at', to: 'pullback', label: 'AT終了' },
+      { from: 'pullback', to: 'at', label: '引き戻し成功' },
+      { from: 'pullback', to: 'normal', label: '引き戻し失敗' },
+      { from: 'at', to: 'super_rush', label: '上位AT昇格' },
+      { from: 'super_rush', to: 'pullback', label: '終了' },
+    ],
+    notes: [
+      '天井は1400pt（約930G）。リセット時は1000pt天井（200/400/600/800/1000pt振り分け）',
+      'AT間1300GでロングフリーズED濃厚',
+      '引き戻し率に約2倍の設定差（設定1:10.2%→設定6:20.0%）',
+    ],
+  },
+
+  stages: [
+    { name: '菜月家ステージ', color: 'blue', meaning: '基本ステージ。通常状態滞在濃厚', settingHint: '設定変更後の時計表示で設定示唆（6:06=設定6濃厚）', tips: '朝一の時計表示を必ず確認' },
+    { name: '聖域ステージ', color: 'amber', meaning: 'ポイント高確率状態。ポイント獲得率UP', tips: 'レア役でのポイント獲得に期待' },
+    { name: '墓所ステージ', color: 'purple', meaning: 'AT前兆ステージ。AT突入のチャンス', tips: '前兆中のため即ヤメ厳禁' },
+    { name: '魔女の茶会ステージ', color: 'red', meaning: '超高確率状態。AT直撃のチャンス大', tips: '即ヤメ厳禁。AT当選まで期待大' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール上段〜枠上に白7を狙う。スイカ停止時以外は中・右リールフリー打ちでOK',
+    reelStops: [
+      { name: 'スイカ', how: '左に白7狙い→スイカテンパイで中リール白7を目安にスイカ狙い', stopForm: 'スイカが斜めに揃う。ハズレでチャンス目' },
+      { name: '弱チェリー', how: '左に白7狙い', stopForm: 'チェリー角停止＋右リール中段ベル' },
+      { name: '強チェリー', how: '左に白7狙い', stopForm: 'チェリー角停止＋右リール中段ベル以外', settingDiff: '強チェリーからのAT直撃率に設定差' },
+      { name: 'チャンス目', how: '左に白7狙い', stopForm: 'スイカテンパイハズレ等' },
+    ],
+    notes: [
+      '通常時は毎G左リール白7狙いが必須',
+      'AT中はナビに従う（押し順ナビ発生時）',
+      'AT終了後32G間の死に戻り中はランプ明滅確認まで絶対にやめない',
+    ],
+  },
 };
 
 export default config;

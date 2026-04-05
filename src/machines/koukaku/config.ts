@@ -307,6 +307,58 @@ const config: MachineConfig = {
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/336.3 → 設定6: 1/278.0（約1.21倍差）', importance: 'weak' },
     { keyword: 'エピソード', name: 'S.A.M.エピソード同一連続', timing: 'AT中', settingHint: '設定2以上濃厚', importance: 'strong' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '殲滅ポイント蓄積+規定G数消化で殲滅ZONE抽選', color: 'blue' },
+      { id: 'senmetsu', label: '殲滅ZONE', description: '7G+α。撃破数に応じてCZ当選抽選', color: 'amber' },
+      { id: 'cz', label: 'S.A.M.（CZ）', description: 'エピソード進行でAT当選を目指す', color: 'purple' },
+      { id: 'at', label: 'SACモード（AT）', description: '純増約2.0枚。継続率管理型', color: 'red' },
+      { id: 'dennou', label: '電脳RUSH（上位AT）', description: '上位AT。高継続率+上乗せ特化', color: 'green' },
+      { id: 'shiro', label: '白の境界', description: '特殊CZ。失敗後は天井400G+αに短縮', color: 'cyan' },
+    ],
+    edges: [
+      { from: 'normal', to: 'senmetsu', label: '規定G数/殲滅pt' },
+      { from: 'senmetsu', to: 'normal', label: 'CZ非当選' },
+      { from: 'senmetsu', to: 'cz', label: 'CZ当選' },
+      { from: 'cz', to: 'normal', label: '失敗' },
+      { from: 'cz', to: 'at', label: '成功' },
+      { from: 'normal', to: 'shiro', label: '白の境界当選' },
+      { from: 'shiro', to: 'at', label: '成功' },
+      { from: 'shiro', to: 'normal', label: '失敗（天井400G+α短縮）' },
+      { from: 'at', to: 'normal', label: 'AT終了' },
+      { from: 'at', to: 'dennou', label: '電脳RUSH昇格' },
+      { from: 'dennou', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      '通常時は50Gごとに殲滅ZONE抽選+殲滅ポイント契機の二重ルート',
+      'CZ天井550G・AT天井999G（リセット時CZ350G・AT699G）',
+      '白の境界失敗後は天井400G+αに短縮。必ず打ち切ること',
+    ],
+  },
+
+  stages: [
+    { name: '公安9課（昼）', color: 'blue', meaning: '基本ステージ。通常状態滞在濃厚', tips: '特に示唆なし' },
+    { name: 'バー', color: 'amber', meaning: '高確示唆。殲滅ポイント獲得率UP', settingHint: '高確移行頻度に設定差あり', tips: 'レア役で殲滅ポイント大量獲得に期待' },
+    { name: '夜', color: 'purple', meaning: '超高確示唆。殲滅ポイント獲得率大幅UP', tips: '超高確中は全力でレア役を引く' },
+    { name: '電脳空間', color: 'red', meaning: '前兆ステージ。殲滅ZONEまたはCZ前兆中', tips: '前兆中のため即ヤメ厳禁' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は順押しBAR狙いが基本。全レア役がリプレイフラグのため取りこぼしなし',
+    reelStops: [
+      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段リプレイ' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段に赤7/白7/青7/BAR' },
+      { name: 'スイカ', how: '左BAR狙い→中右に赤7or青7目安でスイカ狙い', stopForm: 'スイカが揃う' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイテンパイハズレ等' },
+    ],
+    notes: [
+      '全レア役がリプレイフラグのため、フリー打ちでも枚数的損失なし',
+      '成立役判別のために目押しを推奨（設定判別に活用）',
+      'AT中はナビに従う',
+      'リール右のUI色で内部状態確認可能（オレンジ=高確、紫=超高確）',
+    ],
+  },
 };
 
 export default config;

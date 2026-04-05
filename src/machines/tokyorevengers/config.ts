@@ -245,6 +245,57 @@ const config: MachineConfig = {
     { keyword: 'CZ', name: 'CZ中スイカ/弱チェリーAT昇格率', timing: 'CZ中', settingHint: '設定1: 10.2% → 設定6: 16.4%', importance: 'weak' },
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/482.2 → 設定6: 1/373.1（約1.29倍差）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'ポイント蓄積。100ptごとに周期到達チャンス', color: 'blue' },
+      { id: 'cycle', label: '周期抽選', description: '規定pt到達で抽選。最大500ptで周期到達濃厚', color: 'amber' },
+      { id: 'cz_midnight', label: 'ミッドナイトモード', description: 'CZ。成功期待度約50%', color: 'purple' },
+      { id: 'cz_kisaki', label: '稀咲陰謀', description: '上位CZ。成功期待度約75%', color: 'green' },
+      { id: 'at', label: '東卍RUSH', description: '差枚数管理型AT。純増約3.2枚', color: 'red' },
+      { id: 'break', label: 'BREAK CHANCE', description: 'AT開始時の初期枚数決定ゾーン', color: 'cyan' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cycle', label: '規定pt到達' },
+      { from: 'cycle', to: 'normal', label: '非当選' },
+      { from: 'cycle', to: 'cz_midnight', label: 'CZ当選' },
+      { from: 'cycle', to: 'cz_kisaki', label: '上位CZ当選' },
+      { from: 'cz_midnight', to: 'normal', label: '失敗' },
+      { from: 'cz_midnight', to: 'break', label: '成功' },
+      { from: 'cz_kisaki', to: 'normal', label: '失敗' },
+      { from: 'cz_kisaki', to: 'break', label: '成功' },
+      { from: 'break', to: 'at', label: '初期枚数決定' },
+      { from: 'at', to: 'normal', label: 'AT終了' },
+    ],
+    notes: [
+      '通常時はポイント制で100ptごとに周期到達チャンス。最大500ptで周期到達濃厚',
+      '天井は1190G。リセット時は1周期目200pt短縮+モード移行優遇',
+      'リベンジフリーズは3〜5周期スルー時に発生。特大設定差あり',
+    ],
+  },
+
+  stages: [
+    { name: '渋谷', color: 'blue', meaning: '基本ステージ。通常モード滞在濃厚', tips: '特に示唆なし' },
+    { name: '横浜', color: 'amber', meaning: '高確示唆。CZ当選率UP', settingHint: '移行頻度が高いほど高設定の可能性', tips: 'レア役でCZ当選に期待' },
+    { name: '決戦前夜', color: 'purple', meaning: '前兆ステージ。CZ突入間近', tips: '前兆中のため即ヤメ厳禁' },
+    { name: '関東事変', color: 'red', meaning: '超高確ステージ。AT直撃の可能性あり', tips: 'レア役を引けばAT直撃のチャンス' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜中段にBARを狙う（順押し必須）。中・右リールはフリー打ちでOK',
+    reelStops: [
+      { name: '共通ベル', how: '左BAR狙い', stopForm: '15枚ベルが揃う（左第1停止）', settingDiff: '設定1: 1/99.3 → 設定6: 1/77.1' },
+      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+リール上に強演出' },
+      { name: 'スイカ', how: '左BAR狙い→右にBAR狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール中段に停止', settingDiff: '設定1: 1/16384 → 設定6: 1/10923' },
+    ],
+    notes: [
+      '通常時は順押し（左第1停止）が必須。中押し・逆押しはペナルティの可能性あり',
+      'AT中はナビに従う。ブレイクチャンス中もナビ優先',
+      'AT中の中押しBAR狙いはリプレイ1確が出るため一触即発時にオススメ',
+    ],
+  },
 };
 
 export default config;

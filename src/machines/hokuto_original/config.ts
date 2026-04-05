@@ -218,6 +218,52 @@ const config: MachineConfig = {
     { keyword: 'スイカ', name: '弱スイカ確率', timing: '通常時', settingHint: '設定1: 1/109.0 → 設定6: 1/98.3', importance: 'weak' },
     { keyword: '初代画面', name: '初代画面出現', timing: 'BB中/復活演出', settingHint: '設定5以上確定', importance: 'confirmed' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'モード管理。レア役やG数消化でBB抽選', color: 'blue' },
+      { id: 'bb', label: 'バトルボーナス（BB）', description: '北斗揃いで突入。ATのメイン契機', color: 'purple' },
+      { id: 'at', label: 'AT（無想転生バトル）', description: '継続率管理型AT。バトル勝利で継続', color: 'red' },
+      { id: 'heaven', label: '天国モード', description: '256G以内にBB当選しやすいモード', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'bb', label: '規定G数・レア役' },
+      { from: 'bb', to: 'at', label: 'AT突入' },
+      { from: 'bb', to: 'normal', label: 'AT非突入' },
+      { from: 'at', to: 'normal', label: '終了' },
+      { from: 'at', to: 'heaven', label: '天国移行' },
+      { from: 'heaven', to: 'bb', label: '256G以内当選' },
+    ],
+    notes: [
+      '天井は通常1268G+α（リセット時800G+αに短縮）',
+      'BB終了後のステージ移行でモード示唆',
+      '差枚750枚以上で有利区間リセットの可能性あり',
+    ],
+  },
+
+  stages: [
+    { name: 'シンステージ', color: 'blue', meaning: '最も期待度の低い基本ステージ', tips: '特に示唆なし。通常の立ち回りでOK' },
+    { name: 'サウザーステージ', color: 'amber', meaning: '通常モード滞在時に多い。やや期待度UP', tips: 'レア役を引いたらBB当選に少し期待' },
+    { name: 'ジャギステージ', color: 'purple', meaning: '高確またはBBの前兆示唆。チャンス', settingHint: 'ジャギ→サウザー移行は大チャンス', tips: '前兆の可能性あり。即ヤメ注意' },
+    { name: 'ラオウステージ', color: 'red', meaning: 'BB当選期待度最高。本前兆の可能性大', tips: '前兆濃厚。絶対に即ヤメしないこと' },
+  ],
+
+  playGuide: {
+    basicHow: '中押し推奨。中リール上段〜中段に赤7を狙い、停止形に応じて左右を打ち分ける',
+    reelStops: [
+      { name: '弱スイカ', how: '中リール赤7狙い', stopForm: '中リール中段にスイカ停止', settingDiff: '設定1: 1/109.0 → 設定6: 1/98.3' },
+      { name: '強スイカA', how: '中リール赤7狙い', stopForm: '右リール中段にスイカ停止', settingDiff: '設定1: 1/546.1 → 設定6: 1/425.6' },
+      { name: '弱チェリー', how: '中リール赤7狙い→左BAR狙い', stopForm: '左リール下段にチェリー停止' },
+      { name: '強チェリー', how: '中リール赤7狙い→左BAR狙い', stopForm: '左リール中段にチェリー停止' },
+      { name: '中段チェリーA', how: '中リール赤7狙い→左BAR狙い', stopForm: '中段ラインでチェリー一直線', settingDiff: '設定1: 1/260.1 → 設定6: 1/230.8' },
+      { name: 'リーチ目', how: '中リール赤7狙い', stopForm: '特殊出目停止', settingDiff: '設定1: 1/16384 → 設定6: 1/8192' },
+    ],
+    notes: [
+      '中押し（中→右→左）を推奨。取りこぼし防止のため',
+      'AT中はナビに従う',
+      'BB終了後サブ液晶タッチでボイス確認必須',
+    ],
+  },
 };
 
 export default config;

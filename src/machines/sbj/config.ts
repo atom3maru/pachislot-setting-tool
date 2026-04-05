@@ -226,6 +226,54 @@ const config: MachineConfig = {
     { keyword: 'チャンス目', name: 'チャンス目→高確移行率', timing: '通常時', settingHint: '設定1: 40.1% → 設定6: 59.5%', importance: 'weak' },
     { keyword: '初当たり', name: '初当たり確率', timing: '通常時', settingHint: '設定1: 1/241.7 → 設定6: 1/181.3', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'レア役で状態（低確/高確/超高確）を昇格。CZ突入を目指す', color: 'blue' },
+      { id: 'rio_chance', label: 'リオチャンス（CZ）', description: '自力で報酬を昇格・決定する本機最大の叩きドコロ', color: 'amber' },
+      { id: 'bonus', label: 'ボーナス', description: 'BIG/REG。BIG中はST突入のチャンス', color: 'purple' },
+      { id: 'st', label: 'STOCK TIME（ST）', description: '継続率管理型AT。ストック獲得でボーナスループ', color: 'red' },
+      { id: 'big_rio', label: 'BIGリオチャンス', description: 'BIG中の上位演出。ST突入率大幅UP', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'rio_chance', label: 'レア役・規定G数' },
+      { from: 'rio_chance', to: 'normal', label: '非当選' },
+      { from: 'rio_chance', to: 'bonus', label: '当選' },
+      { from: 'bonus', to: 'normal', label: 'ST非突入' },
+      { from: 'bonus', to: 'st', label: 'ST突入' },
+      { from: 'bonus', to: 'big_rio', label: 'BIGリオチャンス突入' },
+      { from: 'big_rio', to: 'st', label: 'ST突入' },
+      { from: 'st', to: 'bonus', label: 'ストック消化→ボーナス' },
+      { from: 'st', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      'リオチャンス→ボーナス→STのSBJループが出玉のメインルート',
+      'G数天井999G・REGスルー4連続・スイカ100回の3種天井',
+      'リセット時は天井が666Gに短縮',
+    ],
+  },
+
+  stages: [
+    { name: '内観/外観ステージ', color: 'blue', meaning: '基本ステージ。低確状態を示唆', tips: '特に示唆なし。レア役で状態UP抽選' },
+    { name: 'CHINAステージ', color: 'amber', meaning: '高確ステージ示唆。CZ当選率UP', settingHint: '移行頻度に設定差の可能性', tips: 'レア役を引けばCZ当選に期待' },
+    { name: 'JAPANステージ', color: 'red', meaning: '超高確ステージ示唆。CZ当選率大幅UP', settingHint: '超高確移行率に設定差あり', tips: '全レア役でCZ当選に大期待！即ヤメ厳禁' },
+    { name: 'リオチャンス高確', color: 'green', meaning: 'ボーナス後0〜100Gの高確率ゾーン', tips: 'ボーナス後は必ず100G消化。即ヤメ厳禁' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBAR狙い。スイカテンパイ時は中リールBAR/赤7目安にスイカ狙い',
+    reelStops: [
+      { name: '斜めスイカ', how: '左BAR狙い→中リールBAR/赤7目安にスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '設定1: 1/99.9 → 設定6: 1/83.9' },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止。中右フリー打ち' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイテンパイハズレ' },
+      { name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが中段に停止（ボーナス確定）' },
+    ],
+    notes: [
+      '通常時は毎G左リールBAR狙いが必須。中押し・逆押し非推奨',
+      'AT中・ボーナス中はナビに従う',
+      '斜めスイカ確率が最重要カウント対象',
+    ],
+  },
 };
 
 export default config;

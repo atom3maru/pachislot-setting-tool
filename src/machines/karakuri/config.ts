@@ -225,6 +225,57 @@ const config: MachineConfig = {
     { keyword: '踊れオリンピア+6', name: '踊れ！オリンピア上乗せ+6', timing: '踊れオリンピア中', settingHint: '設定6濃厚', importance: 'confirmed' },
     { keyword: '踊れオリンピア+20', name: '踊れ！オリンピア上乗せ+20', timing: '踊れオリンピア中', settingHint: '設定2以上示唆', importance: 'strong' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'モード管理（通常A/B/C/天国）。規定G数到達でCZ抽選', color: 'blue' },
+      { id: 'cz', label: 'CZ（機械仕掛けの神）', description: 'バトル形式のCZ。成功でAT突入', color: 'amber' },
+      { id: 'at', label: 'AT（からくりサーカス）', description: '差枚数管理型AT。純増約8.7枚/G', color: 'red' },
+      { id: 'judge', label: '激情ジャッジ', description: 'AT継続ジャッジ。成功で差枚数リセット+継続', color: 'purple' },
+      { id: 'super_at', label: '超からくりサーカス', description: '上位AT。終了後は天国移行率約40%', color: 'green' },
+      { id: 'ed', label: 'エンディング', description: 'AT間2500G到達で突入。ランプ色で設定示唆', color: 'pink' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz', label: '規定G数到達' },
+      { from: 'cz', to: 'normal', label: '失敗' },
+      { from: 'cz', to: 'at', label: '成功' },
+      { from: 'normal', to: 'at', label: '直撃（幕間チャンス等）' },
+      { from: 'at', to: 'judge', label: '差枚数到達' },
+      { from: 'judge', to: 'at', label: '継続成功' },
+      { from: 'judge', to: 'normal', label: '非継続' },
+      { from: 'at', to: 'super_at', label: '上位AT昇格' },
+      { from: 'super_at', to: 'normal', label: '終了（天国移行率約40%）' },
+      { from: 'at', to: 'ed', label: 'AT間2500G到達' },
+      { from: 'ed', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      'CZスルー4回で5回目AT確定',
+      'AT間2500G+αでAT+激情ジャッジ確定（実質天井）',
+      '前回1100G以上ハマリで次回CZ天井300G+αに短縮',
+    ],
+  },
+
+  stages: [
+    { name: '基本ステージ（昼）', color: 'blue', meaning: '通常状態。モード管理でCZ抽選中', tips: '規定G数到達でCZ前兆へ移行' },
+    { name: '夕方ステージ', color: 'amber', meaning: '高確率状態示唆。懸糸傀儡演舞当選率UP', settingHint: '高確移行頻度が高いほど高設定の可能性', tips: 'レア役成立時のCZ・AT当選に期待' },
+    { name: '前兆ステージ', color: 'purple', meaning: 'CZまたはAT当選の前兆中。枠色変化で期待度UP', tips: '枠色：白→青→緑→赤→虹の順。白のまま連続演出=CZ以上濃厚' },
+    { name: '懸糸傀儡演舞', color: 'red', meaning: 'AT直撃のチャンスゾーン', settingHint: '高確中の当選率に設定差あり', tips: '高確滞在中に発生すると当選率大幅UP' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBARを狙う。中・右リールはフリー打ちでOK。変則打ちは抽選冷遇の可能性あり',
+    reelStops: [
+      { name: 'スイカ', how: '左BAR狙い→スイカテンパイで中・右に赤7目安でスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '幕間チャンス当選率に約3倍差（設定1:3.3%→設定6:10.0%）' },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイ・ベルのテンパイハズレ' },
+      { name: 'からくりレア役', how: '左BAR狙い', stopForm: '特殊停止形（幕間チャンス抽選）', settingDiff: '幕間チャンス当選率が最重要設定差要素' },
+    ],
+    notes: [
+      '通常時は毎G左リール第1停止・BAR狙いが必須',
+      'AT中はナビに従う（押し順ナビ発生時）',
+      'ED中のレア役成立時はランプ色で設定示唆（紫=設定4以上、虹=設定6）',
+    ],
+  },
 };
 
 export default config;

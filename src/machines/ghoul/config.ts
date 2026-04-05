@@ -345,6 +345,56 @@ const config: MachineConfig = {
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/394.4 → 設定6: 1/261.3（約1.51倍差）', importance: 'weak' },
     { keyword: '引き戻し', name: '引き戻し率', timing: 'AT終了後', settingHint: '設定1: 7.8% → 設定6: 15.2%（約1.95倍差）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'レア役や規定G数消化でCZ・AT抽選', color: 'blue' },
+      { id: 'cz', label: 'レミニセンス（CZ）', description: '通常CZ。AT突入をかけた抽選', color: 'amber' },
+      { id: 'upper_cz', label: '大喰いの利世（上位CZ）', description: '上位CZ。高期待度のAT抽選', color: 'purple' },
+      { id: 'ep', label: 'エピソードボーナス', description: 'AT直行確定。設定差大（設定6は約2.5倍）', color: 'green' },
+      { id: 'at', label: 'AT（喰種覚醒）', description: 'メインAT。押し順ナビで出玉獲得', color: 'red' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz', label: '規定G数・レア役' },
+      { from: 'normal', to: 'upper_cz', label: '上位CZ当選' },
+      { from: 'normal', to: 'ep', label: 'エピソードBN当選' },
+      { from: 'cz', to: 'at', label: '当選' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'upper_cz', to: 'at', label: '当選' },
+      { from: 'upper_cz', to: 'normal', label: '非当選' },
+      { from: 'ep', to: 'at', label: 'AT直行' },
+      { from: 'at', to: 'normal', label: '終了（引き戻し3〜5G）' },
+    ],
+    notes: [
+      'CZ天井は通常600G（リセット時200Gに大幅短縮）',
+      'AT間天井は1200G',
+      'AT終了後3〜5Gは引き戻しゾーン。即ヤメ厳禁',
+    ],
+  },
+
+  stages: [
+    { name: '昼ステージ', color: 'blue', meaning: '基本ステージ。低確滞在示唆', tips: '特に示唆なし。通常の立ち回りでOK' },
+    { name: '夕方ステージ', color: 'amber', meaning: '通常〜高確示唆。CZ期待度やや高め', tips: 'レア役成立でCZ当選に期待' },
+    { name: '夜ステージ', color: 'purple', meaning: '高確以上示唆。CZ当選率UP', settingHint: '高確移行頻度が高いほど高設定の可能性', tips: 'レア役成立でCZ当選の大チャンス' },
+    { name: '東京上空ステージ', color: 'red', meaning: '前兆ステージ。CZまたはAT前兆中', tips: '前兆中のため即ヤメ厳禁' },
+    { name: '精神世界ステージ', color: 'green', meaning: '超高確ステージ。レア役でCZ/エピソードBN大チャンス', settingHint: '滞在中のCZ当選率に設定差', tips: '10〜30G滞在。全力でレア役を引きに行く' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBARを狙う。中・右リールはフリー打ちでOK',
+    reelStops: [
+      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー+中段にボーナス図柄' },
+      { name: '確定チェリー', how: '左BAR狙い', stopForm: '左リール中段にBN図柄またはチェリーが停止（1/16384）' },
+      { name: 'スイカ', how: '左BAR狙い→中BAR目安でスイカ狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイのテンパイハズレ' },
+    ],
+    notes: [
+      '通常時は左1st推奨',
+      'スイカ停止時のみ中リールスイカ狙い。それ以外は適当打ちでOK',
+      'AT中はナビに従う',
+    ],
+  },
 };
 
 export default config;

@@ -245,6 +245,56 @@ const config: MachineConfig = {
     { keyword: 'CZ', name: '弱レア役→CZ当選率', timing: '通常時', settingHint: '設定1: 0.2% → 設定6: 1.2%（約6倍差）', importance: 'weak' },
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/351.9 → 設定6: 1/290.3', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '規定G数消化・レア役でCZ/AT抽選', color: 'blue' },
+      { id: 'cz', label: '作戦区域（CZ）', description: 'CZ。段階的に前兆が進行し、AT突入を抽選', color: 'amber' },
+      { id: 'hannibal', label: '逆鱗ハンニバル', description: '上位CZ。敗北後100Gは高期待値ゾーン', color: 'purple' },
+      { id: 'at', label: 'アラガミバースト（AT）', description: 'ストーリー→アラガミ交戦→報酬の3パート構成', color: 'red' },
+      { id: 'shikkoku', label: '漆黒の捕喰者', description: '上位AT。高継続率で大量出玉', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz', label: '規定G数・レア役' },
+      { from: 'normal', to: 'hannibal', label: '逆鱗ハンニバル当選' },
+      { from: 'cz', to: 'at', label: '当選' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'hannibal', to: 'at', label: '勝利' },
+      { from: 'hannibal', to: 'normal', label: '敗北（100G高期待値）' },
+      { from: 'at', to: 'normal', label: '終了' },
+      { from: 'at', to: 'shikkoku', label: '昇格' },
+      { from: 'shikkoku', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      '天井は通常1000G+α（リセット時600G+αに短縮）',
+      'AT後/逆鱗ハンニバル敗北後0〜100Gは高期待値ゾーン',
+      '200〜300G・400〜450Gに規定G数の当選ゾーンあり',
+    ],
+  },
+
+  stages: [
+    { name: '街ステージ', color: 'blue', meaning: '基本ステージ。低確滞在示唆', tips: '特に示唆なし。通常の立ち回りでOK' },
+    { name: 'カフェステージ', color: 'amber', meaning: '高確示唆。CZ当選率UP', settingHint: '高確移行頻度が高いほど高設定の可能性', tips: 'レア役を引いたらCZ当選に期待' },
+    { name: 'ムーンパラダイス', color: 'purple', meaning: '高確示唆。CZ当選率UP', tips: 'カフェと同等の高確示唆' },
+    { name: '作戦区域ステージ', color: 'red', meaning: 'CZ前兆ステージ。段階的に進行', tips: '前兆中のため即ヤメ厳禁。段階が進むほど期待度UP' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBARを狙う。中・右リールはフリー打ちでOK',
+    reelStops: [
+      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー+中段にボーナス図柄', settingDiff: 'AT直撃: 設定1: 0.4% → 設定6: 5.9%' },
+      { name: 'スイカ', how: '左BAR狙い→中リール赤7目安でスイカ狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: '神チェリー', how: '左BAR狙い', stopForm: '左リール中段にチェリー停止。AT直撃+高継続率' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイのテンパイハズレ' },
+    ],
+    notes: [
+      '通常時は左1st推奨',
+      'スイカ停止時のみ中リールにスイカ狙い。それ以外は適当打ちでOK',
+      'AT中はナビに従う',
+      '強チェリー成立時はAT直撃に設定差大（15倍差）。必ず記録',
+    ],
+  },
 };
 
 export default config;

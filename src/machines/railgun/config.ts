@@ -229,6 +229,54 @@ const config: MachineConfig = {
     { keyword: '555枚', name: '特殊獲得枚数（555枚OVER）', timing: 'AT中', settingHint: '設定5以上', importance: 'confirmed' },
     { keyword: '666枚', name: '特殊獲得枚数（666枚OVER）', timing: 'AT中', settingHint: '設定6濃厚', importance: 'confirmed' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '超電磁砲コイン停止でCZ決定ゾーンへ。レア役でコイン獲得', color: 'blue' },
+      { id: 'girls_judge', label: 'ガールズジャッジ', description: 'CZ決定ゾーン。CZの種類を決定', color: 'amber' },
+      { id: 'cz', label: 'CZ（ミュージックチャンス/バトル）', description: 'CZ成功でAT突入', color: 'purple' },
+      { id: 'at', label: 'AT（超電磁砲DRIVE）', description: 'ゲーム数上乗せ型AT。No Lossシステム搭載', color: 'red' },
+      { id: 'upper_at', label: '上位AT（超電磁砲BURST）', description: '上位AT。大量上乗せのチャンス', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'girls_judge', label: '超電磁砲コイン停止' },
+      { from: 'girls_judge', to: 'cz', label: 'CZ決定' },
+      { from: 'cz', to: 'normal', label: '失敗' },
+      { from: 'cz', to: 'at', label: '成功' },
+      { from: 'normal', to: 'at', label: '直撃当選' },
+      { from: 'at', to: 'normal', label: '終了（500Gゾーンフォロー推奨）' },
+      { from: 'at', to: 'upper_at', label: '上位AT昇格' },
+      { from: 'upper_at', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      '天井999G（リセット時699Gに短縮）',
+      'AT終了後450〜550Gゾーンの期待度約40%',
+      'No Lossシステム：上乗せしたG数は全て消化可能（上乗せ損なし）',
+    ],
+  },
+
+  stages: [
+    { name: '常盤台ステージ', color: 'blue', meaning: '基本ステージ。通常状態滞在濃厚', tips: '特に示唆なし。レア役でコイン獲得を狙う' },
+    { name: '学園都市ステージ', color: 'amber', meaning: '高確率状態示唆。CZ当選率UP', settingHint: '移行頻度が高いほど高設定の可能性', tips: 'レア役成立時のCZ当選に期待' },
+    { name: '前兆ステージ', color: 'purple', meaning: 'CZまたはAT当選の前兆中', tips: '前兆中のため即ヤメ厳禁' },
+    { name: '暗部ステージ', color: 'red', meaning: '超高確率状態。AT直撃のチャンス', tips: '即ヤメ厳禁。AT当選まで粘る価値あり' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リールに青BARを狙う。スイカ停止時以外は中・右リールフリー打ちでOK',
+    reelStops: [
+      { name: 'スイカ', how: '左に青BAR狙い→スイカテンパイで中・右に白7を目安にスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '上位CZ出現率に約5.6倍差（設定1:2.3%→設定6:13.0%）' },
+      { name: 'チェリー', how: '左に青BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: '強チェリー', how: '左に青BAR狙い', stopForm: 'チェリー＋中段特殊停止形' },
+      { name: 'チャンス目', how: '左に青BAR狙い', stopForm: 'ベル・リプレイのテンパイハズレ' },
+      { name: '超電磁砲コイン', how: '左に青BAR狙い', stopForm: '特殊リール停止（CZ決定ゾーン突入）' },
+    ],
+    notes: [
+      '通常時は毎G左リールに青BAR狙いが必須',
+      'AT中はナビに従う。カットイン発生時は指定図柄を狙う',
+      'No Lossシステムにより上乗せG数は全て消化可能',
+    ],
+  },
 };
 
 export default config;

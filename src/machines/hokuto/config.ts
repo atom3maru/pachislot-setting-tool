@@ -234,6 +234,55 @@ const config: MachineConfig = {
     { keyword: '天破', name: '天破の刻出現率', timing: '通常時', settingHint: '設定1: 1/100.2 → 設定6: 1/81.3', importance: 'weak' },
     { keyword: 'リセット', name: '朝一256以内AT当選率', timing: '朝一', settingHint: '設定1: 25% → 設定6: 52%', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'あべしポイント管理。レア役でポイント加算・AT直撃抽選', color: 'blue' },
+      { id: 'tengeki', label: '天撃（上位CZ）', description: '上位CZ。成功で上位AT濃厚', color: 'amber' },
+      { id: 'tenpa', label: '天破の刻', description: 'CZ的役割。AT突入のチャンス', color: 'purple' },
+      { id: 'at', label: '闘神演舞（AT）', description: 'メインAT。押し順ナビで出玉獲得', color: 'red' },
+      { id: 'denshou', label: '伝承モード', description: '上位AT。高継続率で大量出玉のチャンス', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'tenpa', label: '規定あべし到達・レア役' },
+      { from: 'normal', to: 'tengeki', label: '天撃突入条件' },
+      { from: 'tenpa', to: 'at', label: '当選' },
+      { from: 'tenpa', to: 'normal', label: '非当選' },
+      { from: 'tengeki', to: 'at', label: '成功' },
+      { from: 'tengeki', to: 'normal', label: '失敗' },
+      { from: 'at', to: 'normal', label: '終了' },
+      { from: 'at', to: 'denshou', label: '伝承移行' },
+      { from: 'denshou', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      '天井は通常1536あべし（リセット時1280あべしに短縮）',
+      '193〜256あべしは全モード共通の高期待度ゾーン',
+      'AT終了後は天国モード移行の可能性あり（256あべし以内当選）',
+    ],
+  },
+
+  stages: [
+    { name: '荒野ステージ', color: 'blue', meaning: '基本ステージ。低確滞在示唆', tips: '特に示唆なし。通常の立ち回りでOK' },
+    { name: 'カサンドラステージ', color: 'purple', meaning: '高確状態滞在示唆。天破の刻当選率UP', settingHint: '高確移行頻度が高いほど高設定の可能性', tips: 'レア役を引いたら天破の刻当選に期待' },
+    { name: '修羅の国ステージ', color: 'red', meaning: '前兆ステージ。天破の刻やAT前兆中', tips: '前兆中のため即ヤメ厳禁' },
+    { name: 'UI赤表示', color: 'red', meaning: 'UI枠が赤く変化。高モード示唆', settingHint: '高設定ほど出現しやすい', tips: '出現時は天国モードの期待大' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段に神拳BAR（または青BAR）を狙う。中・右リールはフリー打ちでOK',
+    reelStops: [
+      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール下段に停止' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール中段に停止' },
+      { name: '確定チェリー', how: '左BAR狙い', stopForm: '左右リール中段にチェリーが一直線に停止' },
+      { name: 'スイカ', how: '左BAR狙い→中右に赤7目安でスイカ狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイ/ベルのテンパイハズレ' },
+    ],
+    notes: [
+      '通常時は左1st推奨。中押し・逆押しはペナルティ発生',
+      'AT中はナビに従う',
+      '100G毎に枠ランプの色を確認（設定示唆）',
+    ],
+  },
 };
 
 export default config;

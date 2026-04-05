@@ -247,6 +247,57 @@ const config: MachineConfig = {
     { keyword: 'カヲルボイス', name: 'ED中ボイス（カヲル）', timing: 'エンディング中レア役成立時', settingHint: '設定6濃厚（設定示唆）', importance: 'confirmed' },
     { keyword: 'ボーナス終了ボイス', name: 'ボーナス終了時PUSH（スルー天井示唆）', timing: 'ボーナス終了時PUSH（AT非当選時）', settingHint: '【天井示唆】加持=スルー天井残り2回以内、レイ=減算示唆（高設定ほど優遇）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'レア役・小役連でボーナス抽選。スルー天井あり', color: 'blue' },
+      { id: 'cz', label: 'CZ（アスカVSレイ）', description: 'スイカ成立で突入抽選。小役連続でボーナス当選', color: 'amber' },
+      { id: 'bonus', label: 'ボーナス', description: 'エヴァ/ゴジラ/G覚醒チャレンジ。AT突入抽選', color: 'purple' },
+      { id: 'senmetsu', label: '殲滅作戦', description: 'ボーナス中のバトル。勝利でAT突入', color: 'red' },
+      { id: 'at', label: 'AT（殲滅ラッシュ）', description: 'ゲーム数上乗せ型AT。純増約5.0枚/G', color: 'green' },
+      { id: 'upper_at', label: '上位AT', description: '約77%ループの上位AT。大量出玉のチャンス', color: 'pink' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz', label: 'スイカ成立' },
+      { from: 'cz', to: 'normal', label: '失敗' },
+      { from: 'cz', to: 'bonus', label: '成功' },
+      { from: 'normal', to: 'bonus', label: 'レア役・小役連' },
+      { from: 'bonus', to: 'senmetsu', label: '殲滅作戦突入' },
+      { from: 'senmetsu', to: 'at', label: '勝利' },
+      { from: 'senmetsu', to: 'normal', label: '敗北（スルー回数加算）' },
+      { from: 'bonus', to: 'normal', label: 'AT非当選（スルー加算）' },
+      { from: 'at', to: 'upper_at', label: '上位AT昇格' },
+      { from: 'at', to: 'normal', label: '終了（引き戻し70G）' },
+      { from: 'upper_at', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      'ボーナススルー天井9回（リセット時5回）で次回AT確定',
+      'G数天井1000G（リセット時700G）でボーナス確定',
+      'AT終了後70G間は引き戻し抽選。赤発光中は絶対にやめない',
+    ],
+  },
+
+  stages: [
+    { name: '市街地ステージ', color: 'blue', meaning: '基本ステージ。通常状態滞在濃厚', tips: '特に示唆なし。レア役・小役連に注目' },
+    { name: '高確ステージ', color: 'amber', meaning: '高確率状態。ボーナス当選率UP', settingHint: '高確移行頻度に設定差の可能性', tips: 'レア役でボーナス当選に期待大' },
+    { name: '超高確ステージ', color: 'red', meaning: '超高確率状態。ボーナス当選率大幅UP', tips: '全力でレア役を引きに行く' },
+    { name: '宇宙ステージ', color: 'purple', meaning: 'ボーナス当選でAT濃厚。各役のボーナス期待度大幅UP', tips: '即ヤメ厳禁。ボーナス当選まで打ち切り推奨' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBAR（または紫7）を狙う。中・右リールはフリー打ちでOK',
+    reelStops: [
+      { name: 'スイカ', how: '左BAR狙い→スイカテンパイで中リールにBARを目安にスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: 'スイカからCZ当選率に設定差（設定1:20.3%→設定6:30.5%）' },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: 'G侵食役', how: '左BAR狙い', stopForm: '特殊停止形。ボーナス抽選の重要契機' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル・リプレイのテンパイハズレ' },
+    ],
+    notes: [
+      '通常時は毎G左リール第1停止推奨',
+      '小役連（同一小役の連続成立）がゲーム性の鍵。ボーナス抽選・AT中上乗せに影響',
+      'AT中はナビに従う（押し順ナビ発生時）',
+    ],
+  },
 };
 
 export default config;

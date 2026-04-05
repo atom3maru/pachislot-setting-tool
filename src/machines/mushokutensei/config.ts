@@ -245,6 +245,58 @@ const config: MachineConfig = {
     { keyword: 'AT', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/416 → 設定6: 1/292（約1.42倍差）', importance: 'weak' },
     { keyword: 'TP2', name: 'TP2突入率', timing: '通常時', settingHint: '設定1: 1/2281 → 設定6: 1/1324（約1.72倍差）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'ステチェン（ステージチェンジ）管理。ヒロイン役でCZ抽選', color: 'blue' },
+      { id: 'cz', label: '無職チャンス（CZ）', description: 'ヒロイン役から当選。ボーナス当選を目指す', color: 'amber' },
+      { id: 'bonus', label: '魔術ボーナス', description: 'ボーナス中の抽選でAT突入を目指す', color: 'purple' },
+      { id: 'at', label: 'AT（異世界行ったら本気だす）', description: 'セット継続型AT。セット開始画面で設定示唆', color: 'red' },
+      { id: 'tp2', label: 'ターニングポイント2', description: '上位特化ゾーン。大量上乗せのチャンス', color: 'green' },
+      { id: 'orsted', label: 'オルステッド（最強特化）', description: '最強特化ゾーン。出玉の大チャンス', color: 'red' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz', label: 'ヒロイン役・レア役' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'cz', to: 'bonus', label: '当選' },
+      { from: 'bonus', to: 'normal', label: 'AT非突入' },
+      { from: 'bonus', to: 'at', label: 'AT突入' },
+      { from: 'at', to: 'normal', label: '終了' },
+      { from: 'at', to: 'tp2', label: 'TP2突入' },
+      { from: 'tp2', to: 'at', label: '上乗せ後ATへ' },
+      { from: 'at', to: 'orsted', label: 'オルステッド突入' },
+      { from: 'orsted', to: 'at', label: '上乗せ後ATへ' },
+    ],
+    notes: [
+      '天井はG数ではなくステチェン回数で管理（ボーナス間19回/AT間40回）',
+      'リセット時はボーナス間13回/AT間17回に大幅短縮',
+      'AT駆け抜け後もボーナス間天井13回に短縮',
+    ],
+  },
+
+  stages: [
+    { name: 'ブエナ村', color: 'blue', meaning: '基本ステージ。通常状態を示唆', tips: 'デフォルトステージ。特に示唆なし' },
+    { name: 'ロアの街', color: 'green', meaning: 'エリスステージ。CZ当選のチャンス', tips: 'ヒロイン役でCZ抽選。レア役に注目' },
+    { name: '大森林', color: 'amber', meaning: 'シルフィステージ。CZ当選のチャンス', tips: 'ヒロイン役でCZ抽選。レア役に注目' },
+    { name: 'シーローン王国', color: 'purple', meaning: 'CZ高確ステージ。CZ当選率が大幅UP', settingHint: '移行頻度に設定差の可能性', tips: '全レア役でCZ当選に大期待！即ヤメ厳禁' },
+    { name: 'ヒトガミの空間', color: 'red', meaning: 'ボーナス直撃のチャンスゾーン', tips: 'ボーナス直撃の可能性あり！最大のチャンス' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール第1停止（左1st）を遵守すれば全リール適当打ちでOK。小役の取りこぼしなし',
+    reelStops: [
+      { name: 'ヒロイン役', how: '左1stで適当打ち', stopForm: '自動的に揃う（目押し不要）' },
+      { name: 'レア役', how: '左1stで適当打ち', stopForm: '自動的に揃う（目押し不要）' },
+      { name: 'リプレイ', how: '適当打ち', stopForm: '自動的に揃う' },
+      { name: 'ベル', how: '適当打ち', stopForm: '自動的に揃う' },
+    ],
+    notes: [
+      '通常時は必ず左リールを最初に停止させること（左1st厳守）',
+      '中押し・逆押しはペナルティ発生の可能性あり',
+      '本機は小役確率に設定差なし。小役カウントは不要',
+      'AT中はナビに従う',
+    ],
+  },
 };
 
 export default config;

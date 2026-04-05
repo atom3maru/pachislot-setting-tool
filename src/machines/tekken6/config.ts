@@ -210,6 +210,60 @@ const config: MachineConfig = {
     { keyword: 'ボーナス', name: 'ボーナス初当たり確率', timing: '通常時', settingHint: '設定1: 1/264.7 → 設定6: 1/218.5', importance: 'weak' },
     { keyword: 'スルー', name: 'スルー天井', timing: '通常時', settingHint: '2スルーで天井（リセット時も2スルー）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'ポイント蓄積型。規定pt到達で鉄拳ゾーン（前兆）へ', color: 'blue' },
+      { id: 'tekken_zone', label: '鉄拳ゾーン（前兆）', description: '規定pt到達で発動。ボーナス抽選', color: 'amber' },
+      { id: 'cz', label: 'CZ（鉄拳チャンス）', description: 'レア役契機のCZ。ボーナス当選を目指す', color: 'green' },
+      { id: 'bonus', label: 'ボーナス', description: 'BIG/REG。BIG中にAT突入を目指す', color: 'purple' },
+      { id: 'epi_big', label: 'エピソードBIG', description: '赤7BIG昇格の上位ボーナス。AT突入濃厚', color: 'red' },
+      { id: 'at', label: 'AT（デビルクラッシュ）', description: 'G数上乗せ型AT。引き戻し率に設定差', color: 'red' },
+    ],
+    edges: [
+      { from: 'normal', to: 'tekken_zone', label: '規定pt到達' },
+      { from: 'normal', to: 'cz', label: 'レア役契機' },
+      { from: 'tekken_zone', to: 'normal', label: '非当選' },
+      { from: 'tekken_zone', to: 'bonus', label: '当選' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'cz', to: 'bonus', label: '当選' },
+      { from: 'bonus', to: 'normal', label: 'AT非突入' },
+      { from: 'bonus', to: 'at', label: 'AT突入' },
+      { from: 'bonus', to: 'epi_big', label: 'エピソードBIG昇格' },
+      { from: 'epi_big', to: 'at', label: 'AT突入濃厚' },
+      { from: 'at', to: 'normal', label: '終了' },
+      { from: 'at', to: 'bonus', label: '引き戻し' },
+    ],
+    notes: [
+      '天井は900pt（約747G相当）。ptとG数は完全に一致しない',
+      'スルー天井は2スルー（リセット時も2スルー）',
+      'リセット時は天井500ptに短縮',
+      'エピソードBIG昇格率に大きな設定差（設定1: 2% → 設定6: 13%）',
+    ],
+  },
+
+  stages: [
+    { name: '都市ステージ', color: 'blue', meaning: '基本ステージ。通常状態を示唆', tips: '特に示唆なし。レア役でポイント獲得を狙う' },
+    { name: '道場ステージ', color: 'green', meaning: '高確ステージ示唆。CZ突入率UP', settingHint: '移行頻度に設定差の可能性', tips: 'レア役でCZ当選に期待' },
+    { name: '火山ステージ', color: 'red', meaning: '超高確ステージ示唆。CZ突入率大幅UP', tips: 'レア役を引ければCZ当選に大期待' },
+    { name: 'クマステージ', color: 'amber', meaning: '本前兆濃厚ステージ。ボーナス当選期待大', tips: '移行すれば本前兆濃厚！即ヤメ厳禁' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBAR狙い。スイカテンパイ時のみ中リールにBAR目安でスイカ狙い。右リールはフリー打ち',
+    reelStops: [
+      { name: 'スイカ', how: '左BAR狙い→スイカテンパイ時は中リールBAR目安でスイカ狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止。中右フリー打ち' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイテンパイハズレ' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー角停止+右リールに特定図柄' },
+      { name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが中段に停止（プレミア）' },
+    ],
+    notes: [
+      '通常時は毎G左リールBAR狙いが必須（左1st厳守）',
+      '中押し・逆押しはペナルティ発生の可能性あり',
+      'AT中・ボーナス中はナビに従う',
+    ],
+  },
 };
 
 export default config;

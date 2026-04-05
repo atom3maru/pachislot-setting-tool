@@ -239,6 +239,55 @@ const config: MachineConfig = {
     { keyword: '直撃', name: '弱チェリーAT直撃', timing: '通常時', settingHint: '設定1: 0.4% → 設定6: 3.8%（約9.5倍差）', importance: 'weak' },
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/265.1 → 設定6: 1/219.6', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '規定G数消化・レア役でCZ抽選。解呪状態は50G毎に切替', color: 'blue' },
+      { id: 'cz', label: '解呪ノ儀（CZ）', description: 'AT突入をかけたチャンスゾーン', color: 'amber' },
+      { id: 'upper_cz', label: '怪逅ノ儀（上位CZ）', description: '上位CZ。成功で超倖時間へ', color: 'purple' },
+      { id: 'at', label: '倖時間（AT）', description: 'メインAT。押し順ナビで出玉獲得', color: 'red' },
+      { id: 'upper_at', label: '超倖時間（上位AT）', description: '上位AT。大量出玉のチャンス', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz', label: '規定G数・レア役' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'cz', to: 'at', label: '当選' },
+      { from: 'normal', to: 'upper_cz', label: 'ツラヌキ等' },
+      { from: 'upper_cz', to: 'upper_at', label: '成功' },
+      { from: 'upper_cz', to: 'normal', label: '失敗' },
+      { from: 'at', to: 'normal', label: '終了' },
+      { from: 'at', to: 'upper_at', label: '昇格' },
+      { from: 'upper_at', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      '天井は通常1000G（リセット時600Gに短縮）',
+      '解呪状態は50G毎にLOW/HIGHが切り替わり、HIGH中はCZ当選率UP',
+      'AT終了後0〜50Gは引き戻しゾーン',
+    ],
+  },
+
+  stages: [
+    { name: '昼ステージ', color: 'blue', meaning: '基本ステージ。低確滞在示唆', tips: '特に示唆なし。通常の立ち回りでOK' },
+    { name: '夕方ステージ', color: 'amber', meaning: '通常〜高確示唆。CZ期待度やや高め', tips: 'レア役を引いたらCZ当選に期待' },
+    { name: '夜ステージ', color: 'purple', meaning: '高確以上示唆。CZ当選率UP', settingHint: '高確移行頻度が高いほど高設定の可能性', tips: 'レア役成立でCZ当選の大チャンス' },
+    { name: '学習塾ステージ', color: 'red', meaning: 'CZ前兆・解呪連モード示唆', tips: '前兆中のため即ヤメ厳禁。解呪連モードなら連続CZ抽選あり' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBARを狙う。中・右リールはフリー打ちでOK',
+    reelStops: [
+      { name: 'スイカ', how: '左BAR狙い→中右にスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '設定1: 1/87.4 → 設定6: 1/69.9' },
+      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー+中段にボーナス図柄' },
+      { name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール中段に停止' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイのテンパイハズレ' },
+    ],
+    notes: [
+      '通常時は毎G左リールBAR狙いが必須',
+      'AT中はナビに従う（押し順ナビ発生時）',
+      '怪異停止（擬似遊技）発生時は停止パターンに注目',
+    ],
+  },
 };
 
 export default config;

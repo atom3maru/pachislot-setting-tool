@@ -245,6 +245,52 @@ const config: MachineConfig = {
     { keyword: '初当たり', name: '炎炎ループ初当たり確率', timing: '通常時', settingHint: '設定1: 1/684 → 設定6: 1/486（約1.41倍差）', importance: 'weak' },
     { keyword: '初当たり', name: 'ボーナス初当たり確率', timing: '通常時', settingHint: '設定1: 1/272 → 設定6: 1/227（約1.20倍差）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '規定G数・レア役・十字目変換でボーナス抽選', color: 'blue' },
+      { id: 'bonus', label: 'ボーナス', description: 'BIG/REG。炎炎ループ突入のチャンス', color: 'amber' },
+      { id: 'loop', label: '炎炎激闘/大戦', description: 'ループ型ボーナス高確率状態', color: 'red' },
+      { id: 'ending', label: 'エンディング', description: '大量獲得時のエンディング。ミニキャラで設定示唆', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'bonus', label: '規定G数・レア役・十字目変換' },
+      { from: 'bonus', to: 'normal', label: 'ループ非突入' },
+      { from: 'bonus', to: 'loop', label: 'ループ突入' },
+      { from: 'loop', to: 'bonus', label: 'ループ継続' },
+      { from: 'loop', to: 'normal', label: 'ループ終了' },
+      { from: 'loop', to: 'ending', label: '大量獲得' },
+      { from: 'ending', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      '天井は通常850G（リセット時650Gに短縮）',
+      'リセット時は約1/3で88G天井に振り分け',
+      'ボーナス後の伝導者の罠を必ず消化。炎炎激闘後は潜伏28Gを確認',
+    ],
+  },
+
+  stages: [
+    { name: '第8特殊消防隊ステージ', color: 'blue', meaning: '基本ステージ。通常状態滞在示唆', tips: '特に示唆なし。通常の立ち回りでOK' },
+    { name: '訓練ステージ', color: 'amber', meaning: '高確示唆。ボーナス当選率UP', settingHint: '高確移行頻度に設定差あり', tips: 'レア役を引いたらボーナス当選に期待' },
+    { name: '中華半島上陸作戦', color: 'purple', meaning: '規定G数契機の前兆ステージ', tips: '前兆中。連続演出で当否告知' },
+    { name: '第8特殊消防隊緊急出動', color: 'red', meaning: 'レア役/十字目変換契機の前兆ステージ', tips: '前兆中のため即ヤメ厳禁' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段に黒BARを狙う。スイカ停止時のみ中右にスイカ狙い',
+    reelStops: [
+      { name: 'スイカ', how: '左BAR狙い→中BAR狙い・右白7狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー+中段にボーナス図柄' },
+      { name: '十字目変換', how: '自動', stopForm: 'リプレイ小V後の次G、十字目が停止', settingDiff: '設定1: 42% → 設定6: 50%' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイのテンパイハズレ' },
+    ],
+    notes: [
+      '通常時は左1st推奨。スイカ以外は残りリール適当打ちでOK',
+      'ボーナス中・AT中はナビに従う',
+      'リプレイ小V停止時は十字目変換の発生に注目',
+    ],
+  },
 };
 
 export default config;

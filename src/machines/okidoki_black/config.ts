@@ -183,6 +183,67 @@ const config: MachineConfig = {
     { keyword: '仮天井', name: '仮天井ゾーン301-400G', timing: '通常時', settingHint: '仮天井でボーナス当選率UP', importance: 'weak' },
     { keyword: 'スルー', name: 'スルー天井', timing: '通常時', settingHint: '6スルーで天井・前日回数引き継ぎ', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal_a', label: '通常A', description: 'ボーナス確率低。天井999G', color: 'blue' },
+      { id: 'normal_b', label: '通常B', description: 'ボーナス確率低だがボーナス後50%以上で連チャンモードへ。降格なし', color: 'cyan' },
+      { id: 'hikimodo', label: '引き戻し', description: 'ボーナス確率中。天井200G。通常Aより天国移行率UP', color: 'amber' },
+      { id: 'chance', label: 'チャンス', description: 'ボーナス確率中。天井200G。ボーナス後は通常Bか連チャンモードへ', color: 'green' },
+      { id: 'tengoku', label: '天国', description: '32G以内にボーナス確定。高確率で天国ループ', color: 'red' },
+      { id: 'dokidoki', label: 'ドキドキ', description: '32G以内にボーナス確定。80%で同モードループ', color: 'red' },
+      { id: 'chodoki', label: '超ドキドキ', description: '32G以内にボーナス確定。90%で同モードループ', color: 'red' },
+      { id: 'kurodoki', label: '黒ドキモード', description: '次回天国以上確定。高設定ほど移行率UP', color: 'purple' },
+      { id: 'bonus', label: 'ボーナス', description: 'ハイビスカス点灯で確定。点灯パターンでモード示唆', color: 'red' },
+    ],
+    edges: [
+      { from: 'normal_a', to: 'bonus', label: 'レア役・規定G数' },
+      { from: 'normal_b', to: 'bonus', label: 'レア役・規定G数' },
+      { from: 'hikimodo', to: 'bonus', label: '200G以内' },
+      { from: 'chance', to: 'bonus', label: '200G以内' },
+      { from: 'bonus', to: 'normal_a', label: 'モード移行（通常A）' },
+      { from: 'bonus', to: 'normal_b', label: 'モード移行（通常B）' },
+      { from: 'bonus', to: 'hikimodo', label: 'モード移行（引き戻し）' },
+      { from: 'bonus', to: 'chance', label: 'モード移行（チャンス）' },
+      { from: 'bonus', to: 'tengoku', label: 'モード移行（天国）' },
+      { from: 'bonus', to: 'dokidoki', label: 'モード移行（ドキドキ）' },
+      { from: 'bonus', to: 'chodoki', label: 'モード移行（超ドキドキ）' },
+      { from: 'tengoku', to: 'bonus', label: '32G以内' },
+      { from: 'dokidoki', to: 'bonus', label: '32G以内' },
+      { from: 'chodoki', to: 'bonus', label: '32G以内' },
+      { from: 'normal_a', to: 'kurodoki', label: '非有利区間経由' },
+      { from: 'kurodoki', to: 'tengoku', label: '次回天国以上確定' },
+    ],
+    notes: [
+      'モード管理が最重要。通常Bは降格なしで連チャンモードまで粘れる',
+      '連チャンモード（天国/ドキドキ/超ドキドキ）は32G以内にボーナス確定',
+      '黒ドキモードは非有利区間経由で移行。次回天国以上確定',
+      'ハイビスカス点灯パターン（全30種）でモードを示唆',
+      'リセット時40%でチャンスモード移行（天井200G）',
+    ],
+  },
+
+  stages: [
+    { name: '通常ステージ', color: 'blue', meaning: '通常モード（A/B/引き戻し/チャンス）滞在中', tips: 'ハイビスカスの点灯を待つ。レア役でボーナス抽選' },
+    { name: '連チャンステージ', color: 'red', meaning: '天国/ドキドキ/超ドキドキモード。32G以内にボーナス確定', tips: '32Gまで必ず回す。即ヤメ厳禁' },
+    { name: '黒ドキステージ', color: 'purple', meaning: '黒ドキモード滞在。次回天国以上確定', settingHint: '高設定ほど黒ドキモード移行率UP', tips: '次回天国以上確定のため全ツッパ推奨' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBAR狙い。スイカテンパイ時は中・右リールにスイカ狙い',
+    reelStops: [
+      { name: 'チェリーA', how: '左BAR狙い', stopForm: 'チェリーが角に停止（払い出しあり）' },
+      { name: 'チェリーB', how: '左BAR狙い', stopForm: 'チェリーが中段に停止（払い出しあり）', settingDiff: '設定1: 1/168.0 → 設定6: 1/128.5' },
+      { name: 'スイカ', how: '左BAR狙い→中右スイカ狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: '確定役B', how: '左BAR狙い→中右スイカ狙い', stopForm: 'スイカ小V型（超レア）', settingDiff: '設定1: 1/16384 → 設定6: 1/6554' },
+      { name: '確定チェリー', how: '左BAR狙い', stopForm: '中段チェリー（ボーナス確定）' },
+    ],
+    notes: [
+      '通常時は毎G左リールBAR狙いが必須',
+      'ボーナス中は押し順ナビに従う。予告音発生時は通常時と同じ打ち方で消化',
+      'チェリーA/Bの区別が設定判別の鍵。中段停止がチェリーB',
+    ],
+  },
 };
 
 export default config;

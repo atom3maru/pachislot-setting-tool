@@ -186,6 +186,53 @@ const config: MachineConfig = {
     { keyword: 'GGセット数', name: 'GGセット数ストック', timing: 'AT中', settingHint: '高設定ほど連チャン性能が優遇される傾向', importance: 'weak' },
     { keyword: 'モードB', name: '前兆発生ゾーン（モードB以上）', timing: '450-550G付近', settingHint: '高設定ほどモードB以上滞在率UP', importance: 'strong' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'モード管理。規定G数到達で前兆発生。最大1500G+αで天井', color: 'blue' },
+      { id: 'cz', label: '前兆・CZ', description: '規定G数到達やレア役で発生。GG突入抽選', color: 'amber' },
+      { id: 'gg', label: 'GG（ゴッドゲーム）', description: '1セット50G。純増約7.0枚/G。ストック&ループで連チャン', color: 'red' },
+      { id: 'sgg', label: 'SUPER GOD GAME', description: '赤7揃いで突入。上位GG', color: 'purple' },
+      { id: 'zgame', label: 'Z-GAME', description: 'GOD揃いで突入。4セット+強力ループストック。期待枚数3000枚超', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz', label: '規定G数到達/レア役' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'cz', to: 'gg', label: 'GG当選' },
+      { from: 'gg', to: 'gg', label: 'ストック・ループ継続' },
+      { from: 'gg', to: 'normal', label: '終了' },
+      { from: 'gg', to: 'sgg', label: '赤7揃い' },
+      { from: 'gg', to: 'zgame', label: 'GOD揃い' },
+      { from: 'sgg', to: 'gg', label: '終了（GGに戻る）' },
+      { from: 'zgame', to: 'gg', label: '終了（GGに戻る）' },
+    ],
+    notes: [
+      '天井は1500G+αでGG確定。※新台のため一部推定',
+      '偶数設定が優遇される特殊なスペック（設定2:1/420、設定4:1/338、設定6:1/295）',
+      'GOD揃い確率は全設定共通1/16384（推定）',
+    ],
+  },
+
+  stages: [
+    { name: '基本ステージ', color: 'blue', meaning: '通常状態。モード管理中', tips: '規定G数到達で前兆発生に期待。※新台のため一部推定' },
+    { name: 'ポセイドンステージ', color: 'amber', meaning: '高設定示唆。出現率に設定差あり', settingHint: '設定1:5%→設定6:10%', tips: '出現頻度をカウントして設定推測の材料に' },
+    { name: 'ゼウスステージ', color: 'purple', meaning: '高設定示唆（強）。出現率に約3倍の設定差', settingHint: '設定1:2%→設定6:6%（約3倍差）', tips: '出現すれば高設定の期待大' },
+    { name: '前兆ステージ', color: 'red', meaning: 'GG当選の前兆中', tips: '前兆中のため即ヤメ厳禁' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は全リールフリー打ちでOK（左リール第1停止推奨）。目押し不要の機種',
+    reelStops: [
+      { name: '通常小役', how: '適当打ち', stopForm: 'リプレイ・ベル等が自動で揃う' },
+      { name: 'GOD揃い', how: '適当打ち（自動停止）', stopForm: 'GOD図柄が一直線に揃う。GG中にのみ出現', settingDiff: '全設定共通1/16384（推定）' },
+      { name: '赤7揃い', how: '適当打ち（自動停止）', stopForm: '赤7が揃う。SUPER GOD GAME突入', settingDiff: '全設定共通（推定）' },
+    ],
+    notes: [
+      '目押し不要のため初心者にも打ちやすい機種',
+      'GG中もナビに従うだけでOK',
+      '※新台のため解析データは限定的。データ公開され次第更新',
+    ],
+  },
 };
 
 export default config;

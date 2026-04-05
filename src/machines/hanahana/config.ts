@@ -304,6 +304,45 @@ const config: MachineConfig = {
     { keyword: 'パネル上のみ', name: 'パネルフラッシュ（上のみ点滅）', timing: 'REG/BIG終了後', settingHint: '奇数設定示唆', importance: 'weak' },
     { keyword: 'パネル下のみ', name: 'パネルフラッシュ（下のみ点滅）', timing: 'REG/BIG終了後', settingHint: '偶数設定示唆', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'ノーマルタイプ。レア役・リーチ目でボーナス抽選', color: 'blue' },
+      { id: 'big', label: 'BIGボーナス', description: 'BT前半（196枚払い出し）→中段リプレイでBT後半へ。設定示唆あり', color: 'red' },
+      { id: 'reg', label: 'REGボーナス', description: 'REG中スイカ確率に設定差。パネルフラッシュで設定示唆', color: 'purple' },
+    ],
+    edges: [
+      { from: 'normal', to: 'big', label: 'BIG当選' },
+      { from: 'normal', to: 'reg', label: 'REG当選' },
+      { from: 'big', to: 'normal', label: '終了（ランプ色確認）' },
+      { from: 'reg', to: 'normal', label: '終了（パネルフラッシュ確認）' },
+    ],
+    notes: [
+      'ノーマルタイプのため天井なし。ボーナス間いつでもやめてOK',
+      'BIGはBT仕様（前半+後半の2パート構成）',
+      'BIG後半のサイドランプ色とハイビスカスランプ色が設定示唆の柱',
+    ],
+  },
+
+  stages: [
+    { name: '通常ステージ', color: 'blue', meaning: 'ノーマルタイプのため通常ステージのみ', tips: 'ステージによる設定示唆はなし。ボーナス確率とランプで判断' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リールにBAR（赤BARまたは白BAR）を狙う。チェリー停止時以外は中・右リールフリー打ちでOK',
+    reelStops: [
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止。中・右リールフリー打ちでOK' },
+      { name: 'スイカ', how: '左BAR狙い→スイカまでスベったら中・右にもスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: 'BIG中スイカ:設定1=1/30→設定V=1/19.3、REG中:設定1=1/80→設定V=1/52.9' },
+      { name: 'ベル', how: '自動揃い', stopForm: 'ベルが揃う', settingDiff: '設定1=1/7.60→設定V=1/7.25' },
+      { name: 'リーチ目', how: '左BAR狙い', stopForm: '特殊停止形でボーナス確定' },
+    ],
+    notes: [
+      'BIG前半は順押し適当打ちでOK。サイドが赤緑フラッシュしたらチェリーorスイカ狙い',
+      'BIG後半は一度だけ左リール中段に白7ビタ押し。スイカ揃い時のサイドランプ色を確認',
+      'スイカ揃い後のBIG後半は左リール白7を避けて順押しフリー打ち',
+      'REG中も適当打ちでOK。スイカ回数をカウント',
+    ],
+  },
 };
 
 export default config;

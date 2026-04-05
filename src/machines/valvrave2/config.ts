@@ -226,6 +226,56 @@ const config: MachineConfig = {
     { keyword: 'サブモニター', name: 'サブモニター機体（有人タイプ）', timing: '通常時', settingHint: '偶数設定示唆', importance: 'weak' },
     { keyword: 'サブモニター', name: 'サブモニター機体（無人タイプ）', timing: '通常時', settingHint: '奇数設定示唆', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '周期管理+CZ間G数管理。レア役でCZ抽選', color: 'blue' },
+      { id: 'dennou', label: '電脳ZONE', description: '高確率ゾーン。CZ当選率大幅UP', color: 'amber' },
+      { id: 'cz', label: 'ドルシア攻防戦（CZ）', description: 'ボーナス当選をかけたCZ', color: 'purple' },
+      { id: 'bonus', label: '革命BN/決戦BN', description: 'ボーナス。AT突入のチャンス', color: 'red' },
+      { id: 'at', label: '革命ラッシュ（AT）', description: 'メインAT。ハラキリドライブで大量上乗せ', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'dennou', label: 'レア役・周期到達' },
+      { from: 'normal', to: 'cz', label: '周期到達・規定G数' },
+      { from: 'dennou', to: 'cz', label: '当選' },
+      { from: 'dennou', to: 'normal', label: '終了' },
+      { from: 'cz', to: 'bonus', label: '当選' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'bonus', to: 'at', label: 'AT突入' },
+      { from: 'bonus', to: 'normal', label: 'AT非突入' },
+      { from: 'at', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      '天井は周期6周期/CZ間999G/AT間1500Gの三重構造',
+      'リセット時は周期3周期/AT間1000Gに短縮',
+      'AT終了後66Gは引き戻しゾーン',
+    ],
+  },
+
+  stages: [
+    { name: '咲森学園ステージ', color: 'blue', meaning: '基本ステージ。通常状態滞在示唆', tips: '特に示唆なし。通常の立ち回りでOK' },
+    { name: 'ジオール街ステージ', color: 'blue', meaning: '基本ステージ。通常状態滞在示唆', tips: '咲森学園と同等。特に示唆なし' },
+    { name: '夕方ステージ', color: 'amber', meaning: '高確状態示唆。電脳ZONE当選率UP', settingHint: '高確移行頻度が高いほど高設定の可能性', tips: 'レア役を引いたら電脳ZONE・CZ当選に期待' },
+    { name: '革命の高校生ステージ', color: 'purple', meaning: 'CZ前兆ステージ。連続演出に発展', tips: '前兆中のため即ヤメ厳禁' },
+    { name: '地球脱出作戦ステージ', color: 'red', meaning: '上位前兆ステージ。フェーズ3段階で期待度UP', tips: 'フェーズが上がるほどCZ当選期待度大' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は順押し（左→中→右）推奨。左リールにBARか赤7を狙い、チェリーをフォロー',
+    reelStops: [
+      { name: '弱チェリー', how: '左BAR/赤7狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: '強チェリー', how: '左BAR/赤7狙い', stopForm: 'チェリー+中段にボーナス図柄' },
+      { name: 'スイカ', how: '左BAR/赤7狙い→中右にスイカ狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: 'BAR揃い', how: '左BAR狙い', stopForm: 'BAR図柄が一直線に揃う（リプレイフラグ）' },
+      { name: 'チャンス目', how: '左BAR/赤7狙い', stopForm: 'ベル/リプレイのテンパイハズレ' },
+    ],
+    notes: [
+      '順押し（左→中→右）必須。ハサミ打ちもペナルティ対象',
+      'チェリーさえフォローすれば残りリールは適当打ちでOK',
+      'AT中はナビに従う',
+    ],
+  },
 };
 
 export default config;

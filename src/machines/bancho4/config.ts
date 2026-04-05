@@ -211,6 +211,62 @@ const config: MachineConfig = {
     { keyword: 'ベル', name: '共通ベル確率', timing: '通常時', settingHint: '設定1: 1/21.8 → 設定6: 1/20.6', importance: 'weak' },
     { keyword: '初当たり', name: '初当たり合算確率', timing: '通常時', settingHint: '設定1: 1/259.5 → 設定6: 1/221.1', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'レア役やベルで対決・特訓を抽選。特訓間天井249G', color: 'blue' },
+      { id: 'tokkun', label: '特訓', description: '対決の前段階。レア役で対決昇格のチャンス', color: 'amber' },
+      { id: 'taiketsu', label: '対決', description: '勝利でボーナス確定。ベル・レア役で勝利抽選', color: 'green' },
+      { id: 'bonus_bb', label: 'BB（番長ボーナス）', description: '赤7/青7揃い。AT突入のメイン契機', color: 'purple' },
+      { id: 'bonus_rb', label: 'RB（レギュラー）', description: 'RB後は特訓経由で確定対決のチャンス', color: 'cyan' },
+      { id: 'at', label: '頂RISE（AT）', description: 'G数上乗せ型AT。初期50G・純増約2.7枚', color: 'red' },
+      { id: 'at_up', label: '頂UP（上位AT）', description: '上位AT。大量上乗せのチャンス', color: 'red' },
+    ],
+    edges: [
+      { from: 'normal', to: 'tokkun', label: 'レア役・規定G数' },
+      { from: 'tokkun', to: 'taiketsu', label: '対決発展' },
+      { from: 'tokkun', to: 'normal', label: '対決非発展' },
+      { from: 'taiketsu', to: 'bonus_bb', label: '勝利（BB）' },
+      { from: 'taiketsu', to: 'bonus_rb', label: '勝利（RB）' },
+      { from: 'taiketsu', to: 'normal', label: '敗北' },
+      { from: 'bonus_bb', to: 'at', label: '7揃いでAT突入' },
+      { from: 'bonus_bb', to: 'normal', label: 'AT非突入' },
+      { from: 'bonus_rb', to: 'tokkun', label: 'RB後特訓（確定対決チャンス）' },
+      { from: 'at', to: 'normal', label: '終了' },
+      { from: 'at', to: 'at_up', label: '頂UP昇格' },
+      { from: 'at_up', to: 'at', label: '上乗せ後ATへ' },
+      { from: 'normal', to: 'at', label: 'AT直撃（頂RISE/UP）' },
+    ],
+    notes: [
+      '特訓間天井249Gとボーナス間天井699Gの二段構え',
+      'スルー天井は10スルー（リセット時6スルー）',
+      'リセット時は押忍モード確定（149G以内に特訓突入）',
+      '青7BB当選率に設定差約6.7倍、RB後確定対決に約13倍の設定差',
+    ],
+  },
+
+  stages: [
+    { name: '河川敷', color: 'blue', meaning: '基本ステージ。通常状態を示唆', tips: 'デフォルトステージ。特に示唆なし' },
+    { name: '屋上', color: 'green', meaning: '基本ステージ。通常状態を示唆', tips: 'デフォルトステージ。河川敷と同様' },
+    { name: '港（夕方）', color: 'amber', meaning: '高確ステージ。レア役からの特訓当選率UP・宗次郎ポイント優遇', settingHint: '弱チェリー・弁当からの移行で高確示唆', tips: 'レア役を引けば特訓に期待。即ヤメ厳禁' },
+    { name: '特訓ステージ', color: 'red', meaning: '対決の前段階。レア役で対決昇格チャンス', tips: 'レア役を引いて対決に発展させたい。色付き演出に注目' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBAR狙い（チェリー狙い）。弁当出現時は中リールBAR目安に弁当狙い。右リールはフリー打ち',
+    reelStops: [
+      { name: '共通ベル', how: '左1stで適当打ち', stopForm: 'ベルが揃う（左第1停止）', settingDiff: '設定1: 1/21.8 → 設定6: 1/20.6' },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが角に停止' },
+      { name: '弁当', how: '左上段BAR→中リールBAR目安に弁当狙い', stopForm: '弁当が揃う' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイテンパイハズレ' },
+      { name: '最強チェリー', how: '左BAR狙い', stopForm: '中段チェリー（プレミア・AT確定級）' },
+    ],
+    notes: [
+      '通常時は毎G左リールBAR狙いが必須',
+      'AT中はナビに従う（押し順ナビ発生時）',
+      '共通ベルは左第1停止で揃うベル。設定差は小さいが長時間で有効',
+    ],
+  },
 };
 
 export default config;

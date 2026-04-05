@@ -258,6 +258,57 @@ const config: MachineConfig = {
     { keyword: '鬼斬', name: '弱レア役→鬼斬チャージ当選率', timing: '通常時', settingHint: '設定1: 25% → 設定6: 44%', importance: 'weak' },
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/379.7 → 設定6: 1/293.1（約1.30倍差）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'バッサリポイント蓄積。規定BP到達で周期抽選', color: 'blue' },
+      { id: 'onigiri', label: '鬼斬チャージ', description: 'BP獲得特化ゾーン。毎G5BP以上獲得', color: 'amber' },
+      { id: 'onimode', label: '鬼モード', description: '前兆ステージ。連続演出でAT当否告知', color: 'purple' },
+      { id: 'at', label: '蒼剣RUSH', description: '継続率&セット数管理AT。50/66/80/89%の4段階', color: 'red' },
+      { id: 'bonus', label: '鬼ボーナス', description: 'AT中のボーナス。上乗せ+鬼ガチチャンス抽選', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'onigiri', label: 'レア役契機' },
+      { from: 'normal', to: 'onimode', label: '規定BP到達' },
+      { from: 'normal', to: 'at', label: 'リーチ目直撃' },
+      { from: 'onigiri', to: 'normal', label: 'チャージ終了' },
+      { from: 'onigiri', to: 'at', label: '7セット以上継続でAT' },
+      { from: 'onimode', to: 'normal', label: '非当選' },
+      { from: 'onimode', to: 'at', label: '当選' },
+      { from: 'at', to: 'normal', label: 'AT終了' },
+      { from: 'at', to: 'bonus', label: 'ボーナス当選' },
+      { from: 'bonus', to: 'at', label: 'ボーナス終了→AT継続' },
+    ],
+    notes: [
+      '通常時はバッサリポイント（BP）が毎G1以上加算。規定BP到達で鬼モードへ',
+      '鬼斬チャージ7セット以上継続でAT、10セット目継続でAT+ボーナス濃厚',
+      '天井は1000G/周期6周期（リセット時は周期4周期、1周期目222ptで鬼モード）',
+    ],
+  },
+
+  stages: [
+    { name: '城下町', color: 'blue', meaning: '基本ステージ。通常状態滞在濃厚', tips: '特に示唆なし。通常の立ち回りでOK' },
+    { name: '山道', color: 'amber', meaning: '高確示唆。鬼斬チャージ当選率UP', settingHint: '高確移行頻度に設定差あり', tips: 'レア役で鬼斬チャージ当選に期待' },
+    { name: '幻魔の森', color: 'purple', meaning: '前兆ステージ。鬼モード突入間近', tips: '前兆中のため即ヤメ厳禁' },
+    { name: '鬼の洞窟', color: 'red', meaning: '超高確示唆。AT直撃の可能性あり', tips: '全力でレア役を引きに行く' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜中段にBARを狙う。中・右リールはフリー打ちでOK（全小役1枚払い出しのため損失なし）',
+    reelStops: [
+      { name: '共通3枚ベル', how: '左BAR狙い', stopForm: 'ベルが上段に揃う', settingDiff: '設定1: 1/35.1 → 設定6: 1/26.7' },
+      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段リプレイ' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段にリプレイ以外' },
+      { name: '弱スイカ', how: '左BAR狙い→中右スイカ狙い', stopForm: 'スイカが右下がりに揃う' },
+      { name: '強スイカ', how: '左BAR狙い→中右スイカ狙い', stopForm: 'スイカが平行に揃う' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイテンパイハズレ等' },
+    ],
+    notes: [
+      '通常時は毎G左リールBAR狙いで成立役を判別',
+      'AT中はナビに従う（押し順ナビ発生時）',
+      'オールフリー打ちでも枚数的損失なしだが、成立役判別のため目押し推奨',
+    ],
+  },
 };
 
 export default config;

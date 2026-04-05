@@ -232,6 +232,57 @@ const config: MachineConfig = {
     { keyword: 'チェリー', name: '弱チェリー確率', timing: '通常時', settingHint: '設定1: 1/60.0 → 設定6: 1/50.0（約1.20倍差）', importance: 'weak' },
     { keyword: 'ボーナス', name: 'ボーナス初当たり確率', timing: '通常時', settingHint: '設定1: 1/240.6 → 設定6: 1/184.3（約1.31倍差）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: 'マギアpt蓄積。規定pt到達でボーナス当選', color: 'blue' },
+      { id: 'highmode', label: '高確', description: 'ポイント倍率UP（2〜10倍）。CZ当選率も優遇', color: 'amber' },
+      { id: 'bonus', label: 'ボーナス', description: 'BB/RB。AT突入のチャンス', color: 'purple' },
+      { id: 'cz', label: 'CZ', description: 'スイカ成立時等に当選。ボーナスorAT抽選', color: 'green' },
+      { id: 'at', label: 'マギアラッシュ', description: 'ゲーム数管理型AT。純増約2.6枚。ストーリー進行で昇格', color: 'red' },
+      { id: 'attack', label: 'マギアアタック', description: 'AT開始時の初期G数決定ゾーン', color: 'cyan' },
+    ],
+    edges: [
+      { from: 'normal', to: 'highmode', label: 'レア役契機' },
+      { from: 'normal', to: 'bonus', label: '規定pt到達' },
+      { from: 'normal', to: 'cz', label: 'スイカ等契機' },
+      { from: 'highmode', to: 'normal', label: '高確終了' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'cz', to: 'bonus', label: 'ボーナス当選' },
+      { from: 'bonus', to: 'normal', label: 'AT非突入' },
+      { from: 'bonus', to: 'attack', label: 'AT突入' },
+      { from: 'attack', to: 'at', label: '初期G数決定' },
+      { from: 'at', to: 'normal', label: 'AT終了' },
+    ],
+    notes: [
+      '通常時はマギアptが毎G1pt以上加算。規定pt到達でボーナス当選',
+      '偶数百ptゾーン（200-299pt、400-499pt等）でCZ当選率UP',
+      '天井は950pt（約633G）。リセット時は600-699pt（約400-466G）に短縮',
+    ],
+  },
+
+  stages: [
+    { name: '神浜市（昼）', color: 'blue', meaning: '基本ステージ。通常状態滞在濃厚', tips: '特に示唆なし' },
+    { name: '神浜市（夕）', color: 'amber', meaning: '高確示唆。ポイント倍率UP中', settingHint: '高確移行頻度に設定差あり', tips: '高確中はCZ当選まで打ち切り推奨' },
+    { name: '魔女結界', color: 'purple', meaning: '前兆ステージ。ボーナスまたはCZ前兆中', tips: '前兆中のため即ヤメ厳禁' },
+    { name: 'みかづき荘', color: 'green', meaning: '超高確示唆。CZ・ボーナス当選率大幅UP', tips: '全力でレア役を引きに行く' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール上段にBARを狙う。スイカ停止時は中リールにスイカ（BAR目安）を狙う',
+    reelStops: [
+      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段ベル', settingDiff: '設定1: 1/60.0 → 設定6: 1/50.0' },
+      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段にベル以外' },
+      { name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール中段に停止' },
+      { name: 'スイカ', how: '左BAR狙い→中リールBAR目安にスイカ狙い', stopForm: 'スイカが右下がりに揃う' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイテンパイハズレ等' },
+    ],
+    notes: [
+      '通常時は毎G左リールBAR狙いが必須',
+      'スイカ停止時のみ中リール目押しが必要（右リールはフリー打ちOK）',
+      'AT中・ボーナス中はナビに従う',
+    ],
+  },
 };
 
 export default config;

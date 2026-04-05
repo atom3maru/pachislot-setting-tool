@@ -210,6 +210,58 @@ const config: MachineConfig = {
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/541.6 → 設定6: 1/402.4（約1.35倍差）', importance: 'strong' },
     { keyword: 'CZ', name: 'CZ確率', timing: '通常時', settingHint: '設定1: 1/239.3 → 設定6: 1/181.9（約1.32倍差）', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '規定G数・兜pt・小役連でCZ抽選', color: 'blue' },
+      { id: 'cz', label: 'CZ', description: 'ゴブリンスレイヤーチャンス等。AT突入を目指す', color: 'amber' },
+      { id: 'battle', label: 'ゴブリンスレイヤーバトル', description: '上位CZ。AT突入濃厚', color: 'purple' },
+      { id: 'at', label: 'ゴブリンスレイヤーRUSH', description: 'セットループ型AT。純増約2.8枚', color: 'red' },
+      { id: 'shukumei', label: '宿命バトル', description: 'AT中CZ。3勝以上で上位AT突入チャンス', color: 'green' },
+      { id: 'ultimate', label: 'アルティメットループ', description: '上位AT。純増約6.0枚。期待値3500枚以上', color: 'cyan' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz', label: '規定G数/兜pt' },
+      { from: 'normal', to: 'battle', label: '上位CZ当選' },
+      { from: 'cz', to: 'normal', label: '失敗' },
+      { from: 'cz', to: 'at', label: '成功' },
+      { from: 'battle', to: 'at', label: 'AT突入' },
+      { from: 'at', to: 'normal', label: 'AT終了' },
+      { from: 'at', to: 'shukumei', label: '宿命バトル発生' },
+      { from: 'shukumei', to: 'at', label: 'バトル終了→AT継続' },
+      { from: 'shukumei', to: 'ultimate', label: '3勝以上で昇格' },
+      { from: 'ultimate', to: 'normal', label: '終了' },
+    ],
+    notes: [
+      '天井は600/1000/1500Gの振り分け。高設定ほど600G・1000G選択率UP',
+      'リセット時は天井最大1000Gに短縮',
+      'AT終了後は引き戻し約32G+兜ポイントをフォロー',
+    ],
+  },
+
+  stages: [
+    { name: '辺境の街', color: 'blue', meaning: '基本ステージ。通常状態滞在濃厚', tips: '特に示唆なし' },
+    { name: '訓練場', color: 'amber', meaning: '高確示唆。兜図柄出現率変化', tips: 'レア役でCZ当選に期待' },
+    { name: 'ギルド', color: 'purple', meaning: '前兆ステージ（弱）。CZ突入の前兆中', tips: '前兆中のため即ヤメ厳禁' },
+    { name: 'ゴブリンの洞窟', color: 'red', meaning: '前兆ステージ（強）。ギルドより高チャンス', tips: 'CZ・AT当選に大いに期待' },
+    { name: '月下ステージ', color: 'green', meaning: 'スレイポイント獲得期待大', tips: 'ポイント大量獲得のチャンス' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左第1停止で適当打ちでOK。取りこぼしなし。液晶上に小役が表示される',
+    reelStops: [
+      { name: '弱チェリー', how: '左第1停止（フリー打ち可）', stopForm: '液晶にチェリー1個or2個停止' },
+      { name: '強チェリー', how: '左第1停止（フリー打ち可）', stopForm: '液晶に3連チェリー停止' },
+      { name: 'スイカ', how: '左第1停止（フリー打ち可）', stopForm: '液晶にスイカ停止' },
+      { name: 'チャンス目', how: '左第1停止（フリー打ち可）', stopForm: '液晶にチャンス目表示' },
+    ],
+    notes: [
+      '全小役取りこぼしなし。左第1停止を守れば適当打ちで問題なし',
+      '通常時に中押し・逆押しはペナルティ発生の可能性あり',
+      'ナビ発生時はナビに従う。「狙え」カットイン時は指定図柄を狙う',
+      '液晶リールで小役判別可能。2連BAR位置で強弱判別も可能',
+    ],
+  },
 };
 
 export default config;

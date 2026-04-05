@@ -237,6 +237,56 @@ const config: MachineConfig = {
     { keyword: 'ボーナス', name: 'ボーナス合算確率', timing: '通常時', settingHint: '設定1: 1/189.4 → 設定6: 1/167.6（約1.13倍差）', importance: 'weak' },
     { keyword: '青7', name: 'REG中 青7揃い確率', timing: 'REG中', settingHint: '設定1: 1/117.0 → 設定6: 1/94.2', importance: 'weak' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '毎Gボーナス抽選。レア役でボーナス当選を目指す', color: 'blue' },
+      { id: 'big', label: 'BIGボーナス', description: '黄金郷BIG（最大202枚）/WITCH BIG（最大160枚）', color: 'red' },
+      { id: 'reg', label: 'REGボーナス', description: '最大56枚。青7揃いに設定差あり', color: 'purple' },
+      { id: 'genso', label: '幻想空間/夢想空間', description: 'ボーナス後のCZ待機状態', color: 'amber' },
+      { id: 'cz', label: '運命分岐モード', description: 'CZ。「中を押せ」演出でART突入or転落', color: 'green' },
+      { id: 'art', label: '幻想論戦（ART）', description: 'ボーナス完走型ART。純増約1.0枚', color: 'cyan' },
+    ],
+    edges: [
+      { from: 'normal', to: 'big', label: 'BIG当選' },
+      { from: 'normal', to: 'reg', label: 'REG当選' },
+      { from: 'normal', to: 'cz', label: '200G天井到達' },
+      { from: 'big', to: 'genso', label: 'ボーナス終了' },
+      { from: 'reg', to: 'genso', label: 'ボーナス終了' },
+      { from: 'genso', to: 'cz', label: 'CZ突入' },
+      { from: 'cz', to: 'art', label: '中段ベル停止=ART突入' },
+      { from: 'cz', to: 'normal', label: '中段リプレイ=転落' },
+      { from: 'art', to: 'normal', label: 'ART終了' },
+    ],
+    notes: [
+      '毎Gボーナス抽選が行われるノーマルタイプ寄りの仕様',
+      '200G固定周期で運命分岐モード（CZ）突入',
+      'ART「幻想論戦」はボーナス完走型。30/50/90Gの3種類',
+    ],
+  },
+
+  stages: [
+    { name: '六軒島（昼）', color: 'blue', meaning: '基本ステージ。通常状態', tips: '特に示唆なし' },
+    { name: '六軒島（夜）', color: 'purple', meaning: '高確示唆。ボーナス当選率UP', tips: 'レア役でボーナス当選に期待' },
+    { name: '黄金の間', color: 'amber', meaning: '前兆ステージ。ボーナスまたはCZ前兆中', tips: '前兆中のため即ヤメ厳禁' },
+    { name: '魔女の喫煙室', color: 'red', meaning: '超高確/ART前兆示唆', tips: 'ART突入の大チャンス' },
+  ],
+
+  playGuide: {
+    basicHow: '中押し青7狙い（うみねこ打ち）が推奨。順押しBAR狙いでも全小役フォロー可能',
+    reelStops: [
+      { name: 'チェリー', how: '中リール青7狙い→左右フリー', stopForm: 'チェリーが停止' },
+      { name: 'スイカ', how: '中リール青7狙い→左右に赤7目安でスイカ狙い', stopForm: 'スイカが揃う' },
+      { name: '1枚役', how: '中リール青7狙い', stopForm: '特定の出目で1枚役成立' },
+      { name: 'リーチ目', how: '各リール適正位置に目押し', stopForm: '特殊出目でボーナス確定' },
+    ],
+    notes: [
+      '中押し青7狙い（うみねこ打ち）でボーナス種類判別が可能',
+      '順押し白7狙い（ひぐらし打ち）はより高精度だが難易度高め',
+      'ボーナス中は白7ビタ押しで獲得枚数増加。技術介入要素あり',
+      'REG中の青7揃いに設定差あり。目押し精度が設定判別に直結',
+    ],
+  },
 };
 
 export default config;
