@@ -22,6 +22,9 @@ import HyenaInfo from '../components/HyenaInfo';
 import MachineSelector from '../components/MachineSelector';
 import DictionarySearch from '../components/DictionarySearch';
 import SettingTable from '../components/SettingTable';
+import GameFlowChart from '../components/GameFlowChart';
+import StageGuide from '../components/StageGuide';
+import PlayGuide from '../components/PlayGuide';
 
 interface Props {
   config: MachineConfig;
@@ -159,6 +162,15 @@ export default function MachinePage({ config }: Props) {
 
         {/* 攻め方ガイド */}
         {config.guide && <MachineGuide guide={config.guide} />}
+
+        {/* ゲームフロー */}
+        {config.gameFlow && <GameFlowChart flow={config.gameFlow} />}
+
+        {/* ステージ説明 */}
+        {config.stages && config.stages.length > 0 && <StageGuide stages={config.stages} />}
+
+        {/* 打ち方ガイド */}
+        {config.playGuide && <PlayGuide playGuide={config.playGuide} />}
 
         {/* 設定別スペック */}
         <SettingTable config={config} />

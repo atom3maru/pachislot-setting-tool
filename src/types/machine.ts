@@ -146,6 +146,55 @@ export interface MachineConfig {
   guide?: MachineGuide;           // 攻め方ガイド
   hyena?: HyenaInfo;              // ハイエナ情報（天井・ゾーン・期待値）
   dictionary?: DictionaryEntry[];  // 演出辞典（設定示唆演出一覧）
+  gameFlow?: GameFlowInfo;          // ゲームフロー（図解）
+  stages?: StageInfo[];             // ステージ説明
+  playGuide?: PlayGuideInfo;        // 打ち方ガイド
+}
+
+/** ゲームフローのノード */
+export interface FlowNode {
+  id: string;
+  label: string;
+  description?: string;
+  color: string;  // Tailwindカラー（blue, amber, red等）
+}
+
+/** ゲームフローの遷移 */
+export interface FlowEdge {
+  from: string;
+  to: string;
+  label?: string;
+}
+
+/** ゲームフロー情報 */
+export interface GameFlowInfo {
+  nodes: FlowNode[];
+  edges: FlowEdge[];
+  notes?: string[];
+}
+
+/** ステージ情報 */
+export interface StageInfo {
+  name: string;
+  color: string;
+  meaning: string;
+  settingHint?: string;
+  tips?: string;
+}
+
+/** 打ち方の停止形 */
+export interface ReelStop {
+  name: string;
+  how: string;
+  stopForm: string;
+  settingDiff?: string;
+}
+
+/** 打ち方ガイド */
+export interface PlayGuideInfo {
+  basicHow: string;
+  reelStops: ReelStop[];
+  notes?: string[];
 }
 
 /** 機種一覧表示用 */

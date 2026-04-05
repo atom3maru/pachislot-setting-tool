@@ -351,6 +351,52 @@ const config: MachineConfig = {
     { keyword: '枚数', name: '特定枚数表示 456枚', timing: 'AT中', settingHint: '設定4以上確定', importance: 'confirmed' },
     { keyword: '枚数', name: '特定枚数表示 666枚', timing: 'AT中', settingHint: '設定6確定', importance: 'confirmed' },
   ],
+
+  gameFlow: {
+    nodes: [
+      { id: 'normal', label: '通常時', description: '周期管理（最大6周期で天井）。レア役でポイント加算', color: 'blue' },
+      { id: 'cz', label: 'CZ前兆', description: '周期到達で発生。ボーナス抽選', color: 'amber' },
+      { id: 'bonus', label: 'ボーナス', description: 'BIG/REG。ST突入のチャンス', color: 'purple' },
+      { id: 'st', label: '天破の刻（ST）', description: '継続率管理型AT。毎G継続抽選', color: 'red' },
+      { id: 'kagenori', label: '景之ST（上位）', description: '上位ST。終了後は天井596Gに短縮', color: 'green' },
+    ],
+    edges: [
+      { from: 'normal', to: 'cz', label: '周期到達' },
+      { from: 'cz', to: 'normal', label: '非当選' },
+      { from: 'cz', to: 'bonus', label: '当選' },
+      { from: 'bonus', to: 'st', label: 'ST突入' },
+      { from: 'bonus', to: 'normal', label: 'ST非突入' },
+      { from: 'st', to: 'normal', label: '駆け抜け（天井596G短縮）' },
+      { from: 'st', to: 'kagenori', label: '上位ST昇格' },
+      { from: 'kagenori', to: 'normal', label: '終了（天井596G短縮）' },
+    ],
+    notes: [
+      '通常時は最大6周期（設定変更後・ST駆け抜け後は最大4周期）で天井到達',
+      'ST駆け抜け後・景之ST終了後は天井が596Gに短縮される',
+    ],
+  },
+
+  stages: [
+    { name: '海門（うなと）', color: 'blue', meaning: '基本ステージ。通常モード滞在濃厚', tips: '特に示唆なし。通常の立ち回りでOK' },
+    { name: '駿城', color: 'purple', meaning: '高確ステージ示唆。レア役でCZ当選率UP', settingHint: '移行頻度が高いほど高設定の可能性', tips: 'レア役を引いたらCZ当選に期待' },
+    { name: '研究所', color: 'amber', meaning: '前兆ステージ。CZまたはボーナスの前兆中', tips: '前兆中のため即ヤメ厳禁' },
+    { name: '顕金（あらがね）駅', color: 'red', meaning: '超高確率ステージ。CZ突入率大幅UP', settingHint: '滞在中のCZ当選率に設定差大', tips: '全力でレア役を引きに行く' },
+  ],
+
+  playGuide: {
+    basicHow: '通常時は左リール枠上〜上段にBARを狙う。中・右リールはフリー打ちでOK',
+    reelStops: [
+      { name: '下段ベル', how: '左BAR狙い', stopForm: 'ベルが下段に揃う', settingDiff: '設定1: 1/121.1 → 設定6: 1/99.1' },
+      { name: '角チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
+      { name: 'スイカ', how: '左BAR狙い→中右にスイカ狙い', stopForm: 'スイカが斜めに揃う' },
+      { name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール中段に停止' },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイのテンパイハズレ' },
+    ],
+    notes: [
+      '通常時は毎G左リールBAR狙いが必須',
+      'AT中はナビに従う（押し順ナビ発生時）',
+    ],
+  },
 };
 
 export default config;
