@@ -53,15 +53,15 @@ const config: MachineConfig = {
           ],
         },
         {
-          label: 'ボーナス終了画面', columns: 3,
+          label: 'ボーナス終了画面（戦人一家以降はBIG終了時のみ）', columns: 3,
           fields: [
             { key: 'end_normal', label: '都会(デフォルト)' },
-            { key: 'end_sennin', label: '戦人一家', hint: '設定2以上濃厚' },
+            { key: 'end_sennin', label: '戦人一家', hint: 'BIG限定・設定2以上濃厚' },
             { key: 'end_even', label: 'ベアト&戦人(1)', hint: '偶数設定示唆' },
-            { key: 'end_4plus', label: 'ベアト&戦人(2)', hint: '設定4以上濃厚!' },
-            { key: 'end_5plus', label: 'ベアト&GM戦人(1)', hint: '設定5以上濃厚!' },
-            { key: 'end_6', label: 'ベアト&GM戦人(2)', hint: '設定6濃厚!' },
-            { key: 'end_halloween', label: 'ハロウィン', hint: '設定4以上確定!' },
+            { key: 'end_4plus', label: 'ベアト&戦人(2)', hint: 'BIG限定・設定4以上濃厚!' },
+            { key: 'end_5plus', label: 'ベアト&GM戦人(1)', hint: 'BIG限定・設定5以上濃厚!' },
+            { key: 'end_6', label: 'ベアト&GM戦人(2)', hint: 'BIG限定・設定6濃厚!' },
+            { key: 'end_halloween', label: 'ハロウィン', hint: 'BIG限定・設定4以上確定!' },
           ],
         },
         {
@@ -171,7 +171,7 @@ const config: MachineConfig = {
 
   checklist: [
     { id: 'ck_reg_bg', label: 'REGキャラ背景色', category: 'ボーナス中' },
-    { id: 'ck_bb_end', label: 'BB終了画面', category: 'ボーナス終了時' },
+    { id: 'ck_bb_end', label: 'BIG終了画面（戦人一家以降はBIG限定）', category: 'ボーナス終了時' },
     { id: 'ck_logo', label: 'ロゴ発光', category: '通常時' },
     { id: 'ck_vita', label: 'ビタ押し成功率管理', category: 'ボーナス中' },
     { id: 'ck_blue7', label: '青7斜め揃い', category: 'ボーナス中' },
@@ -184,7 +184,7 @@ const config: MachineConfig = {
       'BIG確率（設定1: 1/362.1 → 設定6: 1/313.6）、REG確率（設定1: 1/397.2 → 設定6: 1/360.1）',
       'RB中キャラ紹介：全銀背景=設定2以上濃厚、全金背景=設定6濃厚',
       '超パー演出：33%=設定3以上、44%=設定4以上、55%=設定5以上、66%=設定6濃厚',
-      'ボーナス終了画面：ハロウィン=設定4以上確定、ベアト&GM戦人(2)=設定6濃厚',
+      'BIG終了画面：ハロウィン=設定4以上確定、ベアト&GM戦人(2)=設定6濃厚（戦人一家以降はBIG限定）',
       'ロゴ発光：小=奇数示唆、大=偶数示唆。BIG20回以上の偏りで偶奇判別の補助に',
     ],
     morningCheck: [
@@ -218,11 +218,11 @@ const config: MachineConfig = {
   },
 
   dictionary: [
-    { keyword: '終了画面', name: 'ボーナス終了画面 ベアト&GM戦人(2)', timing: 'ボーナス終了時', settingHint: '設定6濃厚', importance: 'confirmed' },
-    { keyword: '終了画面', name: 'ボーナス終了画面 ベアト&GM戦人(1)', timing: 'ボーナス終了時', settingHint: '設定5以上濃厚', importance: 'confirmed' },
-    { keyword: '終了画面', name: 'ボーナス終了画面 ハロウィン', timing: 'ボーナス終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
-    { keyword: '終了画面', name: 'ボーナス終了画面 ベアト&戦人(2)', timing: 'ボーナス終了時', settingHint: '設定4以上濃厚', importance: 'confirmed' },
-    { keyword: '終了画面', name: 'ボーナス終了画面 戦人一家', timing: 'ボーナス終了時', settingHint: '設定2以上濃厚', importance: 'strong' },
+    { keyword: '終了画面', name: 'BIG終了画面 ベアト&GM戦人(2)', timing: 'BIG終了時（BIG限定）', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'BIG終了画面 ベアト&GM戦人(1)', timing: 'BIG終了時（BIG限定）', settingHint: '設定5以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'BIG終了画面 ハロウィン', timing: 'BIG終了時（BIG限定）', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'BIG終了画面 ベアト&戦人(2)', timing: 'BIG終了時（BIG限定）', settingHint: '設定4以上濃厚', importance: 'confirmed' },
+    { keyword: '終了画面', name: 'BIG終了画面 戦人一家', timing: 'BIG終了時（BIG限定）', settingHint: '設定2以上濃厚', importance: 'strong' },
     { keyword: '終了画面', name: 'ボーナス終了画面 ベアト&戦人(1)', timing: 'ボーナス終了時', settingHint: '偶数設定示唆', importance: 'weak' },
     { keyword: '超パー', name: '超パー演出 66%表示', timing: '通常時', settingHint: '設定6濃厚', importance: 'confirmed' },
     { keyword: '超パー', name: '超パー演出 55%表示', timing: '通常時', settingHint: '設定5以上濃厚', importance: 'confirmed' },

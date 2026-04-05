@@ -61,7 +61,7 @@ const config: MachineConfig = {
       title: 'トロフィー・ボイス・上乗せ', icon: '🏆',
       groups: [
         {
-          label: 'ケロットトロフィー', columns: 3,
+          label: 'ケロットトロフィー（アラガミ交戦/漆黒の捕喰者終了時）', columns: 3,
           fields: [
             { key: 't_silver', label: '銀トロフィー', hint: '設定3以上' },
             { key: 't_gold', label: '金トロフィー', hint: '設定4以上' },
@@ -225,10 +225,10 @@ const config: MachineConfig = {
   },
 
   dictionary: [
-    { keyword: 'トロフィー', name: 'ケロットトロフィー 虹', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'strong' },
-    { keyword: 'トロフィー', name: 'ケロットトロフィー ケロット柄', timing: 'AT終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
-    { keyword: 'トロフィー', name: 'ケロットトロフィー 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
-    { keyword: 'トロフィー', name: 'ケロットトロフィー 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 虹', timing: 'アラガミ交戦/漆黒の捕喰者終了時', settingHint: '設定6濃厚', importance: 'strong' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー ケロット柄', timing: 'アラガミ交戦/漆黒の捕喰者終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 金', timing: 'アラガミ交戦/漆黒の捕喰者終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 銀', timing: 'アラガミ交戦/漆黒の捕喰者終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
     { keyword: '終了画面', name: 'AT終了画面 ミニキャラ', timing: 'AT終了時', settingHint: '設定6濃厚', importance: 'strong' },
     { keyword: '終了画面', name: 'AT終了画面 キャラ集合', timing: 'AT終了時', settingHint: '設定5以上濃厚', importance: 'strong' },
     { keyword: '終了画面', name: 'AT終了画面 シオ', timing: 'AT終了時', settingHint: '設定4以上濃厚', importance: 'strong' },

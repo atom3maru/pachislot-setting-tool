@@ -46,7 +46,7 @@ const config: MachineConfig = {
       title: 'ケロットトロフィー', icon: '🏆',
       groups: [
         {
-          label: 'ケロットトロフィー（BIG/CZ/ED終了時）', columns: 3,
+          label: 'ケロットトロフィー（BIG/CZ/ED終了時/デビクラバトル敗北時）', columns: 3,
           fields: [
             { key: 't_copper', label: '銅トロフィー', hint: '設定2以上確定' },
             { key: 't_silver', label: '銀トロフィー', hint: '設定3以上確定' },
@@ -197,11 +197,11 @@ const config: MachineConfig = {
   },
 
   dictionary: [
-    { keyword: 'トロフィー', name: 'ケロットトロフィー 虹', timing: 'BIG/CZ/ED終了時', settingHint: '設定6確定', importance: 'confirmed' },
-    { keyword: 'トロフィー', name: 'ケロットトロフィー ケロット柄', timing: 'BIG/CZ/ED終了時', settingHint: '設定5以上確定', importance: 'confirmed' },
-    { keyword: 'トロフィー', name: 'ケロットトロフィー 金', timing: 'BIG/CZ/ED終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
-    { keyword: 'トロフィー', name: 'ケロットトロフィー 銀', timing: 'BIG/CZ/ED終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
-    { keyword: 'トロフィー', name: 'ケロットトロフィー 銅', timing: 'BIG/CZ/ED終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 虹', timing: 'BIG/CZ/ED終了時/デビクラバトル敗北時', settingHint: '設定6確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー ケロット柄', timing: 'BIG/CZ/ED終了時/デビクラバトル敗北時', settingHint: '設定5以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 金', timing: 'BIG/CZ/ED終了時/デビクラバトル敗北時', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 銀', timing: 'BIG/CZ/ED終了時/デビクラバトル敗北時', settingHint: '設定3以上確定', importance: 'confirmed' },
+    { keyword: 'トロフィー', name: 'ケロットトロフィー 銅', timing: 'BIG/CZ/ED終了時/デビクラバトル敗北時', settingHint: '設定2以上確定', importance: 'confirmed' },
     { keyword: '終了画面', name: 'BIG終了画面 赤背景（一八/平八/一美）', timing: '鉄拳チャンス経由BIG終了時', settingHint: '設定4以上濃厚', importance: 'strong' },
     { keyword: '直撃', name: 'AT直撃確率', timing: '通常時', settingHint: '設定1: 1/12580 → 設定6: 1/3565（約3.5倍差）', importance: 'weak' },
     { keyword: 'エピソード', name: 'エピソードBIG昇格率', timing: '赤7BIG開始時', settingHint: '設定1: 2% → 設定6: 13%（6.5倍差）', importance: 'weak' },

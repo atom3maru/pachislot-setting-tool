@@ -5,6 +5,7 @@ const config: MachineConfig = {
   name: 'スマスロ Re:ゼロ Season2',
   version: '1.0.0',
   color: 'bg-gradient-to-r from-blue-700 to-cyan-500',
+  ceilingUnit: 'pt',
 
   sections: [
     {

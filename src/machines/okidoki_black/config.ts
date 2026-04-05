@@ -178,6 +178,7 @@ const config: MachineConfig = {
     { keyword: '遅れ', name: '遅れ発生', timing: 'ボーナス確定時', settingHint: 'ボーナス確定演出', importance: 'weak' },
     { keyword: 'フラッシュ', name: 'LEDフラッシュ', timing: 'ボーナス確定時', settingHint: 'ボーナス確定演出', importance: 'weak' },
     { keyword: '先チカ', name: '先チカ発生', timing: 'ボーナス確定時', settingHint: 'ボーナス確定演出', importance: 'weak' },
+    { keyword: 'ハイビスカス', name: 'ハイビスカス点灯パターン（モード示唆）', timing: 'ボーナス確定時', settingHint: '【モード示唆】全30種類。通常B以上/天国以上/ドキドキ以上を示唆（設定示唆ではない）', importance: 'strong' },
     { keyword: 'モード', name: 'チャンスモード（天井200G）', timing: 'リセット後', settingHint: 'リセット時40%移行', importance: 'weak' },
     { keyword: '仮天井', name: '仮天井ゾーン301-400G', timing: '通常時', settingHint: '仮天井でボーナス当選率UP', importance: 'weak' },
     { keyword: 'スルー', name: 'スルー天井', timing: '通常時', settingHint: '6スルーで天井・前日回数引き継ぎ', importance: 'weak' },

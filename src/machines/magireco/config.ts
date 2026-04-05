@@ -226,6 +226,7 @@ const config: MachineConfig = {
     { keyword: 'プレート', name: 'サブ液晶プレート 金', timing: 'AT終了時', settingHint: '設定4以上確定', importance: 'confirmed' },
     { keyword: 'プレート', name: 'サブ液晶プレート 銀', timing: 'AT終了時', settingHint: '設定3以上確定', importance: 'confirmed' },
     { keyword: 'プレート', name: 'サブ液晶プレート 銅', timing: 'AT終了時', settingHint: '設定2以上確定', importance: 'confirmed' },
+    { keyword: 'ボイス', name: 'BB終了時サブ液晶タッチボイス（天井示唆）', timing: 'BB終了時サブ液晶タッチ', settingHint: '【天井示唆】AT非当選時=規定マギアpt示唆、AT当選時=規定G数示唆（設定示唆ではない）', importance: 'weak' },
     { keyword: 'CZ', name: 'スイカ成立時CZ当選率', timing: '通常時', settingHint: '設定1: 19.9% → 設定6: 32.8%（約1.65倍差）', importance: 'strong' },
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/654.6 → 設定6: 1/416.7（約1.57倍差）', importance: 'strong' },
     { keyword: 'チェリー', name: '弱チェリー確率', timing: '通常時', settingHint: '設定1: 1/60.0 → 設定6: 1/50.0（約1.20倍差）', importance: 'weak' },

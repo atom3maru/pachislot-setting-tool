@@ -5,6 +5,7 @@ const config: MachineConfig = {
   name: 'L無職転生～異世界行ったら本気だす～',
   version: '1.1.0',
   color: 'bg-gradient-to-r from-teal-600 to-cyan-500',
+  ceilingUnit: 'ステチェン',
   // 6段階設定（1,2,3,4,5,6）・小役確率に設定差なし
 
   sections: [

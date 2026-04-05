@@ -28,7 +28,7 @@ const config: MachineConfig = {
       title: 'BB終了時ボイス', icon: '🔊',
       groups: [
         {
-          label: 'サブ液晶タッチ時セリフ', columns: 3,
+          label: 'BB終了後サブ液晶タッチ時セリフ（設定示唆）', columns: 3,
           fields: [
             { key: 'voice_default', label: 'リン・バット', hint: 'デフォルト' },
             { key: 'voice_shin', label: 'シン', hint: '高設定示唆（弱）' },
@@ -206,12 +206,13 @@ const config: MachineConfig = {
     { keyword: 'バトル', name: 'シンバトル', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
     { keyword: 'バトル', name: 'サウザーバトル', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
     { keyword: 'バトル', name: 'ジャギバトル', timing: 'AT中', settingHint: '設定5以上確定', importance: 'confirmed' },
-    { keyword: 'ボイス', name: 'BB終了時ボイス ユリア', timing: 'BB終了時', settingHint: '設定5以上期待大', importance: 'strong' },
-    { keyword: 'ボイス', name: 'BB終了時ボイス ケンシロウ', timing: 'BB終了時', settingHint: '設定4以上期待大', importance: 'strong' },
-    { keyword: 'ボイス', name: 'BB終了時ボイス アミバ', timing: 'BB終了時', settingHint: '高設定示唆（強）', importance: 'weak' },
-    { keyword: 'ボイス', name: 'BB終了時ボイス ジャギ', timing: 'BB終了時', settingHint: '高設定示唆（中）', importance: 'weak' },
-    { keyword: 'ボイス', name: 'BB終了時ボイス サウザー', timing: 'BB終了時', settingHint: '高設定示唆（弱）', importance: 'weak' },
-    { keyword: 'ボイス', name: 'BB終了時ボイス シン', timing: 'BB終了時', settingHint: '高設定示唆（弱）', importance: 'weak' },
+    { keyword: 'ボイス', name: 'BB終了時サブ液晶タッチボイス ユリア', timing: 'BB終了後通常時1G目にサブ液晶タッチ', settingHint: '設定5以上期待大', importance: 'strong' },
+    { keyword: 'ボイス', name: 'BB終了時サブ液晶タッチボイス ケンシロウ', timing: 'BB終了後通常時1G目にサブ液晶タッチ', settingHint: '設定4以上期待大', importance: 'strong' },
+    { keyword: 'ボイス', name: 'BB終了時サブ液晶タッチボイス アミバ', timing: 'BB終了後通常時1G目にサブ液晶タッチ', settingHint: '高設定示唆（強）', importance: 'weak' },
+    { keyword: 'ボイス', name: 'BB終了時サブ液晶タッチボイス ジャギ', timing: 'BB終了後通常時1G目にサブ液晶タッチ', settingHint: '高設定示唆（中）', importance: 'weak' },
+    { keyword: 'ボイス', name: 'BB終了時サブ液晶タッチボイス サウザー', timing: 'BB終了後通常時1G目にサブ液晶タッチ', settingHint: '高設定示唆（弱）', importance: 'weak' },
+    { keyword: 'ボイス', name: 'BB終了時サブ液晶タッチボイス シン', timing: 'BB終了後通常時1G目にサブ液晶タッチ', settingHint: '高設定示唆（弱）', importance: 'weak' },
+    { keyword: 'ステージ', name: 'BB後ステージ移行（モード示唆）', timing: 'BB終了後', settingHint: '【モード示唆】高設定ほど天国スタート率UP（設定示唆ではなくモード示唆）', importance: 'weak' },
     { keyword: '初当たり', name: 'AT初当たり確率', timing: '通常時', settingHint: '設定1: 1/383.4 → 設定6: 1/235.1（約1.63倍差）', importance: 'weak' },
     { keyword: 'リーチ目', name: 'リーチ目確率', timing: '通常時', settingHint: '設定1: 1/16384 → 設定6: 1/8192（2倍差）', importance: 'weak' },
     { keyword: 'スイカ', name: '弱スイカ確率', timing: '通常時', settingHint: '設定1: 1/109.0 → 設定6: 1/98.3', importance: 'weak' },

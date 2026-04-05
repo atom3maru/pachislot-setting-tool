@@ -243,8 +243,9 @@ const config: MachineConfig = {
     { keyword: '222枚', name: '特殊獲得枚数（222枚超）', timing: 'AT中', settingHint: '設定2以上', importance: 'confirmed' },
     { keyword: '456枚', name: '特殊獲得枚数（456枚超）', timing: 'AT中', settingHint: '設定4以上', importance: 'confirmed' },
     { keyword: '666枚', name: '特殊獲得枚数（666枚超）', timing: 'AT中', settingHint: '設定6濃厚', importance: 'confirmed' },
-    { keyword: '加持ボイス', name: 'ED中ボイス（加持）', timing: 'エンディング中', settingHint: '設定4以上濃厚', importance: 'confirmed' },
-    { keyword: 'カヲルボイス', name: 'ED中ボイス（カヲル）', timing: 'エンディング中', settingHint: '設定6濃厚', importance: 'confirmed' },
+    { keyword: '加持ボイス', name: 'ED中ボイス（加持）', timing: 'エンディング中レア役成立時', settingHint: '設定4以上濃厚（設定示唆）', importance: 'confirmed' },
+    { keyword: 'カヲルボイス', name: 'ED中ボイス（カヲル）', timing: 'エンディング中レア役成立時', settingHint: '設定6濃厚（設定示唆）', importance: 'confirmed' },
+    { keyword: 'ボーナス終了ボイス', name: 'ボーナス終了時PUSH（スルー天井示唆）', timing: 'ボーナス終了時PUSH（AT非当選時）', settingHint: '【天井示唆】加持=スルー天井残り2回以内、レイ=減算示唆（高設定ほど優遇）', importance: 'weak' },
   ],
 };
 
