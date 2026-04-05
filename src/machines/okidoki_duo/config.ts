@@ -267,10 +267,18 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左リール枠上〜上段にBAR狙い。スイカテンパイ時は中・右リールにスイカ狙い',
     reelStops: [
-      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが角に停止', settingDiff: '設定1: 1/46.8 → 設定6: 1/40.3' },
-      { name: 'スイカ', how: '左BAR狙い→中右スイカ狙い', stopForm: 'スイカが斜めに揃う' },
-      { name: '確定チェリー', how: '左BAR狙い', stopForm: '中段チェリー（ボーナス確定）' },
-      { name: '確定役', how: '左BAR狙い', stopForm: '特殊出目（ボーナス確定）' },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが角に停止', settingDiff: '設定1: 1/46.8 → 設定6: 1/40.3',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', '空', '空'] },
+      },
+      { name: 'スイカ', how: '左BAR狙い→中右スイカ狙い', stopForm: 'スイカが斜めに揃う',
+        reelPattern: { left: ['スイカ', '空', '空'], center: ['空', 'スイカ', '空'], right: ['空', '空', 'スイカ'], highlightLine: 'diagonal-down' },
+      },
+      { name: '確定チェリー', how: '左BAR狙い', stopForm: '中段チェリー（ボーナス確定）',
+        reelPattern: { left: ['空', 'チェ', '空'], center: ['空', '空', '空'], right: ['空', '空', '空'], highlightLine: 'center' },
+      },
+      { name: '確定役', how: '左BAR狙い', stopForm: '特殊出目（ボーナス確定）',
+        reelPattern: { left: ['空', '空', '空'], center: ['空', '空', '空'], right: ['空', '空', '空'] },
+      },
     ],
     notes: [
       '通常時は毎G左リールBAR狙いが必須',

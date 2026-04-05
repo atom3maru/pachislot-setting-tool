@@ -331,10 +331,14 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左リールにBAR（赤BARまたは白BAR）を狙う。チェリー停止時以外は中・右リールフリー打ちでOK',
     reelStops: [
-      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止。中・右リールフリー打ちでOK' },
-      { name: 'スイカ', how: '左BAR狙い→スイカまでスベったら中・右にもスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: 'BIG中スイカ:設定1=1/30→設定V=1/19.3、REG中:設定1=1/80→設定V=1/52.9' },
-      { name: 'ベル', how: '自動揃い', stopForm: 'ベルが揃う', settingDiff: '設定1=1/7.60→設定V=1/7.25' },
-      { name: 'リーチ目', how: '左BAR狙い', stopForm: '特殊停止形でボーナス確定' },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止。中・右リールフリー打ちでOK',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', '空', '空'] } },
+      { name: 'スイカ', how: '左BAR狙い→スイカまでスベったら中・右にもスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: 'BIG中スイカ:設定1=1/30→設定V=1/19.3、REG中:設定1=1/80→設定V=1/52.9',
+        reelPattern: { left: ['スイカ', '空', '空'], center: ['空', 'スイカ', '空'], right: ['空', '空', 'スイカ'], highlightLine: 'diagonal-down' } },
+      { name: 'ベル', how: '自動揃い', stopForm: 'ベルが揃う', settingDiff: '設定1=1/7.60→設定V=1/7.25',
+        reelPattern: { left: ['空', 'ベル', '空'], center: ['空', 'ベル', '空'], right: ['空', 'ベル', '空'], highlightLine: 'center' } },
+      { name: 'リーチ目', how: '左BAR狙い', stopForm: '特殊停止形でボーナス確定',
+        reelPattern: { left: ['7赤', 'BAR', '空'], center: ['空', '空', '7赤'], right: ['空', 'BAR', '空'] } },
     ],
     notes: [
       'BIG前半は順押し適当打ちでOK。サイドが赤緑フラッシュしたらチェリーorスイカ狙い',

@@ -271,11 +271,27 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左リール上段にBARを狙う。スイカ停止時は中リールにスイカ（BAR目安）を狙う',
     reelStops: [
-      { name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段ベル', settingDiff: '設定1: 1/60.0 → 設定6: 1/50.0' },
-      { name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段にベル以外' },
-      { name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール中段に停止' },
-      { name: 'スイカ', how: '左BAR狙い→中リールBAR目安にスイカ狙い', stopForm: 'スイカが右下がりに揃う' },
-      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイテンパイハズレ等' },
+      {
+        name: '弱チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段ベル',
+        settingDiff: '設定1: 1/60.0 → 設定6: 1/50.0',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', 'ベル', '空'] },
+      },
+      {
+        name: '強チェリー', how: '左BAR狙い', stopForm: 'チェリー停止+右リール中段にベル以外',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', '空', '空'] },
+      },
+      {
+        name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール中段に停止',
+        reelPattern: { left: ['空', 'チェ', '空'], center: ['空', '空', '空'], right: ['空', '空', '空'], highlightLine: 'center' },
+      },
+      {
+        name: 'スイカ', how: '左BAR狙い→中リールBAR目安にスイカ狙い', stopForm: 'スイカが右下がりに揃う',
+        reelPattern: { left: ['スイカ', '空', '空'], center: ['空', 'スイカ', '空'], right: ['空', '空', 'スイカ'], highlightLine: 'diagonal-down' },
+      },
+      {
+        name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイテンパイハズレ等',
+        reelPattern: { left: ['空', 'リプ', '空'], center: ['空', 'リプ', '空'], right: ['空', '空', '空'] },
+      },
     ],
     notes: [
       '通常時は毎G左リールBAR狙いが必須',

@@ -223,9 +223,12 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は全リールフリー打ちでOK（左リール第1停止推奨）。目押し不要の機種',
     reelStops: [
-      { name: '通常小役', how: '適当打ち', stopForm: 'リプレイ・ベル等が自動で揃う' },
-      { name: 'GOD揃い', how: '適当打ち（自動停止）', stopForm: 'GOD図柄が一直線に揃う。GG中にのみ出現', settingDiff: '全設定共通1/16384（推定）' },
-      { name: '赤7揃い', how: '適当打ち（自動停止）', stopForm: '赤7が揃う。SUPER GOD GAME突入', settingDiff: '全設定共通（推定）' },
+      { name: '通常小役', how: '適当打ち', stopForm: 'リプレイ・ベル等が自動で揃う',
+        reelPattern: { left: ['空', 'ベル', '空'], center: ['空', 'ベル', '空'], right: ['空', 'ベル', '空'], highlightLine: 'center' } },
+      { name: 'GOD揃い', how: '適当打ち（自動停止）', stopForm: 'GOD図柄が一直線に揃う。GG中にのみ出現', settingDiff: '全設定共通1/16384（推定）',
+        reelPattern: { left: ['空', 'GOD', '空'], center: ['空', 'GOD', '空'], right: ['空', 'GOD', '空'], highlightLine: 'center' } },
+      { name: '赤7揃い', how: '適当打ち（自動停止）', stopForm: '赤7が揃う。SUPER GOD GAME突入', settingDiff: '全設定共通（推定）',
+        reelPattern: { left: ['空', '7赤', '空'], center: ['空', '7赤', '空'], right: ['空', '7赤', '空'], highlightLine: 'center' } },
     ],
     notes: [
       '目押し不要のため初心者にも打ちやすい機種',

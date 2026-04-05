@@ -240,10 +240,14 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左リール上段〜枠上に白7を狙う。スイカ停止時以外は中・右リールフリー打ちでOK',
     reelStops: [
-      { name: 'スイカ', how: '左に白7狙い→スイカテンパイで中リール白7を目安にスイカ狙い', stopForm: 'スイカが斜めに揃う。ハズレでチャンス目' },
-      { name: '弱チェリー', how: '左に白7狙い', stopForm: 'チェリー角停止＋右リール中段ベル' },
-      { name: '強チェリー', how: '左に白7狙い', stopForm: 'チェリー角停止＋右リール中段ベル以外', settingDiff: '強チェリーからのAT直撃率に設定差' },
-      { name: 'チャンス目', how: '左に白7狙い', stopForm: 'スイカテンパイハズレ等' },
+      { name: 'スイカ', how: '左に白7狙い→スイカテンパイで中リール白7を目安にスイカ狙い', stopForm: 'スイカが斜めに揃う。ハズレでチャンス目',
+        reelPattern: { left: ['スイカ', '空', '空'], center: ['空', 'スイカ', '空'], right: ['空', '空', 'スイカ'], highlightLine: 'diagonal-down' } },
+      { name: '弱チェリー', how: '左に白7狙い', stopForm: 'チェリー角停止＋右リール中段ベル',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', 'ベル', '空'] } },
+      { name: '強チェリー', how: '左に白7狙い', stopForm: 'チェリー角停止＋右リール中段ベル以外', settingDiff: '強チェリーからのAT直撃率に設定差',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', '空', '空'] } },
+      { name: 'チャンス目', how: '左に白7狙い', stopForm: 'スイカテンパイハズレ等',
+        reelPattern: { left: ['空', 'スイカ', '空'], center: ['空', 'スイカ', '空'], right: ['空', '空', '空'] } },
     ],
     notes: [
       '通常時は毎G左リール白7狙いが必須',

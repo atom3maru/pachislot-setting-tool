@@ -265,11 +265,16 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左リールに青BARを狙う。スイカ停止時以外は中・右リールフリー打ちでOK',
     reelStops: [
-      { name: 'スイカ', how: '左に青BAR狙い→スイカテンパイで中・右に白7を目安にスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '上位CZ出現率に約5.6倍差（設定1:2.3%→設定6:13.0%）' },
-      { name: 'チェリー', how: '左に青BAR狙い', stopForm: 'チェリーが左リール角に停止' },
-      { name: '強チェリー', how: '左に青BAR狙い', stopForm: 'チェリー＋中段特殊停止形' },
-      { name: 'チャンス目', how: '左に青BAR狙い', stopForm: 'ベル・リプレイのテンパイハズレ' },
-      { name: '超電磁砲コイン', how: '左に青BAR狙い', stopForm: '特殊リール停止（CZ決定ゾーン突入）' },
+      { name: 'スイカ', how: '左に青BAR狙い→スイカテンパイで中・右に白7を目安にスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '上位CZ出現率に約5.6倍差（設定1:2.3%→設定6:13.0%）',
+        reelPattern: { left: ['スイカ', '空', '空'], center: ['空', 'スイカ', '空'], right: ['空', '空', 'スイカ'], highlightLine: 'diagonal-down' } },
+      { name: 'チェリー', how: '左に青BAR狙い', stopForm: 'チェリーが左リール角に停止',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', '空', '空'] } },
+      { name: '強チェリー', how: '左に青BAR狙い', stopForm: 'チェリー＋中段特殊停止形',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '☆', '空'], right: ['空', '空', '空'], highlightLine: 'center' } },
+      { name: 'チャンス目', how: '左に青BAR狙い', stopForm: 'ベル・リプレイのテンパイハズレ',
+        reelPattern: { left: ['空', 'ベル', '空'], center: ['空', 'ベル', '空'], right: ['空', 'リプ', '空'] } },
+      { name: '超電磁砲コイン', how: '左に青BAR狙い', stopForm: '特殊リール停止（CZ決定ゾーン突入）',
+        reelPattern: { left: ['空', '☆', '空'], center: ['空', '☆', '空'], right: ['空', '☆', '空'], highlightLine: 'center' } },
     ],
     notes: [
       '通常時は毎G左リールに青BAR狙いが必須',

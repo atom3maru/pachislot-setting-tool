@@ -277,10 +277,23 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左リール枠上〜中段にBARを狙う（左第1停止推奨）。中・右リールはフリー打ちでOK',
     reelStops: [
-      { name: '5枚役', how: '左BAR狙い', stopForm: '中段に5枚役が揃う。セグに「5」表示', settingDiff: '設定1: 1/38.15 → 設定6: 1/22.53' },
-      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
-      { name: 'スイカ', how: '左BAR狙い→中右にスイカ狙い', stopForm: 'スイカが斜めに揃う' },
-      { name: 'ボート（チャンス目）', how: '左BAR狙い→中にボート狙い', stopForm: 'ボートが停止' },
+      {
+        name: '5枚役', how: '左BAR狙い', stopForm: '中段に5枚役が揃う。セグに「5」表示',
+        settingDiff: '設定1: 1/38.15 → 設定6: 1/22.53',
+        reelPattern: { left: ['空', '空', '空'], center: ['空', '空', '空'], right: ['空', '空', '空'], highlightLine: 'center' },
+      },
+      {
+        name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', '空', '空'] },
+      },
+      {
+        name: 'スイカ', how: '左BAR狙い→中右にスイカ狙い', stopForm: 'スイカが斜めに揃う',
+        reelPattern: { left: ['スイカ', '空', '空'], center: ['空', 'スイカ', '空'], right: ['空', '空', 'スイカ'], highlightLine: 'diagonal-down' },
+      },
+      {
+        name: 'ボート（チャンス目）', how: '左BAR狙い→中にボート狙い', stopForm: 'ボートが停止',
+        reelPattern: { left: ['空', '空', '空'], center: ['空', '空', '空'], right: ['空', '空', '空'] },
+      },
     ],
     notes: [
       '通常時は毎G左リール第1停止が必須（ペナルティ回避）',

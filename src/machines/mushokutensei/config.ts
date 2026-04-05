@@ -285,10 +285,18 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左リール第1停止（左1st）を遵守すれば全リール適当打ちでOK。小役の取りこぼしなし',
     reelStops: [
-      { name: 'ヒロイン役', how: '左1stで適当打ち', stopForm: '自動的に揃う（目押し不要）' },
-      { name: 'レア役', how: '左1stで適当打ち', stopForm: '自動的に揃う（目押し不要）' },
-      { name: 'リプレイ', how: '適当打ち', stopForm: '自動的に揃う' },
-      { name: 'ベル', how: '適当打ち', stopForm: '自動的に揃う' },
+      { name: 'ヒロイン役', how: '左1stで適当打ち', stopForm: '自動的に揃う（目押し不要）',
+        reelPattern: { left: ['空', '☆', '空'], center: ['空', '☆', '空'], right: ['空', '☆', '空'], highlightLine: 'center' },
+      },
+      { name: 'レア役', how: '左1stで適当打ち', stopForm: '自動的に揃う（目押し不要）',
+        reelPattern: { left: ['空', '空', '空'], center: ['空', '空', '空'], right: ['空', '空', '空'] },
+      },
+      { name: 'リプレイ', how: '適当打ち', stopForm: '自動的に揃う',
+        reelPattern: { left: ['空', 'リプ', '空'], center: ['空', 'リプ', '空'], right: ['空', 'リプ', '空'], highlightLine: 'center' },
+      },
+      { name: 'ベル', how: '適当打ち', stopForm: '自動的に揃う',
+        reelPattern: { left: ['空', 'ベル', '空'], center: ['空', 'ベル', '空'], right: ['空', 'ベル', '空'], highlightLine: 'center' },
+      },
     ],
     notes: [
       '通常時は必ず左リールを最初に停止させること（左1st厳守）',

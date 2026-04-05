@@ -275,10 +275,22 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '中押し青7狙い（うみねこ打ち）が推奨。順押しBAR狙いでも全小役フォロー可能',
     reelStops: [
-      { name: 'チェリー', how: '中リール青7狙い→左右フリー', stopForm: 'チェリーが停止' },
-      { name: 'スイカ', how: '中リール青7狙い→左右に赤7目安でスイカ狙い', stopForm: 'スイカが揃う' },
-      { name: '1枚役', how: '中リール青7狙い', stopForm: '特定の出目で1枚役成立' },
-      { name: 'リーチ目', how: '各リール適正位置に目押し', stopForm: '特殊出目でボーナス確定' },
+      {
+        name: 'チェリー', how: '中リール青7狙い→左右フリー', stopForm: 'チェリーが停止',
+        reelPattern: { left: ['空', '空', '空'], center: ['空', 'チェ', '空'], right: ['空', '空', '空'] },
+      },
+      {
+        name: 'スイカ', how: '中リール青7狙い→左右に赤7目安でスイカ狙い', stopForm: 'スイカが揃う',
+        reelPattern: { left: ['空', 'スイカ', '空'], center: ['空', 'スイカ', '空'], right: ['空', 'スイカ', '空'], highlightLine: 'center' },
+      },
+      {
+        name: '1枚役', how: '中リール青7狙い', stopForm: '特定の出目で1枚役成立',
+        reelPattern: { left: ['空', '空', '空'], center: ['空', '7青', '空'], right: ['空', '空', '空'] },
+      },
+      {
+        name: 'リーチ目', how: '各リール適正位置に目押し', stopForm: '特殊出目でボーナス確定',
+        reelPattern: { left: ['空', '7青', '空'], center: ['空', '7青', '空'], right: ['空', '7青', '空'], highlightLine: 'center' },
+      },
     ],
     notes: [
       '中押し青7狙い（うみねこ打ち）でボーナス種類判別が可能',

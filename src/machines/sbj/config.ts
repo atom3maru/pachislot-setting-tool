@@ -263,10 +263,18 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左リール枠上〜上段にBAR狙い。スイカテンパイ時は中リールBAR/赤7目安にスイカ狙い',
     reelStops: [
-      { name: '斜めスイカ', how: '左BAR狙い→中リールBAR/赤7目安にスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '設定1: 1/99.9 → 設定6: 1/83.9' },
-      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止。中右フリー打ち' },
-      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイテンパイハズレ' },
-      { name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが中段に停止（ボーナス確定）' },
+      { name: '斜めスイカ', how: '左BAR狙い→中リールBAR/赤7目安にスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '設定1: 1/99.9 → 設定6: 1/83.9',
+        reelPattern: { left: ['スイカ', '空', '空'], center: ['空', 'スイカ', '空'], right: ['空', '空', 'スイカ'], highlightLine: 'diagonal-down' },
+      },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止。中右フリー打ち',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', '空', '空'] },
+      },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'ベル/リプレイテンパイハズレ',
+        reelPattern: { left: ['空', 'ベル', '空'], center: ['空', 'ベル', '空'], right: ['空', 'リプ', '空'] },
+      },
+      { name: '中段チェリー', how: '左BAR狙い', stopForm: 'チェリーが中段に停止（ボーナス確定）',
+        reelPattern: { left: ['空', 'チェ', '空'], center: ['空', '空', '空'], right: ['空', '空', '空'], highlightLine: 'center' },
+      },
     ],
     notes: [
       '通常時は毎G左リールBAR狙いが必須。中押し・逆押し非推奨',

@@ -265,10 +265,14 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左リール枠上〜上段にBARを狙う。中・右リールはフリー打ちでOK。変則打ちは抽選冷遇の可能性あり',
     reelStops: [
-      { name: 'スイカ', how: '左BAR狙い→スイカテンパイで中・右に赤7目安でスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '幕間チャンス当選率に約3倍差（設定1:3.3%→設定6:10.0%）' },
-      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止' },
-      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイ・ベルのテンパイハズレ' },
-      { name: 'からくりレア役', how: '左BAR狙い', stopForm: '特殊停止形（幕間チャンス抽選）', settingDiff: '幕間チャンス当選率が最重要設定差要素' },
+      { name: 'スイカ', how: '左BAR狙い→スイカテンパイで中・右に赤7目安でスイカ狙い', stopForm: 'スイカが斜めに揃う', settingDiff: '幕間チャンス当選率に約3倍差（設定1:3.3%→設定6:10.0%）',
+        reelPattern: { left: ['スイカ', '空', '空'], center: ['空', 'スイカ', '空'], right: ['空', '空', 'スイカ'], highlightLine: 'diagonal-down' } },
+      { name: 'チェリー', how: '左BAR狙い', stopForm: 'チェリーが左リール角に停止',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', '空', '空'] } },
+      { name: 'チャンス目', how: '左BAR狙い', stopForm: 'リプレイ・ベルのテンパイハズレ',
+        reelPattern: { left: ['空', 'リプ', '空'], center: ['空', 'リプ', '空'], right: ['空', 'ベル', '空'] } },
+      { name: 'からくりレア役', how: '左BAR狙い', stopForm: '特殊停止形（幕間チャンス抽選）', settingDiff: '幕間チャンス当選率が最重要設定差要素',
+        reelPattern: { left: ['空', 'BAR', '空'], center: ['空', '7赤', '空'], right: ['空', '空', '空'], highlightLine: 'center' } },
     ],
     notes: [
       '通常時は毎G左リール第1停止・BAR狙いが必須',

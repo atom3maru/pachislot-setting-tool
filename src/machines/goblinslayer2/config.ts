@@ -250,10 +250,22 @@ const config: MachineConfig = {
   playGuide: {
     basicHow: '通常時は左第1停止で適当打ちでOK。取りこぼしなし。液晶上に小役が表示される',
     reelStops: [
-      { name: '弱チェリー', how: '左第1停止（フリー打ち可）', stopForm: '液晶にチェリー1個or2個停止' },
-      { name: '強チェリー', how: '左第1停止（フリー打ち可）', stopForm: '液晶に3連チェリー停止' },
-      { name: 'スイカ', how: '左第1停止（フリー打ち可）', stopForm: '液晶にスイカ停止' },
-      { name: 'チャンス目', how: '左第1停止（フリー打ち可）', stopForm: '液晶にチャンス目表示' },
+      {
+        name: '弱チェリー', how: '左第1停止（フリー打ち可）', stopForm: '液晶にチェリー1個or2個停止',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', '空'], right: ['空', '空', '空'] },
+      },
+      {
+        name: '強チェリー', how: '左第1停止（フリー打ち可）', stopForm: '液晶に3連チェリー停止',
+        reelPattern: { left: ['空', '空', 'チェ'], center: ['空', '空', 'チェ'], right: ['空', '空', 'チェ'], highlightLine: 'bottom' },
+      },
+      {
+        name: 'スイカ', how: '左第1停止（フリー打ち可）', stopForm: '液晶にスイカ停止',
+        reelPattern: { left: ['空', 'スイカ', '空'], center: ['空', 'スイカ', '空'], right: ['空', 'スイカ', '空'], highlightLine: 'center' },
+      },
+      {
+        name: 'チャンス目', how: '左第1停止（フリー打ち可）', stopForm: '液晶にチャンス目表示',
+        reelPattern: { left: ['空', '空', '空'], center: ['空', '空', '空'], right: ['空', '空', '空'] },
+      },
     ],
     notes: [
       '全小役取りこぼしなし。左第1停止を守れば適当打ちで問題なし',
