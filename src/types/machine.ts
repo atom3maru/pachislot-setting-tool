@@ -139,6 +139,7 @@ export interface MachineConfig {
   getHints: HintsFn;
 
   // 拡張機能（全てOptional - 既存configは無修正で動作）
+  ceilingUnit?: string;           // 機種固有の天井単位（省略時は'G'）例: 'あべし', 'pt', '周期'
   payoutRates?: number[];         // 設定別機械割(%) 例: [97.0, 98.5, 100.2, 104.0, 107.5, 112.0]
   baseCoins?: number;             // 50枚あたり回転数（デフォルト: 30）
   checklist?: ChecklistItem[];    // 打ちながらチェックリスト

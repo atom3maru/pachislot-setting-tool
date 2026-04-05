@@ -5,6 +5,7 @@ const config: MachineConfig = {
   name: 'スマスロ 北斗の拳 転生の章2',
   version: '1.0.0',
   color: 'bg-gradient-to-r from-sky-800 to-blue-700',
+  ceilingUnit: 'あべし',
 
   sections: [
     {

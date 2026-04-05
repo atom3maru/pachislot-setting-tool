@@ -5,6 +5,7 @@ const config: MachineConfig = {
   name: 'スマスロ マギアレコード まどマギ外伝',
   version: '1.1.0',
   color: 'bg-gradient-to-r from-pink-600 to-purple-600',
+  ceilingUnit: 'pt',
   // 6段階設定（1,2,3,4,5,6）
 
   sections: [

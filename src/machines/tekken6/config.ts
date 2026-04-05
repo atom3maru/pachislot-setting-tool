@@ -5,6 +5,7 @@ const config: MachineConfig = {
   name: 'スマスロ鉄拳6',
   version: '1.1.0',
   color: 'bg-gradient-to-r from-orange-700 to-red-700',
+  ceilingUnit: 'pt',
   // 6段階設定（1,2,3,4,5,6）
 
   sections: [

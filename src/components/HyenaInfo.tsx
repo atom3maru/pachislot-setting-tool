@@ -4,6 +4,7 @@ import { interpolateExpectedValue } from '../logic/hyenaCalc';
 
 interface Props {
   hyena: HyenaType;
+  unit?: string;
 }
 
 const STRENGTH_COLORS = {
@@ -12,7 +13,8 @@ const STRENGTH_COLORS = {
   cold: { bg: 'bg-blue-500', text: 'text-blue-600 dark:text-blue-400', light: 'bg-blue-100 dark:bg-blue-900/30' },
 };
 
-export default function HyenaInfo({ hyena }: Props) {
+export default function HyenaInfo({ hyena, unit }: Props) {
+  const u = unit ?? 'G';
   const [inputGame, setInputGame] = useState<number | null>(null);
 
   const expectedYen = inputGame != null
@@ -36,7 +38,7 @@ export default function HyenaInfo({ hyena }: Props) {
         {/* 天井ヒーローカード */}
         <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700/60 dark:to-gray-700/30 shadow-sm">
           <div className="text-4xl sm:text-5xl font-extrabold text-rose-500 leading-tight">
-            {hyena.ceilingGame}G
+            {hyena.ceilingGame}{u}
           </div>
           <div className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mt-2 break-words">{hyena.ceilingBenefit}</div>
           {hyena.resetInfo && (
@@ -59,21 +61,21 @@ export default function HyenaInfo({ hyena }: Props) {
                     key={i}
                     className={`absolute top-0 h-full ${STRENGTH_COLORS[zone.strength].bg} opacity-80`}
                     style={{ left: `${leftPct}%`, width: `${widthPct}%` }}
-                    title={`${zone.label} (${zone.start}〜${zone.end}G)`}
+                    title={`${zone.label} (${zone.start}〜${zone.end}${u})`}
                   />
                 );
               })}
             </div>
             {/* 目盛り（バーのすぐ下） */}
             <div className="flex items-center justify-between px-2 mt-1 text-xs font-mono text-gray-500 dark:text-gray-400">
-              <span>0G</span>
-              <span>{hyena.ceilingGame}G</span>
+              <span>0{u}</span>
+              <span>{hyena.ceilingGame}{u}</span>
             </div>
             {/* ゾーン凡例 */}
             <div className="flex flex-wrap gap-2 mt-2">
               {hyena.zones.map((zone, i) => (
                 <div key={i} className={`text-xs px-2 py-1 rounded-full ${STRENGTH_COLORS[zone.strength].light} ${STRENGTH_COLORS[zone.strength].text}`}>
-                  {zone.start}〜{zone.end}G: {zone.label}
+                  {zone.start}〜{zone.end}{u}: {zone.label}
                 </div>
               ))}
             </div>
@@ -94,10 +96,10 @@ export default function HyenaInfo({ hyena }: Props) {
                 const v = parseInt(e.target.value, 10);
                 setInputGame(isNaN(v) ? null : v);
               }}
-              placeholder="現在のゲーム数を入力"
+              placeholder={`現在の${u === 'G' ? 'ゲーム数' : u + '数'}を入力`}
               className="flex-1 px-3 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 min-h-[44px]"
             />
-            <span className="text-sm text-gray-500 dark:text-gray-400">G</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">{u}</span>
           </div>
           {expectedYen != null && (
             <div className={`text-center p-3 rounded-2xl ${expectedYen >= 0 ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20'}`}>
@@ -123,7 +125,7 @@ export default function HyenaInfo({ hyena }: Props) {
                 return (
                   <div key={i} className="flex items-center gap-1.5 sm:gap-2">
                     <div className="w-12 sm:w-14 text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 text-right shrink-0 font-mono">
-                      {ev.fromGame}G〜
+                      {ev.fromGame}{u}〜
                     </div>
                     <div className="flex-1 h-6 bg-gray-100 dark:bg-gray-700/50 rounded-full overflow-hidden">
                       <div

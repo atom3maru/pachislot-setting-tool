@@ -279,7 +279,7 @@ const config: MachineConfig = {
     { id: 'ck_trophy', label: 'サミートロフィーを確認', category: 'AT終了時' },
     { id: 'ck_endscreen', label: 'ST終了画面を確認', category: 'ST終了時' },
     { id: 'ck_456over', label: '特定枚数表示（456/666枚）を確認', category: 'AT中' },
-    { id: 'ck_omikuji', label: 'サブ液晶おみくじを確認', category: '随時' },
+    { id: 'ck_omikuji', label: 'サブ液晶タッチ型おみくじを確認（レバーON後にタッチ）', category: '随時' },
   ],
 
   guide: {
@@ -289,7 +289,7 @@ const config: MachineConfig = {
       'サミートロフィー：銅=設定2以上、銀=設定3以上、金=設定4以上、キリン柄=設定5以上、虹=設定6確定',
       'ST終了画面「水着」で設定6濃厚。全員集合は高設定示唆。毎回スクショ推奨',
       '逆押しカットインボイス未発生で設定5以上示唆。景之ボイスは高設定示唆',
-      'サブ液晶おみくじ「大大吉」で設定4以上確定。おみくじパターンは毎回確認',
+      'サブ液晶おみくじ（液晶タッチ型）で「大大吉」なら設定4以上確定。レバーON時の自動おみくじとは別物',
     ],
     morningCheck: [
       '天井は通常996Gだが、設定変更後・ST駆け抜け後・上位ST（景之ST）終了後は596Gに大幅短縮',
@@ -343,8 +343,9 @@ const config: MachineConfig = {
     { keyword: '終了画面', name: 'ST終了画面 デフォルト', timing: 'ST終了時', settingHint: '設定示唆なし', importance: 'weak' },
     { keyword: 'ボイス', name: '逆押しカットインボイス 景之', timing: 'AT中', settingHint: '高設定示唆', importance: 'strong' },
     { keyword: 'ボイス', name: '逆押しカットインボイス 未発生', timing: 'AT中', settingHint: '設定5以上示唆', importance: 'strong' },
-    { keyword: 'おみくじ', name: 'サブ液晶おみくじ 大大吉', timing: '随時', settingHint: '設定4以上確定', importance: 'confirmed' },
-    { keyword: 'おみくじ', name: 'サブ液晶おみくじ 大吉', timing: '随時', settingHint: '高設定示唆', importance: 'strong' },
+    { keyword: 'おみくじ', name: 'サブ液晶おみくじ（タッチ型）大大吉', timing: '通常時・レバーON後にサブ液晶タッチ', settingHint: '設定4以上確定', importance: 'confirmed' },
+    { keyword: 'おみくじ', name: 'サブ液晶おみくじ（タッチ型）大吉', timing: '通常時・レバーON後にサブ液晶タッチ', settingHint: '高設定示唆', importance: 'strong' },
+    { keyword: 'おみくじ', name: 'レバーON時おみくじ（自動型）', timing: 'レバーON時に自動で表示', settingHint: 'モード示唆（設定示唆ではない）', importance: 'weak' },
     { keyword: 'ベル', name: '下段ベル確率', timing: '通常時', settingHint: '設定1: 1/121.1 → 設定6: 1/99.1', importance: 'weak' },
     { keyword: '周期', name: '3周期目ボーナス当選', timing: '通常時', settingHint: '設定1: 12.5% → 設定6: 25.0%', importance: 'weak' },
     { keyword: '枚数', name: '特定枚数表示 456枚', timing: 'AT中', settingHint: '設定4以上確定', importance: 'confirmed' },

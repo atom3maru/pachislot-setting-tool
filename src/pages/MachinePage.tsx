@@ -21,6 +21,7 @@ import IncomeSimulator from '../components/IncomeSimulator';
 import HyenaInfo from '../components/HyenaInfo';
 import MachineSelector from '../components/MachineSelector';
 import DictionarySearch from '../components/DictionarySearch';
+import SettingTable from '../components/SettingTable';
 
 interface Props {
   config: MachineConfig;
@@ -159,6 +160,9 @@ export default function MachinePage({ config }: Props) {
         {/* 攻め方ガイド */}
         {config.guide && <MachineGuide guide={config.guide} />}
 
+        {/* 設定別スペック */}
+        <SettingTable config={config} />
+
         {/* 演出辞典 */}
         {config.dictionary && config.dictionary.length > 0 && (
           <DictionarySearch dictionary={config.dictionary} />
@@ -170,7 +174,7 @@ export default function MachinePage({ config }: Props) {
         )}
 
         {/* ハイエナ情報 */}
-        {config.hyena && <HyenaInfo hyena={config.hyena} />}
+        {config.hyena && <HyenaInfo hyena={config.hyena} unit={config.ceilingUnit} />}
 
         {/* 入力セクション */}
         {config.sections.map((section, si) => (
